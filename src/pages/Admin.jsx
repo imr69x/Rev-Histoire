@@ -1,0 +1,500 @@
+import { useState } from 'react'
+import { Trash2, Plus, ChevronDown, ChevronUp, Settings } from 'lucide-react'
+import { useAdminStore } from '@/stores/useAdminStore'
+
+const LEVELS = ['6e', '5e', '4e', '3e', '2nde', '1ere', 'Terminale', 'HGGSP']
+const ERAS = ['Antiquité', 'Moyen Âge', 'XVIe siècle', 'XVIIe siècle', 'XVIIIe siècle', 'XIXe siècle', 'XXe siècle', 'XXIe siècle']
+const CATS_PERSO = ['Politique', 'Militaire', 'Intellectuel', 'Religieux', 'Artistique', 'Économique', 'Social', 'Philosophe', 'Décolonisation', 'Droits civiques']
+const CATS_GLOSS = ['Politique', 'Économie', 'Société', 'Histoire', 'Militaire', 'Religion', 'Géopolitique', 'Relations internationales', 'Médias', 'Environnement', 'Philosophie', 'Droit international']
+
+function Field({ label, children }) {
+  return (
+    <div>
+      <label className="block text-sm font-medium text-[#4A3728] dark:text-[#8B949E] mb-1">{label}</label>
+      {children}
+    </div>
+  )
+}
+
+const inputCls = 'w-full px-3 py-2 rounded-lg border border-[#E8E0CC] dark:border-[#30363D] bg-white dark:bg-[#161B22] text-[#2C1810] dark:text-[#E6EDF3] text-sm focus:outline-none focus:ring-2 focus:ring-[#D4AF37]'
+const textareaCls = inputCls + ' resize-y min-h-[80px]'
+const selectCls = inputCls
+
+function LevelPicker({ selected, onChange }) {
+  const toggle = (l) => onChange(selected.includes(l) ? selected.filter((x) => x !== l) : [...selected, l])
+  return (
+    <div className="flex flex-wrap gap-2">
+      {LEVELS.map((l) => (
+        <button
+          key={l}
+          type="button"
+          onClick={() => toggle(l)}
+          className={`px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${
+            selected.includes(l)
+              ? 'bg-[#8B4513] text-white'
+              : 'bg-[#E8E0CC] dark:bg-[#30363D] text-[#4A3728] dark:text-[#8B949E] hover:bg-[#D4AF37] hover:text-[#2C1810]'
+          }`}
+        >
+          {l}
+        </button>
+      ))}
+    </div>
+  )
+}
+
+// ─── Personnalité ──────────────────────────────────────────────
+function PersonnaliteForm() {
+  const { addPersonality, customPersonalities, deletePersonality } = useAdminStore()
+  const [open, setOpen] = useState(false)
+  const empty = { name: '', birth: '', death: '', era: ERAS[5], category: CATS_PERSO[0], nationality: '', bio: '', fact1: '', fact2: '', fact3: '', fact4: '', fact5: '', quote: '', level: [] }
+  const [form, setForm] = useState(empty)
+  const [success, setSuccess] = useState(false)
+
+  const set = (k, v) => setForm((f) => ({ ...f, [k]: v }))
+
+  const submit = (e) => {
+    e.preventDefault()
+    if (!form.name || !form.bio) return
+    addPersonality({
+      name: form.name, birth: form.birth, death: form.death || null,
+      era: form.era, category: form.category, nationality: form.nationality,
+      bio: form.bio,
+      keyFacts: [form.fact1, form.fact2, form.fact3, form.fact4, form.fact5].filter(Boolean),
+      quote: form.quote || null,
+      level: form.level,
+    })
+    setForm(empty)
+    setSuccess(true)
+    setTimeout(() => setSuccess(false), 2500)
+  }
+
+  return (
+    <section className="bg-white dark:bg-[#161B22] rounded-2xl border border-[#E8E0CC] dark:border-[#30363D] overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between p-5 text-left hover:bg-[#FDF3E7] dark:hover:bg-[#1a1f29] transition-colors"
+      >
+        <span className="font-['Playfair_Display'] font-semibold text-[#2C1810] dark:text-[#E6EDF3] text-lg">
+          Personnalités historiques
+        </span>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-[#8B7355] bg-[#E8E0CC] dark:bg-[#30363D] px-2 py-0.5 rounded-full">
+            {customPersonalities.length} ajoutée{customPersonalities.length > 1 ? 's' : ''}
+          </span>
+          {open ? <ChevronUp size={18} className="text-[#8B7355]" /> : <ChevronDown size={18} className="text-[#8B7355]" />}
+        </div>
+      </button>
+
+      {open && (
+        <div className="p-5 border-t border-[#E8E0CC] dark:border-[#30363D] space-y-5">
+          <form onSubmit={submit} className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Field label="Nom complet *"><input className={inputCls} value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="ex : Sun Yat-sen" /></Field>
+              <Field label="Nationalité"><input className={inputCls} value={form.nationality} onChange={(e) => set('nationality', e.target.value)} placeholder="ex : Chinoise" /></Field>
+              <Field label="Naissance (année)"><input className={inputCls} value={form.birth} onChange={(e) => set('birth', e.target.value)} placeholder="ex : 1866 ou -551" /></Field>
+              <Field label="Mort (année, vide = vivant)"><input className={inputCls} value={form.death} onChange={(e) => set('death', e.target.value)} placeholder="ex : 1925" /></Field>
+              <Field label="Époque">
+                <select className={selectCls} value={form.era} onChange={(e) => set('era', e.target.value)}>
+                  {ERAS.map((e) => <option key={e}>{e}</option>)}
+                </select>
+              </Field>
+              <Field label="Catégorie">
+                <select className={selectCls} value={form.category} onChange={(e) => set('category', e.target.value)}>
+                  {CATS_PERSO.map((c) => <option key={c}>{c}</option>)}
+                </select>
+              </Field>
+            </div>
+            <Field label="Biographie *"><textarea className={textareaCls} value={form.bio} onChange={(e) => set('bio', e.target.value)} placeholder="Biographie complète…" /></Field>
+            <Field label="Faits essentiels (1 par ligne)">
+              {[1, 2, 3, 4, 5].map((n) => (
+                <input key={n} className={inputCls + ' mb-2'} value={form[`fact${n}`]} onChange={(e) => set(`fact${n}`, e.target.value)} placeholder={`Fait ${n}…`} />
+              ))}
+            </Field>
+            <Field label="Citation"><input className={inputCls} value={form.quote} onChange={(e) => set('quote', e.target.value)} placeholder="Citation célèbre…" /></Field>
+            <Field label="Niveaux scolaires"><LevelPicker selected={form.level} onChange={(l) => set('level', l)} /></Field>
+            <button type="submit" className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#D4AF37] text-[#2C1810] font-semibold text-sm hover:bg-[#E8C85A] transition-colors">
+              <Plus size={16} /> Ajouter la personnalité
+            </button>
+            {success && <p className="text-sm text-[#27AE60] font-medium">✓ Personnalité ajoutée avec succès !</p>}
+          </form>
+
+          {customPersonalities.length > 0 && (
+            <div className="space-y-2 pt-4 border-t border-[#E8E0CC] dark:border-[#30363D]">
+              <p className="text-sm font-semibold text-[#8B7355]">Personnalités ajoutées</p>
+              {customPersonalities.map((p) => (
+                <div key={p.id} className="flex items-center justify-between p-3 rounded-xl bg-[#FDF3E7] dark:bg-[#1a1f29] border border-[#E8E0CC] dark:border-[#30363D]">
+                  <div>
+                    <p className="font-medium text-sm text-[#2C1810] dark:text-[#E6EDF3]">{p.name}</p>
+                    <p className="text-xs text-[#8B7355]">{p.era} · {p.nationality}</p>
+                  </div>
+                  <button onClick={() => deletePersonality(p.id)} className="p-1.5 rounded-lg hover:bg-[#FDEDEC] text-[#C0392B] transition-colors"><Trash2 size={14} /></button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </section>
+  )
+}
+
+// ─── Terme de glossaire ────────────────────────────────────────
+function GlossaireForm() {
+  const { addTerm, customTerms, deleteTerm } = useAdminStore()
+  const [open, setOpen] = useState(false)
+  const empty = { term: '', definition: '', category: CATS_GLOSS[0], level: [] }
+  const [form, setForm] = useState(empty)
+  const [success, setSuccess] = useState(false)
+
+  const set = (k, v) => setForm((f) => ({ ...f, [k]: v }))
+
+  const submit = (e) => {
+    e.preventDefault()
+    if (!form.term || !form.definition) return
+    addTerm({
+      term: form.term, definition: form.definition,
+      category: form.category, level: form.level,
+      letter: form.term[0].toUpperCase(),
+      simpleDefinition: form.definition.split('.')[0] + '.',
+      isExamKeyword: form.level.some((l) => ['Terminale', 'HGGSP', '1ere'].includes(l)),
+    })
+    setForm(empty)
+    setSuccess(true)
+    setTimeout(() => setSuccess(false), 2500)
+  }
+
+  return (
+    <section className="bg-white dark:bg-[#161B22] rounded-2xl border border-[#E8E0CC] dark:border-[#30363D] overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between p-5 text-left hover:bg-[#FDF3E7] dark:hover:bg-[#1a1f29] transition-colors"
+      >
+        <span className="font-['Playfair_Display'] font-semibold text-[#2C1810] dark:text-[#E6EDF3] text-lg">Termes du glossaire</span>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-[#8B7355] bg-[#E8E0CC] dark:bg-[#30363D] px-2 py-0.5 rounded-full">{customTerms.length} ajouté{customTerms.length > 1 ? 's' : ''}</span>
+          {open ? <ChevronUp size={18} className="text-[#8B7355]" /> : <ChevronDown size={18} className="text-[#8B7355]" />}
+        </div>
+      </button>
+
+      {open && (
+        <div className="p-5 border-t border-[#E8E0CC] dark:border-[#30363D] space-y-5">
+          <form onSubmit={submit} className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Field label="Terme *"><input className={inputCls} value={form.term} onChange={(e) => set('term', e.target.value)} placeholder="ex : Hégémonie" /></Field>
+              <Field label="Catégorie">
+                <select className={selectCls} value={form.category} onChange={(e) => set('category', e.target.value)}>
+                  {CATS_GLOSS.map((c) => <option key={c}>{c}</option>)}
+                </select>
+              </Field>
+            </div>
+            <Field label="Définition complète *"><textarea className={textareaCls} value={form.definition} onChange={(e) => set('definition', e.target.value)} placeholder="Définition détaillée avec exemples historiques…" /></Field>
+            <Field label="Niveaux scolaires"><LevelPicker selected={form.level} onChange={(l) => set('level', l)} /></Field>
+            <button type="submit" className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#D4AF37] text-[#2C1810] font-semibold text-sm hover:bg-[#E8C85A] transition-colors">
+              <Plus size={16} /> Ajouter le terme
+            </button>
+            {success && <p className="text-sm text-[#27AE60] font-medium">✓ Terme ajouté avec succès !</p>}
+          </form>
+
+          {customTerms.length > 0 && (
+            <div className="space-y-2 pt-4 border-t border-[#E8E0CC] dark:border-[#30363D]">
+              <p className="text-sm font-semibold text-[#8B7355]">Termes ajoutés</p>
+              {customTerms.map((t) => (
+                <div key={t.id} className="flex items-center justify-between p-3 rounded-xl bg-[#FDF3E7] dark:bg-[#1a1f29] border border-[#E8E0CC] dark:border-[#30363D]">
+                  <div>
+                    <p className="font-medium text-sm text-[#2C1810] dark:text-[#E6EDF3]">{t.term}</p>
+                    <p className="text-xs text-[#8B7355] line-clamp-1">{t.simpleDefinition}</p>
+                  </div>
+                  <button onClick={() => deleteTerm(t.id)} className="p-1.5 rounded-lg hover:bg-[#FDEDEC] text-[#C0392B] transition-colors"><Trash2 size={14} /></button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </section>
+  )
+}
+
+// ─── Fiche de révision ─────────────────────────────────────────
+function FicheForm() {
+  const { addFiche, customFiches, deleteFiche } = useAdminStore()
+  const [open, setOpen] = useState(false)
+  const empty = { title: '', theme: '', level: 'HGGSP', periode: '', context: '', kp1: '', kp2: '', kp3: '', kp4: '', kp5: '' }
+  const [form, setForm] = useState(empty)
+  const [success, setSuccess] = useState(false)
+
+  const set = (k, v) => setForm((f) => ({ ...f, [k]: v }))
+
+  const submit = (e) => {
+    e.preventDefault()
+    if (!form.title || !form.context) return
+    addFiche({
+      title: form.title, theme: form.theme, level: form.level, periode: form.periode,
+      content: {
+        context: form.context,
+        keyPoints: [form.kp1, form.kp2, form.kp3, form.kp4, form.kp5].filter(Boolean),
+        vocabulary: [], dates: [],
+      },
+      flashcards: [], quiz: [],
+    })
+    setForm(empty)
+    setSuccess(true)
+    setTimeout(() => setSuccess(false), 2500)
+  }
+
+  return (
+    <section className="bg-white dark:bg-[#161B22] rounded-2xl border border-[#E8E0CC] dark:border-[#30363D] overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between p-5 text-left hover:bg-[#FDF3E7] dark:hover:bg-[#1a1f29] transition-colors"
+      >
+        <span className="font-['Playfair_Display'] font-semibold text-[#2C1810] dark:text-[#E6EDF3] text-lg">Fiches de révision</span>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-[#8B7355] bg-[#E8E0CC] dark:bg-[#30363D] px-2 py-0.5 rounded-full">{customFiches.length} ajoutée{customFiches.length > 1 ? 's' : ''}</span>
+          {open ? <ChevronUp size={18} className="text-[#8B7355]" /> : <ChevronDown size={18} className="text-[#8B7355]" />}
+        </div>
+      </button>
+
+      {open && (
+        <div className="p-5 border-t border-[#E8E0CC] dark:border-[#30363D] space-y-5">
+          <form onSubmit={submit} className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Field label="Titre *"><input className={inputCls} value={form.title} onChange={(e) => set('title', e.target.value)} placeholder="ex : La démocratie athénienne" /></Field>
+              <Field label="Thème"><input className={inputCls} value={form.theme} onChange={(e) => set('theme', e.target.value)} placeholder="ex : Grèce antique" /></Field>
+              <Field label="Niveau">
+                <select className={selectCls} value={form.level} onChange={(e) => set('level', e.target.value)}>
+                  {LEVELS.map((l) => <option key={l}>{l}</option>)}
+                </select>
+              </Field>
+              <Field label="Période"><input className={inputCls} value={form.periode} onChange={(e) => set('periode', e.target.value)} placeholder="ex : Ve siècle av. J.-C." /></Field>
+            </div>
+            <Field label="Contexte historique *"><textarea className={textareaCls} value={form.context} onChange={(e) => set('context', e.target.value)} placeholder="Présentation du contexte…" /></Field>
+            <Field label="Points essentiels">
+              {[1, 2, 3, 4, 5].map((n) => (
+                <input key={n} className={inputCls + ' mb-2'} value={form[`kp${n}`]} onChange={(e) => set(`kp${n}`, e.target.value)} placeholder={`Point ${n}…`} />
+              ))}
+            </Field>
+            <button type="submit" className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#D4AF37] text-[#2C1810] font-semibold text-sm hover:bg-[#E8C85A] transition-colors">
+              <Plus size={16} /> Ajouter la fiche
+            </button>
+            {success && <p className="text-sm text-[#27AE60] font-medium">✓ Fiche ajoutée avec succès !</p>}
+          </form>
+
+          {customFiches.length > 0 && (
+            <div className="space-y-2 pt-4 border-t border-[#E8E0CC] dark:border-[#30363D]">
+              <p className="text-sm font-semibold text-[#8B7355]">Fiches ajoutées</p>
+              {customFiches.map((f) => (
+                <div key={f.id} className="flex items-center justify-between p-3 rounded-xl bg-[#FDF3E7] dark:bg-[#1a1f29] border border-[#E8E0CC] dark:border-[#30363D]">
+                  <div>
+                    <p className="font-medium text-sm text-[#2C1810] dark:text-[#E6EDF3]">{f.title}</p>
+                    <p className="text-xs text-[#8B7355]">{f.level} · {f.theme}</p>
+                  </div>
+                  <button onClick={() => deleteFiche(f.id)} className="p-1.5 rounded-lg hover:bg-[#FDEDEC] text-[#C0392B] transition-colors"><Trash2 size={14} /></button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </section>
+  )
+}
+
+// ─── Question de quiz ──────────────────────────────────────────
+function QuizForm() {
+  const { addQuestion, customQuestions, deleteQuestion } = useAdminStore()
+  const [open, setOpen] = useState(false)
+  const empty = { question: '', opt1: '', opt2: '', opt3: '', opt4: '', answer: '', explanation: '', theme: '', level: 'HGGSP', difficulty: 1 }
+  const [form, setForm] = useState(empty)
+  const [success, setSuccess] = useState(false)
+
+  const set = (k, v) => setForm((f) => ({ ...f, [k]: v }))
+
+  const submit = (e) => {
+    e.preventDefault()
+    const opts = [form.opt1, form.opt2, form.opt3, form.opt4].filter(Boolean)
+    if (!form.question || opts.length < 2 || !form.answer) return
+    addQuestion({
+      question: form.question, options: opts, answer: form.answer,
+      explanation: form.explanation, theme: form.theme,
+      level: form.level, difficulty: Number(form.difficulty), points: 10,
+    })
+    setForm(empty)
+    setSuccess(true)
+    setTimeout(() => setSuccess(false), 2500)
+  }
+
+  return (
+    <section className="bg-white dark:bg-[#161B22] rounded-2xl border border-[#E8E0CC] dark:border-[#30363D] overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between p-5 text-left hover:bg-[#FDF3E7] dark:hover:bg-[#1a1f29] transition-colors"
+      >
+        <span className="font-['Playfair_Display'] font-semibold text-[#2C1810] dark:text-[#E6EDF3] text-lg">Questions de quiz</span>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-[#8B7355] bg-[#E8E0CC] dark:bg-[#30363D] px-2 py-0.5 rounded-full">{customQuestions.length} ajoutée{customQuestions.length > 1 ? 's' : ''}</span>
+          {open ? <ChevronUp size={18} className="text-[#8B7355]" /> : <ChevronDown size={18} className="text-[#8B7355]" />}
+        </div>
+      </button>
+
+      {open && (
+        <div className="p-5 border-t border-[#E8E0CC] dark:border-[#30363D] space-y-5">
+          <form onSubmit={submit} className="space-y-4">
+            <Field label="Question *"><textarea className={textareaCls} style={{ minHeight: '60px' }} value={form.question} onChange={(e) => set('question', e.target.value)} placeholder="Posez votre question…" /></Field>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {[1, 2, 3, 4].map((n) => (
+                <Field key={n} label={`Option ${n}${n <= 2 ? ' *' : ''}`}>
+                  <input className={inputCls} value={form[`opt${n}`]} onChange={(e) => set(`opt${n}`, e.target.value)} placeholder={`Option ${n}…`} />
+                </Field>
+              ))}
+            </div>
+            <Field label="Bonne réponse * (doit correspondre exactement à une option)">
+              <input className={inputCls} value={form.answer} onChange={(e) => set('answer', e.target.value)} placeholder="Copier-coller la bonne option…" />
+            </Field>
+            <Field label="Explication"><textarea className={textareaCls} style={{ minHeight: '60px' }} value={form.explanation} onChange={(e) => set('explanation', e.target.value)} placeholder="Explication de la réponse…" /></Field>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <Field label="Thème"><input className={inputCls} value={form.theme} onChange={(e) => set('theme', e.target.value)} placeholder="ex : Démocratie" /></Field>
+              <Field label="Niveau">
+                <select className={selectCls} value={form.level} onChange={(e) => set('level', e.target.value)}>
+                  {LEVELS.map((l) => <option key={l}>{l}</option>)}
+                </select>
+              </Field>
+              <Field label="Difficulté (1-3)">
+                <select className={selectCls} value={form.difficulty} onChange={(e) => set('difficulty', e.target.value)}>
+                  <option value={1}>★☆☆ Facile</option>
+                  <option value={2}>★★☆ Moyen</option>
+                  <option value={3}>★★★ Difficile</option>
+                </select>
+              </Field>
+            </div>
+            <button type="submit" className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#D4AF37] text-[#2C1810] font-semibold text-sm hover:bg-[#E8C85A] transition-colors">
+              <Plus size={16} /> Ajouter la question
+            </button>
+            {success && <p className="text-sm text-[#27AE60] font-medium">✓ Question ajoutée avec succès !</p>}
+          </form>
+
+          {customQuestions.length > 0 && (
+            <div className="space-y-2 pt-4 border-t border-[#E8E0CC] dark:border-[#30363D]">
+              <p className="text-sm font-semibold text-[#8B7355]">Questions ajoutées</p>
+              {customQuestions.map((q) => (
+                <div key={q.id} className="flex items-center justify-between p-3 rounded-xl bg-[#FDF3E7] dark:bg-[#1a1f29] border border-[#E8E0CC] dark:border-[#30363D]">
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-sm text-[#2C1810] dark:text-[#E6EDF3] line-clamp-1">{q.question}</p>
+                    <p className="text-xs text-[#8B7355]">Réponse : {q.answer}</p>
+                  </div>
+                  <button onClick={() => deleteQuestion(q.id)} className="ml-3 p-1.5 rounded-lg hover:bg-[#FDEDEC] text-[#C0392B] transition-colors flex-shrink-0"><Trash2 size={14} /></button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </section>
+  )
+}
+
+// ─── Événement frise ───────────────────────────────────────────
+function FriseForm() {
+  const { addFriseEvent, customFriseEvents, deleteFriseEvent } = useAdminStore()
+  const [open, setOpen] = useState(false)
+  const empty = { year: '', title: '', description: '', category: 'Politique', level: [] }
+  const [form, setForm] = useState(empty)
+  const [success, setSuccess] = useState(false)
+
+  const set = (k, v) => setForm((f) => ({ ...f, [k]: v }))
+
+  const submit = (e) => {
+    e.preventDefault()
+    if (!form.year || !form.title) return
+    addFriseEvent({ year: Number(form.year), title: form.title, description: form.description, category: form.category, level: form.level })
+    setForm(empty)
+    setSuccess(true)
+    setTimeout(() => setSuccess(false), 2500)
+  }
+
+  return (
+    <section className="bg-white dark:bg-[#161B22] rounded-2xl border border-[#E8E0CC] dark:border-[#30363D] overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between p-5 text-left hover:bg-[#FDF3E7] dark:hover:bg-[#1a1f29] transition-colors"
+      >
+        <span className="font-['Playfair_Display'] font-semibold text-[#2C1810] dark:text-[#E6EDF3] text-lg">Frise chronologique</span>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-[#8B7355] bg-[#E8E0CC] dark:bg-[#30363D] px-2 py-0.5 rounded-full">{customFriseEvents.length} ajouté{customFriseEvents.length > 1 ? 's' : ''}</span>
+          {open ? <ChevronUp size={18} className="text-[#8B7355]" /> : <ChevronDown size={18} className="text-[#8B7355]" />}
+        </div>
+      </button>
+
+      {open && (
+        <div className="p-5 border-t border-[#E8E0CC] dark:border-[#30363D] space-y-5">
+          <form onSubmit={submit} className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Field label="Année * (négatif pour av. J.-C.)"><input type="number" className={inputCls} value={form.year} onChange={(e) => set('year', e.target.value)} placeholder="ex : -509 ou 1789" /></Field>
+              <Field label="Titre *"><input className={inputCls} value={form.title} onChange={(e) => set('title', e.target.value)} placeholder="ex : Révolution française" /></Field>
+              <Field label="Catégorie">
+                <select className={selectCls} value={form.category} onChange={(e) => set('category', e.target.value)}>
+                  {CATS_GLOSS.map((c) => <option key={c}>{c}</option>)}
+                </select>
+              </Field>
+            </div>
+            <Field label="Description"><textarea className={textareaCls} style={{ minHeight: '60px' }} value={form.description} onChange={(e) => set('description', e.target.value)} placeholder="Description de l'événement…" /></Field>
+            <Field label="Niveaux scolaires"><LevelPicker selected={form.level} onChange={(l) => set('level', l)} /></Field>
+            <button type="submit" className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#D4AF37] text-[#2C1810] font-semibold text-sm hover:bg-[#E8C85A] transition-colors">
+              <Plus size={16} /> Ajouter l'événement
+            </button>
+            {success && <p className="text-sm text-[#27AE60] font-medium">✓ Événement ajouté avec succès !</p>}
+          </form>
+
+          {customFriseEvents.length > 0 && (
+            <div className="space-y-2 pt-4 border-t border-[#E8E0CC] dark:border-[#30363D]">
+              <p className="text-sm font-semibold text-[#8B7355]">Événements ajoutés</p>
+              {customFriseEvents.map((ev) => (
+                <div key={ev.id} className="flex items-center justify-between p-3 rounded-xl bg-[#FDF3E7] dark:bg-[#1a1f29] border border-[#E8E0CC] dark:border-[#30363D]">
+                  <div>
+                    <p className="font-medium text-sm text-[#2C1810] dark:text-[#E6EDF3]">{ev.year < 0 ? Math.abs(ev.year) + ' av. J.-C.' : ev.year} — {ev.title}</p>
+                    <p className="text-xs text-[#8B7355] line-clamp-1">{ev.description}</p>
+                  </div>
+                  <button onClick={() => deleteFriseEvent(ev.id)} className="ml-3 p-1.5 rounded-lg hover:bg-[#FDEDEC] text-[#C0392B] transition-colors flex-shrink-0"><Trash2 size={14} /></button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </section>
+  )
+}
+
+// ─── Page principale ───────────────────────────────────────────
+export default function Admin() {
+  const { customPersonalities, customTerms, customFiches, customQuestions, customFriseEvents } = useAdminStore()
+  const total = customPersonalities.length + customTerms.length + customFiches.length + customQuestions.length + customFriseEvents.length
+
+  return (
+    <div className="p-6 max-w-4xl mx-auto animate-fade-in">
+      <div className="mb-8">
+        <div className="flex items-center gap-3 mb-1">
+          <Settings size={28} className="text-[#D4AF37]" />
+          <h1 className="text-3xl font-['Playfair_Display'] font-bold text-[#2C1810] dark:text-[#E6EDF3]">
+            Modification du contenu
+          </h1>
+        </div>
+        <p className="text-[#8B7355]">
+          {total} élément{total > 1 ? 's' : ''} personnalisé{total > 1 ? 's' : ''} — sauvegardé{total > 1 ? 's' : ''} automatiquement dans votre navigateur
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        <PersonnaliteForm />
+        <GlossaireForm />
+        <FicheForm />
+        <QuizForm />
+        <FriseForm />
+      </div>
+
+      <p className="text-center text-xs text-[#8B7355] mt-8">
+        Les données sont stockées localement dans votre navigateur (localStorage) et persistent entre les sessions.
+      </p>
+    </div>
+  )
+}
