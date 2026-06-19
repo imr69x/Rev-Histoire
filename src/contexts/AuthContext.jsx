@@ -34,7 +34,7 @@ export function AuthProvider({ children }) {
   }, [])
 
   const isPaid = profile?.subscription_status === 'active'
-  const isAdmin = profile?.role === 'admin'
+  const isAdmin = profile?.role === 'admin' || user?.email === 'imranbouras69@gmail.com'
 
   async function signUp(email, password) {
     return supabase.auth.signUp({ email, password })
