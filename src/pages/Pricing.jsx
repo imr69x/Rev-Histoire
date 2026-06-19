@@ -82,7 +82,7 @@ export default function Pricing() {
         <h1 className="text-3xl font-['Playfair_Display'] font-bold text-[#2C1810] mb-3">
           Choisissez votre accès
         </h1>
-        <p className="text-[#8B7355]">Accès complet à toute la plateforme pour une année</p>
+        <p className="text-[#8B7355]">Accès complet à toute la plateforme pendant {label}</p>
       </div>
 
       {/* Plans */}
