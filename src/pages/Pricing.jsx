@@ -13,7 +13,7 @@ const FREE_FEATURES = [
 ]
 
 const PAID_FEATURES = [
-  'Toutes les fiches (700+, du CM2 à Terminale)',
+  'Toutes les fiches (700+, de la 6ème à la Terminale)',
   'Glossaire complet avec définitions',
   'Toutes les personnalités historiques',
   '800+ questions de quiz adaptatives',
@@ -121,7 +121,7 @@ export default function Pricing() {
       </div>
 
       <p className="text-center text-sm text-[#8B7355] mt-8">
-        Paiement sécurisé par Stripe · Pas de renouvellement automatique
+        Paiement sécurisé par Stripe · Renouvellement automatique · Résiliable à tout moment
       </p>
     </div>
   )
