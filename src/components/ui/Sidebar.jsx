@@ -29,7 +29,7 @@ const NAV_ITEMS = [
 export function Sidebar() {
   const [collapsed, setCollapsed] = useState(false)
   const { xp } = useAppStore()
-  const { user, isPaid, isAdmin, isInvited, signOut } = useAuth()
+  const { user, isPaid, isAdmin, isInvited, signOut, refreshProfile } = useAuth()
   const navigate = useNavigate()
   const level = getLevel(xp)
   const progress = getProgressToNext(xp)
@@ -109,13 +109,21 @@ export function Sidebar() {
                 </div>
               </div>
               <Progress value={progress} className="h-1.5" />
-              {!isPaid && (
-                <button
-                  onClick={() => navigate('/pricing')}
-                  className="w-full flex items-center justify-center gap-1.5 py-2 rounded-lg bg-[#D4AF37] text-[#2C1810] text-xs font-bold hover:bg-[#E8C85A] transition-colors"
-                >
-                  <Crown size={13} /> Passer Premium
-                </button>
+              {!isPaid && !isAdmin && (
+                <>
+                  <button
+                    onClick={() => navigate('/pricing')}
+                    className="w-full flex items-center justify-center gap-1.5 py-2 rounded-lg bg-[#D4AF37] text-[#2C1810] text-xs font-bold hover:bg-[#E8C85A] transition-colors"
+                  >
+                    <Crown size={13} /> Passer Premium
+                  </button>
+                  <button
+                    onClick={async () => { if (refreshProfile) await refreshProfile() }}
+                    className="w-full text-center text-[10px] text-[#8B7355] hover:text-[#D4AF37] transition-colors py-0.5"
+                  >
+                    ↻ Déjà payé ? Actualiser
+                  </button>
+                </>
               )}
               <button
                 onClick={handleSignOut}

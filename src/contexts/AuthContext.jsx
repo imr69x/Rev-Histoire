@@ -36,7 +36,18 @@ export function AuthProvider({ children }) {
       else setProfile(null)
     })
 
-    return () => subscription.unsubscribe()
+    // Rafraîchit le profil quand l'onglet reprend le focus
+    function onFocus() {
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        if (session?.user) fetchProfile(session.user.id)
+      })
+    }
+    window.addEventListener('focus', onFocus)
+
+    return () => {
+      subscription.unsubscribe()
+      window.removeEventListener('focus', onFocus)
+    }
   }, [])
 
   const isAdmin = profile?.role === 'admin' || user?.email === 'imranbouras69@gmail.com'
