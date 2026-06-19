@@ -34,7 +34,8 @@ export function AuthProvider({ children }) {
   }, [])
 
   const isAdmin = profile?.role === 'admin' || user?.email === 'imranbouras69@gmail.com'
-  const isPaid = profile?.subscription_status === 'active' || isAdmin
+  const isInvited = profile?.role === 'invited'
+  const isPaid = profile?.subscription_status === 'active' || isAdmin || isInvited
 
   async function signUp(email, password) {
     return supabase.auth.signUp({ email, password })
@@ -49,7 +50,7 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, profile, loading, isPaid, isAdmin, signUp, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, profile, loading, isPaid, isAdmin, isInvited, signUp, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   )

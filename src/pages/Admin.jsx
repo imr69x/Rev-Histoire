@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Trash2, Plus, ChevronDown, ChevronUp, Settings, Users, CheckCircle, XCircle, RefreshCw, Shield, Crown, UserX, LayoutDashboard, SlidersHorizontal, ExternalLink } from 'lucide-react'
 import { useAdminStore } from '@/stores/useAdminStore'
 import { useAuth } from '@/contexts/AuthContext'
@@ -467,6 +467,90 @@ function FriseForm() {
   )
 }
 
+// ─── Gestion des invitations ───────────────────────────────────
+function InvitesSection() {
+  const [invites, setInvites] = useState([])
+  const [email, setEmail] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [msg, setMsg] = useState(null)
+
+  async function loadInvites() {
+    const { data } = await supabase.from('invites').select('*').order('created_at', { ascending: false })
+    setInvites(data || [])
+  }
+
+  useEffect(() => { loadInvites() }, [])
+
+  async function addInvite(e) {
+    e.preventDefault()
+    if (!email.trim()) return
+    setLoading(true)
+    const addr = email.trim().toLowerCase()
+
+    const { error } = await supabase.from('invites').insert({ email: addr })
+    if (error && error.code !== '23505') {
+      setMsg({ type: 'error', text: 'Erreur : ' + error.message })
+    } else {
+      // Si l'utilisateur a déjà un compte, on lui donne le rôle invité immédiatement
+      await supabase.from('profiles').update({ role: 'invited' }).eq('email', addr)
+      setEmail('')
+      setMsg({ type: 'ok', text: `✓ ${addr} invité avec succès !` })
+      loadInvites()
+    }
+    setLoading(false)
+    setTimeout(() => setMsg(null), 3000)
+  }
+
+  async function removeInvite(id, inviteEmail) {
+    await supabase.from('invites').delete().eq('id', id)
+    // Repasse le compte en user si il existe
+    await supabase.from('profiles').update({ role: 'user' }).eq('email', inviteEmail)
+    loadInvites()
+  }
+
+  return (
+    <div className="bg-white rounded-2xl border border-[#E8E0CC] p-5 mb-5">
+      <h3 className="font-['Playfair_Display'] font-semibold text-[#2C1810] text-base mb-3 flex items-center gap-2">
+        🎟️ Invitations — accès gratuit complet
+      </h3>
+      <p className="text-xs text-[#8B7355] mb-3">Les personnes invitées ont accès à tout sans payer. Elles verront "Invité" en bas à gauche.</p>
+      <form onSubmit={addInvite} className="flex gap-2 mb-3">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="adresse@email.com"
+          className={inputCls + ' flex-1'}
+        />
+        <button
+          type="submit"
+          disabled={loading}
+          className="flex items-center gap-1.5 px-4 py-2 bg-[#D4AF37] text-[#2C1810] font-semibold text-sm rounded-lg hover:bg-[#E8C85A] transition-colors disabled:opacity-60"
+        >
+          <Plus size={14} /> Inviter
+        </button>
+      </form>
+      {msg && (
+        <p className={`text-sm mb-2 font-medium ${msg.type === 'ok' ? 'text-[#27AE60]' : 'text-[#C0392B]'}`}>{msg.text}</p>
+      )}
+      {invites.length === 0 && <p className="text-xs text-[#8B7355]">Aucune invitation pour l'instant.</p>}
+      <div className="space-y-1.5">
+        {invites.map((inv) => (
+          <div key={inv.id} className="flex items-center justify-between px-3 py-2 bg-[#FDF3E7] rounded-lg border border-[#E8E0CC]">
+            <span className="text-sm text-[#2C1810]">{inv.email}</span>
+            <button
+              onClick={() => removeInvite(inv.id, inv.email)}
+              className="p-1 rounded hover:bg-[#FADBD8] text-[#C0392B] transition-colors"
+            >
+              <Trash2 size={13} />
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 // ─── Onglet Comptes ────────────────────────────────────────────
 function ComptesPanel() {
   const [users, setUsers] = useState([])
@@ -509,14 +593,18 @@ function ComptesPanel() {
   const total = users.length
   const paid = users.filter(u => u.subscription_status === 'active').length
   const admins = users.filter(u => u.role === 'admin').length
+  const invited = users.filter(u => u.role === 'invited').length
 
   return (
     <div>
+      <InvitesSection />
+
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-3 mb-6">
+      <div className="grid grid-cols-4 gap-3 mb-6">
         {[
           { label: 'Comptes', value: total, color: '#2980B9' },
           { label: 'Abonnés', value: paid, color: '#27AE60' },
+          { label: 'Invités', value: invited, color: '#8E44AD' },
           { label: 'Admins', value: admins, color: '#D4AF37' },
         ].map(({ label, value, color }) => (
           <div key={label} className="bg-white rounded-xl border border-[#E8E0CC] p-4 text-center">
@@ -556,6 +644,7 @@ function ComptesPanel() {
                     <p className="font-medium text-sm text-[#2C1810] truncate">{u.email || u.id}</p>
                     {isMe && <span className="text-xs bg-[#E8E0CC] text-[#4A3728] px-2 py-0.5 rounded-full">Moi</span>}
                     {isUserAdmin && <span className="text-xs bg-[#FDF3E7] text-[#D4AF37] px-2 py-0.5 rounded-full font-medium">Admin</span>}
+                    {u.role === 'invited' && <span className="text-xs bg-[#F5EEF8] text-[#8E44AD] px-2 py-0.5 rounded-full font-medium">Invité</span>}
                   </div>
                   <div className="flex gap-3 mt-1 text-xs text-[#8B7355]">
                     <span>Inscrit le {createdAt}</span>

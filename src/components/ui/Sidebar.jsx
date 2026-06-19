@@ -29,7 +29,7 @@ const NAV_ITEMS = [
 export function Sidebar() {
   const [collapsed, setCollapsed] = useState(false)
   const { xp } = useAppStore()
-  const { user, isPaid, isAdmin, signOut } = useAuth()
+  const { user, isPaid, isAdmin, isInvited, signOut } = useAuth()
   const navigate = useNavigate()
   const level = getLevel(xp)
   const progress = getProgressToNext(xp)
@@ -104,7 +104,7 @@ export function Sidebar() {
                   {level.label[0]}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs font-semibold text-[#D4AF37] truncate">{isAdmin ? '👑 Admin' : level.label}</p>
+                  <p className="text-xs font-semibold text-[#D4AF37] truncate">{isAdmin ? '👑 Admin' : isInvited ? '🎟️ Invité' : level.label}</p>
                   <p className="text-xs text-[#8B7355] truncate">{user?.email || 'Invité'}</p>
                 </div>
               </div>
