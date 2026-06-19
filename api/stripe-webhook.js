@@ -18,10 +18,28 @@ async function getRawBody(req) {
   })
 }
 
+async function setActive(userId, customerId, subscriptionId, periodEnd) {
+  const endDate = periodEnd ? new Date(periodEnd * 1000).toISOString() : null
+  await supabase
+    .from('profiles')
+    .update({
+      subscription_status: 'active',
+      subscription_end_date: endDate,
+      stripe_customer_id: customerId || null,
+      stripe_subscription_id: subscriptionId || null,
+    })
+    .eq('id', userId)
+}
+
+async function setInactiveByCustomer(customerId) {
+  await supabase
+    .from('profiles')
+    .update({ subscription_status: 'inactive' })
+    .eq('stripe_customer_id', customerId)
+}
+
 module.exports = async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' })
-  }
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
 
   const sig = req.headers['stripe-signature']
   const rawBody = await getRawBody(req)
@@ -34,28 +52,57 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: `Webhook error: ${err.message}` })
   }
 
-  if (event.type === 'checkout.session.completed') {
-    const session = event.data.object
-    const userId = session.metadata?.userId
-
-    if (userId) {
-      const expiresAt = new Date()
-      expiresAt.setFullYear(expiresAt.getFullYear() + 1)
-
-      const { error } = await supabase
-        .from('profiles')
-        .update({
-          subscription_status: 'active',
-          subscription_end_date: expiresAt.toISOString(),
-          stripe_customer_id: session.customer || null,
-        })
-        .eq('id', userId)
-
-      if (error) {
-        console.error('Supabase update error:', error)
-        return res.status(500).json({ error: 'Failed to update profile' })
+  try {
+    if (event.type === 'checkout.session.completed') {
+      const session = event.data.object
+      const userId = session.metadata?.userId
+      if (userId && session.subscription) {
+        const sub = await stripe.subscriptions.retrieve(session.subscription)
+        await setActive(userId, session.customer, session.subscription, sub.current_period_end)
       }
     }
+
+    if (event.type === 'invoice.payment_succeeded') {
+      const invoice = event.data.object
+      if (invoice.subscription) {
+        const sub = await stripe.subscriptions.retrieve(invoice.subscription)
+        const userId = sub.metadata?.userId
+        if (userId) {
+          await setActive(userId, invoice.customer, invoice.subscription, sub.current_period_end)
+        }
+      }
+    }
+
+    if (event.type === 'customer.subscription.updated') {
+      const sub = event.data.object
+      const userId = sub.metadata?.userId
+      if (userId) {
+        if (['active', 'trialing'].includes(sub.status)) {
+          await setActive(userId, sub.customer, sub.id, sub.current_period_end)
+        } else {
+          await supabase
+            .from('profiles')
+            .update({ subscription_status: sub.status })
+            .eq('id', userId)
+        }
+      }
+    }
+
+    if (event.type === 'customer.subscription.deleted') {
+      const sub = event.data.object
+      const userId = sub.metadata?.userId
+      if (userId) {
+        await supabase
+          .from('profiles')
+          .update({ subscription_status: 'inactive' })
+          .eq('id', userId)
+      } else {
+        await setInactiveByCustomer(sub.customer)
+      }
+    }
+  } catch (err) {
+    console.error('Handler error:', err.message)
+    return res.status(500).json({ error: err.message })
   }
 
   return res.status(200).json({ received: true })
