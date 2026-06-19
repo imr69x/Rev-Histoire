@@ -1,11 +1,12 @@
 import { useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Users, Calendar, MapPin } from 'lucide-react'
+import { Users, Calendar, MapPin, Lock } from 'lucide-react'
 import { SearchBar } from '@/components/ui/SearchBar'
 import { Badge } from '@/components/ui/Badge'
 import Fuse from 'fuse.js'
 import { personalitiesData as staticPersonalities } from '@/data/personalities'
 import { useAdminStore } from '@/stores/useAdminStore'
+import { useAccess } from '@/hooks/useAccess'
 
 const ERAS = ['Tous', 'Antiquité', 'Moyen Âge', 'Temps Modernes', 'XIXe siècle', 'XXe siècle', 'Contemporain']
 
@@ -53,6 +54,7 @@ export default function Personnalites() {
   const [era, setEra] = useState('Tous')
   const [category, setCategory] = useState('all')
   const { customPersonalities } = useAdminStore()
+  const { canAccessPersonnalite } = useAccess()
 
   const personalitiesData = useMemo(() => [
     ...staticPersonalities,
@@ -128,35 +130,42 @@ export default function Personnalites() {
 
       {/* Grille */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {filtered.map((p) => {
+        {filtered.map((p, index) => {
           const catColor = CAT_COLORS[p.category] || '#8B4513'
+          const locked = !canAccessPersonnalite(index)
           return (
             <div
               key={p.id}
-              className="group cursor-pointer bg-white dark:bg-[#161B22] rounded-xl border border-[#E8E0CC] dark:border-[#30363D] hover:shadow-lg hover:-translate-y-1 transition-all duration-200 overflow-hidden"
-              onClick={() => navigate(`/personnalites/${p.id}`)}
+              className={`group cursor-pointer bg-white dark:bg-[#161B22] rounded-xl border border-[#E8E0CC] dark:border-[#30363D] hover:shadow-lg hover:-translate-y-1 transition-all duration-200 overflow-hidden ${locked ? 'opacity-70' : ''}`}
+              onClick={() => locked ? navigate('/pricing') : navigate(`/personnalites/${p.id}`)}
             >
               <div
-                className="h-32 flex items-center justify-center text-white text-3xl font-['Playfair_Display'] font-bold"
+                className="h-32 flex items-center justify-center text-white text-3xl font-['Playfair_Display'] font-bold relative"
                 style={{ background: `linear-gradient(135deg, ${catColor}CC, ${catColor}66)` }}
               >
-                {getInitials(p.name)}
+                {locked ? <Lock size={28} className="text-white/80" /> : getInitials(p.name)}
               </div>
               <div className="p-4">
                 <h3 className="font-['Playfair_Display'] font-semibold text-[#2C1810] dark:text-[#E6EDF3] leading-tight mb-1">
-                  {p.name}
+                  {locked ? '••••••••' : p.name}
                 </h3>
-                <div className="flex items-center gap-1 text-xs text-[#8B7355] mb-2">
-                  <Calendar size={10} />
-                  <span>{formatYear(p.birthYear)} – {formatYear(p.deathYear)}</span>
-                </div>
-                <div className="flex items-center gap-1 text-xs text-[#8B7355] mb-3">
-                  <MapPin size={10} />
-                  <span>{p.nationality}</span>
-                </div>
-                <Badge style={{ backgroundColor: catColor + '20', color: catColor }} className="text-xs">
-                  {CAT_LABELS[p.category] || p.category}
-                </Badge>
+                {locked ? (
+                  <p className="text-xs text-[#D4AF37] font-medium mt-2">Débloquer →</p>
+                ) : (
+                  <>
+                    <div className="flex items-center gap-1 text-xs text-[#8B7355] mb-2">
+                      <Calendar size={10} />
+                      <span>{formatYear(p.birthYear)} – {formatYear(p.deathYear)}</span>
+                    </div>
+                    <div className="flex items-center gap-1 text-xs text-[#8B7355] mb-3">
+                      <MapPin size={10} />
+                      <span>{p.nationality}</span>
+                    </div>
+                    <Badge style={{ backgroundColor: catColor + '20', color: catColor }} className="text-xs">
+                      {CAT_LABELS[p.category] || p.category}
+                    </Badge>
+                  </>
+                )}
               </div>
             </div>
           )

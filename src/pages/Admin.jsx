@@ -1,6 +1,8 @@
-import { useState } from 'react'
-import { Trash2, Plus, ChevronDown, ChevronUp, Settings } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { Trash2, Plus, ChevronDown, ChevronUp, Settings, Users, CheckCircle, XCircle, RefreshCw } from 'lucide-react'
 import { useAdminStore } from '@/stores/useAdminStore'
+import { useAuth } from '@/contexts/AuthContext'
+import { supabase } from '@/lib/supabase'
 
 const LEVELS = ['6e', '5e', '4e', '3e', '2nde', '1ere', 'Terminale', 'HGGSP']
 const ERAS = ['Antiquité', 'Moyen Âge', 'XVIe siècle', 'XVIIe siècle', 'XVIIIe siècle', 'XIXe siècle', 'XXe siècle', 'XXIe siècle']
@@ -465,8 +467,114 @@ function FriseForm() {
   )
 }
 
+// ─── Gestion des abonnements ───────────────────────────────────
+function UsersPanel() {
+  const [open, setOpen] = useState(false)
+  const [users, setUsers] = useState([])
+  const [loading, setLoading] = useState(false)
+
+  async function loadUsers() {
+    setLoading(true)
+    const { data } = await supabase
+      .from('profiles')
+      .select('id, email, subscription_status, subscription_end_date, role, created_at')
+      .order('created_at', { ascending: false })
+    setUsers(data || [])
+    setLoading(false)
+  }
+
+  useEffect(() => { if (open) loadUsers() }, [open])
+
+  async function toggleSubscription(userId, current) {
+    const newStatus = current === 'active' ? 'inactive' : 'active'
+    const endDate = newStatus === 'active'
+      ? new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString()
+      : null
+    await supabase
+      .from('profiles')
+      .update({ subscription_status: newStatus, subscription_end_date: endDate })
+      .eq('id', userId)
+    loadUsers()
+  }
+
+  return (
+    <section className="bg-white dark:bg-[#161B22] rounded-2xl border border-[#D4AF37] overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between p-5 text-left hover:bg-[#FDF3E7] dark:hover:bg-[#1a1f29] transition-colors"
+      >
+        <div className="flex items-center gap-2">
+          <Users size={18} className="text-[#D4AF37]" />
+          <span className="font-['Playfair_Display'] font-semibold text-[#2C1810] dark:text-[#E6EDF3] text-lg">
+            Utilisateurs & Abonnements
+          </span>
+        </div>
+        {open ? <ChevronUp size={18} className="text-[#8B7355]" /> : <ChevronDown size={18} className="text-[#8B7355]" />}
+      </button>
+
+      {open && (
+        <div className="p-5 border-t border-[#E8E0CC] dark:border-[#30363D]">
+          <div className="flex justify-between items-center mb-4">
+            <p className="text-sm text-[#8B7355]">{users.length} utilisateur{users.length > 1 ? 's' : ''}</p>
+            <button
+              onClick={loadUsers}
+              className="flex items-center gap-1.5 text-xs text-[#8B7355] hover:text-[#2C1810] transition-colors"
+            >
+              <RefreshCw size={12} className={loading ? 'animate-spin' : ''} /> Actualiser
+            </button>
+          </div>
+
+          {loading && <p className="text-sm text-[#8B7355] text-center py-4">Chargement…</p>}
+
+          <div className="space-y-2">
+            {users.map((u) => {
+              const isPaid = u.subscription_status === 'active'
+              const endDate = u.subscription_end_date
+                ? new Date(u.subscription_end_date).toLocaleDateString('fr-FR')
+                : null
+              return (
+                <div
+                  key={u.id}
+                  className="flex items-center justify-between p-3 rounded-xl bg-[#FDF3E7] dark:bg-[#1a1f29] border border-[#E8E0CC] dark:border-[#30363D]"
+                >
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-sm text-[#2C1810] dark:text-[#E6EDF3] truncate">{u.email || u.id}</p>
+                    <p className="text-xs text-[#8B7355]">
+                      {isPaid
+                        ? `✓ Actif${endDate ? ` jusqu'au ${endDate}` : ''}`
+                        : '✗ Gratuit'}
+                      {u.role === 'admin' ? ' · Admin' : ''}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => toggleSubscription(u.id, u.subscription_status)}
+                    className={`ml-3 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                      isPaid
+                        ? 'bg-[#FDEDEC] text-[#C0392B] hover:bg-[#FADBD8]'
+                        : 'bg-[#EAFAF1] text-[#27AE60] hover:bg-[#D5F5E3]'
+                    }`}
+                  >
+                    {isPaid
+                      ? <><XCircle size={12} /> Révoquer</>
+                      : <><CheckCircle size={12} /> Activer</>}
+                  </button>
+                </div>
+              )
+            })}
+          </div>
+
+          {users.length === 0 && !loading && (
+            <p className="text-sm text-[#8B7355] text-center py-4">Aucun utilisateur pour l'instant.</p>
+          )}
+        </div>
+      )}
+    </section>
+  )
+}
+
 // ─── Page principale ───────────────────────────────────────────
 export default function Admin() {
+  const { isAdmin } = useAuth()
   const { customPersonalities, customTerms, customFiches, customQuestions, customFriseEvents } = useAdminStore()
   const total = customPersonalities.length + customTerms.length + customFiches.length + customQuestions.length + customFriseEvents.length
 
@@ -476,7 +584,7 @@ export default function Admin() {
         <div className="flex items-center gap-3 mb-1">
           <Settings size={28} className="text-[#D4AF37]" />
           <h1 className="text-3xl font-['Playfair_Display'] font-bold text-[#2C1810] dark:text-[#E6EDF3]">
-            Modification du contenu
+            Administration
           </h1>
         </div>
         <p className="text-[#8B7355]">
@@ -485,6 +593,7 @@ export default function Admin() {
       </div>
 
       <div className="space-y-4">
+        {isAdmin && <UsersPanel />}
         <PersonnaliteForm />
         <GlossaireForm />
         <FicheForm />

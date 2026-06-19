@@ -1,11 +1,12 @@
 import { useState, useMemo } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
-import { BookMarked, CheckCircle } from 'lucide-react'
+import { BookMarked, CheckCircle, Lock } from 'lucide-react'
 import { useAppStore } from '@/stores/useAppStore'
 import { useAdminStore } from '@/stores/useAdminStore'
 import { SearchBar } from '@/components/ui/SearchBar'
 import Fuse from 'fuse.js'
 import { glossaryData as staticGlossaryData } from '@/data/glossary'
+import { useAccess } from '@/hooks/useAccess'
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 
@@ -35,6 +36,8 @@ export default function Glossaire() {
   const { customTerms } = useAdminStore()
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
+  const { canReadGlossaire } = useAccess()
+  const canRead = canReadGlossaire()
 
   const glossaryData = useMemo(() => [...staticGlossaryData, ...customTerms], [customTerms])
 
@@ -152,7 +155,19 @@ export default function Glossaire() {
                   )}
                 </div>
               </div>
-              <p className="text-xs text-[#8B7355] dark:text-[#8B949E] line-clamp-2">{term.simpleDefinition}</p>
+              {canRead ? (
+                <p className="text-xs text-[#8B7355] dark:text-[#8B949E] line-clamp-2">{term.simpleDefinition}</p>
+              ) : (
+                <div className="flex items-center gap-1.5 mt-1">
+                  <Lock size={11} className="text-[#D4AF37] flex-shrink-0" />
+                  <p
+                    className="text-xs text-[#8B7355] line-clamp-1 blur-sm select-none"
+                    onClick={(e) => { e.stopPropagation(); navigate('/pricing') }}
+                  >
+                    {term.simpleDefinition}
+                  </p>
+                </div>
+              )}
             </div>
           )
         })}

@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
-import { BookOpen, Star, Clock, ChevronRight, Filter } from 'lucide-react'
+import { Link, useSearchParams, useNavigate } from 'react-router-dom'
+import { BookOpen, Star, Clock, ChevronRight, Lock } from 'lucide-react'
 import { useAppStore } from '@/stores/useAppStore'
 import { SearchBar } from '@/components/ui/SearchBar'
 import { LevelSelector, LEVELS } from '@/components/ui/LevelSelector'
@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/Badge'
 import { Card } from '@/components/ui/Card'
 import Fuse from 'fuse.js'
 import { allFiches } from '@/data/allData'
+import { useAccess } from '@/hooks/useAccess'
 
 const LEVEL_COLORS = {
   '6e': '#E74C3C', '5e': '#E67E22', '4e': '#F1C40F',
@@ -20,6 +21,7 @@ export default function Fiches() {
   const [selectedLevel, setSelectedLevel] = useState('all')
   const { favoriteChapters, toggleFavorite } = useAppStore()
   const [searchParams] = useSearchParams()
+  const { canAccessFiche } = useAccess()
 
   const fuse = useMemo(
     () => new Fuse(allFiches, { keys: ['title', 'theme', 'content.context', 'content.vocabulary'], threshold: 0.3 }),
@@ -91,6 +93,7 @@ export default function Fiches() {
                   isFav={favoriteChapters.includes(fiche.id)}
                   onToggleFav={() => toggleFavorite(fiche.id)}
                   levelColor={LEVEL_COLORS[lvl]}
+                  locked={!canAccessFiche(fiche.id)}
                 />
               ))}
             </div>
@@ -107,9 +110,13 @@ export default function Fiches() {
   )
 }
 
-function FicheCard({ fiche, isFav, onToggleFav, levelColor }) {
+function FicheCard({ fiche, isFav, onToggleFav, levelColor, locked }) {
+  const navigate = useNavigate()
+
   return (
-    <div className="group relative bg-white dark:bg-[#161B22] rounded-xl border border-[#E8E0CC] dark:border-[#30363D] hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 overflow-hidden">
+    <div
+      className={`group relative bg-white dark:bg-[#161B22] rounded-xl border border-[#E8E0CC] dark:border-[#30363D] hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 overflow-hidden ${locked ? 'opacity-75' : ''}`}
+    >
       <div className="h-1" style={{ backgroundColor: levelColor }} />
       <div className="p-4">
         <div className="flex items-start justify-between gap-2 mb-2">
@@ -119,15 +126,19 @@ function FicheCard({ fiche, isFav, onToggleFav, levelColor }) {
               {fiche.title}
             </h3>
           </div>
-          <button
-            onClick={(e) => { e.preventDefault(); onToggleFav() }}
-            className="flex-shrink-0 p-1 rounded-lg hover:bg-[#E8E0CC] dark:hover:bg-[#30363D] transition-colors"
-          >
-            <Star
-              size={16}
-              className={isFav ? 'fill-[#D4AF37] text-[#D4AF37]' : 'text-[#8B7355]'}
-            />
-          </button>
+          {locked ? (
+            <Lock size={14} className="text-[#8B7355] flex-shrink-0 mt-0.5" />
+          ) : (
+            <button
+              onClick={(e) => { e.preventDefault(); onToggleFav() }}
+              className="flex-shrink-0 p-1 rounded-lg hover:bg-[#E8E0CC] dark:hover:bg-[#30363D] transition-colors"
+            >
+              <Star
+                size={16}
+                className={isFav ? 'fill-[#D4AF37] text-[#D4AF37]' : 'text-[#8B7355]'}
+              />
+            </button>
+          )}
         </div>
         <div className="flex items-center gap-1 text-xs text-[#8B7355] dark:text-[#8B949E] mb-3">
           <Clock size={12} />
@@ -144,12 +155,21 @@ function FicheCard({ fiche, isFav, onToggleFav, levelColor }) {
               <Badge key={v} variant="ghost" className="text-xs break-words max-w-full whitespace-normal leading-snug">{v}</Badge>
             ))}
           </div>
-          <Link
-            to={`/fiches/${fiche.id}`}
-            className="flex-shrink-0 flex items-center gap-1 text-xs font-medium text-[#8B4513] hover:text-[#D4AF37] transition-colors"
-          >
-            Lire <ChevronRight size={12} />
-          </Link>
+          {locked ? (
+            <button
+              onClick={() => navigate('/pricing')}
+              className="flex-shrink-0 flex items-center gap-1 text-xs font-medium text-[#D4AF37] hover:underline"
+            >
+              Débloquer <ChevronRight size={12} />
+            </button>
+          ) : (
+            <Link
+              to={`/fiches/${fiche.id}`}
+              className="flex-shrink-0 flex items-center gap-1 text-xs font-medium text-[#8B4513] hover:text-[#D4AF37] transition-colors"
+            >
+              Lire <ChevronRight size={12} />
+            </Link>
+          )}
         </div>
       </div>
     </div>
