@@ -29,7 +29,7 @@ const NAV_ITEMS = [
 export function Sidebar() {
   const [collapsed, setCollapsed] = useState(false)
   const { xp } = useAppStore()
-  const { user, isPaid, signOut } = useAuth()
+  const { user, isPaid, isAdmin, signOut } = useAuth()
   const navigate = useNavigate()
   const level = getLevel(xp)
   const progress = getProgressToNext(xp)
@@ -69,11 +69,11 @@ export function Sidebar() {
 
         {/* Navigation */}
         <nav className="flex-1 overflow-y-auto py-3 px-2 space-y-0.5">
-          {NAV_ITEMS.map(({ to, icon: Icon, label }) => (
+          {NAV_ITEMS.filter(({ to }) => to !== '/admin' || isAdmin).map(({ to, icon: Icon, label }) => (
             <NavLink
               key={to}
               to={to}
-              end={to === '/'}
+              end={to === '/dashboard'}
               className={({ isActive }) => cn(
                 'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium',
                 'transition-all duration-150 group',
