@@ -605,17 +605,33 @@ function ComptesPanel() {
 }
 
 // ─── Onglet Configuration ──────────────────────────────────────
+const UNIT_TO_DAYS = { jour: 1, mois: 30, an: 365 }
+
+function durationToParts(days) {
+  if (days % 365 === 0) return { value: days / 365, unit: 'an' }
+  if (days % 30 === 0) return { value: days / 30, unit: 'mois' }
+  return { value: days, unit: 'jour' }
+}
+
 function ConfigPanel() {
   const { subscriptionConfig, setSubscriptionConfig } = useAdminStore()
-  const [form, setForm] = useState(subscriptionConfig)
+  const parts = durationToParts(subscriptionConfig?.durationDays || 365)
+  const [form, setForm] = useState({
+    priceDisplay: subscriptionConfig?.priceDisplay || '9.99',
+    currency: subscriptionConfig?.currency || 'EUR',
+    durationValue: parts.value,
+    durationUnit: parts.unit,
+  })
   const [saved, setSaved] = useState(false)
+
+  const totalDays = Number(form.durationValue) * UNIT_TO_DAYS[form.durationUnit]
 
   function save(e) {
     e.preventDefault()
     setSubscriptionConfig({
       priceDisplay: form.priceDisplay,
-      durationDays: Number(form.durationDays),
       currency: form.currency,
+      durationDays: totalDays,
     })
     setSaved(true)
     setTimeout(() => setSaved(false), 2500)
@@ -629,7 +645,8 @@ function ConfigPanel() {
           Prix & Durée de l'abonnement
         </h3>
         <form onSubmit={save} className="space-y-4">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Prix */}
             <div>
               <label className="text-sm font-medium text-[#4A3728] block mb-1">Prix affiché</label>
               <div className="flex">
@@ -638,30 +655,48 @@ function ConfigPanel() {
                   value={form.priceDisplay}
                   onChange={(e) => setForm((f) => ({ ...f, priceDisplay: e.target.value }))}
                   className={inputCls + ' rounded-r-none'}
+                  placeholder="9.99"
                 />
                 <select
                   value={form.currency}
                   onChange={(e) => setForm((f) => ({ ...f, currency: e.target.value }))}
-                  className={inputCls + ' rounded-l-none border-l-0 w-20'}
+                  className={inputCls + ' rounded-l-none border-l-0 w-24'}
                 >
-                  <option value="EUR">€</option>
-                  <option value="USD">$</option>
+                  <option value="EUR">€ EUR</option>
+                  <option value="USD">$ USD</option>
                   <option value="MAD">MAD</option>
                 </select>
               </div>
             </div>
+
+            {/* Durée */}
             <div>
-              <label className="text-sm font-medium text-[#4A3728] block mb-1">Durée (jours)</label>
-              <input
-                type="number" min="1"
-                value={form.durationDays}
-                onChange={(e) => setForm((f) => ({ ...f, durationDays: e.target.value }))}
-                className={inputCls}
-              />
-              <p className="text-xs text-[#8B7355] mt-1">
-                {form.durationDays >= 365 ? `${Math.round(form.durationDays / 365)} an${Math.round(form.durationDays / 365) > 1 ? 's' : ''}` : `${form.durationDays} jours`}
-              </p>
+              <label className="text-sm font-medium text-[#4A3728] block mb-1">Durée de l'abonnement</label>
+              <div className="flex">
+                <input
+                  type="number" min="1"
+                  value={form.durationValue}
+                  onChange={(e) => setForm((f) => ({ ...f, durationValue: e.target.value }))}
+                  className={inputCls + ' rounded-r-none w-24'}
+                  placeholder="1"
+                />
+                <select
+                  value={form.durationUnit}
+                  onChange={(e) => setForm((f) => ({ ...f, durationUnit: e.target.value }))}
+                  className={inputCls + ' rounded-l-none border-l-0'}
+                >
+                  <option value="jour">Jour{form.durationValue > 1 ? 's' : ''}</option>
+                  <option value="mois">Mois</option>
+                  <option value="an">An{form.durationValue > 1 ? 's' : ''}</option>
+                </select>
+              </div>
+              <p className="text-xs text-[#8B7355] mt-1">= {totalDays} jour{totalDays > 1 ? 's' : ''} d'accès</p>
             </div>
+          </div>
+
+          {/* Aperçu */}
+          <div className="p-3 bg-[#FDF3E7] rounded-lg text-sm text-[#4A3728]">
+            Aperçu sur la page Tarifs : <strong>{form.priceDisplay} {form.currency === 'EUR' ? '€' : form.currency === 'USD' ? '$' : 'MAD'} / {form.durationValue} {form.durationUnit}{form.durationValue > 1 ? (form.durationUnit === 'an' ? 's' : form.durationUnit === 'mois' ? '' : 's') : ''}</strong>
           </div>
 
           <div className="flex items-center gap-3">

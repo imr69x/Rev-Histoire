@@ -30,9 +30,13 @@ export default function Pricing() {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const price = subscriptionConfig?.priceDisplay || '9.99'
-  const currency = subscriptionConfig?.currency === 'USD' ? '$' : subscriptionConfig?.currency === 'MAD' ? ' MAD' : ' €'
+  const currency = subscriptionConfig?.currency === 'USD' ? '$' : subscriptionConfig?.currency === 'MAD' ? 'MAD' : '€'
   const durationDays = subscriptionConfig?.durationDays || 365
-  const durationLabel = durationDays >= 365 ? `${Math.round(durationDays / 365)} an` : `${durationDays} jours`
+  const durationLabel = durationDays % 365 === 0
+    ? `${durationDays / 365} an${durationDays / 365 > 1 ? 's' : ''}`
+    : durationDays % 30 === 0
+    ? `${durationDays / 30} mois`
+    : `${durationDays} jour${durationDays > 1 ? 's' : ''}`
 
   async function handleCheckout() {
     if (!user) { navigate('/register'); return }
