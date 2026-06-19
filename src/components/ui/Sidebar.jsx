@@ -69,7 +69,11 @@ export function Sidebar() {
 
         {/* Navigation */}
         <nav className="flex-1 overflow-y-auto py-3 px-2 space-y-0.5">
-          {NAV_ITEMS.filter(({ to }) => to !== '/admin' || isAdmin).map(({ to, icon: Icon, label }) => (
+          {NAV_ITEMS.filter(({ to }) => {
+            if (to === '/admin') return isAdmin
+            if (to === '/pricing') return !isAdmin
+            return true
+          }).map(({ to, icon: Icon, label }) => (
             <NavLink
               key={to}
               to={to}
@@ -100,7 +104,7 @@ export function Sidebar() {
                   {level.label[0]}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs font-semibold text-[#D4AF37] truncate">{level.label}</p>
+                  <p className="text-xs font-semibold text-[#D4AF37] truncate">{isAdmin ? '👑 Admin' : level.label}</p>
                   <p className="text-xs text-[#8B7355] truncate">{user?.email || 'Invité'}</p>
                 </div>
               </div>

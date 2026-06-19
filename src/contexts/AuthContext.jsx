@@ -33,8 +33,8 @@ export function AuthProvider({ children }) {
     return () => subscription.unsubscribe()
   }, [])
 
-  const isPaid = profile?.subscription_status === 'active'
   const isAdmin = profile?.role === 'admin' || user?.email === 'imranbouras69@gmail.com'
+  const isPaid = profile?.subscription_status === 'active' || isAdmin
 
   async function signUp(email, password) {
     return supabase.auth.signUp({ email, password })
