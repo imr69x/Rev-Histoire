@@ -557,13 +557,20 @@ function ComptesPanel() {
   const [loading, setLoading] = useState(true)
   const { user: me } = useAuth()
 
+  const adminHeaders = {
+    'Content-Type': 'application/json',
+    'x-admin-email': me?.email || '',
+  }
+
   async function loadUsers() {
     setLoading(true)
-    const { data } = await supabase
-      .from('profiles')
-      .select('id, email, subscription_status, subscription_end_date, role, created_at')
-      .order('created_at', { ascending: false })
-    setUsers(data || [])
+    try {
+      const res = await fetch('/api/admin-users', { headers: adminHeaders })
+      const data = await res.json()
+      setUsers(Array.isArray(data) ? data : [])
+    } catch {
+      setUsers([])
+    }
     setLoading(false)
   }
 
@@ -574,19 +581,31 @@ function ComptesPanel() {
     const endDate = newStatus === 'active'
       ? new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString()
       : null
-    await supabase.from('profiles').update({ subscription_status: newStatus, subscription_end_date: endDate }).eq('id', userId)
+    await fetch('/api/admin-users', {
+      method: 'PATCH',
+      headers: adminHeaders,
+      body: JSON.stringify({ id: userId, updates: { subscription_status: newStatus, subscription_end_date: endDate } }),
+    })
     loadUsers()
   }
 
   async function toggleAdmin(userId, current) {
     const newRole = current === 'admin' ? 'user' : 'admin'
-    await supabase.from('profiles').update({ role: newRole }).eq('id', userId)
+    await fetch('/api/admin-users', {
+      method: 'PATCH',
+      headers: adminHeaders,
+      body: JSON.stringify({ id: userId, updates: { role: newRole } }),
+    })
     loadUsers()
   }
 
   async function deleteUser(userId) {
     if (!window.confirm('Supprimer ce compte définitivement ?')) return
-    await supabase.from('profiles').delete().eq('id', userId)
+    await fetch('/api/admin-users', {
+      method: 'DELETE',
+      headers: adminHeaders,
+      body: JSON.stringify({ id: userId }),
+    })
     loadUsers()
   }
 
