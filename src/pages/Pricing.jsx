@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BookOpen, Check, Star } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
-import { useAdminStore } from '@/stores/useAdminStore'
+import { supabase } from '@/lib/supabase'
 
 const FREE_FEATURES = [
   '1 fiche de révision par niveau',
@@ -24,21 +24,29 @@ const PAID_FEATURES = [
   'Mises à jour incluses',
 ]
 
+function durationLabel(days) {
+  if (days % 365 === 0) return `${days / 365} an${days / 365 > 1 ? 's' : ''}`
+  if (days % 30 === 0) return `${days / 30} mois`
+  return `${days} jour${days > 1 ? 's' : ''}`
+}
+
 export default function Pricing() {
   const { user, isPaid } = useAuth()
-  const { subscriptionConfig } = useAdminStore()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const [errMsg, setErrMsg] = useState(null)
+  const [config, setConfig] = useState({ price: '9.99', currency: '€', days: 90 })
 
-  const price = subscriptionConfig?.priceDisplay || '9.99'
-  const currency = subscriptionConfig?.currency === 'USD' ? '$' : subscriptionConfig?.currency === 'MAD' ? 'MAD' : '€'
-  const durationDays = subscriptionConfig?.durationDays || 365
-  const durationLabel = durationDays % 365 === 0
-    ? `${durationDays / 365} an${durationDays / 365 > 1 ? 's' : ''}`
-    : durationDays % 30 === 0
-    ? `${durationDays / 30} mois`
-    : `${durationDays} jour${durationDays > 1 ? 's' : ''}`
+  useEffect(() => {
+    supabase.from('app_config').select('key, value').then(({ data }) => {
+      if (!data) return
+      const cfg = Object.fromEntries(data.map((r) => [r.key, r.value]))
+      const cur = cfg.currency === 'USD' ? '$' : cfg.currency === 'MAD' ? 'MAD' : '€'
+      setConfig({ price: cfg.price_display || '9.99', currency: cur, days: Number(cfg.duration_days || 90) })
+    })
+  }, [])
+
+  const label = durationLabel(config.days)
 
   async function handleCheckout() {
     if (!user) { navigate('/register'); return }
@@ -105,8 +113,8 @@ export default function Pricing() {
             Recommandé
           </div>
           <h2 className="text-lg font-bold text-[#D4AF37] mb-1">Accès complet</h2>
-          <p className="text-3xl font-bold text-white mb-1">{price}{currency}<span className="text-base font-normal text-[#C4A882]">/{durationLabel}</span></p>
-          <p className="text-sm text-[#8B7355] mb-6">Accès complet pendant {durationLabel}</p>
+          <p className="text-3xl font-bold text-white mb-1">{config.price}{config.currency}<span className="text-base font-normal text-[#C4A882]">/{label}</span></p>
+          <p className="text-sm text-[#8B7355] mb-6">Accès complet pendant {label}</p>
           <ul className="space-y-2 mb-6">
             {PAID_FEATURES.map((f) => (
               <li key={f} className="flex items-start gap-2 text-sm text-[#E8E0CC]">

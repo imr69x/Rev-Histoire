@@ -722,25 +722,46 @@ function durationToParts(days) {
 }
 
 function ConfigPanel() {
-  const { subscriptionConfig, setSubscriptionConfig } = useAdminStore()
-  const parts = durationToParts(subscriptionConfig?.durationDays || 365)
+  const { setSubscriptionConfig } = useAdminStore()
   const [form, setForm] = useState({
-    priceDisplay: subscriptionConfig?.priceDisplay || '9.99',
-    currency: subscriptionConfig?.currency || 'EUR',
-    durationValue: parts.value,
-    durationUnit: parts.unit,
+    priceDisplay: '9.99',
+    currency: 'EUR',
+    durationValue: 3,
+    durationUnit: 'mois',
   })
   const [saved, setSaved] = useState(false)
+  const [loadingConfig, setLoadingConfig] = useState(true)
+
+  useEffect(() => {
+    supabase.from('app_config').select('key, value').then(({ data }) => {
+      if (!data) return
+      const cfg = Object.fromEntries(data.map((r) => [r.key, r.value]))
+      const days = Number(cfg.duration_days || 90)
+      const parts = durationToParts(days)
+      setForm({
+        priceDisplay: cfg.price_display || '9.99',
+        currency: cfg.currency || 'EUR',
+        durationValue: parts.value,
+        durationUnit: parts.unit,
+      })
+      setSubscriptionConfig({ priceDisplay: cfg.price_display || '9.99', currency: cfg.currency || 'EUR', durationDays: days })
+      setLoadingConfig(false)
+    })
+  }, [])
 
   const totalDays = Number(form.durationValue) * UNIT_TO_DAYS[form.durationUnit]
 
-  function save(e) {
+  async function save(e) {
     e.preventDefault()
-    setSubscriptionConfig({
-      priceDisplay: form.priceDisplay,
-      currency: form.currency,
-      durationDays: totalDays,
-    })
+    const updates = [
+      { key: 'price_display', value: form.priceDisplay },
+      { key: 'currency', value: form.currency },
+      { key: 'duration_days', value: String(totalDays) },
+    ]
+    for (const row of updates) {
+      await supabase.from('app_config').upsert(row, { onConflict: 'key' })
+    }
+    setSubscriptionConfig({ priceDisplay: form.priceDisplay, currency: form.currency, durationDays: totalDays })
     setSaved(true)
     setTimeout(() => setSaved(false), 2500)
   }
