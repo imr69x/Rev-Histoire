@@ -1,17 +1,18 @@
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import {
   BookOpen, Globe, Users, BookMarked, HelpCircle,
   Clock, BarChart3, GraduationCap, Menu, X,
-  Scroll, Star, MapPin, Settings
+  Scroll, Star, MapPin, Settings, LogOut, Crown
 } from 'lucide-react'
 import { useState } from 'react'
 import { useAppStore } from '@/stores/useAppStore'
+import { useAuth } from '@/contexts/AuthContext'
 import { getLevel, getProgressToNext } from '@/utils/xp'
 import { Progress } from './Progress'
 import { cn } from '@/utils/cn'
 
 const NAV_ITEMS = [
-  { to: '/',          icon: BarChart3,   label: 'Tableau de bord' },
+  { to: '/dashboard',  icon: BarChart3,   label: 'Tableau de bord' },
   { to: '/fiches',    icon: BookOpen,    label: 'Fiches de révision' },
   { to: '/glossaire', icon: BookMarked,  label: 'Glossaire' },
   { to: '/personnalites', icon: Users,   label: 'Personnalités' },
@@ -27,8 +28,15 @@ const NAV_ITEMS = [
 export function Sidebar() {
   const [collapsed, setCollapsed] = useState(false)
   const { xp } = useAppStore()
+  const { user, isPaid, signOut } = useAuth()
+  const navigate = useNavigate()
   const level = getLevel(xp)
   const progress = getProgressToNext(xp)
+
+  async function handleSignOut() {
+    await signOut()
+    navigate('/landing')
+  }
 
   return (
     <>
@@ -80,23 +88,44 @@ export function Sidebar() {
         </nav>
 
         {/* XP & Profil */}
-        {!collapsed && (
-          <div className="px-4 py-4 border-t border-[#4A3728] dark:border-[#30363D]">
-            <div className="flex items-center gap-2 mb-2">
-              <div
-                className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-[#2C1810]"
-                style={{ backgroundColor: level.color }}
+        <div className="px-4 py-4 border-t border-[#4A3728] dark:border-[#30363D] space-y-3">
+          {!collapsed && (
+            <>
+              <div className="flex items-center gap-2">
+                <div
+                  className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-[#2C1810] flex-shrink-0"
+                  style={{ backgroundColor: level.color }}
+                >
+                  {level.label[0]}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-semibold text-[#D4AF37] truncate">{level.label}</p>
+                  <p className="text-xs text-[#8B7355] truncate">{user?.email || 'Invité'}</p>
+                </div>
+              </div>
+              <Progress value={progress} className="h-1.5" />
+              {!isPaid && (
+                <button
+                  onClick={() => navigate('/pricing')}
+                  className="w-full flex items-center justify-center gap-1.5 py-2 rounded-lg bg-[#D4AF37] text-[#2C1810] text-xs font-bold hover:bg-[#E8C85A] transition-colors"
+                >
+                  <Crown size={13} /> Passer Premium
+                </button>
+              )}
+              <button
+                onClick={handleSignOut}
+                className="w-full flex items-center justify-center gap-1.5 py-2 rounded-lg text-[#8B7355] hover:text-[#E74C3C] hover:bg-[#3D2314] text-xs transition-colors"
               >
-                {level.label[0]}
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-xs font-semibold text-[#D4AF37] truncate">{level.label}</p>
-                <p className="text-xs text-[#8B7355]">{xp} XP</p>
-              </div>
-            </div>
-            <Progress value={progress} className="h-1.5" />
-          </div>
-        )}
+                <LogOut size={13} /> Se déconnecter
+              </button>
+            </>
+          )}
+          {collapsed && (
+            <button onClick={handleSignOut} className="w-full flex justify-center text-[#8B7355] hover:text-[#E74C3C] transition-colors">
+              <LogOut size={16} />
+            </button>
+          )}
+        </div>
 
       </aside>
 

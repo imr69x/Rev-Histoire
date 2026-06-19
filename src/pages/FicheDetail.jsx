@@ -1,13 +1,14 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import {
   ArrowLeft, Star, BookOpen, Calendar, Key, Target,
-  ChevronRight, ChevronLeft, HelpCircle, RotateCcw
+  ChevronRight, ChevronLeft, HelpCircle, RotateCcw, Lock
 } from 'lucide-react'
 import { useState } from 'react'
 import { useAppStore } from '@/stores/useAppStore'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { allFiches } from '@/data/allData'
+import { useAccess } from '@/hooks/useAccess'
 
 const LEVEL_COLORS = {
   '6e': '#E74C3C', '5e': '#E67E22', '4e': '#F1C40F',
@@ -136,6 +137,7 @@ export default function FicheDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { favoriteChapters, toggleFavorite, addXP } = useAppStore()
+  const { canAccessFiche } = useAccess()
   const [activeTab, setActiveTab] = useState('cours')
 
   const fiche = allFiches.find((f) => f.id === id)
@@ -150,6 +152,27 @@ export default function FicheDetail() {
       <div className="flex flex-col items-center justify-center min-h-screen gap-4">
         <p className="text-[#8B7355]">Fiche introuvable.</p>
         <Button onClick={() => navigate('/fiches')}>Retour aux fiches</Button>
+      </div>
+    )
+  }
+
+  if (!canAccessFiche(id)) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen gap-4 px-6 text-center">
+        <div className="w-16 h-16 rounded-full bg-[#F5F0E8] flex items-center justify-center mb-2">
+          <Lock size={28} className="text-[#D4AF37]" />
+        </div>
+        <h2 className="text-xl font-['Playfair_Display'] font-bold text-[#2C1810]">Contenu verrouillé</h2>
+        <p className="text-[#8B7355] max-w-sm">Cette fiche est réservée aux abonnés. Débloque l'accès complet pour 9,99€/an.</p>
+        <button
+          onClick={() => navigate('/pricing')}
+          className="px-6 py-2.5 bg-[#D4AF37] text-[#2C1810] font-bold rounded-xl hover:bg-[#E8C85A] transition-colors"
+        >
+          Débloquer l'accès →
+        </button>
+        <button onClick={() => navigate('/fiches')} className="text-sm text-[#8B7355] hover:underline">
+          ← Retour aux fiches
+        </button>
       </div>
     )
   }
