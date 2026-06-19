@@ -1043,7 +1043,7 @@ export const personalities = [
       "Le Coran : révélations compilées après sa mort",
       "Les cinq piliers de l'islam : shahada, salat, zakat, sawm, hajj"
     ],
-    quote: "Cherchez le savoir, fût-ce jusqu'en Chine.",
+    quote: "La vraie richesse d'un homme en ce monde se mesure au bien qu'il a fait autour de lui.",
     level: ['5e', '4e', '2nde', 'HGGSP']
   },
 
@@ -1560,7 +1560,7 @@ export const personalities = [
       "Président du Comité Al-Quds (Jérusalem) à l'OCI",
       "Discours de fin de règne : 'J'ai servi mon pays de mon mieux'"
     ],
-    quote: "Je suis le commandeur des croyants. Servir le Maroc est mon destin.",
+    quote: "Mes ennemis, je m'en charge. Protégez-moi seulement de mes amis.",
     level: ['3e', '1ere', 'Terminale', 'HGGSP']
   },
 
