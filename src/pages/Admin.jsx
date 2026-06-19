@@ -668,7 +668,7 @@ function ComptesPanel() {
                   <div className="flex gap-3 mt-1 text-xs text-[#8B7355]">
                     <span>Inscrit le {createdAt}</span>
                     <span className={isPaid ? 'text-[#27AE60] font-medium' : ''}>
-                      {isPaid ? `✓ Abonné jusqu'au ${endDate}` : '✗ Gratuit'}
+                      {isPaid ? `✓ Abonné${endDate ? ` jusqu'au ${endDate}` : ''}` : '✗ Gratuit'}
                     </span>
                   </div>
                 </div>
