@@ -1,5 +1,5 @@
-const Stripe = require('stripe')
-const { createClient } = require('@supabase/supabase-js')
+import Stripe from 'stripe'
+import { createClient } from '@supabase/supabase-js'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 const supabase = createClient(
@@ -7,7 +7,7 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 )
 
-module.exports.config = { api: { bodyParser: false } }
+export const config = { api: { bodyParser: false } }
 
 async function getRawBody(req) {
   return new Promise((resolve, reject) => {
@@ -20,25 +20,15 @@ async function getRawBody(req) {
 
 async function setActive(userId, customerId, subscriptionId, periodEnd) {
   const endDate = periodEnd ? new Date(periodEnd * 1000).toISOString() : null
-  await supabase
-    .from('profiles')
-    .update({
-      subscription_status: 'active',
-      subscription_end_date: endDate,
-      stripe_customer_id: customerId || null,
-      stripe_subscription_id: subscriptionId || null,
-    })
-    .eq('id', userId)
+  await supabase.from('profiles').update({
+    subscription_status: 'active',
+    subscription_end_date: endDate,
+    stripe_customer_id: customerId || null,
+    stripe_subscription_id: subscriptionId || null,
+  }).eq('id', userId)
 }
 
-async function setInactiveByCustomer(customerId) {
-  await supabase
-    .from('profiles')
-    .update({ subscription_status: 'inactive' })
-    .eq('stripe_customer_id', customerId)
-}
-
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
 
   const sig = req.headers['stripe-signature']
@@ -67,9 +57,7 @@ module.exports = async function handler(req, res) {
       if (invoice.subscription) {
         const sub = await stripe.subscriptions.retrieve(invoice.subscription)
         const userId = sub.metadata?.userId
-        if (userId) {
-          await setActive(userId, invoice.customer, invoice.subscription, sub.current_period_end)
-        }
+        if (userId) await setActive(userId, invoice.customer, invoice.subscription, sub.current_period_end)
       }
     }
 
@@ -80,10 +68,7 @@ module.exports = async function handler(req, res) {
         if (['active', 'trialing'].includes(sub.status)) {
           await setActive(userId, sub.customer, sub.id, sub.current_period_end)
         } else {
-          await supabase
-            .from('profiles')
-            .update({ subscription_status: sub.status })
-            .eq('id', userId)
+          await supabase.from('profiles').update({ subscription_status: sub.status }).eq('id', userId)
         }
       }
     }
@@ -92,12 +77,7 @@ module.exports = async function handler(req, res) {
       const sub = event.data.object
       const userId = sub.metadata?.userId
       if (userId) {
-        await supabase
-          .from('profiles')
-          .update({ subscription_status: 'inactive' })
-          .eq('id', userId)
-      } else {
-        await setInactiveByCustomer(sub.customer)
+        await supabase.from('profiles').update({ subscription_status: 'inactive' }).eq('id', userId)
       }
     }
   } catch (err) {
