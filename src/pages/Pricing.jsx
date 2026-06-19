@@ -29,6 +29,8 @@ export default function Pricing() {
   const { subscriptionConfig } = useAdminStore()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
+  const [errMsg, setErrMsg] = useState(null)
+
   const price = subscriptionConfig?.priceDisplay || '9.99'
   const currency = subscriptionConfig?.currency === 'USD' ? '$' : subscriptionConfig?.currency === 'MAD' ? 'MAD' : '€'
   const durationDays = subscriptionConfig?.durationDays || 365
@@ -41,15 +43,22 @@ export default function Pricing() {
   async function handleCheckout() {
     if (!user) { navigate('/register'); return }
     setLoading(true)
+    setErrMsg(null)
     try {
       const res = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: user.id, email: user.email }),
       })
-      const { url } = await res.json()
-      window.location.href = url
-    } catch {
+      const data = await res.json()
+      if (!res.ok || !data.url) {
+        setErrMsg(data.error || 'Erreur inconnue')
+        setLoading(false)
+        return
+      }
+      window.location.href = data.url
+    } catch (err) {
+      setErrMsg('Impossible de contacter le serveur : ' + err.message)
       setLoading(false)
     }
   }
@@ -110,12 +119,17 @@ export default function Pricing() {
               ✓ Accès actif
             </div>
           ) : (
-            <button
-              onClick={handleCheckout} disabled={loading}
-              className="w-full py-2.5 bg-[#D4AF37] text-[#2C1810] rounded-xl font-bold hover:bg-[#E8C85A] transition-colors disabled:opacity-60"
-            >
-              {loading ? 'Redirection…' : 'Débloquer maintenant →'}
-            </button>
+            <>
+              <button
+                onClick={handleCheckout} disabled={loading}
+                className="w-full py-2.5 bg-[#D4AF37] text-[#2C1810] rounded-xl font-bold hover:bg-[#E8C85A] transition-colors disabled:opacity-60"
+              >
+                {loading ? 'Connexion à Stripe…' : 'Débloquer maintenant →'}
+              </button>
+              {errMsg && (
+                <p className="mt-3 text-xs text-[#E74C3C] bg-[#FDEDEC] rounded-lg px-3 py-2">{errMsg}</p>
+              )}
+            </>
           )}
         </div>
       </div>
