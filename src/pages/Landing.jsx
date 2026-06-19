@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { BookOpen, Globe, HelpCircle, Users, Star, Lock } from 'lucide-react'
 
 const FEATURES = [
-  { icon: BookOpen, label: '700+ fiches de révision', desc: 'Du CM2 à la Terminale HGGSP' },
+  { icon: BookOpen, label: '700+ fiches de révision', desc: 'De la 6ème à la Terminale HGGSP' },
   { icon: HelpCircle, label: '800+ questions de quiz', desc: 'Avec explications détaillées' },
   { icon: Globe, label: 'Carte interactive', desc: 'Histoire du monde visualisée' },
   { icon: Users, label: 'Personnalités historiques', desc: 'Les grands acteurs de l\'Histoire' },
