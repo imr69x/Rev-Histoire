@@ -31,6 +31,16 @@ export const useAdminStore = create(
       deleteFiche: (id) => set((s) => ({ customFiches: s.customFiches.filter((x) => x.id !== id) })),
       deleteQuestion: (id) => set((s) => ({ customQuestions: s.customQuestions.filter((x) => x.id !== id) })),
       deleteFriseEvent: (id) => set((s) => ({ customFriseEvents: s.customFriseEvents.filter((x) => x.id !== id) })),
+
+      // Configuration abonnement
+      subscriptionConfig: {
+        priceDisplay: '9.99',
+        durationDays: 365,
+        currency: 'EUR',
+      },
+      setSubscriptionConfig: (config) => set((s) => ({
+        subscriptionConfig: { ...s.subscriptionConfig, ...config },
+      })),
     }),
     { name: 'admin-store' }
   )

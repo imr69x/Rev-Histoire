@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Trash2, Plus, ChevronDown, ChevronUp, Settings, Users, CheckCircle, XCircle, RefreshCw, Shield, Crown, UserX, LayoutDashboard } from 'lucide-react'
+import { Trash2, Plus, ChevronDown, ChevronUp, Settings, Users, CheckCircle, XCircle, RefreshCw, Shield, Crown, UserX, LayoutDashboard, SlidersHorizontal, ExternalLink } from 'lucide-react'
 import { useAdminStore } from '@/stores/useAdminStore'
 import { useAuth } from '@/contexts/AuthContext'
 import { supabase } from '@/lib/supabase'
@@ -604,6 +604,110 @@ function ComptesPanel() {
   )
 }
 
+// ─── Onglet Configuration ──────────────────────────────────────
+function ConfigPanel() {
+  const { subscriptionConfig, setSubscriptionConfig } = useAdminStore()
+  const [form, setForm] = useState(subscriptionConfig)
+  const [saved, setSaved] = useState(false)
+
+  function save(e) {
+    e.preventDefault()
+    setSubscriptionConfig({
+      priceDisplay: form.priceDisplay,
+      durationDays: Number(form.durationDays),
+      currency: form.currency,
+    })
+    setSaved(true)
+    setTimeout(() => setSaved(false), 2500)
+  }
+
+  return (
+    <div className="space-y-6">
+      {/* Prix et durée */}
+      <div className="bg-white rounded-2xl border border-[#E8E0CC] p-6">
+        <h3 className="font-['Playfair_Display'] font-semibold text-[#2C1810] text-lg mb-4">
+          Prix & Durée de l'abonnement
+        </h3>
+        <form onSubmit={save} className="space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label className="text-sm font-medium text-[#4A3728] block mb-1">Prix affiché</label>
+              <div className="flex">
+                <input
+                  type="number" step="0.01" min="0"
+                  value={form.priceDisplay}
+                  onChange={(e) => setForm((f) => ({ ...f, priceDisplay: e.target.value }))}
+                  className={inputCls + ' rounded-r-none'}
+                />
+                <select
+                  value={form.currency}
+                  onChange={(e) => setForm((f) => ({ ...f, currency: e.target.value }))}
+                  className={inputCls + ' rounded-l-none border-l-0 w-20'}
+                >
+                  <option value="EUR">€</option>
+                  <option value="USD">$</option>
+                  <option value="MAD">MAD</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-[#4A3728] block mb-1">Durée (jours)</label>
+              <input
+                type="number" min="1"
+                value={form.durationDays}
+                onChange={(e) => setForm((f) => ({ ...f, durationDays: e.target.value }))}
+                className={inputCls}
+              />
+              <p className="text-xs text-[#8B7355] mt-1">
+                {form.durationDays >= 365 ? `${Math.round(form.durationDays / 365)} an${Math.round(form.durationDays / 365) > 1 ? 's' : ''}` : `${form.durationDays} jours`}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <button type="submit" className="px-5 py-2.5 bg-[#D4AF37] text-[#2C1810] font-bold rounded-xl text-sm hover:bg-[#E8C85A] transition-colors">
+              Enregistrer
+            </button>
+            {saved && <p className="text-sm text-[#27AE60] font-medium">✓ Sauvegardé !</p>}
+          </div>
+        </form>
+
+        <div className="mt-4 p-3 bg-[#FDF3E7] rounded-lg border border-[#E8E0CC]">
+          <p className="text-xs text-[#8B7355]">
+            ⚠️ Ces valeurs modifient l'affichage sur la page Tarifs. Pour changer le <strong>vrai prix Stripe</strong>, crée un nouveau produit dans ton dashboard Stripe et mets à jour la variable <code className="bg-[#E8E0CC] px-1 rounded">STRIPE_PRICE_ID</code> dans Vercel.
+          </p>
+        </div>
+      </div>
+
+      {/* Liens rapides */}
+      <div className="bg-white rounded-2xl border border-[#E8E0CC] p-6">
+        <h3 className="font-['Playfair_Display'] font-semibold text-[#2C1810] text-lg mb-4">Accès rapides</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {[
+            { label: 'Dashboard Stripe', url: 'https://dashboard.stripe.com', desc: 'Gérer produits, prix, paiements' },
+            { label: 'Dashboard Supabase', url: 'https://supabase.com/dashboard', desc: 'Base de données, utilisateurs auth' },
+            { label: 'Variables Vercel', url: 'https://vercel.com', desc: 'Modifier STRIPE_PRICE_ID, clés API' },
+          ].map(({ label, url, desc }) => (
+            <a
+              key={label}
+              href={url}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center justify-between p-3 rounded-xl border border-[#E8E0CC] hover:border-[#D4AF37] hover:bg-[#FDF3E7] transition-colors group"
+            >
+              <div>
+                <p className="text-sm font-medium text-[#2C1810]">{label}</p>
+                <p className="text-xs text-[#8B7355]">{desc}</p>
+              </div>
+              <ExternalLink size={14} className="text-[#8B7355] group-hover:text-[#D4AF37] flex-shrink-0" />
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // ─── Page principale ───────────────────────────────────────────
 export default function Admin() {
   const { isAdmin } = useAuth()
@@ -612,8 +716,11 @@ export default function Admin() {
   const total = customPersonalities.length + customTerms.length + customFiches.length + customQuestions.length + customFriseEvents.length
 
   const TABS = [
-    ...(isAdmin ? [{ id: 'comptes', label: 'Gestion des comptes', icon: Users }] : []),
-    { id: 'contenu', label: 'Modification du contenu', icon: Settings },
+    ...(isAdmin ? [
+      { id: 'comptes', label: 'Comptes', icon: Users },
+      { id: 'config', label: 'Configuration', icon: SlidersHorizontal },
+    ] : []),
+    { id: 'contenu', label: 'Contenu', icon: Settings },
   ]
 
   return (
@@ -646,6 +753,7 @@ export default function Admin() {
 
       {/* Contenu des onglets */}
       {tab === 'comptes' && isAdmin && <ComptesPanel />}
+      {tab === 'config' && isAdmin && <ConfigPanel />}
 
       {tab === 'contenu' && (
         <div className="space-y-4">

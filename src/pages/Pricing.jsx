@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BookOpen, Check, Star } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
+import { useAdminStore } from '@/stores/useAdminStore'
 
 const FREE_FEATURES = [
   '1 fiche de révision par niveau',
@@ -25,8 +26,13 @@ const PAID_FEATURES = [
 
 export default function Pricing() {
   const { user, isPaid } = useAuth()
+  const { subscriptionConfig } = useAdminStore()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
+  const price = subscriptionConfig?.priceDisplay || '9.99'
+  const currency = subscriptionConfig?.currency === 'USD' ? '$' : subscriptionConfig?.currency === 'MAD' ? ' MAD' : ' €'
+  const durationDays = subscriptionConfig?.durationDays || 365
+  const durationLabel = durationDays >= 365 ? `${Math.round(durationDays / 365)} an` : `${durationDays} jours`
 
   async function handleCheckout() {
     if (!user) { navigate('/register'); return }
@@ -86,8 +92,8 @@ export default function Pricing() {
             Recommandé
           </div>
           <h2 className="text-lg font-bold text-[#D4AF37] mb-1">Accès complet</h2>
-          <p className="text-3xl font-bold text-white mb-1">9,99 €<span className="text-base font-normal text-[#C4A882]">/an</span></p>
-          <p className="text-sm text-[#8B7355] mb-6">Soit moins de 1 €/mois</p>
+          <p className="text-3xl font-bold text-white mb-1">{price}{currency}<span className="text-base font-normal text-[#C4A882]">/{durationLabel}</span></p>
+          <p className="text-sm text-[#8B7355] mb-6">Accès complet pendant {durationLabel}</p>
           <ul className="space-y-2 mb-6">
             {PAID_FEATURES.map((f) => (
               <li key={f} className="flex items-start gap-2 text-sm text-[#E8E0CC]">
