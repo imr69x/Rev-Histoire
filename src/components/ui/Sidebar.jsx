@@ -22,6 +22,7 @@ const NAV_ITEMS = [
   { to: '/methode',   icon: GraduationCap, label: 'Méthode Bac/Brevet' },
   { to: '/favoris',   icon: Star,        label: 'Mes favoris' },
   { to: '/pays',      icon: MapPin,      label: 'Histoire des pays' },
+  { to: '/pricing',   icon: Crown,       label: 'Tarifs & Abonnement' },
   { to: '/admin',     icon: Settings,    label: 'Modification' },
 ]
 
