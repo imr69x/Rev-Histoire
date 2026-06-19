@@ -27,7 +27,7 @@ export default async function handler(req, res) {
         metadata: { userId },
       },
       metadata: { userId },
-      success_url: `${SITE_URL}/success`,
+      success_url: `${SITE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${SITE_URL}/pricing`,
     })
 
