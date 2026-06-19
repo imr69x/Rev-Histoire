@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Trash2, Plus, ChevronDown, ChevronUp, Settings, Users, CheckCircle, XCircle, RefreshCw } from 'lucide-react'
+import { Trash2, Plus, ChevronDown, ChevronUp, Settings, Users, CheckCircle, XCircle, RefreshCw, Shield, Crown, UserX, LayoutDashboard } from 'lucide-react'
 import { useAdminStore } from '@/stores/useAdminStore'
 import { useAuth } from '@/contexts/AuthContext'
 import { supabase } from '@/lib/supabase'
@@ -467,11 +467,11 @@ function FriseForm() {
   )
 }
 
-// ─── Gestion des abonnements ───────────────────────────────────
-function UsersPanel() {
-  const [open, setOpen] = useState(false)
+// ─── Onglet Comptes ────────────────────────────────────────────
+function ComptesPanel() {
   const [users, setUsers] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const { user: me } = useAuth()
 
   async function loadUsers() {
     setLoading(true)
@@ -483,127 +483,182 @@ function UsersPanel() {
     setLoading(false)
   }
 
-  useEffect(() => { if (open) loadUsers() }, [open])
+  useEffect(() => { loadUsers() }, [])
 
   async function toggleSubscription(userId, current) {
     const newStatus = current === 'active' ? 'inactive' : 'active'
     const endDate = newStatus === 'active'
       ? new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString()
       : null
-    await supabase
-      .from('profiles')
-      .update({ subscription_status: newStatus, subscription_end_date: endDate })
-      .eq('id', userId)
+    await supabase.from('profiles').update({ subscription_status: newStatus, subscription_end_date: endDate }).eq('id', userId)
     loadUsers()
   }
 
+  async function toggleAdmin(userId, current) {
+    const newRole = current === 'admin' ? 'user' : 'admin'
+    await supabase.from('profiles').update({ role: newRole }).eq('id', userId)
+    loadUsers()
+  }
+
+  async function deleteUser(userId) {
+    if (!window.confirm('Supprimer ce compte définitivement ?')) return
+    await supabase.from('profiles').delete().eq('id', userId)
+    loadUsers()
+  }
+
+  const total = users.length
+  const paid = users.filter(u => u.subscription_status === 'active').length
+  const admins = users.filter(u => u.role === 'admin').length
+
   return (
-    <section className="bg-white dark:bg-[#161B22] rounded-2xl border border-[#D4AF37] overflow-hidden">
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between p-5 text-left hover:bg-[#FDF3E7] dark:hover:bg-[#1a1f29] transition-colors"
-      >
-        <div className="flex items-center gap-2">
-          <Users size={18} className="text-[#D4AF37]" />
-          <span className="font-['Playfair_Display'] font-semibold text-[#2C1810] dark:text-[#E6EDF3] text-lg">
-            Utilisateurs & Abonnements
-          </span>
-        </div>
-        {open ? <ChevronUp size={18} className="text-[#8B7355]" /> : <ChevronDown size={18} className="text-[#8B7355]" />}
-      </button>
-
-      {open && (
-        <div className="p-5 border-t border-[#E8E0CC] dark:border-[#30363D]">
-          <div className="flex justify-between items-center mb-4">
-            <p className="text-sm text-[#8B7355]">{users.length} utilisateur{users.length > 1 ? 's' : ''}</p>
-            <button
-              onClick={loadUsers}
-              className="flex items-center gap-1.5 text-xs text-[#8B7355] hover:text-[#2C1810] transition-colors"
-            >
-              <RefreshCw size={12} className={loading ? 'animate-spin' : ''} /> Actualiser
-            </button>
+    <div>
+      {/* Stats */}
+      <div className="grid grid-cols-3 gap-3 mb-6">
+        {[
+          { label: 'Comptes', value: total, color: '#2980B9' },
+          { label: 'Abonnés', value: paid, color: '#27AE60' },
+          { label: 'Admins', value: admins, color: '#D4AF37' },
+        ].map(({ label, value, color }) => (
+          <div key={label} className="bg-white rounded-xl border border-[#E8E0CC] p-4 text-center">
+            <p className="text-2xl font-bold" style={{ color }}>{value}</p>
+            <p className="text-xs text-[#8B7355] mt-0.5">{label}</p>
           </div>
+        ))}
+      </div>
 
-          {loading && <p className="text-sm text-[#8B7355] text-center py-4">Chargement…</p>}
+      {/* Liste */}
+      <div className="flex justify-between items-center mb-3">
+        <p className="text-sm font-medium text-[#4A3728]">Tous les comptes</p>
+        <button onClick={loadUsers} className="flex items-center gap-1.5 text-xs text-[#8B7355] hover:text-[#2C1810]">
+          <RefreshCw size={12} className={loading ? 'animate-spin' : ''} /> Actualiser
+        </button>
+      </div>
 
-          <div className="space-y-2">
-            {users.map((u) => {
-              const isPaid = u.subscription_status === 'active'
-              const endDate = u.subscription_end_date
-                ? new Date(u.subscription_end_date).toLocaleDateString('fr-FR')
-                : null
-              return (
-                <div
-                  key={u.id}
-                  className="flex items-center justify-between p-3 rounded-xl bg-[#FDF3E7] dark:bg-[#1a1f29] border border-[#E8E0CC] dark:border-[#30363D]"
-                >
-                  <div className="flex-1 min-w-0">
-                    <p className="font-medium text-sm text-[#2C1810] dark:text-[#E6EDF3] truncate">{u.email || u.id}</p>
-                    <p className="text-xs text-[#8B7355]">
-                      {isPaid
-                        ? `✓ Actif${endDate ? ` jusqu'au ${endDate}` : ''}`
-                        : '✗ Gratuit'}
-                      {u.role === 'admin' ? ' · Admin' : ''}
-                    </p>
+      {loading && <p className="text-sm text-[#8B7355] text-center py-6">Chargement…</p>}
+
+      <div className="space-y-2">
+        {users.map((u) => {
+          const isPaid = u.subscription_status === 'active'
+          const isUserAdmin = u.role === 'admin'
+          const isMe = u.id === me?.id || u.email === me?.email
+          const endDate = u.subscription_end_date
+            ? new Date(u.subscription_end_date).toLocaleDateString('fr-FR')
+            : null
+          const createdAt = u.created_at
+            ? new Date(u.created_at).toLocaleDateString('fr-FR')
+            : '—'
+
+          return (
+            <div key={u.id} className="bg-white rounded-xl border border-[#E8E0CC] p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <p className="font-medium text-sm text-[#2C1810] truncate">{u.email || u.id}</p>
+                    {isMe && <span className="text-xs bg-[#E8E0CC] text-[#4A3728] px-2 py-0.5 rounded-full">Moi</span>}
+                    {isUserAdmin && <span className="text-xs bg-[#FDF3E7] text-[#D4AF37] px-2 py-0.5 rounded-full font-medium">Admin</span>}
                   </div>
+                  <div className="flex gap-3 mt-1 text-xs text-[#8B7355]">
+                    <span>Inscrit le {createdAt}</span>
+                    <span className={isPaid ? 'text-[#27AE60] font-medium' : ''}>
+                      {isPaid ? `✓ Abonné jusqu'au ${endDate}` : '✗ Gratuit'}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Actions */}
+                <div className="flex gap-1.5 flex-shrink-0 flex-wrap justify-end">
                   <button
                     onClick={() => toggleSubscription(u.id, u.subscription_status)}
-                    className={`ml-3 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                      isPaid
-                        ? 'bg-[#FDEDEC] text-[#C0392B] hover:bg-[#FADBD8]'
-                        : 'bg-[#EAFAF1] text-[#27AE60] hover:bg-[#D5F5E3]'
-                    }`}
+                    title={isPaid ? 'Révoquer abonnement' : 'Activer abonnement'}
+                    className={`p-1.5 rounded-lg text-xs transition-colors ${isPaid ? 'bg-[#FDEDEC] text-[#C0392B] hover:bg-[#FADBD8]' : 'bg-[#EAFAF1] text-[#27AE60] hover:bg-[#D5F5E3]'}`}
                   >
-                    {isPaid
-                      ? <><XCircle size={12} /> Révoquer</>
-                      : <><CheckCircle size={12} /> Activer</>}
+                    {isPaid ? <XCircle size={14} /> : <CheckCircle size={14} />}
                   </button>
+                  <button
+                    onClick={() => toggleAdmin(u.id, u.role)}
+                    title={isUserAdmin ? 'Retirer admin' : 'Rendre admin'}
+                    className={`p-1.5 rounded-lg transition-colors ${isUserAdmin ? 'bg-[#FDF3E7] text-[#D4AF37] hover:bg-[#FDEBD0]' : 'bg-[#F8F9FA] text-[#8B7355] hover:bg-[#E8E0CC]'}`}
+                  >
+                    <Shield size={14} />
+                  </button>
+                  {!isMe && (
+                    <button
+                      onClick={() => deleteUser(u.id)}
+                      title="Supprimer le compte"
+                      className="p-1.5 rounded-lg bg-[#FDEDEC] text-[#C0392B] hover:bg-[#FADBD8] transition-colors"
+                    >
+                      <Trash2 size={14} />
+                    </button>
+                  )}
                 </div>
-              )
-            })}
-          </div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
 
-          {users.length === 0 && !loading && (
-            <p className="text-sm text-[#8B7355] text-center py-4">Aucun utilisateur pour l'instant.</p>
-          )}
-        </div>
+      {users.length === 0 && !loading && (
+        <p className="text-sm text-[#8B7355] text-center py-6">Aucun compte pour l'instant.</p>
       )}
-    </section>
+    </div>
   )
 }
 
 // ─── Page principale ───────────────────────────────────────────
 export default function Admin() {
   const { isAdmin } = useAuth()
+  const [tab, setTab] = useState(isAdmin ? 'comptes' : 'contenu')
   const { customPersonalities, customTerms, customFiches, customQuestions, customFriseEvents } = useAdminStore()
   const total = customPersonalities.length + customTerms.length + customFiches.length + customQuestions.length + customFriseEvents.length
 
+  const TABS = [
+    ...(isAdmin ? [{ id: 'comptes', label: 'Gestion des comptes', icon: Users }] : []),
+    { id: 'contenu', label: 'Modification du contenu', icon: Settings },
+  ]
+
   return (
     <div className="p-6 max-w-4xl mx-auto animate-fade-in">
-      <div className="mb-8">
+      <div className="mb-6">
         <div className="flex items-center gap-3 mb-1">
-          <Settings size={28} className="text-[#D4AF37]" />
+          <LayoutDashboard size={28} className="text-[#D4AF37]" />
           <h1 className="text-3xl font-['Playfair_Display'] font-bold text-[#2C1810] dark:text-[#E6EDF3]">
             Administration
           </h1>
         </div>
-        <p className="text-[#8B7355]">
-          {total} élément{total > 1 ? 's' : ''} personnalisé{total > 1 ? 's' : ''} — sauvegardé{total > 1 ? 's' : ''} automatiquement dans votre navigateur
-        </p>
       </div>
 
-      <div className="space-y-4">
-        {isAdmin && <UsersPanel />}
-        <PersonnaliteForm />
-        <GlossaireForm />
-        <FicheForm />
-        <QuizForm />
-        <FriseForm />
+      {/* Onglets */}
+      <div className="flex gap-2 mb-6 border-b border-[#E8E0CC]">
+        {TABS.map(({ id, label, icon: Icon }) => (
+          <button
+            key={id}
+            onClick={() => setTab(id)}
+            className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium border-b-2 transition-colors -mb-px ${
+              tab === id
+                ? 'border-[#D4AF37] text-[#2C1810]'
+                : 'border-transparent text-[#8B7355] hover:text-[#2C1810]'
+            }`}
+          >
+            <Icon size={15} /> {label}
+          </button>
+        ))}
       </div>
 
-      <p className="text-center text-xs text-[#8B7355] mt-8">
-        Les données sont stockées localement dans votre navigateur (localStorage) et persistent entre les sessions.
-      </p>
+      {/* Contenu des onglets */}
+      {tab === 'comptes' && isAdmin && <ComptesPanel />}
+
+      {tab === 'contenu' && (
+        <div className="space-y-4">
+          <PersonnaliteForm />
+          <GlossaireForm />
+          <FicheForm />
+          <QuizForm />
+          <FriseForm />
+          <p className="text-center text-xs text-[#8B7355] mt-4">
+            Données sauvegardées automatiquement dans le navigateur.
+          </p>
+        </div>
+      )}
     </div>
   )
 }
