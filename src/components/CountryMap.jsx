@@ -345,10 +345,7 @@ export default function CountryMap({ countryId: cid, continent }) {
       {/* Carte — hauteur 70vh minimum 560px, fond blanc */}
       <div className="relative" style={{ height: 'max(70vh, 560px)', background: '#FFFFFF' }}>
         {cid === 'maroc' ? (
-          <MarocSVGMap
-            onRegionClick={setSelectedRegion}
-            selectedRegion={selectedRegion}
-          />
+          <img src="/geo/carte_maroc.png" alt="Carte du Maroc" className="w-full h-full object-contain" />
         ) : (
           <>
             {loading && (

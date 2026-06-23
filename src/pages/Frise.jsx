@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef } from 'react'
+import { useState, useMemo, useRef, useEffect } from 'react'
 import { ZoomIn, ZoomOut } from 'lucide-react'
 import { Modal } from '@/components/ui/Modal'
 import { Badge } from '@/components/ui/Badge'
@@ -157,6 +157,19 @@ export default function Frise() {
   const [zoom, setZoom] = useState(2)
   const [filter, setFilter] = useState('all')
   const [selected, setSelected] = useState(null)
+  const friseRef = useRef(null)
+
+  useEffect(() => {
+    const el = friseRef.current
+    if (!el) return
+    const onWheel = (e) => {
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return
+      e.preventDefault()
+      el.scrollLeft += e.deltaY * 2
+    }
+    el.addEventListener('wheel', onWheel, { passive: false })
+    return () => el.removeEventListener('wheel', onWheel)
+  }, [])
 
   const filtered = EVENTS.filter(e => filter === 'all' || e.type === filter)
 
@@ -212,7 +225,7 @@ export default function Frise() {
       </div>
 
       {/* Frise */}
-      <div className="overflow-x-auto pb-2 bg-white dark:bg-[#161B22] rounded-2xl border border-[#E8E0CC] dark:border-[#30363D]">
+      <div ref={friseRef} className="overflow-x-auto pb-2 bg-white dark:bg-[#161B22] rounded-2xl border border-[#E8E0CC] dark:border-[#30363D]" style={{ cursor: 'grab' }}>
         <div style={{ width: `${trackWidth + MARGIN * 2}px`, minWidth: '100%', position: 'relative', height: `${TOTAL_H}px` }}>
 
           {/* Ligne centrale */}
