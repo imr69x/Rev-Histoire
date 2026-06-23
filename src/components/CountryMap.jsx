@@ -181,9 +181,9 @@ function LeafletMap({ geoData, nameKey, center, zoom, hoverColor, onRegionClick,
   const selectedLayerRef = useRef(null)
   const selectedNameRef = useRef(null)
 
-  const defaultStyle = { fillColor: '#F0EDE8', weight: 1, opacity: 1, color: '#9B8B7A', fillOpacity: 1 }
-  const hoverStyle   = { fillColor: hoverColor, fillOpacity: 0.55, weight: 1.5, color: '#5A4A3A', opacity: 1 }
-  const activeStyle  = { fillColor: hoverColor, fillOpacity: 0.9,  weight: 2,   color: '#3A2A1A', opacity: 1 }
+  const defaultStyle = { fillColor: '#DDD0BB', weight: 1, opacity: 1, color: '#B8A898', fillOpacity: 1 }
+  const hoverStyle   = { fillColor: '#EDE4D4', weight: 1.5, color: '#A09080', fillOpacity: 1, opacity: 1 }
+  const activeStyle  = { fillColor: '#9A7A52', weight: 2,   color: '#6B5030', fillOpacity: 1, opacity: 1 }
 
   const onEachFeature = useCallback((feature, layer) => {
     const name =
@@ -245,7 +245,7 @@ function LeafletMap({ geoData, nameKey, center, zoom, hoverColor, onRegionClick,
       touchZoom={false}
       keyboard={false}
       boxZoom={false}
-      style={{ width: '100%', height: '100%', background: 'transparent' }}
+      style={{ width: '100%', height: '100%', background: '#FFFFFF' }}
     >
       <GeoJSON
         key={countryId + String(geoData?.features?.length)}
@@ -324,10 +324,10 @@ export default function CountryMap({ countryId: cid, continent }) {
         <span className="text-[10px] text-[#8B7355] italic">Survol = couleur · Clic = détails</span>
       </div>
 
-      {/* Carte — hauteur fixe, fond transparent */}
-      <div className="relative" style={{ height: 300, background: '#F8F5F0' }}>
+      {/* Carte — hauteur fixe, fond blanc */}
+      <div className="relative" style={{ height: 300, background: '#FFFFFF' }}>
         {loading && (
-          <div className="absolute inset-0 flex items-center justify-center z-[1000]" style={{ background: '#F8F5F0' }}>
+          <div className="absolute inset-0 flex items-center justify-center z-[1000]" style={{ background: '#FFFFFF' }}>
             <div className="w-8 h-8 border-3 border-[#D4AF37] border-t-transparent rounded-full animate-spin" style={{ borderWidth: 3 }} />
           </div>
         )}

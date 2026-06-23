@@ -66,6 +66,7 @@ const TABS = [
   { id: 'batailles',  label: 'Batailles',         icon: Swords },
   { id: 'economie',   label: 'Économie & Culture',icon: Wheat },
   { id: 'geographie', label: 'Géographie',        icon: MapPin },
+  { id: 'carte',      label: 'Carte',             icon: Globe },
 ]
 
 const GEO_LABELS = {
@@ -523,16 +524,7 @@ export default function Pays() {
                     <MapPin size={20} className="text-[#D4AF37]" />
                     Géographie de {selected.name}
                   </h3>
-
-                  {/* Carte interactive des régions */}
-                  <CountryMap
-                    countryId={selected.id}
-                    countryColor={selected.color}
-                    continent={selected.continent}
-                  />
-
-                  {/* Données géographiques textuelles */}
-                  {selected.geography && (
+                  {selected.geography ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {Object.entries(selected.geography).map(([k, v]) => (
                         <div key={k} className="p-4 rounded-xl border border-[#E8E0CC] dark:border-[#30363D] bg-[#FAF7F2] dark:bg-[#161B22]">
@@ -541,8 +533,18 @@ export default function Pays() {
                         </div>
                       ))}
                     </div>
+                  ) : (
+                    <p className="text-sm text-[#8B7355]">Données géographiques à venir.</p>
                   )}
                 </div>
+              )}
+
+              {/* ── Carte interactive ── */}
+              {tab === 'carte' && (
+                <CountryMap
+                  countryId={selected.id}
+                  continent={selected.continent}
+                />
               )}
             </div>
           </div>
