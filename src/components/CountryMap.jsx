@@ -341,28 +341,38 @@ export default function CountryMap({ countryId: cid, continent }) {
       </div>
 
       {/* Carte — hauteur 70vh minimum 560px, fond blanc */}
-      <div className="relative" style={{ height: 'max(70vh, 560px)', background: '#FFFFFF' }}>
-        {loading && (
-          <div className="absolute inset-0 flex items-center justify-center z-[1000]" style={{ background: '#FFFFFF' }}>
-            <div className="w-8 h-8 border-3 border-[#D4AF37] border-t-transparent rounded-full animate-spin" style={{ borderWidth: 3 }} />
-          </div>
-        )}
-        {error && !loading && (
-          <div className="absolute inset-0 flex items-center justify-center z-[1000]">
-            <p className="text-sm text-[#8B7355]">Carte indisponible</p>
-          </div>
-        )}
-        {geoData && !loading && (
-          <LeafletMap
-            key={cid + (drilldown ? '-d' : '-r')}
-            geoData={geoData}
-            nameKey={nameKey}
-            center={center}
-            zoom={zoom}
-            hoverColor={hoverColor}
-            onRegionClick={setSelectedRegion}
-            selectedRegion={selectedRegion}
+      <div className="relative flex items-center justify-center" style={{ height: 'max(70vh, 560px)', background: '#FFFFFF' }}>
+        {cid === 'maroc' ? (
+          <img
+            src="/geo/maroc-static.svg"
+            alt="Carte du Maroc"
+            className="max-w-full max-h-full object-contain"
           />
+        ) : (
+          <>
+            {loading && (
+              <div className="absolute inset-0 flex items-center justify-center z-[1000]" style={{ background: '#FFFFFF' }}>
+                <div className="w-8 h-8 border-3 border-[#D4AF37] border-t-transparent rounded-full animate-spin" style={{ borderWidth: 3 }} />
+              </div>
+            )}
+            {error && !loading && (
+              <div className="absolute inset-0 flex items-center justify-center z-[1000]">
+                <p className="text-sm text-[#8B7355]">Carte indisponible</p>
+              </div>
+            )}
+            {geoData && !loading && (
+              <LeafletMap
+                key={cid + (drilldown ? '-d' : '-r')}
+                geoData={geoData}
+                nameKey={nameKey}
+                center={center}
+                zoom={zoom}
+                hoverColor={hoverColor}
+                onRegionClick={setSelectedRegion}
+                selectedRegion={selectedRegion}
+              />
+            )}
+          </>
         )}
       </div>
 
