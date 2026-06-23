@@ -18,7 +18,7 @@ const EVENTS = [
   { year: 0,     title: 'Naissance de Jésus de Nazareth', type: 'religion', level: '6e', region: 'Asie' },
   { year: 313,   title: 'Édit de Milan — tolérance du christianisme', type: 'religion', level: '6e', region: 'Europe' },
   { year: 476,   title: 'Chute de l\'Empire romain d\'Occident', type: 'politique', level: '5e', region: 'Europe' },
-  { year: 570,   title: 'Naissance de Muhammad (Mahomet)', type: 'religion', level: '5e', region: 'Asie' },
+  { year: 570,   title: 'Naissance de Mohammed', type: 'religion', level: '5e', region: 'Asie' },
   { year: 622,   title: 'Hégire — fuite de Muhammad vers Médine', type: 'religion', level: '5e', region: 'Asie' },
   { year: 732,   title: 'Bataille de Poitiers — Charles Martel', type: 'guerre', level: '5e', region: 'Europe' },
   { year: 800,   title: 'Couronnement de Charlemagne à Rome', type: 'politique', level: '5e', region: 'Europe' },
