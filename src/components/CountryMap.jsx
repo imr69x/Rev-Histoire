@@ -5,93 +5,135 @@ import { regionsData } from '@/data/pays-regions'
 import { MapPin, X, Building2, Utensils, Landmark, Users, Waves, BookOpen, ChevronRight, ChevronLeft } from 'lucide-react'
 
 const COUNTRY_MAP_CONFIG = {
+  // ── Europe ──
   france: {
     url: '/geo/france-regions.geojson',
     nameKey: 'nom',
-    center: [46.6, 2.5],
-    zoom: 5,
+    center: [46.6, 2.5], zoom: 5,
     sublevelUrl: '/geo/france-departements.geojson',
     sublevelNameKey: 'nom',
-    sublevelCenter: [46.6, 2.5],
-    sublevelZoom: 5,
+    sublevelCenter: [46.6, 2.5], sublevelZoom: 5,
   },
   allemagne: {
     url: '/geo/allemagne-regions.geojson',
-    nameKey: 'name_de',
-    center: [51.2, 10.4],
-    zoom: 5,
+    nameKey: 'name', center: [51.2, 10.4], zoom: 5,
   },
   espagne: {
     url: '/geo/espagne-regions.geojson',
-    nameKey: 'name',
-    center: [40.0, -3.7],
-    zoom: 5,
+    nameKey: 'name', center: [40.0, -3.7], zoom: 5,
   },
   portugal: {
     url: '/geo/portugal-regions.geojson',
-    nameKey: 'name',
-    center: [39.4, -8.2],
-    zoom: 6,
+    nameKey: 'name', center: [39.4, -8.2], zoom: 6,
   },
   italie: {
     url: '/geo/italie-regions.geojson',
-    nameKey: 'reg_name',
-    center: [42.5, 12.5],
-    zoom: 5,
+    nameKey: 'reg_name', center: [42.5, 12.5], zoom: 5,
+  },
+  grece: {
+    url: '/geo/grece-regions.geojson',
+    nameKey: 'NAME_1', center: [39.0, 22.0], zoom: 6,
   },
   russie: {
     url: '/geo/russie-regions.geojson',
-    nameKey: 'name',
-    center: [60.0, 60.0],
-    zoom: 2,
+    nameKey: 'name', center: [60.0, 60.0], zoom: 2,
   },
   pologne: {
     url: '/geo/pologne-regions.geojson',
-    nameKey: 'name',
-    center: [52.0, 19.5],
-    zoom: 5,
+    nameKey: 'name', center: [52.0, 19.5], zoom: 5,
+  },
+  royaume_uni: {
+    url: '/geo/royaume_uni-regions.geojson',
+    nameKey: 'name', center: [54.5, -3.0], zoom: 5,
+  },
+  pays_bas: {
+    url: '/geo/pays_bas-regions.geojson',
+    nameKey: 'NAME_1', center: [52.3, 5.3], zoom: 7,
+  },
+  // ── Afrique ──
+  maroc: {
+    url: '/geo/maroc-regions.geojson',
+    nameKey: 'NAME_1', center: [31.5, -6.0], zoom: 5,
+  },
+  tunisie: {
+    url: '/geo/tunisie-regions.geojson',
+    nameKey: 'NAME_1', center: [34.0, 9.0], zoom: 6,
+  },
+  egypte: {
+    url: '/geo/egypte-regions.geojson',
+    nameKey: 'NAME_1', center: [26.5, 29.5], zoom: 5,
   },
   afrique_du_sud: {
     url: '/geo/afrique_du_sud-regions.geojson',
-    nameKey: 'name',
-    center: [-29.0, 25.0],
-    zoom: 5,
+    nameKey: 'name', center: [-29.0, 25.0], zoom: 5,
   },
-  chine: {
-    url: '/geo/chine-regions.geojson',
-    nameKey: 'name',
-    center: [37.0, 104.0],
-    zoom: 3,
+  mali: {
+    url: '/geo/mali-regions.geojson',
+    nameKey: 'NAME_1', center: [17.5, -1.5], zoom: 4,
   },
-  inde: {
-    url: '/geo/inde-regions.geojson',
-    nameKey: 'name',
-    center: [22.0, 80.0],
-    zoom: 4,
+  ethiopie: {
+    url: '/geo/ethiopie-regions.geojson',
+    nameKey: 'NAME_1', center: [9.0, 40.5], zoom: 5,
   },
-  japon: {
-    url: '/geo/japon-regions.geojson',
-    nameKey: 'name',
-    center: [37.0, 137.0],
-    zoom: 4,
+  // ── Moyen-Orient ──
+  irak: {
+    url: '/geo/irak-regions.geojson',
+    nameKey: 'NAME_1', center: [33.0, 43.7], zoom: 5,
   },
-  mexique: {
-    url: '/geo/mexique-regions.geojson',
-    nameKey: 'name',
-    center: [24.0, -102.0],
-    zoom: 4,
+  iran: {
+    url: '/geo/iran-regions.geojson',
+    nameKey: 'NAME_1', center: [32.5, 53.5], zoom: 4,
   },
-  australie: {
-    url: '/geo/australie-regions.geojson',
-    nameKey: 'name',
-    center: [-28.0, 134.0],
-    zoom: 3,
+  arabie_saoudite: {
+    url: '/geo/arabie_saoudite-regions.geojson',
+    nameKey: 'NAME_1', center: [24.0, 44.0], zoom: 4,
   },
   turquie: {
     url: '/geo/turquie-regions.geojson',
-    nameKey: 'name',
-    center: [39.0, 35.0],
-    zoom: 5,
+    nameKey: 'name', center: [39.0, 35.0], zoom: 5,
+  },
+  // ── Asie ──
+  chine: {
+    url: '/geo/chine-regions.geojson',
+    nameKey: 'name', center: [37.0, 104.0], zoom: 3,
+  },
+  inde: {
+    url: '/geo/inde-regions.geojson',
+    nameKey: 'name', center: [22.0, 80.0], zoom: 4,
+  },
+  japon: {
+    url: '/geo/japon-regions.geojson',
+    nameKey: 'name_english', center: [37.0, 137.0], zoom: 4,
+  },
+  mongolie: {
+    url: '/geo/mongolie-regions.geojson',
+    nameKey: 'NAME_1', center: [47.0, 103.0], zoom: 4,
+  },
+  coree_du_sud: {
+    url: '/geo/coree_du_sud-regions.geojson',
+    nameKey: 'NAME_1', center: [36.5, 127.8], zoom: 6,
+  },
+  // ── Amériques ──
+  etats_unis: {
+    url: '/geo/etats_unis-regions.geojson',
+    nameKey: 'name', center: [38.0, -96.0], zoom: 3,
+  },
+  mexique: {
+    url: '/geo/mexique-regions.geojson',
+    nameKey: 'name', center: [24.0, -102.0], zoom: 4,
+  },
+  bresil: {
+    url: '/geo/bresil-regions.geojson',
+    nameKey: 'name', center: [-15.0, -52.0], zoom: 3,
+  },
+  haiti: {
+    url: '/geo/haiti-regions.geojson',
+    nameKey: 'NAME_1', center: [18.9, -72.5], zoom: 8,
+  },
+  // ── Océanie ──
+  australie: {
+    url: '/geo/australie-regions.geojson',
+    nameKey: 'name', center: [-28.0, 134.0], zoom: 3,
   },
 }
 
