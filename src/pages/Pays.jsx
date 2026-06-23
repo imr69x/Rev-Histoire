@@ -115,7 +115,7 @@ export default function Pays() {
   }
 
   return (
-    <div className="flex h-[calc(100vh-80px)] overflow-hidden animate-fade-in">
+    <div className="flex h-[calc(100vh-80px)] md:h-screen overflow-hidden animate-fade-in">
       {/* ── Panneau gauche ── */}
       <aside className="w-72 flex-shrink-0 flex flex-col border-r border-[#E8E0CC] dark:border-[#30363D] bg-white dark:bg-[#0D1117]">
         {/* En-tête sidebar */}
