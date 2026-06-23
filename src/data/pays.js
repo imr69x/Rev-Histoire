@@ -339,7 +339,7 @@ export const paysData = [
   },
   {
     id: 'italie',
-    name: 'Italie (et Rome antique)',
+    name: 'Italie (Rome antique)',
     flag: '🇮🇹',
     continent: 'Europe',
     capital: 'Rome',

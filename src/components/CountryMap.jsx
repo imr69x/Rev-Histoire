@@ -340,8 +340,8 @@ export default function CountryMap({ countryId: cid, continent }) {
         <span className="text-[10px] text-[#8B7355] italic">Survol = couleur · Clic = détails</span>
       </div>
 
-      {/* Carte — hauteur 55vh minimum 420px, fond blanc */}
-      <div className="relative" style={{ height: 'max(55vh, 420px)', background: '#FFFFFF' }}>
+      {/* Carte — hauteur 70vh minimum 560px, fond blanc */}
+      <div className="relative" style={{ height: 'max(70vh, 560px)', background: '#FFFFFF' }}>
         {loading && (
           <div className="absolute inset-0 flex items-center justify-center z-[1000]" style={{ background: '#FFFFFF' }}>
             <div className="w-8 h-8 border-3 border-[#D4AF37] border-t-transparent rounded-full animate-spin" style={{ borderWidth: 3 }} />

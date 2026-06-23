@@ -117,7 +117,7 @@ export default function Pays() {
   return (
     <div className="flex h-[calc(100vh-80px)] overflow-hidden animate-fade-in">
       {/* ── Panneau gauche ── */}
-      <aside className="w-72 flex-shrink-0 flex flex-col border-r border-[#E8E0CC] dark:border-[#30363D] bg-[#FAF7F2] dark:bg-[#0D1117]">
+      <aside className="w-72 flex-shrink-0 flex flex-col border-r border-[#E8E0CC] dark:border-[#30363D] bg-white dark:bg-[#0D1117]">
         {/* En-tête sidebar */}
         <div className="p-4 border-b border-[#E8E0CC] dark:border-[#30363D]">
           <div className="flex items-center gap-2 mb-3">
