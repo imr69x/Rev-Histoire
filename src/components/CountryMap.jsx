@@ -196,6 +196,7 @@ function FitBounds({ geoData, countryId }) {
 
     if (bounds.isValid()) {
       map.fitBounds(bounds, { padding: [4, 4] })
+      setTimeout(() => map.setZoom(map.getZoom() + 1), 80)
     }
   }, [geoData, map])
   return null
