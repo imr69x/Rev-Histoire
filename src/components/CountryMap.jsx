@@ -21,7 +21,7 @@ const COUNTRY_MAP_CONFIG = {
   pologne:       { url: '/geo/pologne-regions.geojson',       nameKey: 'name',    center: [52.0, 19.5],  zoom: 5 },
   royaume_uni:   { url: '/geo/royaume_uni-regions.geojson',   nameKey: 'name',    center: [54.5, -3.0],  zoom: 5 },
   pays_bas:      { url: '/geo/pays_bas-regions.geojson',      nameKey: 'NAME_1',  center: [52.3, 5.3],   zoom: 7 },
-  maroc:         { url: '/geo/maroc-regions.geojson',         nameKey: 'NAME_1',  center: [27.5, -9.0],  zoom: 4 },
+  maroc:         { url: '/geo/maroc-regions.geojson?v=3',      nameKey: 'NAME_1',  center: [27.5, -9.0],  zoom: 4 },
   tunisie:       { url: '/geo/tunisie-regions.geojson',       nameKey: 'NAME_1',  center: [34.0, 9.0],   zoom: 6 },
   egypte:        { url: '/geo/egypte-regions.geojson',        nameKey: 'NAME_1',  center: [26.5, 29.5],  zoom: 5 },
   afrique_du_sud:{ url: '/geo/afrique_du_sud-regions.geojson',nameKey: 'name',    center: [-29.0, 25.0], zoom: 5 },
@@ -192,7 +192,7 @@ function FitBounds({ geoData }) {
 }
 
 // Carte Leaflet interne — fixe, sans zoom, sans drag
-function LeafletMap({ geoData, nameKey, center, zoom, hoverColor, onRegionClick, selectedRegion }) {
+function LeafletMap({ geoData, nameKey, center, zoom, hoverColor, onRegionClick, selectedRegion, interactive = true }) {
   const selectedLayerRef = useRef(null)
   const selectedNameRef = useRef(null)
 
@@ -201,6 +201,7 @@ function LeafletMap({ geoData, nameKey, center, zoom, hoverColor, onRegionClick,
   const activeStyle  = { fillColor: '#9A7A52', weight: 2,   color: '#6B5030', fillOpacity: 1, opacity: 1 }
 
   const onEachFeature = useCallback((feature, layer) => {
+    if (!interactive) return
     const name =
       feature.properties[nameKey] ??
       feature.properties.name ??
@@ -237,7 +238,7 @@ function LeafletMap({ geoData, nameKey, center, zoom, hoverColor, onRegionClick,
         }
       },
     })
-  }, [nameKey, hoverColor])
+  }, [nameKey, hoverColor, interactive])
 
   // Reset selection visuelle si region désélectionnée depuis l'extérieur
   useEffect(() => {
@@ -362,6 +363,7 @@ export default function CountryMap({ countryId: cid, continent }) {
             hoverColor={hoverColor}
             onRegionClick={setSelectedRegion}
             selectedRegion={selectedRegion}
+            interactive={cid !== 'maroc'}
           />
         )}
       </div>
