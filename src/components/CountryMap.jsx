@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { MapContainer, GeoJSON, ZoomControl } from 'react-leaflet'
+import { MapContainer, GeoJSON, useMap } from 'react-leaflet'
+import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { regionsData } from '@/data/pays-regions'
 import { MapPin, X, Building2, Utensils, Landmark, Users, Waves, BookOpen, ChevronRight, ChevronLeft } from 'lucide-react'
@@ -20,7 +21,7 @@ const COUNTRY_MAP_CONFIG = {
   pologne:       { url: '/geo/pologne-regions.geojson',       nameKey: 'name',    center: [52.0, 19.5],  zoom: 5 },
   royaume_uni:   { url: '/geo/royaume_uni-regions.geojson',   nameKey: 'name',    center: [54.5, -3.0],  zoom: 5 },
   pays_bas:      { url: '/geo/pays_bas-regions.geojson',      nameKey: 'NAME_1',  center: [52.3, 5.3],   zoom: 7 },
-  maroc:         { url: '/geo/maroc-regions.geojson',         nameKey: 'NAME_1',  center: [31.5, -6.0],  zoom: 5 },
+  maroc:         { url: '/geo/maroc-regions.geojson',         nameKey: 'NAME_1',  center: [27.5, -9.0],  zoom: 4 },
   tunisie:       { url: '/geo/tunisie-regions.geojson',       nameKey: 'NAME_1',  center: [34.0, 9.0],   zoom: 6 },
   egypte:        { url: '/geo/egypte-regions.geojson',        nameKey: 'NAME_1',  center: [26.5, 29.5],  zoom: 5 },
   afrique_du_sud:{ url: '/geo/afrique_du_sud-regions.geojson',nameKey: 'name',    center: [-29.0, 25.0], zoom: 5 },
@@ -176,6 +177,20 @@ function RegionPanel({ countryId, regionName, onClose, onDrillDown, hasSublevel,
   )
 }
 
+// Auto-fit the map to the GeoJSON bounds after load
+function FitBounds({ geoData }) {
+  const map = useMap()
+  useEffect(() => {
+    if (!geoData || !map) return
+    const layer = L.geoJSON(geoData)
+    const bounds = layer.getBounds()
+    if (bounds.isValid()) {
+      map.fitBounds(bounds, { padding: [12, 12] })
+    }
+  }, [geoData, map])
+  return null
+}
+
 // Carte Leaflet interne — fixe, sans zoom, sans drag
 function LeafletMap({ geoData, nameKey, center, zoom, hoverColor, onRegionClick, selectedRegion }) {
   const selectedLayerRef = useRef(null)
@@ -247,6 +262,7 @@ function LeafletMap({ geoData, nameKey, center, zoom, hoverColor, onRegionClick,
       boxZoom={false}
       style={{ width: '100%', height: '100%', background: '#FFFFFF' }}
     >
+      <FitBounds geoData={geoData} />
       <GeoJSON
         key={countryId + String(geoData?.features?.length)}
         data={geoData}
@@ -324,8 +340,8 @@ export default function CountryMap({ countryId: cid, continent }) {
         <span className="text-[10px] text-[#8B7355] italic">Survol = couleur · Clic = détails</span>
       </div>
 
-      {/* Carte — hauteur fixe, fond blanc */}
-      <div className="relative" style={{ height: 300, background: '#FFFFFF' }}>
+      {/* Carte — hauteur 55vh minimum 420px, fond blanc */}
+      <div className="relative" style={{ height: 'max(55vh, 420px)', background: '#FFFFFF' }}>
         {loading && (
           <div className="absolute inset-0 flex items-center justify-center z-[1000]" style={{ background: '#FFFFFF' }}>
             <div className="w-8 h-8 border-3 border-[#D4AF37] border-t-transparent rounded-full animate-spin" style={{ borderWidth: 3 }} />
