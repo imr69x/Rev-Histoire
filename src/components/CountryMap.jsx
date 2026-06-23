@@ -342,8 +342,8 @@ export default function CountryMap({ countryId: cid, continent }) {
         {cid !== 'maroc' && <span className="text-[10px] text-[#8B7355] italic">Survol = couleur · Clic = détails</span>}
       </div>
 
-      {/* Carte — hauteur 70vh minimum 560px, fond blanc */}
-      <div className="relative" style={{ height: 'max(70vh, 560px)', background: '#FFFFFF' }}>
+      {/* Carte — hauteur 85vh minimum 600px, fond blanc */}
+      <div className="relative" style={{ height: 'max(85vh, 600px)', background: '#FFFFFF' }}>
         {cid === 'maroc' ? (
           <img src="/geo/carte_maroc.png" alt="Carte du Maroc" className="w-full h-full object-contain" />
         ) : (
