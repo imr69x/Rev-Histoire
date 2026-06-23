@@ -181,7 +181,7 @@ export default function Pays() {
                     <img
                       src={getFlagUrl(p.id)}
                       alt={p.name}
-                      className="w-9 h-6 object-cover rounded shadow-sm flex-shrink-0"
+                      className="w-9 h-6 object-fill rounded shadow-sm flex-shrink-0"
                     />
                   ) : (
                     <span className="text-xl leading-none">{p.flag}</span>
