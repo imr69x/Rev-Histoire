@@ -160,6 +160,7 @@ export default function Frise() {
 
   const filtered = EVENTS.filter(e => filter === 'all' || e.type === filter)
 
+  const MARGIN = 64
   const BASE_TRACK = 4000
   const trackWidth = BASE_TRACK * zoom
 
@@ -168,7 +169,7 @@ export default function Frise() {
     [filtered, trackWidth]
   )
 
-  const getX = (year) => getXPct(year) / 100 * trackWidth
+  const getX = (year) => MARGIN + getXPct(year) / 100 * trackWidth
 
   // Hauteur dynamique : centre + N_LANES couloirs de chaque côté
   const CENTER = N_LANES * LANE_H + 40
@@ -212,7 +213,7 @@ export default function Frise() {
 
       {/* Frise */}
       <div className="overflow-x-auto pb-2 bg-white dark:bg-[#161B22] rounded-2xl border border-[#E8E0CC] dark:border-[#30363D]">
-        <div style={{ width: `${trackWidth}px`, minWidth: '100%', position: 'relative', height: `${TOTAL_H}px` }}>
+        <div style={{ width: `${trackWidth + MARGIN * 2}px`, minWidth: '100%', position: 'relative', height: `${TOTAL_H}px` }}>
 
           {/* Ligne centrale */}
           <div style={{ position: 'absolute', top: `${CENTER}px`, left: 0, right: 0, height: '3px', background: '#D4AF37', borderRadius: '99px' }} />
@@ -249,7 +250,7 @@ export default function Frise() {
                 title={evt.title}
                 style={{
                   position: 'absolute',
-                  left: evt.px,
+                  left: evt.px + MARGIN,
                   top: CENTER - 6,
                   transform: 'translateX(-50%)',
                   cursor: 'pointer',
