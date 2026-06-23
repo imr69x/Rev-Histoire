@@ -1,5 +1,6 @@
-import { useState, memo } from 'react'
-import { ComposableMap, Geographies, Geography } from 'react-simple-maps'
+import { useState, useEffect, useRef, useCallback } from 'react'
+import { MapContainer, GeoJSON, ZoomControl } from 'react-leaflet'
+import 'leaflet/dist/leaflet.css'
 import { regionsData } from '@/data/pays-regions'
 import { MapPin, X, Building2, Utensils, Landmark, Users, Waves, BookOpen, ChevronRight, ChevronLeft } from 'lucide-react'
 
@@ -7,154 +8,186 @@ const COUNTRY_MAP_CONFIG = {
   france: {
     url: 'https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/regions-version-simplifiee.geojson',
     nameKey: 'nom',
-    projection: { center: [2.5, 46.5], scale: 2200 },
+    center: [46.6, 2.5],
+    zoom: 5,
     sublevelUrl: 'https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/departements-version-simplifiee.geojson',
     sublevelNameKey: 'nom',
+    sublevelCenter: [46.6, 2.5],
+    sublevelZoom: 5,
   },
   allemagne: {
     url: 'https://raw.githubusercontent.com/isellsoap/deutschlandGeoJSON/main/2_bundeslaender/4_niedrig.geo.json',
     nameKey: 'name_de',
-    projection: { center: [10.4, 51.2], scale: 2800 },
+    center: [51.2, 10.4],
+    zoom: 5,
   },
   espagne: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/spain-communities.geojson',
     nameKey: 'name',
-    projection: { center: [-3.7, 40.0], scale: 2200 },
+    center: [40.0, -3.7],
+    zoom: 5,
   },
   portugal: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/portugal.geojson',
     nameKey: 'name',
-    projection: { center: [-8.2, 39.4], scale: 5000 },
+    center: [39.4, -8.2],
+    zoom: 6,
   },
   italie: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/italy.geojson',
     nameKey: 'name',
-    projection: { center: [12.5, 42.5], scale: 2200 },
+    center: [42.5, 12.5],
+    zoom: 5,
   },
   grece: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/greece.geojson',
     nameKey: 'name',
-    projection: { center: [22.0, 39.0], scale: 3200 },
+    center: [39.0, 22.0],
+    zoom: 6,
   },
   russie: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/russia.geojson',
     nameKey: 'name',
-    projection: { center: [60.0, 60.0], scale: 350 },
+    center: [60.0, 60.0],
+    zoom: 2,
   },
   pologne: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/poland.geojson',
     nameKey: 'name',
-    projection: { center: [19.5, 52.0], scale: 3000 },
+    center: [52.0, 19.5],
+    zoom: 5,
   },
   pays_bas: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/netherlands.geojson',
     nameKey: 'name',
-    projection: { center: [5.3, 52.3], scale: 6000 },
+    center: [52.3, 5.3],
+    zoom: 7,
   },
   maroc: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/morocco.geojson',
     nameKey: 'name',
-    projection: { center: [-6.0, 31.5], scale: 2000 },
+    center: [31.5, -6.0],
+    zoom: 5,
   },
   tunisie: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/tunisia.geojson',
     nameKey: 'name',
-    projection: { center: [9.0, 34.0], scale: 3500 },
+    center: [34.0, 9.0],
+    zoom: 6,
   },
   egypte: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/egypt.geojson',
     nameKey: 'name',
-    projection: { center: [29.5, 26.5], scale: 1700 },
+    center: [26.5, 29.5],
+    zoom: 5,
   },
   afrique_du_sud: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/south-africa.geojson',
     nameKey: 'name',
-    projection: { center: [25.0, -29.0], scale: 1500 },
+    center: [-29.0, 25.0],
+    zoom: 5,
   },
   chine: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/china.geojson',
     nameKey: 'name',
-    projection: { center: [104.0, 37.0], scale: 800 },
+    center: [37.0, 104.0],
+    zoom: 3,
   },
   inde: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/india.geojson',
     nameKey: 'name',
-    projection: { center: [80.0, 22.0], scale: 900 },
+    center: [22.0, 80.0],
+    zoom: 4,
   },
   japon: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/japan.geojson',
     nameKey: 'name',
-    projection: { center: [137.0, 37.0], scale: 1400 },
+    center: [37.0, 137.0],
+    zoom: 4,
   },
   etats_unis: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/usa.geojson',
     nameKey: 'name',
-    projection: { center: [-96.0, 38.0], scale: 700 },
+    center: [38.0, -96.0],
+    zoom: 3,
   },
   bresil: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/brazil.geojson',
     nameKey: 'name',
-    projection: { center: [-52.0, -15.0], scale: 700 },
+    center: [-15.0, -52.0],
+    zoom: 3,
   },
   mexique: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/mexico.geojson',
     nameKey: 'name',
-    projection: { center: [-102.0, 24.0], scale: 1000 },
+    center: [24.0, -102.0],
+    zoom: 4,
   },
   australie: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/australia.geojson',
     nameKey: 'name',
-    projection: { center: [134.0, -28.0], scale: 700 },
+    center: [-28.0, 134.0],
+    zoom: 3,
   },
   turquie: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/turkey.geojson',
     nameKey: 'name',
-    projection: { center: [35.0, 39.0], scale: 1500 },
+    center: [39.0, 35.0],
+    zoom: 5,
   },
   iran: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/iran.geojson',
     nameKey: 'name',
-    projection: { center: [53.5, 32.5], scale: 1300 },
+    center: [32.5, 53.5],
+    zoom: 4,
   },
   arabie_saoudite: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/saudi-arabia.geojson',
     nameKey: 'name',
-    projection: { center: [44.0, 24.0], scale: 1100 },
+    center: [24.0, 44.0],
+    zoom: 4,
   },
   irak: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/iraq.geojson',
     nameKey: 'name',
-    projection: { center: [43.7, 33.0], scale: 2000 },
+    center: [33.0, 43.7],
+    zoom: 5,
   },
   mongolie: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/mongolia.geojson',
     nameKey: 'name',
-    projection: { center: [103.0, 47.0], scale: 1000 },
+    center: [47.0, 103.0],
+    zoom: 4,
   },
   coree_du_sud: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/south-korea.geojson',
     nameKey: 'name',
-    projection: { center: [127.8, 36.5], scale: 3000 },
+    center: [36.5, 127.8],
+    zoom: 6,
   },
   mali: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/mali.geojson',
     nameKey: 'name',
-    projection: { center: [-1.5, 17.5], scale: 1200 },
+    center: [17.5, -1.5],
+    zoom: 4,
   },
   ethiopie: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/ethiopia.geojson',
     nameKey: 'name',
-    projection: { center: [40.5, 9.0], scale: 1400 },
+    center: [9.0, 40.5],
+    zoom: 5,
   },
   haiti: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/haiti.geojson',
     nameKey: 'name',
-    projection: { center: [-72.5, 18.9], scale: 6000 },
+    center: [18.9, -72.5],
+    zoom: 8,
   },
   royaume_uni: {
     url: 'https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/uk-counties.geojson',
     nameKey: 'name',
-    projection: { center: [-3.0, 54.5], scale: 2800 },
+    center: [54.5, -3.0],
+    zoom: 5,
   },
 }
 
@@ -171,7 +204,7 @@ function RegionPanel({ countryId, regionName, onClose, onDrillDown, hasSublevel 
   const data = (regionsData[countryId] || {})[regionName]
 
   return (
-    <div className="absolute top-0 right-0 bottom-0 w-80 bg-white dark:bg-[#161B22] border-l border-[#E8E0CC] dark:border-[#30363D] z-20 overflow-y-auto shadow-2xl">
+    <div className="absolute top-0 right-0 bottom-0 w-80 bg-white dark:bg-[#161B22] border-l border-[#E8E0CC] dark:border-[#30363D] z-[500] overflow-y-auto shadow-2xl">
       <div className="sticky top-0 bg-white dark:bg-[#161B22] border-b border-[#E8E0CC] dark:border-[#30363D] px-4 py-3 flex items-center justify-between z-10">
         <div className="flex items-center gap-2">
           <MapPin size={16} className="text-[#D4AF37] flex-shrink-0" />
@@ -295,7 +328,7 @@ function RegionPanel({ countryId, regionName, onClose, onDrillDown, hasSublevel 
 
             {hasSublevel && (
               <button
-                onClick={() => onDrillDown(regionName)}
+                onClick={onDrillDown}
                 className="w-full flex items-center justify-center gap-2 py-2.5 mt-2 rounded-xl bg-[#D4AF37] text-[#2C1810] text-sm font-bold hover:bg-[#E8C85A] transition-colors"
               >
                 <MapPin size={14} /> Voir les départements <ChevronRight size={14} />
@@ -314,21 +347,144 @@ function RegionPanel({ countryId, regionName, onClose, onDrillDown, hasSublevel 
   )
 }
 
-export default memo(function CountryMap({ countryId, countryColor, continent }) {
+// Composant carte interne (react-leaflet)
+function LeafletMap({ geoData, nameKey, center, zoom, hoverColor, onRegionClick }) {
+  const mapRef = useRef(null)
+  const geoJsonRef = useRef(null)
+  const selectedLayerRef = useRef(null)
+  const selectedNameRef = useRef(null)
+
+  const defaultStyle = {
+    fillColor: '#F0EDE8',
+    weight: 1,
+    opacity: 1,
+    color: '#9B8B7A',
+    fillOpacity: 1,
+  }
+  const hoverStyle = { fillColor: hoverColor + 'BB', weight: 1.5, color: '#6A5A4A', fillOpacity: 1 }
+  const selectedStyle = { fillColor: hoverColor, weight: 2, color: '#4A3A2A', fillOpacity: 1 }
+
+  const onEachFeature = useCallback((feature, layer) => {
+    const name =
+      feature.properties[nameKey] ||
+      feature.properties.name ||
+      feature.properties.nom ||
+      feature.properties.NAME ||
+      'Région'
+
+    layer.on({
+      mouseover(e) {
+        const l = e.target
+        if (selectedNameRef.current !== name) {
+          l.setStyle(hoverStyle)
+        }
+        l.bringToFront()
+      },
+      mouseout(e) {
+        const l = e.target
+        if (selectedNameRef.current !== name) {
+          l.setStyle(defaultStyle)
+        }
+      },
+      click() {
+        // Reset previous selection
+        if (selectedLayerRef.current && selectedNameRef.current !== name) {
+          selectedLayerRef.current.setStyle(defaultStyle)
+        }
+        if (selectedNameRef.current === name) {
+          // Deselect
+          layer.setStyle(defaultStyle)
+          selectedLayerRef.current = null
+          selectedNameRef.current = null
+          onRegionClick(null)
+        } else {
+          // Select new
+          layer.setStyle(selectedStyle)
+          selectedLayerRef.current = layer
+          selectedNameRef.current = name
+          onRegionClick(name)
+        }
+      },
+    })
+  }, [nameKey, hoverColor])
+
+  // Fly to new center when it changes
+  useEffect(() => {
+    if (mapRef.current) {
+      mapRef.current.setView(center, zoom, { animate: true, duration: 0.5 })
+    }
+  }, [center, zoom])
+
+  return (
+    <MapContainer
+      center={center}
+      zoom={zoom}
+      zoomControl={false}
+      attributionControl={false}
+      ref={mapRef}
+      style={{ width: '100%', height: '100%', background: '#EEF4F9' }}
+    >
+      <ZoomControl position="bottomright" />
+      <GeoJSON
+        key={JSON.stringify(geoData?.features?.length) + hoverColor}
+        ref={geoJsonRef}
+        data={geoData}
+        style={defaultStyle}
+        onEachFeature={onEachFeature}
+      />
+    </MapContainer>
+  )
+}
+
+export default function CountryMap({ countryId, continent }) {
   const config = COUNTRY_MAP_CONFIG[countryId]
-  const [hoveredRegion, setHoveredRegion] = useState(null)
+  const [geoData, setGeoData] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
   const [selectedRegion, setSelectedRegion] = useState(null)
   const [drilldown, setDrilldown] = useState(false)
 
   const hoverColor = HOVER_COLORS[continent] || '#D4AF37'
 
-  // Reset state when country changes
-  const [currentCountry, setCurrentCountry] = useState(countryId)
-  if (currentCountry !== countryId) {
-    setCurrentCountry(countryId)
+  useEffect(() => {
+    if (!config) return
+    setLoading(true)
+    setError(null)
+    setGeoData(null)
     setSelectedRegion(null)
     setDrilldown(false)
-    setHoveredRegion(null)
+
+    const url = config.url
+    fetch(url)
+      .then(r => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
+        return r.json()
+      })
+      .then(data => { setGeoData(data); setLoading(false) })
+      .catch(() => { setError('Impossible de charger la carte.'); setLoading(false) })
+  }, [countryId])
+
+  function handleDrillDown() {
+    if (!config?.sublevelUrl) return
+    setLoading(true)
+    setError(null)
+    setSelectedRegion(null)
+    setDrilldown(true)
+
+    fetch(config.sublevelUrl)
+      .then(r => r.json())
+      .then(data => { setGeoData(data); setLoading(false) })
+      .catch(() => { setError('Impossible de charger les départements.'); setLoading(false) })
+  }
+
+  function handleExitDrillDown() {
+    setDrilldown(false)
+    setSelectedRegion(null)
+    setLoading(true)
+    fetch(config.url)
+      .then(r => r.json())
+      .then(data => { setGeoData(data); setLoading(false) })
+      .catch(() => { setError('Impossible de charger la carte.'); setLoading(false) })
   }
 
   if (!config) {
@@ -342,9 +498,9 @@ export default memo(function CountryMap({ countryId, countryColor, continent }) 
     )
   }
 
-  const activeUrl = drilldown ? config.sublevelUrl : config.url
   const activeNameKey = drilldown ? (config.sublevelNameKey || 'nom') : config.nameKey
-  const projection = config.projection
+  const mapCenter = drilldown ? (config.sublevelCenter || config.center) : config.center
+  const mapZoom = drilldown ? (config.sublevelZoom || config.zoom) : config.zoom
 
   return (
     <div className="space-y-3">
@@ -354,7 +510,7 @@ export default memo(function CountryMap({ countryId, countryColor, continent }) 
           {drilldown && (
             <>
               <button
-                onClick={() => { setDrilldown(false); setSelectedRegion(null) }}
+                onClick={handleExitDrillDown}
                 className="flex items-center gap-1 text-sm text-[#D4AF37] hover:text-[#8B4513] transition-colors font-medium"
               >
                 <ChevronLeft size={16} /> Régions
@@ -369,78 +525,45 @@ export default memo(function CountryMap({ countryId, countryColor, continent }) 
         <span className="text-xs text-[#8B7355] italic">Survol = couleur · Clic = détails</span>
       </div>
 
-      {/* Map container */}
-      <div
-        className="relative rounded-2xl border border-[#E8E0CC] dark:border-[#30363D] overflow-hidden"
-        style={{ height: 400, background: '#EEF4F9' }}
-      >
-        <ComposableMap
-          projection="geoMercator"
-          projectionConfig={projection}
-          style={{ width: '100%', height: '100%' }}
-        >
-          <Geographies geography={activeUrl}>
-            {({ geographies }) => {
-              if (!geographies || geographies.length === 0) return null
-              return geographies.map(geo => {
-                const name =
-                  geo.properties[activeNameKey] ||
-                  geo.properties.name ||
-                  geo.properties.nom ||
-                  geo.properties.NAME ||
-                  'Région'
-                const isSelected = selectedRegion === name
-
-                return (
-                  <Geography
-                    key={geo.rsmKey}
-                    geography={geo}
-                    onMouseEnter={() => setHoveredRegion(name)}
-                    onMouseLeave={() => setHoveredRegion(null)}
-                    onClick={() => setSelectedRegion(isSelected ? null : name)}
-                    style={{
-                      default: {
-                        fill: isSelected ? hoverColor : '#F0EDE8',
-                        stroke: '#9B8B7A',
-                        strokeWidth: 0.6,
-                        outline: 'none',
-                        cursor: 'pointer',
-                      },
-                      hover: {
-                        fill: hoverColor + 'BB',
-                        stroke: '#7A6A5A',
-                        strokeWidth: 0.8,
-                        outline: 'none',
-                        cursor: 'pointer',
-                      },
-                      pressed: {
-                        fill: hoverColor,
-                        stroke: '#7A6A5A',
-                        strokeWidth: 0.8,
-                        outline: 'none',
-                      },
-                    }}
-                  />
-                )
-              })
-            }}
-          </Geographies>
-        </ComposableMap>
-
-        {/* Tooltip survol */}
-        {hoveredRegion && !selectedRegion && (
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-[#2C1810]/90 text-white text-xs rounded-lg pointer-events-none z-10 whitespace-nowrap shadow">
-            {hoveredRegion}
+      {/* Carte */}
+      <div className="relative rounded-2xl border border-[#E8E0CC] dark:border-[#30363D] overflow-hidden" style={{ height: 400 }}>
+        {loading && (
+          <div className="absolute inset-0 flex items-center justify-center z-[1000] bg-[#EEF4F9]">
+            <div className="text-center">
+              <div className="w-10 h-10 border-4 border-[#D4AF37] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+              <p className="text-sm text-[#8B7355]">Chargement de la carte…</p>
+            </div>
           </div>
         )}
 
-        {/* Panneau latéral infos région */}
+        {error && !loading && (
+          <div className="absolute inset-0 flex items-center justify-center z-[1000] bg-[#EEF4F9]">
+            <div className="text-center px-8">
+              <MapPin size={36} className="mx-auto mb-3 text-[#8B7355] opacity-40" />
+              <p className="text-sm text-[#8B7355]">{error}</p>
+            </div>
+          </div>
+        )}
+
+        {geoData && !loading && (
+          <LeafletMap
+            key={countryId + (drilldown ? '-dept' : '-reg')}
+            geoData={geoData}
+            nameKey={activeNameKey}
+            center={mapCenter}
+            zoom={mapZoom}
+            hoverColor={hoverColor}
+            onRegionClick={setSelectedRegion}
+          />
+        )}
+
+        {/* Panneau infos région */}
         {selectedRegion && (
           <RegionPanel
             countryId={countryId}
             regionName={selectedRegion}
             onClose={() => setSelectedRegion(null)}
-            onDrillDown={() => { setDrilldown(true); setSelectedRegion(null) }}
+            onDrillDown={handleDrillDown}
             hasSublevel={!!config.sublevelUrl && !drilldown}
           />
         )}
@@ -463,4 +586,4 @@ export default memo(function CountryMap({ countryId, countryColor, continent }) 
       </div>
     </div>
   )
-})
+}
