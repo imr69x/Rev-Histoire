@@ -13,7 +13,7 @@ export function Layout() {
   }, [])
 
   return (
-    <div className="flex min-h-screen bg-[#F5F0E8] dark:bg-[#0D1117]">
+    <div className="flex min-h-screen bg-white dark:bg-[#0D1117]">
       <Sidebar />
       <main className="flex-1 overflow-auto pb-20 md:pb-0">
         <Outlet />
