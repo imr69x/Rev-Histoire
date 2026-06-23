@@ -56,7 +56,7 @@ export function Sidebar() {
           </div>
           {!collapsed && (
             <span className="font-title text-[#D4AF37] font-semibold text-sm leading-tight">
-              Histoire<br/>Révision
+              Rev'Histoire
             </span>
           )}
           <button
