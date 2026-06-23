@@ -470,9 +470,11 @@ function FriseForm() {
 // ─── Gestion des invitations ───────────────────────────────────
 function InvitesSection() {
   const [invites, setInvites] = useState([])
-  const [email, setEmail] = useState('')
+  const [form, setForm] = useState({ email: '', password: '' })
   const [loading, setLoading] = useState(false)
   const [msg, setMsg] = useState(null)
+  const [showPwd, setShowPwd] = useState(false)
+  const { user: me } = useAuth()
 
   async function loadInvites() {
     const { data } = await supabase.from('invites').select('*').order('created_at', { ascending: false })
@@ -481,72 +483,99 @@ function InvitesSection() {
 
   useEffect(() => { loadInvites() }, [])
 
-  async function addInvite(e) {
+  async function createInvite(e) {
     e.preventDefault()
-    if (!email.trim()) return
+    if (!form.email.trim() || !form.password.trim()) return
     setLoading(true)
-    const addr = email.trim().toLowerCase()
+    setMsg(null)
 
-    const { error } = await supabase.from('invites').insert({ email: addr })
-    if (error && error.code !== '23505') {
-      setMsg({ type: 'error', text: 'Erreur : ' + error.message })
+    const res = await fetch('/api/create-invite-user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-admin-email': me?.email || '' },
+      body: JSON.stringify({ email: form.email.trim().toLowerCase(), password: form.password }),
+    })
+    const data = await res.json()
+
+    if (!res.ok) {
+      setMsg({ type: 'error', text: data.error || 'Erreur inconnue' })
     } else {
-      // Si l'utilisateur a déjà un compte, on lui donne le rôle invité immédiatement
-      await supabase.from('profiles').update({ role: 'invited' }).eq('email', addr)
-      setEmail('')
-      setMsg({ type: 'ok', text: `✓ ${addr} invité avec succès !` })
+      setMsg({ type: 'ok', text: `✓ Compte créé et email envoyé à ${form.email} !` })
+      setForm({ email: '', password: '' })
       loadInvites()
     }
     setLoading(false)
-    setTimeout(() => setMsg(null), 3000)
+    setTimeout(() => setMsg(null), 4000)
   }
 
   async function removeInvite(id, inviteEmail) {
     await supabase.from('invites').delete().eq('id', id)
-    // Repasse le compte en user si il existe
-    await supabase.from('profiles').update({ role: 'user' }).eq('email', inviteEmail)
+    await supabase.from('profiles').update({ role: 'user', subscription_status: 'inactive' }).eq('email', inviteEmail)
     loadInvites()
   }
 
   return (
     <div className="bg-white rounded-2xl border border-[#E8E0CC] p-5 mb-5">
-      <h3 className="font-['Playfair_Display'] font-semibold text-[#2C1810] text-base mb-3 flex items-center gap-2">
-        🎟️ Invitations — accès gratuit complet
+      <h3 className="font-['Playfair_Display'] font-semibold text-[#2C1810] text-base mb-1 flex items-center gap-2">
+        🎟️ Créer un compte invité
       </h3>
-      <p className="text-xs text-[#8B7355] mb-3">Les personnes invitées ont accès à tout sans payer. Elles verront "Invité" en bas à gauche.</p>
-      <form onSubmit={addInvite} className="flex gap-2 mb-3">
+      <p className="text-xs text-[#8B7355] mb-4">Le compte est créé automatiquement et la personne reçoit ses identifiants par email.</p>
+
+      <form onSubmit={createInvite} className="space-y-2 mb-4">
         <input
           type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="adresse@email.com"
-          className={inputCls + ' flex-1'}
+          value={form.email}
+          onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+          placeholder="Email de l'invité"
+          className={inputCls}
+          required
         />
+        <div className="flex gap-2">
+          <input
+            type={showPwd ? 'text' : 'password'}
+            value={form.password}
+            onChange={(e) => setForm((f) => ({ ...f, password: e.target.value }))}
+            placeholder="Mot de passe à lui attribuer"
+            className={inputCls + ' flex-1'}
+            minLength={6}
+            required
+          />
+          <button
+            type="button"
+            onClick={() => setShowPwd(!showPwd)}
+            className="px-3 py-2 rounded-lg border border-[#E8E0CC] text-xs text-[#8B7355] hover:bg-[#F5F0E8]"
+          >
+            {showPwd ? 'Cacher' : 'Voir'}
+          </button>
+        </div>
         <button
           type="submit"
           disabled={loading}
-          className="flex items-center gap-1.5 px-4 py-2 bg-[#D4AF37] text-[#2C1810] font-semibold text-sm rounded-lg hover:bg-[#E8C85A] transition-colors disabled:opacity-60"
+          className="w-full flex items-center justify-center gap-1.5 py-2.5 bg-[#D4AF37] text-[#2C1810] font-bold text-sm rounded-xl hover:bg-[#E8C85A] transition-colors disabled:opacity-60"
         >
-          <Plus size={14} /> Inviter
+          <Plus size={14} /> {loading ? 'Création en cours…' : 'Créer le compte et envoyer l\'invitation'}
         </button>
       </form>
+
       {msg && (
-        <p className={`text-sm mb-2 font-medium ${msg.type === 'ok' ? 'text-[#27AE60]' : 'text-[#C0392B]'}`}>{msg.text}</p>
+        <p className={`text-sm mb-3 font-medium ${msg.type === 'ok' ? 'text-[#27AE60]' : 'text-[#C0392B]'}`}>{msg.text}</p>
       )}
-      {invites.length === 0 && <p className="text-xs text-[#8B7355]">Aucune invitation pour l'instant.</p>}
-      <div className="space-y-1.5">
-        {invites.map((inv) => (
-          <div key={inv.id} className="flex items-center justify-between px-3 py-2 bg-[#FDF3E7] rounded-lg border border-[#E8E0CC]">
-            <span className="text-sm text-[#2C1810]">{inv.email}</span>
-            <button
-              onClick={() => removeInvite(inv.id, inv.email)}
-              className="p-1 rounded hover:bg-[#FADBD8] text-[#C0392B] transition-colors"
-            >
-              <Trash2 size={13} />
-            </button>
+
+      {invites.length === 0
+        ? <p className="text-xs text-[#8B7355]">Aucun invité pour l'instant.</p>
+        : (
+          <div className="space-y-1.5">
+            <p className="text-xs font-semibold text-[#8B7355] mb-1">Invités actifs</p>
+            {invites.map((inv) => (
+              <div key={inv.id} className="flex items-center justify-between px-3 py-2 bg-[#FDF3E7] rounded-lg border border-[#E8E0CC]">
+                <span className="text-sm text-[#2C1810]">{inv.email}</span>
+                <button onClick={() => removeInvite(inv.id, inv.email)} className="p-1 rounded hover:bg-[#FADBD8] text-[#C0392B]">
+                  <Trash2 size={13} />
+                </button>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        )
+      }
     </div>
   )
 }
