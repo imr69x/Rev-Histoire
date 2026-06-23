@@ -4,6 +4,7 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { regionsData } from '@/data/pays-regions'
 import { MapPin, X, Building2, Utensils, Landmark, Users, Waves, BookOpen, ChevronRight, ChevronLeft } from 'lucide-react'
+import MarocSVGMap from './MarocSVGMap'
 
 const COUNTRY_MAP_CONFIG = {
   france: {
@@ -344,10 +345,9 @@ export default function CountryMap({ countryId: cid, continent }) {
       {/* Carte — hauteur 70vh minimum 560px, fond blanc */}
       <div className="relative" style={{ height: 'max(70vh, 560px)', background: '#FFFFFF' }}>
         {cid === 'maroc' ? (
-          <img
-            src="/geo/carte_maroc.png"
-            alt="Carte du Maroc"
-            className="w-full h-full object-contain"
+          <MarocSVGMap
+            onRegionClick={setSelectedRegion}
+            selectedRegion={selectedRegion}
           />
         ) : (
           <>
