@@ -824,20 +824,131 @@ Préparez 2-3 phrases qui montrent en quoi cette question vous a donné envie de
   }
 ]
 
-function GuideSection({ section }) {
+function renderContent(content, color) {
+  const lines = content.split('\n')
+  const result = []
+  let key = 0
+
+  for (let i = 0; i < lines.length; i++) {
+    const raw = lines[i]
+    const line = raw.trim()
+    if (!line) { result.push(<div key={key++} className="h-2" />); continue }
+
+    // SECTION HEADER : ligne tout en majuscules ou terminant par " :"
+    if ((line === line.toUpperCase() && line.length > 4 && !/^[✓✗•→\-\d]/.test(line)) || (line.endsWith(' :') && line.length < 55)) {
+      result.push(
+        <p key={key++} className="text-xs font-bold uppercase tracking-widest mt-4 mb-1" style={{ color }}>
+          {line.replace(/ :$/, '')}
+        </p>
+      )
+      continue
+    }
+
+    // ✓ → vert
+    if (line.startsWith('✓')) {
+      result.push(
+        <div key={key++} className="flex items-start gap-2 py-0.5">
+          <span className="text-emerald-600 font-bold flex-shrink-0 mt-0.5">✓</span>
+          <span className="text-sm text-[#2C1810] dark:text-[#C9D1D9]">{line.slice(1).trim()}</span>
+        </div>
+      )
+      continue
+    }
+
+    // ✗ → rouge
+    if (line.startsWith('✗')) {
+      result.push(
+        <div key={key++} className="flex items-start gap-2 py-0.5">
+          <span className="text-red-500 font-bold flex-shrink-0 mt-0.5">✗</span>
+          <span className="text-sm text-[#2C1810] dark:text-[#C9D1D9]">{line.slice(1).trim()}</span>
+        </div>
+      )
+      continue
+    }
+
+    // → flèche
+    if (line.startsWith('→')) {
+      result.push(
+        <div key={key++} className="flex items-start gap-2 py-0.5 pl-1">
+          <span className="font-bold flex-shrink-0 mt-0.5" style={{ color }}>→</span>
+          <span className="text-sm text-[#4A3728] dark:text-[#8B949E]">{line.slice(1).trim()}</span>
+        </div>
+      )
+      continue
+    }
+
+    // • puce
+    if (line.startsWith('•')) {
+      result.push(
+        <div key={key++} className="flex items-start gap-2 py-0.5 pl-1">
+          <span className="flex-shrink-0 mt-1.5 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: color }} />
+          <span className="text-sm text-[#4A3728] dark:text-[#8B949E]">{line.slice(1).trim()}</span>
+        </div>
+      )
+      continue
+    }
+
+    // Étapes numérotées : "1. Texte"
+    const numMatch = line.match(/^(\d+)\.\s+(.+)$/)
+    if (numMatch) {
+      result.push(
+        <div key={key++} className="flex items-start gap-3 py-1">
+          <span className="w-6 h-6 rounded-full text-white text-xs flex items-center justify-center flex-shrink-0 font-bold mt-0.5" style={{ backgroundColor: color }}>
+            {numMatch[1]}
+          </span>
+          <span className="text-sm text-[#2C1810] dark:text-[#C9D1D9] leading-relaxed">{numMatch[2]}</span>
+        </div>
+      )
+      continue
+    }
+
+    // ⚠️ avertissement
+    if (line.startsWith('⚠️')) {
+      result.push(
+        <div key={key++} className="flex items-start gap-2 py-1 px-3 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 my-1">
+          <span className="flex-shrink-0">⚠️</span>
+          <span className="text-sm text-amber-800 dark:text-amber-300 font-medium">{line.slice(2).trim()}</span>
+        </div>
+      )
+      continue
+    }
+
+    // BONUS ligne
+    if (line.startsWith('BONUS')) {
+      result.push(
+        <div key={key++} className="mt-2 px-3 py-2 rounded-lg border-l-4 bg-[#FAF7F2] dark:bg-[#161B22]" style={{ borderColor: color }}>
+          <span className="text-sm text-[#4A3728] dark:text-[#8B949E]">{line}</span>
+        </div>
+      )
+      continue
+    }
+
+    // Ligne ordinaire
+    result.push(
+      <p key={key++} className="text-sm text-[#4A3728] dark:text-[#8B949E] leading-relaxed">
+        {line}
+      </p>
+    )
+  }
+  return result
+}
+
+function GuideSection({ section, color }) {
   const [open, setOpen] = useState(false)
   return (
-    <div className="border border-[#E8E0CC] dark:border-[#30363D] rounded-xl overflow-hidden">
+    <div className="border border-[#E8E0CC] dark:border-[#30363D] rounded-xl overflow-hidden shadow-sm">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between px-4 py-3 bg-white dark:bg-[#161B22] hover:bg-[#E8E0CC]/50 dark:hover:bg-[#30363D]/50 transition-colors text-left"
+        className="w-full flex items-center justify-between px-5 py-4 bg-white dark:bg-[#161B22] hover:bg-[#F5F0E8] dark:hover:bg-[#30363D]/40 transition-colors text-left gap-3"
       >
-        <span className="font-medium text-[#2C1810] dark:text-[#E6EDF3]">{section.title}</span>
-        {open ? <ChevronDown size={16} className="text-[#8B7355]" /> : <ChevronRight size={16} className="text-[#8B7355]" />}
+        <span className="font-semibold text-[#2C1810] dark:text-[#E6EDF3] text-sm leading-snug">{section.title}</span>
+        <span className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-transform" style={{ backgroundColor: color + '20', color }}>
+          {open ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+        </span>
       </button>
       {open && (
-        <div className="px-4 pb-4 pt-2 bg-[#F5F0E8]/50 dark:bg-[#0D1117]/50">
-          <p className="text-sm text-[#4A3728] dark:text-[#8B949E] leading-relaxed whitespace-pre-line">{section.content}</p>
+        <div className="px-5 pb-5 pt-3 bg-white dark:bg-[#161B22] border-t border-[#E8E0CC] dark:border-[#30363D] space-y-0.5">
+          {renderContent(section.content, color)}
         </div>
       )}
     </div>
@@ -895,7 +1006,7 @@ export default function Methode() {
 
           <div className="space-y-2">
             {guide.sections.map((section, i) => (
-              <GuideSection key={i} section={section} />
+              <GuideSection key={i} section={section} color={guide.color} />
             ))}
           </div>
         </div>
