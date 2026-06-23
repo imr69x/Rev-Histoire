@@ -179,14 +179,23 @@ function RegionPanel({ countryId, regionName, onClose, onDrillDown, hasSublevel,
 }
 
 // Auto-fit the map to the GeoJSON bounds after load
-function FitBounds({ geoData }) {
+function FitBounds({ geoData, countryId }) {
   const map = useMap()
   useEffect(() => {
     if (!geoData || !map) return
     const layer = L.geoJSON(geoData)
-    const bounds = layer.getBounds()
+    let bounds = layer.getBounds()
+
+    // Russie : Chukotka dépasse le méridien 180° et crée une bbox absurde → on limite à l'ouest de 180°
+    if (countryId === 'russie') {
+      bounds = L.latLngBounds(
+        L.latLng(bounds.getSouth(), Math.max(bounds.getWest(), 20)),
+        L.latLng(bounds.getNorth(), 180)
+      )
+    }
+
     if (bounds.isValid()) {
-      map.fitBounds(bounds, { padding: [12, 12] })
+      map.fitBounds(bounds, { padding: [4, 4] })
     }
   }, [geoData, map])
   return null
@@ -264,7 +273,7 @@ function LeafletMap({ geoData, nameKey, center, zoom, hoverColor, onRegionClick,
       boxZoom={false}
       style={{ width: '100%', height: '100%', background: '#FFFFFF' }}
     >
-      <FitBounds geoData={geoData} />
+      <FitBounds geoData={geoData} countryId={countryId} />
       <GeoJSON
         key={countryId + String(geoData?.features?.length)}
         data={geoData}
