@@ -195,12 +195,7 @@ function FitBounds({ geoData, countryId }) {
     }
 
     if (bounds.isValid()) {
-      map.fitBounds(bounds, { padding: [4, 4] })
-      // Pour les grands pays, le fitBounds laisse trop de blanc → on zoome un peu plus
-      const BIG_COUNTRIES = ['royaume_uni', 'espagne', 'grece', 'pays_bas', 'tunisie', 'japon', 'iran', 'etats_unis', 'mexique']
-      if (BIG_COUNTRIES.includes(countryId)) {
-        setTimeout(() => map.setZoom(map.getZoom() + 1), 80)
-      }
+      map.fitBounds(bounds, { paddingTopLeft: [4, 4], paddingBottomRight: [4, 60] })
     }
   }, [geoData, map])
   return null
