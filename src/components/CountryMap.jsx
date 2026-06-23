@@ -196,7 +196,11 @@ function FitBounds({ geoData, countryId }) {
 
     if (bounds.isValid()) {
       map.fitBounds(bounds, { padding: [4, 4] })
-      setTimeout(() => map.setZoom(map.getZoom() + 1), 80)
+      // Pour les grands pays, le fitBounds laisse trop de blanc → on zoome un peu plus
+      const BIG_COUNTRIES = ['russie', 'chine', 'etats_unis', 'bresil', 'australie', 'mongolie', 'arabie_saoudite', 'iran', 'mali', 'ethiopie']
+      if (BIG_COUNTRIES.includes(countryId)) {
+        setTimeout(() => map.setZoom(map.getZoom() + 1), 80)
+      }
     }
   }, [geoData, map])
   return null
