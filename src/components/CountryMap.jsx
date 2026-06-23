@@ -4,6 +4,7 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { regionsData } from '@/data/pays-regions'
 import { MapPin, X, Building2, Utensils, Landmark, Users, Waves, BookOpen, ChevronRight, ChevronLeft } from 'lucide-react'
+import MarocSVGMap from '@/components/MarocSVGMap'
 
 const COUNTRY_MAP_CONFIG = {
   france: {
@@ -342,27 +343,33 @@ export default function CountryMap({ countryId: cid, continent }) {
 
       {/* Carte — hauteur 70vh minimum 560px, fond blanc */}
       <div className="relative" style={{ height: 'max(70vh, 560px)', background: '#FFFFFF' }}>
-        {loading && (
-          <div className="absolute inset-0 flex items-center justify-center z-[1000]" style={{ background: '#FFFFFF' }}>
-            <div className="w-8 h-8 border-3 border-[#D4AF37] border-t-transparent rounded-full animate-spin" style={{ borderWidth: 3 }} />
-          </div>
-        )}
-        {error && !loading && (
-          <div className="absolute inset-0 flex items-center justify-center z-[1000]">
-            <p className="text-sm text-[#8B7355]">Carte indisponible</p>
-          </div>
-        )}
-        {geoData && !loading && (
-          <LeafletMap
-            key={cid + (drilldown ? '-d' : '-r')}
-            geoData={geoData}
-            nameKey={nameKey}
-            center={center}
-            zoom={zoom}
-            hoverColor={hoverColor}
-            onRegionClick={setSelectedRegion}
-            selectedRegion={selectedRegion}
-          />
+        {cid === 'maroc' ? (
+          <MarocSVGMap onRegionClick={setSelectedRegion} />
+        ) : (
+          <>
+            {loading && (
+              <div className="absolute inset-0 flex items-center justify-center z-[1000]" style={{ background: '#FFFFFF' }}>
+                <div className="w-8 h-8 border-3 border-[#D4AF37] border-t-transparent rounded-full animate-spin" style={{ borderWidth: 3 }} />
+              </div>
+            )}
+            {error && !loading && (
+              <div className="absolute inset-0 flex items-center justify-center z-[1000]">
+                <p className="text-sm text-[#8B7355]">Carte indisponible</p>
+              </div>
+            )}
+            {geoData && !loading && (
+              <LeafletMap
+                key={cid + (drilldown ? '-d' : '-r')}
+                geoData={geoData}
+                nameKey={nameKey}
+                center={center}
+                zoom={zoom}
+                hoverColor={hoverColor}
+                onRegionClick={setSelectedRegion}
+                selectedRegion={selectedRegion}
+              />
+            )}
+          </>
         )}
       </div>
 
