@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import { Globe, Search, ChevronRight, Building2, Swords, Crown, User, Info, Landmark, Wheat, Music, MapPin } from 'lucide-react'
 import { paysData } from '@/data/pays'
+import CountryMap from '@/components/CountryMap'
 
 const CONTINENTS = ['Tous', 'Europe', 'Moyen-Orient', 'Asie', 'Afrique', 'Amériques', 'Océanie']
 
@@ -518,25 +519,27 @@ export default function Pays() {
               {/* ── Géographie ── */}
               {tab === 'geographie' && (
                 <div className="space-y-6">
-                  {selected.geography ? (
-                    <>
-                      <h3 className="font-['Playfair_Display'] text-lg font-bold text-[#2C1810] dark:text-[#E6EDF3] mb-4 flex items-center gap-2">
-                        <MapPin size={20} className="text-[#D4AF37]" />
-                        Géographie de {selected.name}
-                      </h3>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        {Object.entries(selected.geography).map(([k, v]) => (
-                          <div key={k} className="p-4 rounded-xl border border-[#E8E0CC] dark:border-[#30363D] bg-[#FAF7F2] dark:bg-[#161B22]">
-                            <p className="text-xs font-bold text-[#8B7355] uppercase tracking-wider mb-1">{GEO_LABELS[k] || k}</p>
-                            <p className="text-sm text-[#4A3728] dark:text-[#8B949E]">{v}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </>
-                  ) : (
-                    <div className="text-center py-12">
-                      <MapPin size={40} className="mx-auto mb-3 text-[#D4AF37] opacity-40" />
-                      <p className="text-[#8B7355] text-sm">Données géographiques à venir pour ce pays.</p>
+                  <h3 className="font-['Playfair_Display'] text-lg font-bold text-[#2C1810] dark:text-[#E6EDF3] flex items-center gap-2">
+                    <MapPin size={20} className="text-[#D4AF37]" />
+                    Géographie de {selected.name}
+                  </h3>
+
+                  {/* Carte interactive des régions */}
+                  <CountryMap
+                    countryId={selected.id}
+                    countryColor={selected.color}
+                    continent={selected.continent}
+                  />
+
+                  {/* Données géographiques textuelles */}
+                  {selected.geography && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {Object.entries(selected.geography).map(([k, v]) => (
+                        <div key={k} className="p-4 rounded-xl border border-[#E8E0CC] dark:border-[#30363D] bg-[#FAF7F2] dark:bg-[#161B22]">
+                          <p className="text-xs font-bold text-[#8B7355] uppercase tracking-wider mb-1">{GEO_LABELS[k] || k}</p>
+                          <p className="text-sm text-[#4A3728] dark:text-[#8B949E]">{v}</p>
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>
