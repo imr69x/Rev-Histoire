@@ -201,14 +201,15 @@ function FitBounds({ geoData, countryId }) {
   return null
 }
 
-// Carte Leaflet interne — fixe, sans zoom, sans drag
+// Carte Leaflet interne
 function LeafletMap({ geoData, nameKey, center, zoom, hoverColor, onRegionClick, selectedRegion, interactive = true }) {
   const selectedLayerRef = useRef(null)
-  const selectedNameRef = useRef(null)
+  const selectedNameRef  = useRef(null)
+  const hoveredLayerRef  = useRef(null) // anti-bug : toujours réinitialiser le survol précédent
 
-  const defaultStyle = { fillColor: '#DDD0BB', weight: 1, opacity: 1, color: '#B8A898', fillOpacity: 1 }
-  const hoverStyle   = { fillColor: '#EDE4D4', weight: 1.5, color: '#A09080', fillOpacity: 1, opacity: 1 }
-  const activeStyle  = { fillColor: '#9A7A52', weight: 2,   color: '#6B5030', fillOpacity: 1, opacity: 1 }
+  const defaultStyle = { fillColor: '#DDD0BB', weight: 1,   opacity: 1, color: '#B8A898', fillOpacity: 1 }
+  const hoverStyle   = { fillColor: '#C8B898', weight: 1.5, opacity: 1, color: '#A09080', fillOpacity: 1 }
+  const activeStyle  = { fillColor: '#9A7A52', weight: 2,   opacity: 1, color: '#6B5030', fillOpacity: 1 }
 
   const onEachFeature = useCallback((feature, layer) => {
     if (!interactive) return
@@ -221,6 +222,14 @@ function LeafletMap({ geoData, nameKey, center, zoom, hoverColor, onRegionClick,
 
     layer.on({
       mouseover(e) {
+        // Réinitialise l'ancien hover (évite que plusieurs zones restent colorées)
+        if (hoveredLayerRef.current && hoveredLayerRef.current !== layer) {
+          if (selectedNameRef.current !== hoveredLayerRef.current._name) {
+            hoveredLayerRef.current.setStyle(defaultStyle)
+          }
+        }
+        hoveredLayerRef.current = layer
+        layer._name = name
         if (selectedNameRef.current !== name) {
           e.target.setStyle(hoverStyle)
         }
@@ -230,8 +239,10 @@ function LeafletMap({ geoData, nameKey, center, zoom, hoverColor, onRegionClick,
         if (selectedNameRef.current !== name) {
           e.target.setStyle(defaultStyle)
         }
+        if (hoveredLayerRef.current === layer) hoveredLayerRef.current = null
       },
       click() {
+        // Désélectionne l'ancien sélectionné
         if (selectedLayerRef.current && selectedNameRef.current !== name) {
           selectedLayerRef.current.setStyle(defaultStyle)
         }
@@ -248,9 +259,8 @@ function LeafletMap({ geoData, nameKey, center, zoom, hoverColor, onRegionClick,
         }
       },
     })
-  }, [nameKey, hoverColor, interactive])
+  }, [nameKey, interactive])
 
-  // Reset selection visuelle si region désélectionnée depuis l'extérieur
   useEffect(() => {
     if (!selectedRegion && selectedLayerRef.current) {
       selectedLayerRef.current.setStyle(defaultStyle)
@@ -266,12 +276,12 @@ function LeafletMap({ geoData, nameKey, center, zoom, hoverColor, onRegionClick,
       zoomControl={false}
       attributionControl={false}
       scrollWheelZoom={false}
-      doubleClickZoom={false}
-      dragging={false}
-      touchZoom={false}
-      keyboard={false}
+      doubleClickZoom={true}
+      dragging={true}
+      touchZoom={true}
+      keyboard={true}
       boxZoom={false}
-      style={{ width: '100%', height: '100%', background: '#FFFFFF' }}
+      style={{ width: '100%', height: '100%', background: '#FFFFFF', cursor: 'grab' }}
     >
       <FitBounds geoData={geoData} countryId={countryId} />
       <GeoJSON
@@ -348,7 +358,7 @@ export default function CountryMap({ countryId: cid, continent }) {
             {drilldown ? 'Départements' : 'Carte des régions'}
           </span>
         </div>
-        {cid !== 'maroc' && <span className="text-[10px] text-[#8B7355] italic">Survol = couleur · Clic = détails</span>}
+        {cid !== 'maroc' && <span className="text-[10px] text-[#8B7355] italic">Survol = couleur · Clic = détails · <kbd className="px-1 bg-[#E8E0CC] rounded text-[9px]">+</kbd> <kbd className="px-1 bg-[#E8E0CC] rounded text-[9px]">-</kbd> pour zoomer · glisser pour déplacer</span>}
       </div>
 
       {/* Carte — hauteur 85vh minimum 600px, fond blanc */}
