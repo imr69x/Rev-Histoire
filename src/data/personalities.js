@@ -2179,21 +2179,315 @@ export const personalities = [
     level: ['3e', 'Terminale']
   },
 
-  // BRÉSIL
+  // MAROC (suppléments)
   {
-    id: 'pele',
-    name: 'Pelé',
-    birth: '1940', death: '2022',
-    era: 'XXe siècle', category: 'Art', nationality: 'Brésilienne',
-    bio: "Edson Arantes do Nascimento, dit Pelé, est universellement considéré comme le plus grand footballeur de l'histoire. Il remporte trois Coupes du Monde (1958 à 17 ans — record, 1962, 1970), marque 1 283 buts en carrière professionnelle et révèle au monde le football-art brésilien. Né dans la misère, il devient ambassadeur mondial du Brésil, symbole de la mobilité sociale et de l'élégance sportive. Il est le seul joueur à avoir remporté trois Coupes du Monde.",
+    id: 'mohammed-v',
+    name: 'Mohammed V',
+    birth: '1909', death: '1961',
+    era: 'XXe siècle', category: 'Politique', nationality: 'Marocaine',
+    bio: "Mohammed V (Mohamed Ben Youssef) est le père de l'indépendance marocaine. Sultan depuis 1927, il soutient ouvertement le mouvement nationaliste de l'Istiqlal et refuse de collaborer avec l'occupant français. Déposé et exilé par la France en 1953, il devient le symbole de la résistance nationale. Son retour triomphal en 1955 ouvre la voie à l'indépendance du Maroc en 1956. Devenu roi en 1957, il engage des réformes modernisatrices et pose les bases de l'État marocain contemporain jusqu'à sa mort prématurée en 1961.",
     keyFacts: [
-      "3 Coupes du Monde (1958, 1962, 1970) — seul joueur de l'histoire à réaliser ce triplé",
-      "Débute en Coupe du Monde à 17 ans (1958) — plus jeune champion du monde",
-      "1 283 buts officiels en carrière — record mondial",
-      "Joue au Santos FC (1956-1974) puis au New York Cosmos",
-      "Déclaré Athlète du siècle par le Comité International Olympique"
+      "Sultan du Maroc depuis 1927 sous protectorat français",
+      "Refuse de signer un dahir de collaboration avec le régime de Vichy",
+      "Exilé à Madagascar par la France en 1953 — devient martyr de l'indépendance",
+      "Retour triomphal au Maroc en 1955, indépendance obtenue le 2 mars 1956",
+      "Proclame le Maroc royaume et prend le titre de roi en 1957"
     ],
-    quote: "Le succès n'est pas un accident. C'est du travail acharné, de la persévérance, de l'apprentissage.",
+    quote: "Nous avons terminé le petit jihad, nous commençons le grand jihad — le développement du Maroc.",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'abd-el-krim',
+    name: 'Abd el-Krim al-Khattabi',
+    birth: '1882', death: '1963',
+    era: 'XXe siècle', category: 'Militaire', nationality: 'Marocaine',
+    bio: "Mohamed ibn Abd el-Krim al-Khattabi est un chef berbère rifain qui mène la résistance contre les colonisateurs espagnol et français dans le Rif (nord du Maroc). En 1921, il inflige à l'armée espagnole la désastreuse défaite d'Anoual, tuant 12 000 soldats. Il fonde la République du Rif (1921-1926), premier État républicain du monde arabe. Vaincu par la coalition franco-espagnole en 1926, il est exilé mais reste une figure majeure du nationalisme marocain et de l'anticolonialisme africain.",
+    keyFacts: [
+      "Victoire d'Anoual (1921) : 12 000 soldats espagnols tués — une des plus grandes défaites coloniales",
+      "Fonde la République confédérée des tribus du Rif (1921-1926)",
+      "Résiste deux ans à la coalition de 200 000 soldats franco-espagnols",
+      "Exilé à La Réunion puis au Caire où il préside le Comité de libération du Maghreb",
+      "Icône des mouvements anticoloniaux en Afrique et en Asie"
+    ],
+    quote: "Un peuple qui ne défend pas sa liberté ne mérite pas de la posséder.",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'averroes',
+    name: 'Ibn Rushd (Averroès)',
+    birth: '1126', death: '1198',
+    era: 'Moyen Âge', category: 'Intellectuel', nationality: 'Marocaine',
+    bio: "Abū al-Walīd Muḥammad ibn Rushd, connu en Europe sous le nom d'Averroès, est né à Cordoue mais vécut et mourut à Marrakech. Grand philosophe, médecin et juriste arabo-andalou, il rédige des commentaires encyclopédiques sur l'œuvre d'Aristote qui influenceront profondément la scolastique chrétienne et la philosophie occidentale médiévale. Sa thèse sur la compatibilité entre raison et religion, et son Traité décisif, introduisent en Europe la philosophie aristotélicienne et font de lui le pont intellectuel entre Islam et Occident.",
+    keyFacts: [
+      "Rédige 38 commentaires sur les œuvres d'Aristote — surnommé 'Le Commentateur' par Thomas d'Aquin",
+      "Philosophe de la cour des califes almohades à Marrakech",
+      "Son œuvre transmise en latin révolutionne l'Université de Paris au XIIIe siècle",
+      "Auteur du Kitāb al-Kulliyyāt (Colliget), encyclopédie médicale traduite dans toute l'Europe",
+      "Défenseur de la rationalité contre l'obscurantisme — condamné puis réhabilité par le calife"
+    ],
+    quote: "L'ignorance mène à la peur, la peur mène à la haine, et la haine conduit à la violence.",
+    level: ['Terminale']
+  },
+  {
+    id: 'moulay-idriss',
+    name: 'Moulay Idriss Ier',
+    birth: '745', death: '791',
+    era: 'Moyen Âge', category: 'Politique', nationality: 'Marocaine',
+    bio: "Idriss ibn Abdallah, dit Moulay Idriss Ier, est le fondateur du premier État islamique du Maroc et ancêtre de la dynastie idrisside. Descendant du Prophète Mohammed par Ali et Fatima, il fuit le Proche-Orient après la bataille de Fakhkh (786) et s'établit à Volubilis (actuel Maroc). Accueilli par la tribu berbère des Aouraba, il unifie les tribus berbères du Maghreb et fonde Fès en 789. Il inaugure une ère d'islamisation organisée du Maroc et sa lignée régnera jusqu'au Xe siècle.",
+    keyFacts: [
+      "Descendant direct du Prophète Mohammed — fondateur de la lignée chérifienne",
+      "Fonde la ville de Fès en 789, future capitale intellectuelle du Maroc",
+      "Premier souverain à unifier sous l'islam les tribus berbères marocaines",
+      "Assassiné en 791 par un agent abbasside envoyé par Hārūn al-Rashīd",
+      "Sa ville sainte, Moulay Idriss Zerhoun, reste le plus grand lieu de pèlerinage du Maroc"
+    ],
+    quote: "L'unité sous la foi est la seule fondation durable d'un royaume.",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'ahmed-mansour',
+    name: 'Ahmed al-Mansour al-Saadien',
+    birth: '1549', death: '1603',
+    era: 'Époque moderne', category: 'Politique', nationality: 'Marocaine',
+    bio: "Ahmed al-Mansour al-Saadien ('le Victorieux', 'le Doré') est le souverain le plus puissant de la dynastie saadienne. Sa victoire à la bataille des Trois Rois (1578) contre le Portugal consacre l'indépendance du Maroc et lui vaut un prestige considérable. Il conquiert ensuite l'Empire Songhaï en Afrique de l'Ouest (1591), contrôlant les routes de l'or et du sel du Sahara. Grand mécène, il embellit Marrakech avec le palais El Badi et la Medersa Ben Youssef, faisant de sa cour l'une des plus brillantes du monde islamique.",
+    keyFacts: [
+      "Victoire à la bataille des Trois Rois (4 août 1578) — mort du roi Sébastien Ier du Portugal",
+      "Conquête de l'Empire Songhaï en 1591 — contrôle des mines d'or du Soudan occidental",
+      "Construction du palais El Badi à Marrakech, merveille du monde islamique",
+      "Entretient des relations diplomatiques avec la reine Élisabeth Ire d'Angleterre",
+      "Dernier grand souverain saadien — sa mort plonge le Maroc dans une guerre civile"
+    ],
+    quote: "L'or et l'épée sont les deux piliers de tout royaume durable.",
+    level: ['Terminale']
+  },
+
+  // ROYAUME-UNI (suppléments)
+  {
+    id: 'william-conquerant',
+    name: 'Guillaume le Conquérant',
+    birth: '1028', death: '1087',
+    era: 'Moyen Âge', category: 'Militaire', nationality: 'Britannique',
+    bio: "Guillaume, duc de Normandie, conquiert l'Angleterre à la bataille de Hastings (1066) et devient Guillaume Ier d'Angleterre. Cette conquête normande transforme radicalement la langue, la culture et les structures politiques anglaises : le français devient langue de la cour, le système féodal est imposé et la domination normande remodèle la noblesse. Le Domesday Book (1086), recensement complet de l'Angleterre, témoigne de son génie administratif. Sa conquête est l'événement fondateur de l'Angleterre médiévale.",
+    keyFacts: [
+      "Victoire à la bataille de Hastings (14 octobre 1066) contre Harold II",
+      "Couronnement à l'abbaye de Westminster le 25 décembre 1066",
+      "Impose le système féodal normand à toute l'Angleterre",
+      "Ordonne le Domesday Book (1086), premier recensement exhaustif d'un pays européen",
+      "Le français normand influence profondément la langue anglaise (30 % des mots anglais)"
+    ],
+    quote: "Je suis entré en Angleterre par la grâce de Dieu — et j'y resterai.",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'richard-coeur-de-lion',
+    name: 'Richard Cœur de Lion',
+    birth: '1157', death: '1199',
+    era: 'Moyen Âge', category: 'Militaire', nationality: 'Britannique',
+    bio: "Richard Ier d'Angleterre, dit Cœur de Lion, est l'une des figures les plus emblématiques de la chevalerie médiévale. Chef de la Troisième Croisade (1189-1192), il remporte plusieurs victoires face à Saladin — dont Arsūf et la prise d'Acre — mais ne peut reprendre Jérusalem. Prisonnier de l'Autriche puis rançonné, il rentre en Angleterre où il passe peu de temps, préférant guerroyer en France. Tué d'un carreau d'arbalète en Poitou, il incarne l'idéal du roi-chevalier dans l'imaginaire médiéval et romantique.",
+    keyFacts: [
+      "Conduit la Troisième Croisade aux côtés de Philippe II Auguste et de Frédéric Barberousse",
+      "Victoire d'Arsūf (1191) contre Saladin — one of the rare Christian victories of the Crusades",
+      "Signé la trêve de Jaffa (1192) permettant aux pèlerins d'accéder à Jérusalem",
+      "Capturé par le duc Léopold d'Autriche et rançonné 150 000 marcs d'argent",
+      "Passe seulement 6 mois de son règne de 10 ans sur le sol anglais"
+    ],
+    quote: "Si j'avais pu trouver un acheteur, j'aurais vendu Londres elle-même.",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'henri-viii',
+    name: 'Henri VIII',
+    birth: '1491', death: '1547',
+    era: 'Époque moderne', category: 'Politique', nationality: 'Britannique',
+    bio: "Henri VIII est le roi d'Angleterre qui rompt avec l'Église catholique romaine pour créer l'Église anglicane (1534), événement fondateur de la Réforme anglaise. Cette rupture, motivée par le refus du pape d'annuler son mariage avec Catherine d'Aragon, transforme l'Angleterre religieusement, politiquement et économiquement. Il se marie six fois, fait décapiter deux de ses épouses et dissolve les monastères, s'appropriant leurs richesses. Despote autoritaire, il renforce l'autorité royale et pose les bases de l'Angleterre moderne.",
+    keyFacts: [
+      "Fonde l'Église d'Angleterre (anglicane) en 1534 — Acte de Suprématie",
+      "Six mariages : Catherine d'Aragon, Anne Boleyn, Jane Seymour, Anne de Clèves, Catherine Howard, Catherine Parr",
+      "Fait exécuter deux épouses (Anne Boleyn, Catherine Howard) et son chancelier Thomas More",
+      "Dissolution des monastères (1536-1541) — redistribution des terres à la noblesse",
+      "Père d'Édouard VI, Marie Ière et Élisabeth Ière"
+    ],
+    quote: "La tête qui porte la couronne ne peut dormir paisiblement.",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'elizabeth-iere',
+    name: 'Élisabeth Ière',
+    birth: '1533', death: '1603',
+    era: 'Époque moderne', category: 'Politique', nationality: 'Britannique',
+    bio: "Élisabeth Ière d'Angleterre, fille d'Henri VIII et d'Anne Boleyn, règne 45 ans (1558-1603) et préside au premier âge d'or de l'Angleterre. Surnommée la 'Reine Vierge', elle refuse tout mariage pour préserver son autorité. Sous son règne, l'Angleterre défait l'Invincible Armada espagnole (1588), connaît la floraison de la littérature élisabéthaine (Shakespeare, Marlowe) et pose les bases de son empire commercial. Figure de la résistance protestante face à l'Espagne catholique, elle incarne la Renaissance anglaise.",
+    keyFacts: [
+      "Défaite de l'Invincible Armada espagnole (1588) — tournant dans l'hégémonie maritime mondiale",
+      "Âge d'or de la littérature anglaise : Shakespeare, Marlowe, Edmund Spenser",
+      "Consolide l'anglicanisme comme religion d'État — persécution modérée des catholiques",
+      "Fonde la Compagnie des Indes orientales (1600) — base de l'empire commercial britannique",
+      "Règne 45 ans sans héritier — fin des Tudors, succession des Stuarts"
+    ],
+    quote: "Je sais que j'ai le corps d'une femme faible et délicate, mais j'ai le cœur et l'estomac d'un roi.",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'queen-victoria',
+    name: 'Reine Victoria',
+    birth: '1819', death: '1901',
+    era: 'XIXe siècle', category: 'Politique', nationality: 'Britannique',
+    bio: "Victoria règne 63 ans (1837-1901), le règne le plus long de l'histoire britannique avant Élisabeth II. Son ère voit l'apogée de l'Empire britannique qui couvre alors un quart des terres émergées et comprend 400 millions de sujets. La Révolution industrielle transforme l'Angleterre en atelier du monde. Impératrice des Indes depuis 1876, elle est la grand-mère de presque toutes les familles royales européennes. L'époque victorienne définit la morale bourgeoise, l'expansion coloniale et la modernisation industrielle.",
+    keyFacts: [
+      "Règne de 63 ans (1837-1901) — record avant Élisabeth II (70 ans)",
+      "L'Empire britannique atteint son apogée : 24 % des terres mondiales, 400 millions d'habitants",
+      "Proclamée Impératrice des Indes en 1876 par le Premier ministre Disraeli",
+      "Grand-mère de 9 souverains européens — surnommée 'la grand-mère de l'Europe'",
+      "Révolution industrielle : l'Angleterre devient l'atelier du monde sous son règne"
+    ],
+    quote: "Nous ne sommes pas intéressés par les possibilités d'un échec. Elles n'existent pas.",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'margaret-thatcher',
+    name: 'Margaret Thatcher',
+    birth: '1925', death: '2013',
+    era: 'XXe siècle', category: 'Politique', nationality: 'Britannique',
+    bio: "Margaret Thatcher, première femme Premier ministre du Royaume-Uni (1979-1990), transforme radicalement l'économie et la société britanniques. Son programme néolibéral — privatisations massives, démantèlement des syndicats, déréglementation financière — est surnommé 'thatchérisme'. Elle gagne la guerre des Malouines (1982), renforce l'alliance atlantique avec Reagan et participe à la fin de la Guerre froide. Figure controversée, elle est adulée comme libératrice économique par les uns et dénoncée comme destructrice du tissu social par les autres.",
+    keyFacts: [
+      "Première femme Premier ministre du Royaume-Uni (4 mai 1979 - 28 novembre 1990)",
+      "Guerre des Malouines (1982) — victoire contre l'Argentine, regain de popularité national",
+      "Brise le mouvement syndical — grève des mineurs (1984-1985) — affaiblit le Trade Union Congress",
+      "Privatise British Telecom, British Gas, British Airways, Water — 'Big Bang' financier de 1986",
+      "Surnommée 'Dame de fer' par la presse soviétique pour sa fermeté anti-communiste"
+    ],
+    quote: "Il n'y a pas d'alternative. (TINA — There Is No Alternative)",
+    level: ['3e', 'Terminale']
+  },
+
+  // FRANCE (suppléments)
+  {
+    id: 'francois-ier',
+    name: 'François Ier',
+    birth: '1494', death: '1547',
+    era: 'Époque moderne', category: 'Politique', nationality: 'Française',
+    bio: "François Ier est le roi de France de la Renaissance (1515-1547). Sa victoire à Marignan (1515) contre les Suisses marque le début de son règne brillant. Grand mécène, il attire en France Léonard de Vinci, fait construire les châteaux de la Loire et fait du français la langue officielle du royaume (Ordonnance de Villers-Cotterêts, 1539). Il rivalise avec Charles Quint pour l'hégémonie européenne, fait alliance avec les Ottomans et pose les bases de l'absolutisme royal français. Son règne incarne la Renaissance française.",
+    keyFacts: [
+      "Victoire de Marignan (13-14 septembre 1515) — ouvre les guerres d'Italie",
+      "Ordonnance de Villers-Cotterêts (1539) — impose le français dans les actes officiels",
+      "Accueille Léonard de Vinci à Amboise — mécène de la Renaissance française",
+      "Rivalité avec Charles Quint — capturé à Pavie (1525), rançonné",
+      "Fonde le Collège de France (1530) — institution qui existe encore aujourd'hui"
+    ],
+    quote: "Souvent femme varie, bien fol est qui s'y fie.",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'henri-iv',
+    name: 'Henri IV',
+    birth: '1553', death: '1610',
+    era: 'Époque moderne', category: 'Politique', nationality: 'Française',
+    bio: "Henri IV, premier roi de la dynastie des Bourbons, met fin aux guerres de Religion qui déchiraient la France depuis 1562. Huguenot converti au catholicisme ('Paris vaut bien une messe'), il promulgue l'Édit de Nantes (1598) qui accorde la liberté de culte aux protestants. Son règne voit la reconstruction économique de la France ruinée par les guerres civiles, sous l'impulsion de son ministre Sully. Populaire sous le nom du 'bon roi Henri', il est assassiné par Ravaillac en 1610, laissant un royaume apaisé et prospère.",
+    keyFacts: [
+      "Conversion au catholicisme en 1593 : 'Paris vaut bien une messe'",
+      "Édit de Nantes (13 avril 1598) — première grande loi de tolérance religieuse d'Europe",
+      "Reconstruction économique sous Sully : dragage des marais, routes, agriculture",
+      "Premier roi de la dynastie des Bourbons — ancêtre des dynasties espagnole et française actuelles",
+      "Assassiné le 14 mai 1610 par François Ravaillac — deuil national immense"
+    ],
+    quote: "Je veux qu'il n'y ait si pauvre paysan en mon royaume qu'il n'ait tous les dimanches sa poule au pot.",
+    level: ['3e', 'Terminale']
+  },
+
+  // ESPAGNE
+  {
+    id: 'isabelle-castille',
+    name: 'Isabelle de Castille',
+    birth: '1451', death: '1504',
+    era: 'Époque moderne', category: 'Politique', nationality: 'Espagnole',
+    bio: "Isabelle Ière de Castille, reine de 1474 à 1504, est avec son époux Ferdinand II d'Aragon la co-fondatrice de l'Espagne unifiée. Ensemble, ils reconquièrent Grenade (1492), dernier bastion musulman en Espagne, et financent le voyage de Christophe Colomb qui aboutit à la découverte de l'Amérique la même année. L'Inquisition espagnole est réorganisée sous son règne, menant à l'expulsion des Juifs et des Maures. Elle reçoit le titre de 'Reine catholique' du pape et joue un rôle central dans la construction de l'empire colonial espagnol.",
+    keyFacts: [
+      "Reconquête de Grenade (2 janvier 1492) — fin de la Reconquista, 781 ans de présence islamique",
+      "Finance l'expédition de Christophe Colomb — découverte de l'Amérique (12 octobre 1492)",
+      "Expulsion des Juifs d'Espagne (édit de 1492) — 100 000 à 300 000 personnes exilées",
+      "Réorganise l'Inquisition espagnole sous Torquemada",
+      "Reçoit du pape le titre de 'Reine catholique' avec Ferdinand en 1496"
+    ],
+    quote: "Pour le service de Dieu et de notre sainte foi catholique.",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'charles-quint',
+    name: 'Charles Quint (Carlos V)',
+    birth: '1500', death: '1558',
+    era: 'Époque moderne', category: 'Politique', nationality: 'Espagnole',
+    bio: "Charles Quint est l'un des souverains les plus puissants de l'histoire européenne. Héritier des Habsbourg, il cumule les couronnes d'Espagne, d'Allemagne (Saint-Empire), des Pays-Bas et de la moitié des Amériques. Son empire, sur lequel 'le soleil ne se couche jamais', est le plus vaste de l'époque moderne. Il affronte la Réforme luthérienne, rivalise avec François Ier de France et Soliman le Magnifique. Épuisé par ces guerres incessantes, il abdique en 1556 et se retire au monastère de Yuste, geste sans précédent dans l'histoire.",
+    keyFacts: [
+      "Règne sur Espagne, Saint-Empire romain germanique, Pays-Bas, Amériques — empire 'sans coucher de soleil'",
+      "Rivalise avec François Ier (capturé à Pavie, 1525) et Soliman le Magnifique",
+      "Affronte Luther à la Diète de Worms (1521) — début des guerres de religion en Allemagne",
+      "Conquête du Mexique (Cortés, 1521) et du Pérou (Pizarro, 1532) sous son règne",
+      "Abdique en 1556 — partage l'empire entre son fils Philippe II et son frère Ferdinand"
+    ],
+    quote: "Je parle espagnol à Dieu, italien aux femmes, français aux hommes et allemand à mon cheval.",
+    level: ['Terminale']
+  },
+  {
+    id: 'cervantes',
+    name: 'Miguel de Cervantes',
+    birth: '1547', death: '1616',
+    era: 'Époque moderne', category: 'Art', nationality: 'Espagnole',
+    bio: "Miguel de Cervantes Saavedra est l'auteur de Don Quichotte (1605-1615), considéré comme le premier roman moderne et l'un des plus grands chefs-d'œuvre de la littérature mondiale. Soldat blessé à Lépante (1571), capturé et esclave à Alger cinq ans, puis prisonnier pour dettes en Espagne, sa vie aventureuse nourrit son œuvre. Don Quichotte, qui tourne en dérision les romans de chevalerie, invente le roman psychologique et donne naissance à la littérature espagnole du Siècle d'Or.",
+    keyFacts: [
+      "Don Quichotte (1605-1615) — traduit en plus de 140 langues, roman le plus vendu après la Bible",
+      "Blessé à la bataille de Lépante (1571) — perd l'usage de la main gauche",
+      "Capturé par des corsaires, esclave à Alger de 1575 à 1580",
+      "Emprisonné à plusieurs reprises pour dettes — commence Don Quichotte en prison",
+      "Meurt le même jour que Shakespeare (23 avril 1616)"
+    ],
+    quote: "Dis-moi tes fréquentations, et je te dirai qui tu es.",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'velazquez',
+    name: 'Diego Vélazquez',
+    birth: '1599', death: '1660',
+    era: 'Époque moderne', category: 'Art', nationality: 'Espagnole',
+    bio: "Diego Rodríguez de Silva y Vélazquez est le plus grand peintre du Siècle d'Or espagnol et l'un des maîtres absolus de la peinture occidentale. Peintre officiel de Philippe IV d'Espagne, il révolutionne la représentation de la lumière, de l'espace et du mouvement réel. Son chef-d'œuvre, Las Meninas (1656), est considéré comme la 'théologie de la peinture' pour sa réflexion sur la représentation. Goya, Manet et Picasso reconnaissent tous sa dette envers Vélazquez.",
+    keyFacts: [
+      "Peintre officiel du roi Philippe IV d'Espagne à partir de 1623",
+      "Las Meninas (1656) — chef-d'œuvre absolu, révolutionne la peinture par sa complexité spatiale",
+      "Deux voyages en Italie — rencontre Rubens, s'imprègne de la Renaissance italienne",
+      "Portrait de l'Innocent X (1650) — pape choqué par son réalisme : 'troppo vero' (trop vrai)",
+      "Influence directe sur Goya, Manet et Picasso qui copient ses œuvres"
+    ],
+    quote: "Peindre ce que l'on voit, non ce que l'on sait.",
+    level: ['Terminale']
+  },
+  {
+    id: 'picasso',
+    name: 'Pablo Picasso',
+    birth: '1881', death: '1973',
+    era: 'XXe siècle', category: 'Art', nationality: 'Espagnole',
+    bio: "Pablo Ruiz Picasso est l'artiste le plus influent du XXe siècle. Co-fondateur du cubisme avec Georges Braque, il révolutionne la peinture en représentant simultanément plusieurs points de vue. Son œuvre de 20 000 pièces traverse les périodes bleue, rose, cubiste, surréaliste. Guernica (1937), peinte en réaction au bombardement de la ville basque par l'aviation nazie, est devenu le symbole mondial de la dénonciation de la guerre. Né à Málaga, il passe l'essentiel de sa vie en France où il s'engage aux côtés des républicains espagnols.",
+    keyFacts: [
+      "Co-fondateur du cubisme avec Braque (Les Demoiselles d'Avignon, 1907)",
+      "Guernica (1937) — dénonce le bombardement nazi de la ville basque, icône anti-guerre mondiale",
+      "Œuvre totale : plus de 20 000 pièces (peintures, sculptures, céramiques, gravures)",
+      "Membre du Parti Communiste Français (1944-1973) — engagement politique affirmé",
+      "Artiste le plus cité dans les vols d'art — ses œuvres valuent des centaines de millions d'euros"
+    ],
+    quote: "L'art lave de la poussière du quotidien notre âme.",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'franco',
+    name: 'Francisco Franco',
+    birth: '1892', death: '1975',
+    era: 'XXe siècle', category: 'Politique', nationality: 'Espagnole',
+    bio: "Francisco Franco Bahamonde est le dictateur qui dirige l'Espagne de 1939 à 1975. Chef nationaliste lors de la guerre civile espagnole (1936-1939), il bénéficie du soutien de Hitler et Mussolini pour vaincre la République espagnole. Son régime (le Franquisme) est une dictature nationaliste catholique autoritaire qui réprime toute opposition. Neutre pendant la Seconde Guerre mondiale, il survit à la défaite des fascismes et modernise l'économie espagnole dans les années 1960 (le 'miracle espagnol'). Il désigne Juan Carlos Ier comme successeur, qui rétablit la démocratie après sa mort.",
+    keyFacts: [
+      "Déclenche le pronunciamiento (coup d'État) du 18 juillet 1936 — début de la guerre civile",
+      "Soutenu par Hitler (Légion Condor) et Mussolini — victory en 1939 sur la République",
+      "Dictateur de l'Espagne pendant 36 ans (1939-1975) — répression de 100 000+ opposants",
+      "Maintient la neutralité espagnole pendant la Seconde Guerre mondiale — survie du régime",
+      "Désigne Juan Carlos Ier comme successeur — transition vers la démocratie après 1975"
+    ],
+    quote: "Tout pour la patrie, rien contre la patrie, tout avec la patrie.",
     level: ['3e', 'Terminale']
   },
 ]
