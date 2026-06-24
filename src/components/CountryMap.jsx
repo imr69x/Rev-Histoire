@@ -195,7 +195,7 @@ function FitBounds({ geoData, countryId }) {
     }
 
     if (bounds.isValid()) {
-      map.fitBounds(bounds, { padding: [30, 30] })
+      map.fitBounds(bounds, { padding: [8, 8] })
     }
   }, [geoData, map])
   return null
