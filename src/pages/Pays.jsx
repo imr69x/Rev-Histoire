@@ -28,6 +28,7 @@ const SURNOMS = {
   mali: "L'Empire de l'Or · Pays de Mansa Moussa",
   afrique_du_sud: "La Nation arc-en-ciel · Rainbow Nation",
   maroc: "Royaume Chérifien · Pays du Soleil Couchant",
+  algerie: "El Djazaïr · La Grande Bleue du Maghreb",
   etats_unis: "The New World · Uncle Sam's Land",
   mexique: "L'Aigle et le Serpent · Tierra de Maíz",
   bresil: "O País do Futuro · Le Géant de l'Amazonie",
@@ -42,7 +43,7 @@ const FLAG_CODES = {
   mongolie: 'mn', japon: 'jp', ethiopie: 'et', mali: 'ml', afrique_du_sud: 'za',
   maroc: 'ma', etats_unis: 'us', mexique: 'mx', bresil: 'br', haiti: 'ht',
   australie: 'au', arabie_saoudite: 'sa', coree_du_sud: 'kr',
-  pays_bas: 'nl', tunisie: 'tn',
+  pays_bas: 'nl', tunisie: 'tn', algerie: 'dz',
 }
 
 function getFlagUrl(id, size = 80) {
