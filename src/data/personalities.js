@@ -1652,6 +1652,550 @@ export const personalities = [
     quote: "Make America Great Again.",
     level: ['3e', 'Terminale', 'HGGSP']
   },
+
+  // === PERSONNALITÉS DES PAYS (ajouts) ===
+
+  // RUSSIE
+  {
+    id: 'ivan_terrible',
+    name: 'Ivan le Terrible',
+    birth: '1530', death: '1584',
+    era: 'Époque moderne', category: 'Politique', nationality: 'Russe',
+    bio: "Ivan IV, dit 'le Terrible' (Grozny = redoutable en russe), est le premier tsar de toutes les Russies (1547). Il centralise le pouvoir, conquiert le Khanat de Kazan (1552) et de l'Astrakhan, ouvre la Sibérie aux Cosaques et renforce l'autocratie. Il crée l'oprichnina, police d'État qui terrorise la noblesse. Dans un accès de rage, il tue son fils et héritier Ivan de sa propre main (1581).",
+    keyFacts: [
+      "Premier souverain à prendre le titre de 'Tsar de toutes les Russies' (1547)",
+      "Conquête du Khanat de Kazan (1552) — symbole de la puissance russe",
+      "Création de l'oprichnina : première police secrète d'État russe",
+      "Guerre de Livonie (1558-1583) pour accéder à la Baltique — échec",
+      "Tue son propre fils Ivan lors d'une dispute (1581)"
+    ],
+    quote: "Le tsar est sur la terre l'image de Dieu tout-puissant.",
+    level: ['4e', 'Terminale']
+  },
+  {
+    id: 'pierre_grand',
+    name: 'Pierre le Grand',
+    birth: '1672', death: '1725',
+    era: 'Époque moderne', category: 'Politique', nationality: 'Russe',
+    bio: "Tsar puis premier Empereur de Russie (1682-1725), Pierre le Grand transforme la Russie arriérée en puissance européenne. Après un voyage incognito en Europe occidentale (Grand Tour 1697-98), il modernise l'armée, crée la marine, fonde Saint-Pétersbourg (1703) comme 'fenêtre sur l'Europe'. Il vainc Charles XII de Suède à Poltava (1709) et ouvre la Russie à la Baltique.",
+    keyFacts: [
+      "Visite l'Europe de façon incognito pour apprendre les techniques occidentales",
+      "Fonde Saint-Pétersbourg (1703) — nouvelle capitale tournée vers l'Europe",
+      "Vainqueur de Charles XII à Poltava (1709) — accès à la Baltique",
+      "Crée la marine russe et modernise l'armée sur le modèle occidental",
+      "Oblige les nobles à se raser la barbe et à adopter les mœurs européennes"
+    ],
+    quote: "Je gouverne des hommes et non des anges.",
+    level: ['4e', 'Terminale']
+  },
+  {
+    id: 'catherine_grande',
+    name: 'Catherine II la Grande',
+    birth: '1729', death: '1796',
+    era: 'XVIIIe siècle', category: 'Politique', nationality: 'Russe',
+    bio: "Impératrice de Russie (1762-1796), Catherine II est la souveraine éclairée par excellence : corresponde avec Voltaire et Diderot, fonde l'Ermitage, favorise les arts et les sciences. Elle agrandit l'Empire par les guerres contre l'Empire ottoman (accès à la mer Noire, Crimée 1783) et participe aux partages de la Pologne. Son règne de 34 ans est l'apogée de l'Empire russe des Lumières.",
+    keyFacts: [
+      "Renverse son époux Pierre III par un coup d'État (1762)",
+      "Correspond avec Voltaire, Diderot, D'Alembert — Enlightened Despotism",
+      "Annexe la Crimée (1783) et étend la Russie jusqu'à la mer Noire",
+      "Participe aux trois partages de la Pologne (1772, 1793, 1795)",
+      "Fonde l'Ermitage et enrichit considérablement les collections royales"
+    ],
+    quote: "Plus on est éclairé, plus on est libre.",
+    level: ['4e', 'Terminale']
+  },
+  {
+    id: 'lenine',
+    name: 'Lénine',
+    birth: '1870', death: '1924',
+    era: 'XXe siècle', category: 'Politique', nationality: 'Russe',
+    bio: "Vladimir Ilitch Oulianov, dit Lénine, est le fondateur de l'URSS et théoricien du marxisme-léninisme. Chef des bolcheviks, il organise la Révolution d'Octobre (7 novembre 1917) qui renverse le gouvernement provisoire et instaure le premier État soviétique. Il signe le traité de Brest-Litovsk (1918) avec l'Allemagne, gagne la guerre civile (1917-1922) et crée l'Union des Républiques Socialistes Soviétiques (1922).",
+    keyFacts: [
+      "Fondateur du Parti bolchevik — courant révolutionnaire du marxisme",
+      "Révolution d'Octobre 1917 — premier État communiste au monde",
+      "Traité de Brest-Litovsk (1918) — sortie de la guerre, perte de territoires",
+      "Gagne la guerre civile (armées blanches, interventions étrangères 1917-1922)",
+      "Fonde l'URSS (1922) — empire soviétique de 15 républiques"
+    ],
+    quote: "L'État, c'est nous.",
+    level: ['3e', 'Terminale']
+  },
+
+  // ÉTATS-UNIS
+  {
+    id: 'washington',
+    name: 'George Washington',
+    birth: '1732', death: '1799',
+    era: 'XVIIIe siècle', category: 'Militaire', nationality: 'Américaine',
+    bio: "Général en chef de l'armée continentale lors de la Révolution américaine et premier président des États-Unis (1789-1797), George Washington est le 'Père de la Nation' américaine. Il conduit les troupes coloniales à la victoire contre les Britanniques (Yorktown, 1781), préside la Convention constitutionnelle (1787) et établit les précédents fondamentaux de la présidence, dont le retrait volontaire après deux mandats.",
+    keyFacts: [
+      "Commandant en chef de l'armée continentale — guerre d'indépendance (1775-1783)",
+      "Victoire de Yorktown (1781) — reddition de Cornwallis, fin de la guerre",
+      "Préside la Convention de Philadelphie (1787) — rédaction de la Constitution",
+      "Premier président des États-Unis (1789-1797)",
+      "Se retire volontairement après deux mandats — précédent fondateur"
+    ],
+    quote: "Associez-vous avec les hommes vertueux si vous voulez l'être.",
+    level: ['4e', '2nde']
+  },
+  {
+    id: 'lincoln',
+    name: 'Abraham Lincoln',
+    birth: '1809', death: '1865',
+    era: 'XIXe siècle', category: 'Politique', nationality: 'Américaine',
+    bio: "16e président des États-Unis (1861-1865), Abraham Lincoln conduit le pays à travers la Guerre civile (1861-1865), abolit l'esclavage (Proclamation d'émancipation, 1863 ; 13e amendement, 1865) et sauve l'Union. Né dans une famille pauvre du Kentucky, autodidacte devenu avocat, il est assassiné par John Wilkes Booth au Ford's Theatre (14 avril 1865), cinq jours après la reddition du général sudiste Lee.",
+    keyFacts: [
+      "Élu président (1860) sans obtenir un seul vote des États du Sud",
+      "Conduit le Nord pendant la Guerre civile (1861-1865, 700 000 morts)",
+      "Proclamation d'émancipation (1863) — libération des esclaves dans les États rebelles",
+      "Discours de Gettysburg (1863) — définition de la démocratie",
+      "Assassiné au Ford's Theatre le 14 avril 1865 par John Wilkes Booth"
+    ],
+    quote: "On peut tromper tout le monde quelque temps, et quelqu'un toujours, mais on ne peut tromper tout le monde toujours.",
+    level: ['3e', '2nde']
+  },
+  {
+    id: 'fdr',
+    name: 'Franklin D. Roosevelt',
+    birth: '1882', death: '1945',
+    era: 'XXe siècle', category: 'Politique', nationality: 'Américaine',
+    bio: "32e président des États-Unis (1933-1945), Franklin D. Roosevelt est le seul à avoir été élu quatre fois. Il sort les États-Unis de la Grande Dépression avec le New Deal (1933), refonde l'État-providence américain et guide le pays tout au long de la Seconde Guerre mondiale jusqu'à sa mort en fonctions (avril 1945). Handicapé par la poliomyélite (1921), il dissimule son fauteuil roulant pour préserver son image de force.",
+    keyFacts: [
+      "Élu quatre fois président (1932, 1936, 1940, 1944) — record absolu",
+      "New Deal (1933) : relance économique après la Grande Dépression",
+      "Lend-Lease (1941) : aide aux Alliés avant l'entrée en guerre",
+      "Organise les conférences de Téhéran (1943) et Yalta (1945) avec Churchill et Staline",
+      "Meurt en fonctions le 12 avril 1945 — à 3 semaines de la victoire"
+    ],
+    quote: "La seule chose que nous ayons à craindre est la crainte elle-même.",
+    level: ['3e', 'Terminale']
+  },
+
+  // ÉGYPTE
+  {
+    id: 'ramsesII',
+    name: 'Ramsès II',
+    birth: '-1303', death: '-1213',
+    era: 'Antiquité', category: 'Politique', nationality: 'Égyptienne',
+    bio: "Troisième pharaon de la XIXe dynastie, Ramsès II (règne -1279 à -1213) est le pharaon le plus célèbre de l'Égypte ancienne. Surnommé 'Ramsès le Grand', son règne de 66 ans est marqué par de grands travaux (Abou Simbel, Karnak, Ramesséum) et la bataille de Qadesh contre les Hittites (vers -1274), après laquelle est signé le premier traité de paix de l'histoire. Son corps momifié est conservé au Musée du Caire.",
+    keyFacts: [
+      "Règne exceptionnel de 66 ans (-1279 à -1213)",
+      "Bataille de Qadesh contre les Hittites (-1274) — premier traité de paix de l'histoire",
+      "Construction d'Abou Simbel — temple taillé dans la roche en son honneur",
+      "Construction de Pi-Ramsès, sa capitale dans le Delta",
+      "Sa momie est l'une des mieux préservées du monde"
+    ],
+    quote: "Je suis le fils du soleil, né de son propre corps.",
+    level: ['6e', '5e']
+  },
+  {
+    id: 'nasser',
+    name: 'Gamal Abdel Nasser',
+    birth: '1918', death: '1970',
+    era: 'XXe siècle', category: 'Politique', nationality: 'Égyptienne',
+    bio: "Président de l'Égypte (1956-1970), Gamal Abdel Nasser est la figure emblématique du nationalisme arabe et du tiers-mondisme. Officier lors du coup d'État de 1952 contre le roi Farouk, il nationalise le canal de Suez (1956), défiant la France et le Royaume-Uni — crise de Suez. Il fonde la République arabe unie avec la Syrie (1958-1961) et tente d'unifier le monde arabe. Sa défaite face à Israël (Guerre des Six Jours, 1967) brise son prestige.",
+    keyFacts: [
+      "Participe au coup d'État des 'Officiers libres' (1952) — fin de la monarchie égyptienne",
+      "Nationalisation du canal de Suez (1956) — symbole de la décolonisation",
+      "Crise de Suez (1956) : France, Royaume-Uni et Israël attaquent mais reculent sous pression américano-soviétique",
+      "République arabe unie avec la Syrie (1958-1961)",
+      "Défaite lors de la Guerre des Six Jours (1967) — perte du Sinaï"
+    ],
+    quote: "Unité, discipline, travail.",
+    level: ['3e', 'Terminale', 'HGGSP']
+  },
+
+  // IRAN
+  {
+    id: 'cyrus',
+    name: 'Cyrus le Grand',
+    birth: '-600', death: '-530',
+    era: 'Antiquité', category: 'Politique', nationality: 'Perse',
+    bio: "Fondateur de l'Empire achéménide (559-330 av. J.-C.), Cyrus le Grand crée le premier grand empire multiéthnique de l'histoire, s'étendant de la Méditerranée à l'Inde. Contrairement aux conquérants de son époque, il respecte les cultures et religions locales — il libère les Juifs de Babylone (539 av. J.-C.) et les autorise à reconstruire le Temple de Jérusalem. Le Cylindre de Cyrus est souvent présenté comme la première Déclaration des droits de l'homme.",
+    keyFacts: [
+      "Fonde l'Empire achéménide (-559) — le plus grand empire du monde antique",
+      "Conquête de la Médie, de la Lydie (Crésus) et de Babylone",
+      "Libère les Juifs de Babylone (539 av. J.-C.) — retour à Jérusalem",
+      "Cylindre de Cyrus — considéré comme la première charte des droits de l'homme",
+      "Respecte les religions et cultures des peuples conquis"
+    ],
+    quote: "Je suis Cyrus, roi du monde entier, grand roi, roi puissant, roi de Babylone.",
+    level: ['5e', '2nde']
+  },
+  {
+    id: 'khomeiny',
+    name: 'Ruhollah Khomeiny',
+    birth: '1902', death: '1989',
+    era: 'XXe siècle', category: 'Religion', nationality: 'Iranienne',
+    bio: "Ayatollah Ruhollah Khomeiny est le fondateur de la République islamique d'Iran. Théologien chiite exilé par le Shah Pahlavi (d'abord en Turquie, Irak, puis France), il orchestre depuis l'étranger la Révolution islamique de 1979 qui renverse le Shah. Revenant triomphalement à Téhéran (1er février 1979), il instaure la théocratie islamique (Velayat-e Faqih — gouvernement du jurisconsulte). Son régime affronte la prise d'otages à l'ambassade américaine et la guerre Iran-Irak (1980-1988).",
+    keyFacts: [
+      "Fondateur de la République islamique d'Iran (1979)",
+      "Théorise le Velayat-e Faqih — gouvernement des religieux",
+      "Organise la Révolution islamique depuis Paris (1978-79)",
+      "Retour triomphal à Téhéran le 1er février 1979 (5 millions dans la rue)",
+      "Prise d'otages à l'ambassade américaine (444 jours, 1979-1981)"
+    ],
+    quote: "L'islam est politique ou n'est pas.",
+    level: ['Terminale', 'HGGSP']
+  },
+
+  // TURQUIE/EMPIRE OTTOMAN
+  {
+    id: 'soliman',
+    name: 'Soliman le Magnifique',
+    birth: '1494', death: '1566',
+    era: 'Époque moderne', category: 'Politique', nationality: 'Ottomane',
+    bio: "Dixième sultan de l'Empire ottoman (1520-1566), Soliman Ier dit 'le Magnifique' (en Occident) ou 'le Législateur' (Kanuni, en turc) règne pendant 46 ans sur l'empire à son apogée. Il conquiert Belgrade (1521), Rhodes (1522), la Hongrie (Mohács, 1526), assiège Vienne (1529) et étend l'empire en Afrique du Nord et en Orient. Il modernise la législation ottomane, mécène des arts et de l'architecture (Sinan, mosquée de Soliman).",
+    keyFacts: [
+      "Règne 46 ans sur l'Empire ottoman à son apogée (1520-1566)",
+      "Conquête de Belgrade (1521), Rhodes (1522), bataille de Mohács (1526)",
+      "Siège de Vienne (1529) — limite de l'expansion ottomane en Europe",
+      "Fait de l'Empire ottoman la première puissance méditerranéenne",
+      "Mécène : construit la Mosquée de Soliman (architecte Sinan)"
+    ],
+    quote: "Je suis Sultan des sultans, roi des rois, dispensateur des couronnes aux monarques du globe.",
+    level: ['4e', '2nde']
+  },
+  {
+    id: 'mehmed2',
+    name: 'Mehmed II le Conquérant',
+    birth: '1432', death: '1481',
+    era: 'Moyen Âge', category: 'Militaire', nationality: 'Ottomane',
+    bio: "Sultan ottoman (1444-1446, puis 1451-1481), Mehmed II prend Constantinople le 29 mai 1453, mettant fin à l'Empire byzantin vieux de 1 100 ans. Il fait de Constantinople (renommée Istanbul) la nouvelle capitale ottomane et y reconstruit Sainte-Sophie en mosquée. Il poursuit les conquêtes (Serbie, Morée, Trébizonde, Valachie) et vise Rome. Polyglotte, poète et mécène, il se présente comme héritier de la Rome antique.",
+    keyFacts: [
+      "Prise de Constantinople le 29 mai 1453 — fin de l'Empire byzantin",
+      "Transforme Sainte-Sophie en mosquée — symbole de la victoire islamique",
+      "Reconstitue et repeuple Constantinople — attire Grecs, Arméniens, Juifs",
+      "Conquête des Balkans, de la Morée, de l'Anatolie orientale",
+      "Se proclame héritier de l'Empire romain ('César des Romains')"
+    ],
+    quote: "Je suis le César des Romains.",
+    level: ['4e', '2nde']
+  },
+
+  // JAPON
+  {
+    id: 'oda_nobunaga',
+    name: 'Oda Nobunaga',
+    birth: '1534', death: '1582',
+    era: 'Époque moderne', category: 'Militaire', nationality: 'Japonaise',
+    bio: "Seigneur de guerre japonais (daimyo), Oda Nobunaga est le premier des trois 'unificateurs' du Japon après un siècle de guerres civiles (Sengoku). Innovateur militaire, il utilise le premier les arquebuses en masse à la bataille de Nagashino (1575). Il détruit le pouvoir des moines guerriers bouddhistes (Enryaku-ji, 1571) et contrôle la moitié du Japon avant d'être trahi et contraint au suicide (seppuku) lors de l'incident de Honnoji (1582).",
+    keyFacts: [
+      "Premier unificateur du Japon après le siècle Sengoku",
+      "Utilise les arquebuses en masse (Nagashino 1575) — révolution militaire",
+      "Renverse le shogunat Ashikaga (1573)",
+      "Détruit le monastère Enryaku-ji et ses moines guerriers (1571)",
+      "Assassiné lors de l'incident de Honnoji (1582) — trahison d'Akechi Mitsuhide"
+    ],
+    quote: "Le monde est régi par la force, pas par la raison.",
+    level: ['Terminale']
+  },
+  {
+    id: 'tokugawa',
+    name: 'Tokugawa Ieyasu',
+    birth: '1543', death: '1616',
+    era: 'Époque moderne', category: 'Politique', nationality: 'Japonaise',
+    bio: "Troisième et dernier des unificateurs du Japon, Tokugawa Ieyasu fonde le shogunat Tokugawa (1603) après sa victoire à Sekigahara (1600), qui lui assure le contrôle du Japon. Son régime établit la période Edo (1603-1868) — 265 ans de paix, d'isolement (sakoku) et de prospérité. Sa lignée de shoguns Tokugawa gouverne le Japon jusqu'à la Restauration Meiji (1868).",
+    keyFacts: [
+      "Victoire de Sekigahara (1600) — maître du Japon",
+      "Nommé shogun par l'Empereur (1603) — fonde la période Edo",
+      "Politique de sakoku — isolement du Japon du reste du monde",
+      "Fait d'Edo (Tokyo) la capitale de facto du Japon",
+      "Sa lignée règne 265 ans jusqu'à la Restauration Meiji"
+    ],
+    quote: "La patience est la base de la sécurité et de la durée.",
+    level: ['Terminale']
+  },
+
+  // MEXIQUE
+  {
+    id: 'cortes',
+    name: 'Hernán Cortés',
+    birth: '1485', death: '1547',
+    era: 'Époque moderne', category: 'Militaire', nationality: 'Espagnole',
+    bio: "Conquistador espagnol, Hernán Cortés conquiert l'Empire aztèque avec seulement 500 soldats entre 1519 et 1521. Grâce aux alliances avec les ennemis aztèques, aux épidémies de variole et à la superstition de Moctezuma II (qui le prend pour le dieu Quetzalcoatl), il prend Tenochtitlan (1521) et fonde la Nouvelle-Espagne. Sa conquête réduit de 90% la population indigène de la région.",
+    keyFacts: [
+      "Débarque au Mexique avec 500 soldats et 16 chevaux (1519)",
+      "Alliance avec Tlaxcalans, ennemis des Aztèques",
+      "Capture Moctezuma II et prend Tenochtitlan (1521)",
+      "Fonde la Nouvelle-Espagne sur les ruines aztèques",
+      "La variole décime les populations indigènes — génocide involontaire"
+    ],
+    quote: "Je veux de l'or, pas de simples excuses.",
+    level: ['4e', '2nde']
+  },
+  {
+    id: 'zapata',
+    name: 'Emiliano Zapata',
+    birth: '1879', death: '1919',
+    era: 'XXe siècle', category: 'Politique', nationality: 'Mexicaine',
+    bio: "Leader paysan de la Révolution mexicaine (1910-1920), Emiliano Zapata est le symbole de la résistance des paysans indiens contre les grands propriétaires terriens. Son slogan 'Tierra y Libertad' (Terre et Liberté) résume l'idéal révolutionnaire. Il dirige l'Armée de Libération du Sud et occupe Mexico deux fois. Trahi et assassiné en 1919, il devient une icône de la lutte pour la justice sociale en Amérique latine.",
+    keyFacts: [
+      "Chef de l'Armée de Libération du Sud — révolutionnaire paysan",
+      "'Tierra y Libertad' — programme agraire radical",
+      "Plan d'Ayala (1911) — redistribution des terres volées aux paysans",
+      "Occupe Mexico deux fois avec Pancho Villa (1914)",
+      "Assassiné par trahison (1919) — martyr de la Révolution mexicaine"
+    ],
+    quote: "Il vaut mieux mourir debout que de vivre toute sa vie à genoux.",
+    level: ['Terminale', 'HGGSP']
+  },
+
+  // HAÏTI
+  {
+    id: 'toussaint',
+    name: 'Toussaint Louverture',
+    birth: '1743', death: '1803',
+    era: 'XVIIIe siècle', category: 'Politique', nationality: 'Haïtienne',
+    bio: "Esclave affranchi devenu général, Toussaint Louverture mène la seule révolution d'esclaves victorieuse de l'histoire (Saint-Domingue, 1791-1803). Il unifie l'île, vainc les armées françaises, britanniques et espagnoles, et gouverne Saint-Domingue de façon quasi indépendante. Trahi par Napoléon lors d'une négociation, il est déporté en France et meurt au Fort de Joux (Doubs) en 1803.",
+    keyFacts: [
+      "Esclave affranchi qui apprend à lire seul et lit César et Épictète",
+      "Dirige la rébellion des esclaves de Saint-Domingue (1791)",
+      "Repousse les armées française, britannique et espagnole",
+      "Gouverneur de Saint-Domingue — première Constitution de l'île (1801)",
+      "Déporté en France par Napoléon et meurt au Fort de Joux (1803)"
+    ],
+    quote: "En me renversant, on n'a abattu que le tronc de l'arbre de la liberté des Noirs. Mais il repoussera car ses racines sont profondes.",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'dessalines',
+    name: 'Jean-Jacques Dessalines',
+    birth: '1758', death: '1806',
+    era: 'XVIIIe siècle', category: 'Militaire', nationality: 'Haïtienne',
+    bio: "Général haïtien, successeur de Toussaint Louverture, Jean-Jacques Dessalines proclame l'indépendance d'Haïti le 1er janvier 1804 après la victoire définitive sur l'armée française de Leclerc à Vertières (novembre 1803). Il prend le nom de Jacques Ier, Empereur d'Haïti, et ordonne le massacre des Blancs restants. Il est la figure fondatrice de la première République noire du monde.",
+    keyFacts: [
+      "Vainqueur à Vertières (18 novembre 1803) — dernière bataille décisive",
+      "Proclame l'indépendance d'Haïti le 1er janvier 1804",
+      "Premier à déchirer le drapeau tricolore français pour créer le drapeau haïtien",
+      "Se proclame Empereur Jacques Ier (1804)",
+      "Assassiné en 1806 — martyr de l'indépendance haïtienne"
+    ],
+    quote: "Pour dresser l'acte de l'indépendance, il nous faut la peau d'un Blanc pour parchemin.",
+    level: ['3e', 'Terminale']
+  },
+
+  // ÉTHIOPIE
+  {
+    id: 'menelik2',
+    name: 'Menelik II',
+    birth: '1844', death: '1913',
+    era: 'XIXe siècle', category: 'Militaire', nationality: 'Éthiopienne',
+    bio: "Négus Négast (Roi des rois) d'Éthiopie (1889-1913), Menelik II remporte la bataille d'Adoua (1er mars 1896) contre l'armée italienne — la première grande victoire d'une armée africaine sur une puissance coloniale européenne. Il modernise l'Éthiopie (chemins de fer, hôpitaux, administration) et maintient l'indépendance du seul pays africain à ne jamais avoir été colonisé.",
+    keyFacts: [
+      "Unification de l'Éthiopie (1889-1895) — roi des rois",
+      "Bataille d'Adoua (1er mars 1896) — 7 000 Italiens tués, défaite coloniale majeure",
+      "Traité d'Addis-Abeba (1896) — l'Italie reconnaît la souveraineté éthiopienne",
+      "Modernise l'Éthiopie : chemin de fer Djibouti-Addis-Abeba",
+      "Fonde Addis-Abeba, nouvelle capitale (1886)"
+    ],
+    quote: "L'Éthiopie ne s'incline devant aucun étranger.",
+    level: ['3e', 'Terminale', 'HGGSP']
+  },
+  {
+    id: 'haile_selassie',
+    name: 'Hailé Sélassié',
+    birth: '1892', death: '1975',
+    era: 'XXe siècle', category: 'Politique', nationality: 'Éthiopienne',
+    bio: "Ras Tafari Makonnen, couronné Hailé Sélassié Ier (1930-1974), est le dernier Négus d'Éthiopie et une icône mondiale. Il résiste à l'invasion italienne de Mussolini (1935-1941), discours historique à la Société des Nations (1936). Vénéré comme un messie dans le mouvement rastafari jamaïcain (qui le considère comme une incarnation divine), il modernise l'Éthiopie et fonde l'Organisation de l'Unité Africaine (OUA, 1963, Addis-Abeba).",
+    keyFacts: [
+      "Résiste à l'invasion italienne (1935-41) — discours à la Société des Nations",
+      "Libère l'Éthiopie avec les alliés britanniques (1941)",
+      "Fondateur de l'Organisation de l'Unité Africaine (1963)",
+      "Vénéré par le mouvement rastafari comme figure divine",
+      "Renversé par le coup d'État militaire du Derg (1974)"
+    ],
+    quote: "Jusqu'à ce que la couleur d'un homme ne soit plus importante que la couleur de ses yeux, il y aura la guerre.",
+    level: ['Terminale', 'HGGSP']
+  },
+
+  // INDE
+  {
+    id: 'akbar',
+    name: 'Akbar le Grand',
+    birth: '1542', death: '1605',
+    era: 'Époque moderne', category: 'Politique', nationality: 'Indienne (Moghole)',
+    bio: "Troisième Empereur moghol (1556-1605), Akbar le Grand règne sur la quasi-totalité du sous-continent indien. Illettré mais d'une intelligence exceptionnelle, il est le symbole de la tolérance religieuse dans l'histoire islamique : il abolit la taxe sur les non-musulmans (jizya), épouse des princesses hindoues (Jodha Bai) et tente de créer une religion syncrétique (Din-i-Ilahi). Il construit Fatehpur Sikri, cité impériale abandonnée.",
+    keyFacts: [
+      "Étend l'Empire moghol à la quasi-totalité de l'Inde",
+      "Abolit la jizya (taxe sur les non-musulmans) — symbole de tolérance",
+      "Épouse des princesses hindoues rajputes — politique de réconciliation",
+      "Construit Fatehpur Sikri (1571-1585, UNESCO)",
+      "Tente de créer le Din-i-Ilahi — religion universelle syncrétique"
+    ],
+    quote: "Un monarque doit être impartial envers toutes les religions.",
+    level: ['4e', '2nde']
+  },
+  {
+    id: 'nehru',
+    name: 'Jawaharlal Nehru',
+    birth: '1889', death: '1964',
+    era: 'XXe siècle', category: 'Politique', nationality: 'Indienne',
+    bio: "Premier Premier ministre de l'Inde indépendante (1947-1964), Jawaharlal Nehru est l'architecte de l'État indien moderne. Compagnon de Gandhi dans la lutte anticoloniale, il forge le modèle de la démocratie laïque indienne, inscrit dans la Constitution de 1950. Il dirige l'Inde lors de la partition traumatique avec le Pakistan (1947), de la Guerre froide (mouvement des non-alignés, Bandung 1955), et de la guerre sino-indienne (1962).",
+    keyFacts: [
+      "Premier PM de l'Inde indépendante (1947-1964) — 17 ans au pouvoir",
+      "Rédige le Plan de Nehru — économie mixte, socialisme indien",
+      "Fonde le Mouvement des non-alignés avec Nasser et Tito (Bandung 1955)",
+      "Construit les IIT et les institutions scientifiques de l'Inde",
+      "Sa fille Indira Gandhi et son petit-fils Rajiv Gandhi lui succèderont"
+    ],
+    quote: "La diversité de l'Inde n'est pas un obstacle mais sa plus grande richesse.",
+    level: ['3e', 'Terminale', 'HGGSP']
+  },
+
+  // CHINE
+  {
+    id: 'wu_zetian',
+    name: 'Wu Zetian',
+    birth: '624', death: '705',
+    era: 'Moyen Âge', category: 'Politique', nationality: 'Chinoise',
+    bio: "Seule femme à avoir régné en son propre nom en Chine impériale, Wu Zetian est d'abord concubine de l'Empereur Taizong puis impératrice consort de l'Empereur Gaozong. Elle gouverne de facto la Chine dès 660, puis proclame la Dynastie Zhou (690-705), se nommant elle-même Huangdi (Fils du Ciel). Son règne est marqué par le développement des examens impériaux basés sur le mérite, l'expansion territoriale et l'essor du bouddhisme.",
+    keyFacts: [
+      "Seule femme à avoir officié comme Huangdi (Fils du Ciel) de Chine",
+      "Fonde la Dynastie Zhou (690-705) sur les ruines des Tang",
+      "Réforme des examens impériaux — mérite contre hérédité",
+      "Développe le bouddhisme Chan (ancêtre du Zen japonais)",
+      "Renversée lors d'un coup d'État à 80 ans, restitue le pouvoir aux Tang"
+    ],
+    quote: "Je suis l'égale du Ciel.",
+    level: ['Terminale']
+  },
+  {
+    id: 'zheng_he',
+    name: 'Zheng He',
+    birth: '1371', death: '1433',
+    era: 'Époque moderne', category: 'Exploration', nationality: 'Chinoise',
+    bio: "Amiral et eunuque de la cour des Ming, Zheng He dirige sept expéditions maritimes (1405-1433) à la tête de flottes colossales (jusqu'à 300 navires, 28 000 hommes) vers l'Asie du Sud-Est, l'Inde, la Perse et l'Afrique orientale. Ces voyages précèdent de plusieurs décennies ceux des Européens. La Chine renonce ensuite à l'exploration maritime, tournant radical qui lui fait manquer l'expansion coloniale.",
+    keyFacts: [
+      "7 expéditions maritimes géantes (1405-1433) avec jusqu'à 300 navires",
+      "Atteint l'Afrique de l'Est (Malindi, Kenya) 70 ans avant les Portugais",
+      "Navires 'junques au trésor' de 120 m — bien plus grands que ceux de Colomb",
+      "Ramène des girafes en Chine — cadeaux diplomatiques",
+      "La Chine renonce aux grandes explorations après sa mort — occasion manquée"
+    ],
+    quote: "Les vents d'est favorisent les voyages vers l'ouest.",
+    level: ['4e', '2nde']
+  },
+  {
+    id: 'sun_yatsen',
+    name: 'Sun Yat-sen',
+    birth: '1866', death: '1925',
+    era: 'XIXe siècle', category: 'Politique', nationality: 'Chinoise',
+    bio: "Médecin et révolutionnaire chinois, Sun Yat-sen est le père fondateur de la Chine républicaine. Il mène la Révolution de 1911 (Xinhai) qui renverse la dynastie Qing et proclame la République de Chine. Il théorise les 'Trois Principes du Peuple' (nationalisme, démocratie, bien-être). Vénéré à la fois à Taïwan (KMT) et en Chine populaire, il est l'une des rares figures respectées des deux côtés du détroit.",
+    keyFacts: [
+      "Père de la République de Chine — révolution de 1911 contre les Qing",
+      "Premier président provisoire de la République de Chine (1912)",
+      "Fonde le Kuomintang (Parti nationaliste chinois, 1912)",
+      "'Trois Principes du Peuple' : nationalisme, démocratie, bien-être du peuple",
+      "Vénéré à la fois par le PCC et le KMT de Taïwan"
+    ],
+    quote: "Résister à l'ennemi extérieur, purifier les affaires intérieures.",
+    level: ['Terminale', 'HGGSP']
+  },
+
+  // CORÉE DU SUD
+  {
+    id: 'sejong',
+    name: 'Sejong le Grand',
+    birth: '1397', death: '1450',
+    era: 'Moyen Âge', category: 'Intellectuel', nationality: 'Coréenne',
+    bio: "Quatrième roi de la Dynastie Joseon (1418-1450), Sejong le Grand est la figure la plus vénérée de l'histoire coréenne. Il crée l'alphabet coréen, le hangeul (1443), en remplacement des sinogrammes chinois difficiles d'accès, permettant l'alphabétisation de masse du peuple coréen. Il encourage les sciences (invention du pluviomètre, horloges solaires, cadrans solaires), la littérature et la musique coréenne.",
+    keyFacts: [
+      "Crée le hangeul, l'alphabet coréen (1443) — l'un des alphabets les plus rationnels du monde",
+      "Permet l'alphabétisation de masse de la population coréenne",
+      "Développe les sciences : pluviomètre, horloges solaires, armillaires",
+      "Étend le territoire coréen au nord (quatre districts du nord)",
+      "Figure la plus représentée sur les billets coréens (10 000 won)"
+    ],
+    quote: "Considérez l'état du peuple avant de gouverner.",
+    level: ['Terminale']
+  },
+
+  // AFRIQUE DU SUD
+  {
+    id: 'shaka',
+    name: 'Shaka Zoulou',
+    birth: '1787', death: '1828',
+    era: 'XIXe siècle', category: 'Militaire', nationality: 'Sud-africaine (Zouloue)',
+    bio: "Fondateur et roi du royaume Zoulou (1816-1828), Shaka Zoulou révolutionne l'art de la guerre zoulou avec la formation en 'tête de taureau' (impi) et la courte lance iklwa. Il conquiert la quasi-totalité de l'Afrique du Sud actuelle lors d'une expansion foudroyante (mfecane), déplaçant des millions de personnes. Sa domination crée indirectement les conditions de la résistance africaine face à la colonisation européenne.",
+    keyFacts: [
+      "Fonde le royaume Zoulou (1816) après avoir vaincu son demi-frère Sigujana",
+      "Révolutionne la tactique militaire : formation 'tête de taureau', courte lance iklwa",
+      "Mfecane ('le broyage') — expansion qui redessine l'Afrique australe",
+      "Construit une armée de 40 000 guerriers professionnels",
+      "Assassiné par ses demi-frères Dingane et Mhlangane (1828)"
+    ],
+    quote: "Le Zoulou ne fuit pas une bataille.",
+    level: ['Terminale', 'HGGSP']
+  },
+
+  // PAYS-BAS
+  {
+    id: 'rembrandt',
+    name: 'Rembrandt van Rijn',
+    birth: '1606', death: '1669',
+    era: 'Époque moderne', category: 'Art', nationality: 'Néerlandaise',
+    bio: "Peintre néerlandais du Siècle d'Or (XVIIe s.), Rembrandt van Rijn est l'un des plus grands artistes de l'histoire de l'art occidental. Maître inégalé du clair-obscur (chiaroscuro), il peint des portraits d'une profondeur psychologique rare, des scènes bibliques et la célèbre Ronde de Nuit (1642). Plus de 300 peintures, 300 gravures et 2 000 dessins constituent son œuvre monumentale.",
+    keyFacts: [
+      "Chef-d'œuvre : La Ronde de Nuit (1642, Rijksmuseum Amsterdam)",
+      "Maître du clair-obscur — influence les peintres jusqu'à nos jours",
+      "300 peintures, 300 gravures, 2 000 dessins",
+      "Faillite et vente aux enchères de ses biens (1656) — fin dans la pauvreté",
+      "Ses auto-portraits (une centaine) sont une méditation unique sur le vieillissement"
+    ],
+    quote: "Choisissez uniquement une couleur comme amie, faites-la votre.",
+    level: ['2nde', 'Terminale']
+  },
+  {
+    id: 'van_gogh',
+    name: 'Vincent van Gogh',
+    birth: '1853', death: '1890',
+    era: 'XIXe siècle', category: 'Art', nationality: 'Néerlandaise',
+    bio: "Peintre postimpressionniste néerlandais, Vincent van Gogh produit en seulement 10 ans de carrière plus de 900 tableaux, dont La Nuit étoilée, Les Tournesols, La Chambre, Les Iris. Tourmenté par des troubles mentaux, il se coupe l'oreille lors d'une crise (1888) et finit sa vie à l'asile de Saint-Rémy. Il meurt à 37 ans sans avoir vendu qu'un seul tableau de son vivant — ses œuvres valent aujourd'hui parmi les plus chères du monde.",
+    keyFacts: [
+      "900 peintures en 10 ans de carrière (1880-1890)",
+      "La Nuit étoilée (1889) — l'un des tableaux les plus célèbres au monde",
+      "Se coupe l'oreille lors d'une dispute avec Gauguin (1888)",
+      "Hospitalisé à Saint-Rémy-de-Provence (1889-1890)",
+      "Vend un seul tableau de son vivant — ses œuvres valent des centaines de millions"
+    ],
+    quote: "Je rêve de ma peinture et je peins mon rêve.",
+    level: ['2nde', 'Terminale']
+  },
+  {
+    id: 'anne_frank',
+    name: 'Anne Frank',
+    birth: '1929', death: '1945',
+    era: 'XXe siècle', category: 'Résistance', nationality: 'Néerlandaise (Allemande)',
+    bio: "Adolescente juive allemande réfugiée à Amsterdam, Anne Frank se cache avec sa famille dans l'Annexe secrète (Achterhuis) d'un immeuble d'Amsterdam pendant 2 ans (1942-1944). Son journal, tenu pendant toute la période de clandestinité, est découvert après son arrestation par la Gestapo (août 1944). Elle meurt au camp de concentration de Bergen-Belsen en mars 1945. Son Journal (publié 1947) est l'un des livres les plus lus du monde.",
+    keyFacts: [
+      "Se cache avec sa famille dans l'Annexe secrète d'Amsterdam (1942-1944)",
+      "Tient son journal pendant 2 ans de clandestinité",
+      "Arrêtée par la Gestapo (4 août 1944) — trahie par un dénonciateur inconnu",
+      "Déportée à Auschwitz puis Bergen-Belsen",
+      "Son Journal (publié par son père Otto, 1947) traduit en 70 langues"
+    ],
+    quote: "Malgré tout, je crois encore à la bonté fondamentale des hommes.",
+    level: ['3e', 'Terminale']
+  },
+
+  // BRÉSIL
+  {
+    id: 'pele',
+    name: 'Pelé',
+    birth: '1940', death: '2022',
+    era: 'XXe siècle', category: 'Art', nationality: 'Brésilienne',
+    bio: "Edson Arantes do Nascimento, dit Pelé, est universellement considéré comme le plus grand footballeur de l'histoire. Il remporte trois Coupes du Monde (1958 à 17 ans — record, 1962, 1970), marque 1 283 buts en carrière professionnelle et révèle au monde le football-art brésilien. Né dans la misère, il devient ambassadeur mondial du Brésil, symbole de la mobilité sociale et de l'élégance sportive. Il est le seul joueur à avoir remporté trois Coupes du Monde.",
+    keyFacts: [
+      "3 Coupes du Monde (1958, 1962, 1970) — seul joueur de l'histoire à réaliser ce triplé",
+      "Débute en Coupe du Monde à 17 ans (1958) — plus jeune champion du monde",
+      "1 283 buts officiels en carrière — record mondial",
+      "Joue au Santos FC (1956-1974) puis au New York Cosmos",
+      "Déclaré Athlète du siècle par le Comité International Olympique"
+    ],
+    quote: "Le succès n'est pas un accident. C'est du travail acharné, de la persévérance, de l'apprentissage.",
+    level: ['3e', 'Terminale']
+  },
 ]
 
 const CAT_MAP = {

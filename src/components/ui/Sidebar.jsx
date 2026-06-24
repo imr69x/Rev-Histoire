@@ -21,8 +21,8 @@ const NAV_ITEMS = [
   { to: '/carte',     icon: Globe,       label: 'Carte interactive' },
   { to: '/frise',     icon: Clock,       label: 'Frise chronologique' },
   { to: '/methode',   icon: GraduationCap, label: 'Méthode Bac/Brevet' },
-  { to: '/favoris',   icon: Star,        label: 'Mes favoris' },
   { to: '/pays',      icon: MapPin,      label: 'Histoire des pays' },
+  { to: '/favoris',   icon: Star,        label: 'Mes favoris' },
   { to: '/pricing',   icon: Crown,       label: 'Tarifs & Abonnement' },
   { to: '/admin',     icon: Settings,    label: 'Modification' },
 ]
@@ -38,8 +38,8 @@ const MORE_ITEMS = [
   { to: '/glossaire',      icon: BookMarked,    label: 'Glossaire' },
   { to: '/personnalites',  icon: Users,         label: 'Personnalités' },
   { to: '/frise',          icon: Clock,         label: 'Frise' },
-  { to: '/pays',           icon: MapPin,        label: 'Pays' },
   { to: '/methode',        icon: GraduationCap, label: 'Méthode' },
+  { to: '/pays',           icon: MapPin,        label: 'Pays' },
   { to: '/favoris',        icon: Star,          label: 'Favoris' },
 ]
 
