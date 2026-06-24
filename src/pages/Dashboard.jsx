@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import {
   BookOpen, Globe, Users, BookMarked, HelpCircle,
-  Clock, Flame, Star, TrendingUp, Award, Target
+  Clock, Flame, Star, TrendingUp, Award, Target, MapPin
 } from 'lucide-react'
 import { useAppStore } from '@/stores/useAppStore'
 import { getLevel, getProgressToNext, XP_LEVELS } from '@/utils/xp'
@@ -45,6 +45,12 @@ const MODULES = [
     label: 'Frise chronologique',
     desc: '-3000 → 2024',
     stat: '500+ événements'
+  },
+  {
+    to: '/pays', icon: MapPin, color: '#16A085', bg: '#E8F8F5',
+    label: 'Histoire des pays',
+    desc: '30+ pays explorés',
+    stat: 'Monde entier'
   },
 ]
 
