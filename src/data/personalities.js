@@ -2358,6 +2358,22 @@ export const personalities = [
     quote: "Il n'y a pas d'alternative. (TINA — There Is No Alternative)",
     level: ['3e', 'Terminale']
   },
+  {
+    id: 'elizabeth-ii',
+    name: 'Reine Élisabeth II',
+    birth: '1926', death: '2022',
+    era: 'XXe siècle', category: 'Politique', nationality: 'Britannique',
+    bio: "Élisabeth II règne 70 ans (1952-2022), le plus long règne de l'histoire britannique et le second plus long d'un monarque reconnu dans le monde entier. Montée sur le trône à 25 ans après la mort prématurée de son père George VI, elle incarne la continuité de la monarchie à travers les bouleversements du XXe siècle : décolonisation du Commonwealth, guerres froides, révolution culturelle des années 60, crises familiales (divorce de Charles et Diana), Brexit. Figure de stabilité et de service public, elle est reçue par 13 présidents américains et 15 Premiers ministres britanniques. Sa mort en septembre 2022 suscite un deuil planétaire sans précédent.",
+    keyFacts: [
+      "Règne de 70 ans (6 février 1952 – 8 septembre 2022) — record absolu de la monarchie britannique",
+      "Couronnée à l'abbaye de Westminster le 2 juin 1953 — première cérémonie télévisée de l'histoire (27 millions de téléspectateurs)",
+      "Chef du Commonwealth — 56 nations, 2,5 milliards de personnes",
+      "A nommé 15 Premiers ministres, de Churchill (1952) à Truss (2022, deux jours avant sa mort)",
+      "Sa mort le 8 septembre 2022 à Balmoral déclenche un deuil mondial — 4 milliards de téléspectateurs pour ses funérailles"
+    ],
+    quote: "Je déclare devant vous tous que ma vie entière, longue ou courte, sera consacrée à votre service.",
+    level: ['3e', 'Terminale']
+  },
 
   // FRANCE (suppléments)
   {
