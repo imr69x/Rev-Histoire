@@ -23,6 +23,7 @@ const Login               = lazy(() => import('@/pages/Login'))
 const Register            = lazy(() => import('@/pages/Register'))
 const Pricing             = lazy(() => import('@/pages/Pricing'))
 const Success             = lazy(() => import('@/pages/Success'))
+const Preview             = lazy(() => import('@/pages/Preview'))
 
 function HomeRedirect() {
   const { user, loading } = useAuth()
@@ -51,6 +52,7 @@ export default function App() {
             <Route path="/" element={<HomeRedirect />} />
 
             {/* Public pages (no layout) */}
+            <Route path="/preview" element={<Preview />} />
             <Route path="/landing" element={<Landing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

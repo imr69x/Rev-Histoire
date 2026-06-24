@@ -1,8 +1,9 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import {
   BookOpen, Globe, Users, BookMarked, HelpCircle,
   Clock, BarChart3, GraduationCap, Menu, X,
-  Scroll, Star, MapPin, Settings, LogOut, Crown
+  Scroll, Star, MapPin, Settings, LogOut, Crown,
+  MoreHorizontal, ChevronRight
 } from 'lucide-react'
 import { useState } from 'react'
 import { useAppStore } from '@/stores/useAppStore'
@@ -25,6 +26,148 @@ const NAV_ITEMS = [
   { to: '/pricing',   icon: Crown,       label: 'Tarifs & Abonnement' },
   { to: '/admin',     icon: Settings,    label: 'Modification' },
 ]
+
+const BOTTOM_MAIN = [
+  { to: '/dashboard',      icon: BarChart3,  label: 'Accueil' },
+  { to: '/fiches',         icon: BookOpen,   label: 'Fiches' },
+  { to: '/quiz',           icon: HelpCircle, label: 'Quiz' },
+  { to: '/carte',          icon: Globe,      label: 'Carte' },
+]
+
+const MORE_ITEMS = [
+  { to: '/glossaire',      icon: BookMarked,    label: 'Glossaire' },
+  { to: '/personnalites',  icon: Users,         label: 'Personnalités' },
+  { to: '/frise',          icon: Clock,         label: 'Frise' },
+  { to: '/pays',           icon: MapPin,        label: 'Pays' },
+  { to: '/methode',        icon: GraduationCap, label: 'Méthode' },
+  { to: '/favoris',        icon: Star,          label: 'Favoris' },
+]
+
+function MobileNav({ navItems, isAdmin, isPaid, navigate, handleSignOut, user, level, xp }) {
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const location = useLocation()
+
+  const moreActive = MORE_ITEMS.some(i => location.pathname.startsWith(i.to))
+    || (isAdmin && location.pathname === '/admin')
+
+  return (
+    <>
+      {/* Drawer overlay */}
+      {drawerOpen && (
+        <div
+          className="md:hidden fixed inset-0 z-40 bg-black/60"
+          onClick={() => setDrawerOpen(false)}
+        />
+      )}
+
+      {/* Drawer panel */}
+      <div className={cn(
+        'md:hidden fixed bottom-[64px] left-0 right-0 z-50',
+        'bg-[#2C1810] border-t border-[#4A3728]',
+        'transition-transform duration-300',
+        drawerOpen ? 'translate-y-0' : 'translate-y-full pointer-events-none'
+      )}>
+        <div className="px-4 pt-4 pb-2">
+          <p className="text-[10px] font-semibold text-[#8B7355] uppercase tracking-widest mb-3">Plus</p>
+          <div className="grid grid-cols-3 gap-2">
+            {MORE_ITEMS.map(({ to, icon: Icon, label }) => (
+              <NavLink
+                key={to}
+                to={to}
+                onClick={() => setDrawerOpen(false)}
+                className={({ isActive }) => cn(
+                  'flex flex-col items-center gap-1.5 p-3 rounded-xl text-xs font-medium transition-all',
+                  isActive
+                    ? 'bg-[#D4AF37]/20 text-[#D4AF37]'
+                    : 'text-[#C4A882] active:bg-[#3D2314]'
+                )}
+              >
+                <Icon size={22} />
+                <span>{label}</span>
+              </NavLink>
+            ))}
+            {isAdmin && (
+              <NavLink
+                to="/admin"
+                onClick={() => setDrawerOpen(false)}
+                className={({ isActive }) => cn(
+                  'flex flex-col items-center gap-1.5 p-3 rounded-xl text-xs font-medium transition-all',
+                  isActive ? 'bg-[#D4AF37]/20 text-[#D4AF37]' : 'text-[#C4A882]'
+                )}
+              >
+                <Settings size={22} />
+                <span>Admin</span>
+              </NavLink>
+            )}
+          </div>
+        </div>
+
+        {/* Profil rapide */}
+        <div className="mx-4 my-3 p-3 rounded-xl bg-[#3D2314] flex items-center gap-3">
+          <div
+            className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold text-[#2C1810] flex-shrink-0"
+            style={{ backgroundColor: level.color }}
+          >
+            {user?.email?.[0]?.toUpperCase() || '?'}
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-xs font-semibold text-[#D4AF37] truncate">{level.label}</p>
+            <p className="text-[11px] text-[#8B7355] truncate">{user?.email || ''}</p>
+          </div>
+          <button
+            onClick={() => { handleSignOut(); setDrawerOpen(false) }}
+            className="text-[#8B7355] hover:text-[#E74C3C] transition-colors p-1"
+          >
+            <LogOut size={16} />
+          </button>
+        </div>
+
+        {!isPaid && !isAdmin && (
+          <div className="px-4 pb-4">
+            <button
+              onClick={() => { navigate('/pricing'); setDrawerOpen(false) }}
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#D4AF37] text-[#2C1810] text-sm font-bold"
+            >
+              <Crown size={15} /> Passer Premium
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Barre du bas */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#2C1810] border-t border-[#4A3728]">
+        <div className="flex">
+          {BOTTOM_MAIN.map(({ to, icon: Icon, label }) => (
+            <NavLink
+              key={to}
+              to={to}
+              end={to === '/dashboard'}
+              onClick={() => setDrawerOpen(false)}
+              className={({ isActive }) => cn(
+                'flex-1 flex flex-col items-center gap-0.5 py-2.5 text-[10px] font-medium transition-colors',
+                isActive ? 'text-[#D4AF37]' : 'text-[#8B7355]'
+              )}
+            >
+              <Icon size={21} />
+              <span>{label}</span>
+            </NavLink>
+          ))}
+          {/* Bouton Plus */}
+          <button
+            onClick={() => setDrawerOpen(v => !v)}
+            className={cn(
+              'flex-1 flex flex-col items-center gap-0.5 py-2.5 text-[10px] font-medium transition-colors',
+              (drawerOpen || moreActive) ? 'text-[#D4AF37]' : 'text-[#8B7355]'
+            )}
+          >
+            <MoreHorizontal size={21} />
+            <span>Plus</span>
+          </button>
+        </div>
+      </nav>
+    </>
+  )
+}
 
 export function Sidebar() {
   const [collapsed, setCollapsed] = useState(false)
@@ -143,24 +286,16 @@ export function Sidebar() {
       </aside>
 
       {/* Mobile bottom nav */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#2C1810] border-t border-[#4A3728] px-2 py-2">
-        <div className="flex justify-around">
-          {NAV_ITEMS.slice(0, 5).map(({ to, icon: Icon, label }) => (
-            <NavLink
-              key={to}
-              to={to}
-              end={to === '/'}
-              className={({ isActive }) => cn(
-                'flex flex-col items-center gap-0.5 px-2 py-1 rounded-lg text-xs',
-                isActive ? 'text-[#D4AF37]' : 'text-[#8B7355]'
-              )}
-            >
-              <Icon size={20} />
-              <span className="hidden xs:block">{label.split(' ')[0]}</span>
-            </NavLink>
-          ))}
-        </div>
-      </nav>
+      <MobileNav
+        navItems={NAV_ITEMS}
+        isAdmin={isAdmin}
+        isPaid={isPaid}
+        navigate={navigate}
+        handleSignOut={handleSignOut}
+        user={user}
+        level={level}
+        xp={xp}
+      />
     </>
   )
 }

@@ -1237,7 +1237,7 @@ export default function Carte() {
       <div style={{ display: 'flex', flex: 1, overflow: 'hidden', minHeight: 0, position: 'relative' }}>
 
         {/* ── Carte ── */}
-        <div style={{ flex: 1, position: 'relative', background: OCEAN_COLOR, overflow: 'hidden', minWidth: 0 }}>
+        <div style={{ flex: 1, position: 'relative', background: OCEAN_COLOR, overflow: 'hidden', minWidth: 0, touchAction: 'none' }}>
           <ComposableMap
             projection="geoNaturalEarth1"
             width={980} height={551}

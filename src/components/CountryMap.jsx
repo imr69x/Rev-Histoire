@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { MapContainer, GeoJSON, useMap } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -18,7 +18,7 @@ const COUNTRY_MAP_CONFIG = {
   portugal:      { url: '/geo/portugal-regions.geojson',      nameKey: 'name',    center: [39.4, -8.2],  zoom: 6 },
   italie:        { url: '/geo/italie-regions.geojson',        nameKey: 'reg_name',center: [42.5, 12.5],  zoom: 5 },
   grece:         { url: '/geo/grece-regions.geojson',         nameKey: 'NAME_1',  center: [39.0, 22.0],  zoom: 6 },
-  russie:        { url: '/geo/russie-regions.geojson',        nameKey: 'name',    center: [60.0, 60.0],  zoom: 2 },
+  russie:        { url: '/geo/russie-regions.geojson',        nameKey: 'name_latin', center: [60.0, 60.0],  zoom: 2 },
   pologne:       { url: '/geo/pologne-regions.geojson',       nameKey: 'name',    center: [52.0, 19.5],  zoom: 5 },
   royaume_uni:   { url: '/geo/royaume_uni-regions.geojson',   nameKey: 'name',    center: [54.5, -3.0],  zoom: 5 },
   pays_bas:      { url: '/geo/pays_bas-regions.geojson',      nameKey: 'NAME_1',  center: [52.3, 5.3],   zoom: 7 },
@@ -201,15 +201,61 @@ function FitBounds({ geoData, countryId }) {
   return null
 }
 
+// Contrôles zoom + navigation flottants dans la carte
+function MapControls({ color }) {
+  const map = useMap()
+  const pan = (dx, dy) => map.panBy([dx, dy], { animate: true })
+
+  const btnBase = {
+    backgroundColor: color,
+    color: '#fff',
+    border: 'none',
+    borderRadius: 8,
+    width: 36,
+    height: 36,
+    fontSize: 18,
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: '0 2px 6px rgba(0,0,0,0.25)',
+    opacity: 0.9,
+  }
+
+  return (
+    <div style={{ position: 'absolute', bottom: 16, right: 16, zIndex: 1000, display: 'flex', flexDirection: 'column', gap: 6 }}>
+      {/* Zoom */}
+      <button style={btnBase} onClick={() => map.zoomIn()}>+</button>
+      <button style={btnBase} onClick={() => map.zoomOut()}>−</button>
+      {/* Navigation */}
+      <div style={{ display: 'grid', gridTemplateColumns: '36px 36px 36px', gap: 3, marginTop: 4 }}>
+        <div />
+        <button style={{ ...btnBase, fontSize: 14 }} onClick={() => pan(0, -80)}>▲</button>
+        <div />
+        <button style={{ ...btnBase, fontSize: 14 }} onClick={() => pan(-80, 0)}>◀</button>
+        <div />
+        <button style={{ ...btnBase, fontSize: 14 }} onClick={() => pan(80, 0)}>▶</button>
+        <div />
+        <button style={{ ...btnBase, fontSize: 14 }} onClick={() => pan(0, 80)}>▼</button>
+        <div />
+      </div>
+    </div>
+  )
+}
+
+// Style par défaut stable (hors composant pour éviter la recréation à chaque render)
+const DEFAULT_STYLE = { fillColor: '#DDD0BB', fillOpacity: 1, weight: 1, color: '#B8A898', opacity: 1 }
+
 // Carte Leaflet interne
 function LeafletMap({ geoData, nameKey, center, zoom, hoverColor, onRegionClick, selectedRegion, interactive = true }) {
   const selectedLayerRef = useRef(null)
   const selectedNameRef  = useRef(null)
-  const hoveredLayerRef  = useRef(null) // anti-bug : toujours réinitialiser le survol précédent
+  const hoveredLayerRef  = useRef(null)
 
-  const defaultStyle = { fillColor: '#DDD0BB', weight: 1,   opacity: 1, color: '#B8A898', fillOpacity: 1 }
-  const hoverStyle   = { fillColor: '#C8B898', weight: 1.5, opacity: 1, color: '#A09080', fillOpacity: 1 }
-  const activeStyle  = { fillColor: '#9A7A52', weight: 2,   opacity: 1, color: '#6B5030', fillOpacity: 1 }
+  const defaultStyle = DEFAULT_STYLE
+  const hoverStyle   = useMemo(() => ({ fillColor: hoverColor, fillOpacity: 0.4,  weight: 2,   color: hoverColor, opacity: 1 }), [hoverColor])
+  const activeStyle  = useMemo(() => ({ fillColor: hoverColor, fillOpacity: 0.85, weight: 2.5, color: hoverColor, opacity: 1 }), [hoverColor])
 
   const onEachFeature = useCallback((feature, layer) => {
     if (!interactive) return
@@ -222,7 +268,6 @@ function LeafletMap({ geoData, nameKey, center, zoom, hoverColor, onRegionClick,
 
     layer.on({
       mouseover(e) {
-        // Réinitialise l'ancien hover (évite que plusieurs zones restent colorées)
         if (hoveredLayerRef.current && hoveredLayerRef.current !== layer) {
           if (selectedNameRef.current !== hoveredLayerRef.current._name) {
             hoveredLayerRef.current.setStyle(defaultStyle)
@@ -242,7 +287,6 @@ function LeafletMap({ geoData, nameKey, center, zoom, hoverColor, onRegionClick,
         if (hoveredLayerRef.current === layer) hoveredLayerRef.current = null
       },
       click() {
-        // Désélectionne l'ancien sélectionné
         if (selectedLayerRef.current && selectedNameRef.current !== name) {
           selectedLayerRef.current.setStyle(defaultStyle)
         }
@@ -259,7 +303,7 @@ function LeafletMap({ geoData, nameKey, center, zoom, hoverColor, onRegionClick,
         }
       },
     })
-  }, [nameKey, interactive])
+  }, [nameKey, interactive, hoverColor])
 
   useEffect(() => {
     if (!selectedRegion && selectedLayerRef.current) {
@@ -281,7 +325,7 @@ function LeafletMap({ geoData, nameKey, center, zoom, hoverColor, onRegionClick,
       touchZoom={true}
       keyboard={true}
       boxZoom={false}
-      style={{ width: '100%', height: '100%', background: '#FFFFFF', cursor: 'grab' }}
+      style={{ width: '100%', height: '100%', background: '#FFFFFF' }}
     >
       <FitBounds geoData={geoData} countryId={countryId} />
       <GeoJSON
@@ -290,6 +334,7 @@ function LeafletMap({ geoData, nameKey, center, zoom, hoverColor, onRegionClick,
         style={defaultStyle}
         onEachFeature={onEachFeature}
       />
+      <MapControls color={hoverColor} />
     </MapContainer>
   )
 }

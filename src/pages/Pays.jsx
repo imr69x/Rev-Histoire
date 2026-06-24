@@ -1,7 +1,8 @@
 import { useState, useMemo } from 'react'
-import { Globe, Search, ChevronRight, Building2, Swords, Crown, User, Info, Landmark, Wheat, Music, MapPin } from 'lucide-react'
+import { Globe, Search, ChevronRight, ChevronLeft, Building2, Swords, Crown, User, Info, Landmark, Wheat, Music, MapPin } from 'lucide-react'
 import { paysData } from '@/data/pays'
 import CountryMap from '@/components/CountryMap'
+import { cn } from '@/utils/cn'
 
 const CONTINENTS = ['Tous', 'Europe', 'Moyen-Orient', 'Asie', 'Afrique', 'Amériques', 'Océanie']
 
@@ -82,8 +83,9 @@ const GEO_LABELS = {
 export default function Pays() {
   const [search, setSearch] = useState('')
   const [continent, setContinent] = useState('Tous')
-  const [selected, setSelected] = useState(paysData[0])
+  const [selected, setSelected] = useState(null)
   const [tab, setTab] = useState('resume')
+  const [mobileView, setMobileView] = useState('list') // 'list' | 'detail'
 
   const filtered = useMemo(() => {
     let data = [...paysData]
@@ -112,12 +114,18 @@ export default function Pays() {
   function selectPays(p) {
     setSelected(p)
     setTab('resume')
+    setMobileView('detail')
   }
 
   return (
-    <div className="flex h-[calc(100vh-80px)] md:h-screen overflow-hidden animate-fade-in">
-      {/* ── Panneau gauche ── */}
-      <aside className="w-72 flex-shrink-0 flex flex-col border-r border-[#E8E0CC] dark:border-[#30363D] bg-white dark:bg-[#0D1117]">
+    <div className="relative flex h-[calc(100vh-80px)] md:h-screen overflow-hidden animate-fade-in">
+      {/* ── Panneau liste (plein écran mobile, sidebar desktop) ── */}
+      <aside className={cn(
+        'absolute inset-0 z-10 flex flex-col transition-transform duration-300',
+        'border-r border-[#E8E0CC] dark:border-[#30363D] bg-white dark:bg-[#0D1117]',
+        mobileView === 'detail' ? '-translate-x-full' : 'translate-x-0',
+        'md:static md:translate-x-0 md:w-72 md:flex-shrink-0'
+      )}>
         {/* En-tête sidebar */}
         <div className="p-4 border-b border-[#E8E0CC] dark:border-[#30363D]">
           <div className="flex items-center gap-2 mb-3">
@@ -156,10 +164,10 @@ export default function Pays() {
         </div>
 
         {/* Liste des pays */}
-        <div className="flex-1 overflow-y-auto py-2">
+        <div className="flex-1 overflow-y-auto">
           {Object.entries(grouped).map(([cont, pays]) => (
             <div key={cont}>
-              <div className="px-4 py-2 sticky top-0 z-10 bg-[#FAF7F2] dark:bg-[#0D1117]">
+              <div className="px-4 py-1.5 sticky top-0 z-10 bg-white dark:bg-[#0D1117] border-b border-[#E8E0CC]/60 dark:border-[#30363D]">
                 <span
                   className="text-xs font-bold uppercase tracking-wider"
                   style={{ color: CONTINENT_COLORS[cont] || '#8B7355' }}
@@ -203,8 +211,23 @@ export default function Pays() {
         </div>
       </aside>
 
-      {/* ── Panneau droit ── */}
-      <main className="flex-1 overflow-y-auto bg-white dark:bg-[#0D1117]">
+      {/* ── Panneau détail (plein écran mobile, flex-1 desktop) ── */}
+      <main className={cn(
+        'absolute inset-0 flex flex-col transition-transform duration-300 overflow-y-auto',
+        'bg-white dark:bg-[#0D1117]',
+        mobileView === 'detail' ? 'translate-x-0' : 'translate-x-full',
+        'md:static md:translate-x-0 md:flex-1'
+      )}>
+        {/* Bouton retour — mobile uniquement */}
+        {mobileView === 'detail' && (
+          <button
+            onClick={() => setMobileView('list')}
+            className="md:hidden sticky top-0 z-20 flex items-center gap-2 px-4 py-3 text-sm font-semibold text-[#8B4513] bg-[#FAF7F2]/95 backdrop-blur-sm border-b border-[#E8E0CC] w-full"
+          >
+            <ChevronLeft size={18} />
+            Tous les pays
+          </button>
+        )}
         {selected ? (
           <div>
             {/* Hero */}
@@ -256,18 +279,21 @@ export default function Pays() {
             </div>
 
             {/* Tabs */}
-            <div className="flex border-b border-[#E8E0CC] dark:border-[#30363D] px-6">
+            <div
+              className="no-scrollbar flex border-b border-[#E8E0CC] dark:border-[#30363D] overflow-x-auto"
+              style={{}}
+            >
               {TABS.map(({ id, label, icon: Icon }) => (
                 <button
                   key={id}
                   onClick={() => setTab(id)}
-                  className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-all -mb-px ${
+                  className={`flex-shrink-0 flex items-center gap-1.5 px-3 py-3 text-sm font-medium border-b-2 transition-all -mb-px whitespace-nowrap ${
                     tab === id
                       ? 'border-[#D4AF37] text-[#8B4513] dark:text-[#D4AF37]'
                       : 'border-transparent text-[#8B7355] hover:text-[#2C1810] dark:hover:text-[#E6EDF3]'
                   }`}
                 >
-                  <Icon size={15} />
+                  <Icon size={14} />
                   {label}
                 </button>
               ))}
@@ -549,7 +575,7 @@ export default function Pays() {
             </div>
           </div>
         ) : (
-          <div className="flex items-center justify-center h-full text-[#8B7355]">
+          <div className="hidden md:flex items-center justify-center h-full text-[#8B7355]">
             <div className="text-center">
               <Globe size={48} className="mx-auto mb-4 opacity-30" />
               <p>Sélectionne un pays pour voir son histoire.</p>

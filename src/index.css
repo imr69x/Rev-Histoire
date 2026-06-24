@@ -62,3 +62,7 @@ h1, h2, h3, h4, h5 { font-family: 'Playfair Display', Georgia, serif; }
 }
 .animate-slide-in-right { animation: slideInRight 0.25s ease-out forwards; }
 .leaflet-container { font-family: 'Inter', system-ui, sans-serif; }
+
+/* Scroll horizontal sans scrollbar visible */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
