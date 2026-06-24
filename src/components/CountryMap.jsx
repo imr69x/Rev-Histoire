@@ -196,6 +196,9 @@ function FitBounds({ geoData, countryId }) {
 
     if (bounds.isValid()) {
       map.fitBounds(bounds, { paddingTopLeft: [4, 4], paddingBottomRight: [4, 60] })
+      const ZOOM_BOOST = { royaume_uni: 1, grece: 1, pays_bas: 1, tunisie: 1, japon: 1, espagne: 1 }
+      const boost = ZOOM_BOOST[countryId]
+      if (boost) setTimeout(() => map.setZoom(map.getZoom() + boost), 80)
     }
   }, [geoData, map])
   return null
