@@ -222,7 +222,7 @@ export const regionsData = {
     'Loire (42)':            { chef_lieu: 'Saint-Étienne',   villes: ['Saint-Étienne', 'Roanne', 'Montbrison'],  fleuves: ['Loire', 'Gier'],   region: 'Auvergne-Rhône-Alpes',   couleur: '#E67E22' },
     'Haute-Loire (43)':      { chef_lieu: 'Le Puy-en-Velay', villes: ['Le Puy-en-Velay', 'Brioude', 'Yssingeaux'], fleuves: ['Loire', 'Allier'], region: 'Auvergne-Rhône-Alpes', couleur: '#E67E22' },
     'Puy-de-Dôme (63)':     { chef_lieu: 'Clermont-Ferrand', villes: ['Clermont-Ferrand', 'Thiers', 'Riom'],    fleuves: ['Allier', 'Dore'],  region: 'Auvergne-Rhône-Alpes',   couleur: '#E67E22' },
-    'Rhône (69)':            { chef_lieu: 'Lyon',            villes: ['Lyon', 'Villeurbanne', 'Vénissieux'],     fleuves: ['Rhône', 'Saône'],  region: 'Auvergne-Rhône-Alpes',   couleur: '#E67E22' },
+    'Rhône (69)':            { chef_lieu: 'Lyon',            villes: ['Lyon', 'Villeurbanne', 'Villefranche-sur-Saône'],     fleuves: ['Rhône', 'Saône'],  region: 'Auvergne-Rhône-Alpes',   couleur: '#E67E22' },
     'Savoie (73)':           { chef_lieu: 'Chambéry',        villes: ['Chambéry', 'Albertville', 'Aix-les-Bains'], fleuves: ['Isère', 'Arc'],  region: 'Auvergne-Rhône-Alpes',   couleur: '#E67E22' },
     'Haute-Savoie (74)':    { chef_lieu: 'Annecy',          villes: ['Annecy', 'Thonon-les-Bains', 'Cluses'],   fleuves: ['Arve', 'Fier'],    region: 'Auvergne-Rhône-Alpes',   couleur: '#E67E22' },
 

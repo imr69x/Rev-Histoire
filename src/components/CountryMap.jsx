@@ -50,16 +50,17 @@ const HOVER_COLORS = {
   Afrique: '#27AE60', Amériques: '#8E44AD', Océanie: '#16A085',
 }
 
-function lookupRegionData(countryId, regionName) {
+function lookupRegionEntry(countryId, regionName) {
   const countryData = regionsData[countryId] || {}
-  if (countryData[regionName]) return countryData[regionName]
+  if (countryData[regionName]) return { data: countryData[regionName], key: regionName }
   const key = Object.keys(countryData).find(k => k.startsWith(regionName + ' ('))
-  return key ? countryData[key] : null
+  return key ? { data: countryData[key], key } : { data: null, key: null }
 }
 
 // Panneau d'info region (affiché SOUS la carte)
 function RegionPanel({ countryId, regionName, onClose, onDrillDown, hasSublevel, color, isDepartement }) {
-  const data = lookupRegionData(countryId, regionName)
+  const { data, key } = lookupRegionEntry(countryId, regionName)
+  const deptNumber = key?.match(/\((\w+)\)/)?.[1]
 
   return (
     <div className="border-t border-[#E8E0CC] dark:border-[#30363D] bg-[#FAF7F2] dark:bg-[#0D1117] rounded-b-2xl">
@@ -67,7 +68,7 @@ function RegionPanel({ countryId, regionName, onClose, onDrillDown, hasSublevel,
       <div className="flex items-center justify-between px-5 py-3 border-b border-[#E8E0CC] dark:border-[#30363D]">
         <div className="flex items-center gap-2">
           <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: color }} />
-          <h3 className="font-bold text-[#2C1810] dark:text-[#E6EDF3] text-sm">{regionName}</h3>
+          <h3 className="font-bold text-[#2C1810] dark:text-[#E6EDF3] text-sm">{regionName}{deptNumber && <span className="ml-1.5 text-xs font-normal text-[#8B7355]">({deptNumber})</span>}</h3>
           {data?.chef_lieu && (
             <span className="text-xs text-[#8B7355] hidden sm:inline">· Chef-lieu : {data.chef_lieu}</span>
           )}
