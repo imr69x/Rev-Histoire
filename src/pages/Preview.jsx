@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 // iPhone 17 — dimensions logiques réelles (CSS pixels)
 const SCREEN_W = 393
 const SCREEN_H = 796
@@ -12,21 +10,7 @@ const PHONE_H  = SCREEN_H + BEZEL * 2
 
 const SCALE = 0.72
 
-const PAGES = [
-  { label: 'Tableau de bord', path: '/dashboard' },
-  { label: 'Fiches',          path: '/fiches' },
-  { label: 'Glossaire',       path: '/glossaire' },
-  { label: 'Personnalités',   path: '/personnalites' },
-  { label: 'Quiz',            path: '/quiz' },
-  { label: 'Carte',           path: '/carte' },
-  { label: 'Frise',           path: '/frise' },
-  { label: 'Méthode',         path: '/methode' },
-  { label: 'Pays',            path: '/pays' },
-  { label: 'Favoris',         path: '/favoris' },
-]
-
 export default function Preview() {
-  const [current, setCurrent] = useState('/dashboard')
 
   return (
     <div style={{
@@ -40,39 +24,7 @@ export default function Preview() {
       fontFamily: '-apple-system, system-ui, sans-serif',
     }}>
 
-      {/* Panneau gauche — navigation */}
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 6,
-        minWidth: 180,
-      }}>
-        <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11, letterSpacing: 1, textTransform: 'uppercase', marginBottom: 8 }}>
-          Pages
-        </p>
-        {PAGES.map(({ label, path }) => (
-          <button
-            key={path}
-            onClick={() => setCurrent(path)}
-            style={{
-              background: current === path ? '#D4AF37' : 'rgba(255,255,255,0.07)',
-              color: current === path ? '#2C1810' : 'rgba(255,255,255,0.7)',
-              border: 'none',
-              borderRadius: 10,
-              padding: '9px 14px',
-              textAlign: 'left',
-              cursor: 'pointer',
-              fontSize: 13,
-              fontWeight: current === path ? 600 : 400,
-              transition: 'all 0.15s',
-            }}
-          >
-            {label}
-          </button>
-        ))}
-      </div>
-
-      {/* Téléphone — droite */}
+      {/* Téléphone */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
         <div style={{
           position: 'relative',
@@ -169,8 +121,7 @@ export default function Preview() {
 
                 {/* App iframe */}
                 <iframe
-                  key={current}
-                  src={current}
+                  src="/dashboard"
                   title="App preview"
                   style={{
                     position: 'absolute',
@@ -201,7 +152,7 @@ export default function Preview() {
                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0, opacity: 0.35 }}><path d="M7 4l5 5-5 5" stroke="#000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   <div style={{ flex: 1, height: 36, background: 'rgba(0,0,0,0.06)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}>
                     <span style={{ fontSize: 13, fontWeight: 400, fontFamily: '-apple-system, system-ui, sans-serif', color: 'rgba(0,0,0,0.5)', letterSpacing: '-0.1px' }}>
-                      localhost:5173{current}
+                      localhost:5173/dashboard
                     </span>
                   </div>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}><path d="M10 2v10M6 6l4-4 4 4" stroke="#007AFF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /><path d="M4 10v6a1 1 0 001 1h10a1 1 0 001-1v-6" stroke="#007AFF" strokeWidth="1.8" strokeLinecap="round" /></svg>
