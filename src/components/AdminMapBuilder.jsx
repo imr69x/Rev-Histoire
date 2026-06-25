@@ -56,8 +56,8 @@ function getCentroid(labels, label, width) {
   return n > 0 ? { x: (sx / n) | 0, y: (sy / n) | 0 } : { x: 0, y: 0 }
 }
 
-// Tracé silhouette : scan ligne par ligne (gauche↓ + droite↑) + colonne (haut→ + bas←)
-// Garanti ordonné, zéro rayon, fonctionne pour formes concaves (ex: sud du Maroc)
+// Silhouette : scan horizontal uniquement (gauche↓ + droite↑)
+// Pas de combo top/bot qui crée des croisements sur les formes concaves
 function traceSilhouette(labels, label, width, height, step) {
   const left = [], right = []
   for (let y = 0; y < height; y += step) {
@@ -67,15 +67,7 @@ function traceSilhouette(labels, label, width, height, step) {
     }
     if (l !== -1) { left.push([l, y]); right.push([r, y]) }
   }
-  const top = [], bot = []
-  for (let x = 0; x < width; x += step) {
-    let t = -1, b = -1
-    for (let y = 0; y < height; y++) {
-      if (labels[y * width + x] === label) { if (t === -1) t = y; b = y }
-    }
-    if (t !== -1) { top.push([x, t]); bot.push([x, b]) }
-  }
-  return [...left, ...bot, ...right.slice().reverse(), ...top.slice().reverse()]
+  return [...left, ...right.slice().reverse()]
 }
 
 function douglasPeucker(pts, eps) {
@@ -114,9 +106,11 @@ function MapBuilder() {
   const [minPixels, setMinPixels] = useState(300)
   const [epsilon, setEpsilon] = useState(3)
   const [step, setStep] = useState(2)
-  // Edition par région (nom + données)
-  const [editing, setEditing] = useState(null) // id de la région éditée
-  const [editForm, setEditForm] = useState({})
+  // Modal nommage rapide (clic sur carte)
+  const [naming, setNaming] = useState(null)
+  const [nameInput, setNameInput] = useState('')
+  // Région dont on édite les données (inline)
+  const [expandedId, setExpandedId] = useState(null)
   // Pays cible
   const [countryMode, setCountryMode] = useState('existing')
   const [selectedCountry, setSelectedCountry] = useState('')
@@ -176,19 +170,15 @@ function MapBuilder() {
       })
     }
     detected.sort((a, b) => b.pixelCount - a.pixelCount)
-    setRegions(detected)
-    setStatus(`${detected.length} région(s) détectée(s). Clique pour nommer et compléter les données.`)
+    // Filtre artefacts : < 5% de la taille médiane
+    const median = detected[Math.floor(detected.length / 2)]?.pixelCount || 0
+    const filtered = detected.filter(r => r.pixelCount >= median * 0.05)
+    setRegions(filtered)
+    setStatus(`${filtered.length} région(s) détectée(s). Clique sur la carte pour nommer.`)
   }, [imageSrc, darkThreshold, minPixels, epsilon, step])
 
-  const openEdit = (r) => {
-    setEditing(r.id)
-    setEditForm({ name: r.name, chef_lieu: r.chef_lieu, villes: r.villes, fleuves: r.fleuves, description: r.description, color: r.color })
-  }
-
-  const saveEdit = () => {
-    setRegions(prev => prev.map(r => r.id === editing ? { ...r, ...editForm } : r))
-    setEditing(null)
-  }
+  const updateRegion = (id, fields) =>
+    setRegions(prev => prev.map(r => r.id === id ? { ...r, ...fields } : r))
 
   const generateExport = () => {
     const countryId = countryMode === 'existing' ? selectedCountry : newCountryId.trim()
@@ -286,7 +276,7 @@ export default function ${compName}SVGMap({ onRegionClick, selectedRegion }) {
       {status && <p className="text-sm font-medium text-[#D4AF37]">{status}</p>}
       <canvas ref={canvasRef} className="hidden" />
 
-      {/* Carte SVG */}
+      {/* Carte SVG — clic = nommage rapide */}
       {imageSrc && (
         <div className="relative border border-[#E8E0CC] rounded-xl overflow-hidden bg-gray-50" style={{ maxHeight: '65vh' }}>
           <img src={imageSrc} alt="carte" style={{ width: '100%', display: 'block' }} />
@@ -294,14 +284,12 @@ export default function ${compName}SVGMap({ onRegionClick, selectedRegion }) {
             <svg viewBox={`0 0 ${imgSize.w} ${imgSize.h}`}
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
               {regions.map(r => (
-                <g key={r.id} onClick={() => openEdit(r)} style={{ cursor: 'pointer' }}>
-                  <path d={r.path} fill={r.name ? '#D4AF3744' : r.color + '55'} stroke={r.name ? '#D4AF37' : r.color} strokeWidth="1.5" />
+                <g key={r.id} onClick={() => { setNaming(r.id); setNameInput(r.name) }} style={{ cursor: 'pointer' }}>
+                  <path d={r.path} fill={r.name ? r.color + '44' : r.color + '33'} stroke={r.color} strokeWidth="1.5" />
                   {r.name && r.centroid && (
                     <text x={r.centroid.x} y={r.centroid.y} textAnchor="middle" dominantBaseline="middle"
-                      fontSize={Math.max(8, Math.min(14, imgSize.w / 70))} fill="#2C1810" fontWeight="bold"
-                      style={{ pointerEvents: 'none', userSelect: 'none' }}>
-                      {r.name}
-                    </text>
+                      fontSize={Math.max(8, Math.min(13, imgSize.w / 75))} fill="#2C1810" fontWeight="bold"
+                      style={{ pointerEvents: 'none', userSelect: 'none' }}>{r.name}</text>
                   )}
                 </g>
               ))}
@@ -310,34 +298,36 @@ export default function ${compName}SVGMap({ onRegionClick, selectedRegion }) {
         </div>
       )}
 
-      {/* Chips régions + section pays */}
-      {regions.length > 0 && (
-        <div className="border border-[#E8E0CC] rounded-xl p-4 space-y-4">
-          {/* Chips */}
-          <div>
-            <p className="text-xs font-bold text-[#8B7355] uppercase tracking-wider mb-2">
-              {regions.filter(r => r.name).length}/{regions.length} régions nommées — clique pour éditer
-            </p>
-            <div className="flex flex-wrap gap-1.5">
-              {regions.map(r => (
-                <button key={r.id} onClick={() => openEdit(r)}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium border hover:opacity-80 transition-opacity"
-                  style={{ borderColor: r.color, color: r.color, background: r.color + '15' }}>
-                  <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: r.color }} />
-                  {r.name || `#${r.id}`}
-                </button>
-              ))}
+      {/* Modal nommage rapide */}
+      {naming !== null && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40" onClick={() => setNaming(null)}>
+          <div className="bg-white dark:bg-[#161B22] rounded-2xl p-5 w-72 shadow-2xl" onClick={e => e.stopPropagation()}>
+            <h3 className="font-bold text-[#2C1810] dark:text-[#E6EDF3] mb-3">Nom de la région</h3>
+            <input autoFocus value={nameInput} onChange={e => setNameInput(e.target.value)}
+              onKeyDown={e => { if (e.key === 'Enter') { updateRegion(naming, { name: nameInput.trim() }); setNaming(null) } }}
+              placeholder="Ex: Souss-Massa"
+              className="w-full px-3 py-2 rounded-lg border border-[#E8E0CC] text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]" />
+            <div className="flex gap-2">
+              <button onClick={() => { updateRegion(naming, { name: nameInput.trim() }); setNaming(null) }}
+                className="flex-1 px-3 py-2 rounded-lg bg-[#D4AF37] text-[#2C1810] font-semibold text-sm">Valider</button>
+              <button onClick={() => setNaming(null)} className="px-3 py-2 rounded-lg border text-sm text-[#8B7355]">Annuler</button>
             </div>
           </div>
+        </div>
+      )}
 
-          {/* Pays cible */}
+      {/* Section pays + données inline */}
+      {regions.length > 0 && (
+        <div className="border border-[#E8E0CC] rounded-xl p-4 space-y-4">
+
+          {/* Associer à un pays */}
           <div>
             <p className="text-sm font-bold text-[#2C1810] mb-2 flex items-center gap-2"><Globe size={14}/> Associer à un pays</p>
             <div className="flex gap-2 mb-2">
               {[['existing', 'Pays existant'], ['new', 'Nouveau pays']].map(([m, lbl]) => (
                 <button key={m} onClick={() => setCountryMode(m)}
                   className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${countryMode === m ? 'bg-[#D4AF37] text-[#2C1810]' : 'bg-[#F5F0E8] text-[#8B7355] hover:bg-[#E8E0CC]'}`}>
-                  {m === 'new' && <Plus size={12} className="inline mr-1" />}{lbl}
+                  {m === 'new' && <Plus size={12} className="inline mr-1"/>}{lbl}
                 </button>
               ))}
             </div>
@@ -349,12 +339,69 @@ export default function ${compName}SVGMap({ onRegionClick, selectedRegion }) {
               </select>
             ) : (
               <div className="flex gap-2">
-                <input value={newCountryId} onChange={e => setNewCountryId(e.target.value)}
-                  placeholder="id (ex: maroc)" className="flex-1 px-3 py-2 rounded-lg border border-[#E8E0CC] text-sm focus:outline-none focus:ring-2 focus:ring-[#D4AF37]" />
-                <input value={newCountryLabel} onChange={e => setNewCountryLabel(e.target.value)}
-                  placeholder="Nom (ex: Maroc)" className="flex-1 px-3 py-2 rounded-lg border border-[#E8E0CC] text-sm focus:outline-none focus:ring-2 focus:ring-[#D4AF37]" />
+                <input value={newCountryId} onChange={e => setNewCountryId(e.target.value)} placeholder="id (ex: maroc)"
+                  className="flex-1 px-3 py-2 rounded-lg border border-[#E8E0CC] text-sm focus:outline-none focus:ring-2 focus:ring-[#D4AF37]" />
+                <input value={newCountryLabel} onChange={e => setNewCountryLabel(e.target.value)} placeholder="Nom affiché (ex: Maroc)"
+                  className="flex-1 px-3 py-2 rounded-lg border border-[#E8E0CC] text-sm focus:outline-none focus:ring-2 focus:ring-[#D4AF37]" />
               </div>
             )}
+          </div>
+
+          {/* Données par région — inline expandable */}
+          <div>
+            <p className="text-xs font-bold text-[#8B7355] uppercase tracking-wider mb-2">
+              {regions.filter(r => r.name).length}/{regions.length} régions nommées — complète les données
+            </p>
+            <div className="space-y-1.5">
+              {regions.map((r, i) => (
+                <div key={r.id} className="border border-[#E8E0CC] rounded-xl overflow-hidden">
+                  {/* En-tête cliquable */}
+                  <button onClick={() => setExpandedId(expandedId === r.id ? null : r.id)}
+                    className="w-full flex items-center gap-2.5 px-3 py-2.5 text-left hover:bg-[#FAF7F2] transition-colors">
+                    <span className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: r.color }} />
+                    <span className="flex-1 text-sm font-medium text-[#2C1810]">
+                      {r.name || <span className="text-[#8B7355] italic">Région {i+1} — clique sur la carte pour nommer</span>}
+                    </span>
+                    {r.chef_lieu && <span className="text-xs text-[#8B7355]">{r.chef_lieu}</span>}
+                    <span className="text-[#8B7355] text-xs">{expandedId === r.id ? '▲' : '▼'}</span>
+                  </button>
+                  {/* Données expandables */}
+                  {expandedId === r.id && (
+                    <div className="px-3 pb-3 space-y-2 border-t border-[#E8E0CC] bg-[#FAFAF8]">
+                      <div className="pt-2 grid grid-cols-2 gap-2">
+                        <div>
+                          <label className="block text-xs font-semibold text-[#8B7355] uppercase tracking-wider mb-1">Nom</label>
+                          <input value={r.name} onChange={e => updateRegion(r.id, { name: e.target.value })} placeholder="Ex: Souss-Massa"
+                            className="w-full px-2 py-1.5 rounded-lg border border-[#E8E0CC] text-sm focus:outline-none focus:ring-2 focus:ring-[#D4AF37]" />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-semibold text-[#8B7355] uppercase tracking-wider mb-1">Chef-lieu</label>
+                          <input value={r.chef_lieu} onChange={e => updateRegion(r.id, { chef_lieu: e.target.value })} placeholder="Ex: Agadir"
+                            className="w-full px-2 py-1.5 rounded-lg border border-[#E8E0CC] text-sm focus:outline-none focus:ring-2 focus:ring-[#D4AF37]" />
+                        </div>
+                      </div>
+                      {[['villes','Villes (une par ligne)','Agadir\nInezgane'],['fleuves','Fleuves (un par ligne)','Oued Souss'],['description','Description','Région du sud-ouest…']].map(([k,lbl,ph]) => (
+                        <div key={k}>
+                          <label className="block text-xs font-semibold text-[#8B7355] uppercase tracking-wider mb-1">{lbl}</label>
+                          <textarea value={r[k] || ''} onChange={e => updateRegion(r.id, { [k]: e.target.value })} placeholder={ph} rows={2}
+                            className="w-full px-2 py-1.5 rounded-lg border border-[#E8E0CC] text-sm focus:outline-none focus:ring-2 focus:ring-[#D4AF37] resize-y" />
+                        </div>
+                      ))}
+                      <div>
+                        <label className="block text-xs font-semibold text-[#8B7355] uppercase tracking-wider mb-1">Couleur</label>
+                        <div className="flex gap-1 flex-wrap">
+                          {COLORS.map(c => (
+                            <button key={c} onClick={() => updateRegion(r.id, { color: c })}
+                              className={`w-6 h-6 rounded-full border-2 transition-transform hover:scale-110 ${r.color === c ? 'border-[#2C1810] scale-110' : 'border-transparent'}`}
+                              style={{ background: c }} />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
 
           <button onClick={generateExport}
@@ -375,61 +422,6 @@ export default function ${compName}SVGMap({ onRegionClick, selectedRegion }) {
           <pre className="text-xs bg-[#0D1117] text-[#58A6FF] rounded-xl p-4 overflow-auto max-h-56 whitespace-pre-wrap">{exportedCode}</pre>
         </div>
       )}
-
-      {/* Modal édition région */}
-      {editing !== null && (() => {
-        const region = regions.find(r => r.id === editing)
-        if (!region) return null
-        return (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={() => setEditing(null)}>
-            <div className="bg-white dark:bg-[#161B22] rounded-2xl p-5 w-full max-w-md shadow-2xl max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
-              <div className="flex items-center gap-2 mb-4">
-                <span className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: editForm.color }} />
-                <h3 className="font-bold text-[#2C1810] dark:text-[#E6EDF3]">Éditer la région</h3>
-              </div>
-              <div className="space-y-3">
-                {[
-                  ['name', 'Nom de la région *', 'text', 'Ex: Souss-Massa'],
-                  ['chef_lieu', 'Chef-lieu', 'text', 'Ex: Agadir'],
-                ].map(([k, lbl, , ph]) => (
-                  <div key={k}>
-                    <label className="block text-xs font-semibold text-[#8B7355] uppercase tracking-wider mb-1">{lbl}</label>
-                    <input value={editForm[k] || ''} onChange={e => setEditForm(p => ({ ...p, [k]: e.target.value }))} placeholder={ph}
-                      className="w-full px-3 py-2 rounded-lg border border-[#E8E0CC] text-sm focus:outline-none focus:ring-2 focus:ring-[#D4AF37]" />
-                  </div>
-                ))}
-                {[
-                  ['villes', 'Villes (une par ligne)', 'Agadir\nInezgane\nTiznit'],
-                  ['fleuves', 'Fleuves / côtes (un par ligne)', 'Oued Souss\nOued Massa'],
-                  ['description', 'Description', 'Région du sud-ouest…'],
-                ].map(([k, lbl, ph]) => (
-                  <div key={k}>
-                    <label className="block text-xs font-semibold text-[#8B7355] uppercase tracking-wider mb-1">{lbl}</label>
-                    <textarea value={editForm[k] || ''} onChange={e => setEditForm(p => ({ ...p, [k]: e.target.value }))} placeholder={ph} rows={3}
-                      className="w-full px-3 py-2 rounded-lg border border-[#E8E0CC] text-sm focus:outline-none focus:ring-2 focus:ring-[#D4AF37] resize-y" />
-                  </div>
-                ))}
-                <div>
-                  <label className="block text-xs font-semibold text-[#8B7355] uppercase tracking-wider mb-1">Couleur</label>
-                  <div className="flex gap-1.5 flex-wrap">
-                    {COLORS.map(c => (
-                      <button key={c} onClick={() => setEditForm(p => ({ ...p, color: c }))}
-                        className={`w-7 h-7 rounded-full border-2 transition-transform hover:scale-110 ${editForm.color === c ? 'border-[#2C1810] scale-110' : 'border-transparent'}`}
-                        style={{ background: c }} />
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="flex gap-2 mt-4">
-                <button onClick={saveEdit} className="flex-1 px-3 py-2 rounded-lg bg-[#D4AF37] text-[#2C1810] font-semibold text-sm">
-                  <Save size={13} className="inline mr-1" />Enregistrer
-                </button>
-                <button onClick={() => setEditing(null)} className="px-3 py-2 rounded-lg border text-sm text-[#8B7355]">Annuler</button>
-              </div>
-            </div>
-          </div>
-        )
-      })()}
     </div>
   )
 }
