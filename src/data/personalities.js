@@ -2524,6 +2524,254 @@ export const personalities = [
     quote: "Tout pour la patrie, rien contre la patrie, tout avec la patrie.",
     level: ['3e', 'Terminale']
   },
+
+  // ANTIQUITÉ (manquants)
+  {
+    id: 'hannibal',
+    name: 'Hannibal Barca',
+    birth: '-247', death: '-183',
+    era: 'Antiquité', category: 'Militaire', nationality: 'Carthaginoise',
+    bio: "Hannibal Barca est le plus grand général de l'Antiquité selon de nombreux historiens et le stratège qui faillit détruire Rome. Fils d'Hamilcar Barca, il jure dès l'enfance une haine éternelle à Rome. En 218 av. J.-C., il accomplit l'exploit de traverser les Alpes avec 37 éléphants de guerre et une armée de 40 000 hommes pour attaquer l'Italie par le nord. Il écrase les armées romaines à la Trébie, au lac Trasimène, puis à Cannes (216 av. J.-C.) — l'une des plus grandes défaites militaires de l'histoire romaine. Ses tactiques d'encerclement, notamment la manœuvre en tenaille de Cannes, sont encore enseignées aujourd'hui dans toutes les académies militaires du monde.",
+    keyFacts: [
+      "Traverse les Alpes avec 37 éléphants de guerre (218 av. J.-C.) — exploit militaire légendaire",
+      "Victoire de Cannes (216 av. J.-C.) : 70 000 Romains tués en une journée — record de l'Antiquité",
+      "Reste 15 ans en Italie sans jamais être chassé, malgré les contre-offensives romaines",
+      "Vaincu à Zama (202 av. J.-C.) par Scipion l'Africain — fin de la suprématie carthaginoise",
+      "Sa manœuvre d'encerclement de Cannes est encore enseignée à West Point et Saint-Cyr"
+    ],
+    quote: "Je trouverai un chemin ou j'en ferai un.",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'spartacus',
+    name: 'Spartacus',
+    birth: '-111', death: '-71',
+    era: 'Antiquité', category: 'Militaire', nationality: 'Thrace',
+    bio: "Spartacus est un gladiateur thrace devenu le chef de la plus grande révolte d'esclaves de l'Antiquité romaine (73-71 av. J.-C.), connue sous le nom de Troisième Guerre Servile. Escapé de l'école de gladiateurs de Capoue avec une soixantaine d'hommes, il constitue rapidement une armée de 120 000 esclaves fugitifs et inflige plusieurs défaites cuisantes aux légions romaines. Sa révolte terrorise Rome pendant deux ans. Vaincu et tué par Crassus en 71 av. J.-C., il est devenu le symbole universel de la résistance des opprimés — repris par Marx, les spartakistes allemands et les mouvements révolutionnaires du XXe siècle.",
+    keyFacts: [
+      "Mène la Troisième Guerre Servile (73-71 av. J.-C.) — 120 000 esclaves sous ses ordres",
+      "Inflige plusieurs défaites à des légions romaines — terreur à Rome pendant deux ans",
+      "Tué au combat par Crassus en 71 av. J.-C. — 6 000 de ses compagnons crucifiés sur la Via Appia",
+      "Repris comme symbole par Karl Marx, Rosa Luxemburg (spartakistes) et les révolutionnaires du XXe s.",
+      "Figure fondatrice de la lutte contre l'esclavage et l'oppression"
+    ],
+    quote: "Mieux vaut mourir libre qu'enchaîné.",
+    level: ['3e', 'Terminale']
+  },
+
+  // MOYEN ÂGE / PÉRIODE MÉDIÉVALE (manquants)
+  {
+    id: 'dante',
+    name: 'Dante Alighieri',
+    birth: '1265', death: '1321',
+    era: 'Moyen Âge', category: 'Intellectuel', nationality: 'Italienne',
+    bio: "Dante Alighieri est le père de la langue italienne et l'un des plus grands poètes de la civilisation occidentale. Sa Divine Comédie (1308-1321), voyage allégorique à travers l'Enfer, le Purgatoire et le Paradis, est considérée comme le sommet de la littérature médiévale et l'un des textes fondateurs de la culture européenne. En choisissant d'écrire en toscan populaire plutôt qu'en latin, Dante invente la langue italienne littéraire. Exilé de Florence pour des raisons politiques, il erre en Italie jusqu'à sa mort à Ravenne. Son influence sur la littérature mondiale — de Boccace à T.S. Eliot — est incalculable.",
+    keyFacts: [
+      "La Divine Comédie (1308-1321) — œuvre fondatrice de la littérature européenne",
+      "Choisit le toscan populaire pour écrire — invente la langue italienne littéraire",
+      "Exilé de Florence (1302) pour raisons politiques — ne reverra jamais sa ville natale",
+      "Introduit Virgile comme guide symbolique — pont entre Antiquité et Chrétienté médiévale",
+      "Influence T.S. Eliot, Borges, Balzac et des siècles de littérature mondiale"
+    ],
+    quote: "Lasciate ogne speranza, voi ch'intrate. (Abandonnez toute espérance, vous qui entrez.)",
+    level: ['Terminale']
+  },
+  {
+    id: 'marco-polo',
+    name: 'Marco Polo',
+    birth: '1254', death: '1324',
+    era: 'Moyen Âge', category: 'Exploration', nationality: 'Italienne',
+    bio: "Marco Polo est le plus célèbre explorateur médiéval occidental, dont le récit de voyage en Chine et en Asie ouvre l'Europe sur un monde inconnu. Parti de Venise à 17 ans avec son père et son oncle (1271), il voyage 24 ans en Asie — Perse, Afghanistan, Chine — et sert 17 ans à la cour de Kubilai Khan, l'empereur mongol. Son Livre des Merveilles (Il Milione), dicté en prison après sa capture par les Génois, est le premier témoignage détaillé de la Chine, du Japon, de l'Inde et de l'Afrique orientale pour les Européens. Ce livre inspire directement Christophe Colomb dans son projet de route vers l'Asie.",
+    keyFacts: [
+      "Voyage 24 ans en Asie (1271-1295) — premier Européen à décrire la Chine, la Perse, l'Inde",
+      "Sert 17 ans à la cour de Kubilai Khan comme envoyé diplomatique",
+      "Dicte son Livre des Merveilles (Il Milione) en prison — 150 manuscrits copiés en Europe",
+      "Christophe Colomb possédait un exemplaire annoté de son livre lors de son voyage de 1492",
+      "Décrit pour la première fois le papier-monnaie, le charbon, les pâtes, la porcelaine pour les Européens"
+    ],
+    quote: "J'ai seulement dit la moitié de ce que j'ai vu.",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'avicenne',
+    name: 'Ibn Sina (Avicenne)',
+    birth: '980', death: '1037',
+    era: 'Moyen Âge', category: 'Intellectuel', nationality: 'Persane',
+    bio: "Ibn Sina, connu en Occident sous le nom d'Avicenne, est le plus grand médecin et philosophe du monde islamique médiéval, dont l'œuvre façonne la médecine mondiale jusqu'au XVIIe siècle. Son Canon de la médecine (Al-Qanun fi al-Tibb) — encyclopédie médicale en 5 volumes — est le manuel de référence des universités européennes pendant 600 ans. Philosophe aristotélicien, il développe une synthèse de la pensée grecque et islamique qui influence Thomas d'Aquin. Prodige absolu : il mémorise le Coran à 10 ans, maîtrise la médecine à 16 ans et est médecin de cour à 18 ans.",
+    keyFacts: [
+      "Mémorise le Coran à 10 ans, maîtrise la médecine à 16 ans — prodige universel",
+      "Le Canon de la médecine (1025) — manuel de référence des universités européennes pendant 600 ans",
+      "Premier à décrire la méningite, la quarantaine et la transmission des maladies par l'eau et l'air",
+      "450 ouvrages écrits en médecine, philosophie, astronomie, mathématiques, musique",
+      "Influence directe sur Thomas d'Aquin, Roger Bacon et la scolastique chrétienne"
+    ],
+    quote: "La connaissance de quelque chose, puisqu'elle existe, ne peut être bornée.",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'al-khwarizmi',
+    name: 'Al-Khwarizmi',
+    birth: '780', death: '850',
+    era: 'Moyen Âge', category: 'Intellectuel', nationality: 'Persane',
+    bio: "Muhammad ibn Musa al-Khwarizmi est le mathématicien qui a inventé l'algèbre et dont le nom a donné le mot 'algorithme' — deux des concepts les plus fondamentaux des mathématiques et de l'informatique modernes. Savant à la Maison de la Sagesse de Bagdad sous le calife Al-Mamoun, il rédige le Kitab al-mukhtasar (Le Livre abrégé sur le calcul par la complétion et la réduction), fondateur de l'algèbre. Il introduit les chiffres hindous (dits 'arabes') en Occident via ses travaux traduits en latin. Sans lui, pas de mathématiques modernes, pas d'informatique.",
+    keyFacts: [
+      "Invente l'algèbre — son traité de 820 fonde cette branche des mathématiques",
+      "Son nom latinisé 'Algoritmi' donne le mot 'algorithme' — base de toute l'informatique",
+      "Introduit les chiffres dits 'arabes' (d'origine indienne) en Occident via ses traductions latines",
+      "Travaille à la Maison de la Sagesse de Bagdad — centre mondial du savoir au IXe siècle",
+      "Ses travaux traduits en latin au XIIe s. révolutionnent les mathématiques européennes"
+    ],
+    quote: "La science est la lumière de l'esprit.",
+    level: ['3e', 'Terminale']
+  },
+
+  // ÉPOQUE MODERNE (manquants)
+  {
+    id: 'garibaldi',
+    name: 'Giuseppe Garibaldi',
+    birth: '1807', death: '1882',
+    era: 'XIXe siècle', category: 'Militaire', nationality: 'Italienne',
+    bio: "Giuseppe Garibaldi est le héros national de l'unification italienne (Risorgimento) et l'une des figures les plus romanesques du XIXe siècle. Condamné à mort en Italie, il s'exile en Amérique latine où il combat pour l'Uruguay et le Brésil. Revenu en Europe, il mène ses célèbres Chemises Rouges (Mille volontaires) à la conquête du royaume des Deux-Siciles (1860), offrant ses conquêtes au roi Victor-Emmanuel II pour forger l'Italie unifiée. Admiré dans toute l'Europe — notamment par Hugo et Dumas — il incarne le héros romantique au service d'une cause nationale.",
+    keyFacts: [
+      "Condamné à mort en 1834 — s'exile en Amérique latine pendant 12 ans",
+      "Expédition des Mille (5-6 mai 1860) — conquête du royaume des Deux-Siciles avec 1 000 volontaires",
+      "Offre ses conquêtes au roi Victor-Emmanuel II — acte fondateur de l'Italie unifiée (1861)",
+      "Ses Chemises Rouges (camicie rosse) deviennent symbole des volontaires révolutionnaires",
+      "Admiré par Victor Hugo, Alexandre Dumas et Abraham Lincoln"
+    ],
+    quote: "Ici on fait l'Italie ou on meurt.",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'simon-bolivar',
+    name: 'Simón Bolívar',
+    birth: '1783', death: '1830',
+    era: 'XIXe siècle', category: 'Politique', nationality: 'Vénézuélienne',
+    bio: "Simón Bolívar, dit El Libertador, est le père de l'indépendance de six nations d'Amérique latine : Venezuela, Colombie, Équateur, Pérou, Bolivie et Panama. Issu de la noblesse créole vénézuélienne, il mène pendant 20 ans des campagnes militaires épiques à travers les Andes pour libérer le continent de la domination espagnole. Stratège brillant, il traverse les Andes en plein hiver avec son armée (1819) — exploit comparé à celui d'Hannibal. Son rêve d'une Grande Colombie unifiée échoue face aux divisions locales, et il meurt dans la déception et l'exil, sans voir l'aboutissement de son idéal.",
+    keyFacts: [
+      "Libère 6 nations : Venezuela, Colombie, Équateur, Pérou, Bolivie, Panama",
+      "Traverse les Andes en hiver 1819 avec son armée — victoire de Boyacá, libération de la Colombie",
+      "La Bolivie est nommée en son honneur à son indépendance (1825)",
+      "Rêve de la Gran Colombia unifiée — échoue face aux divisions régionales",
+      "Meurt à 47 ans dans la misère et l'exil, trahi par ceux qu'il a libérés"
+    ],
+    quote: "Un peuple ignorant est l'instrument aveugle de sa propre destruction.",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'zumbi',
+    name: 'Zumbi dos Palmares',
+    birth: '1655', death: '1695',
+    era: 'Époque moderne', category: 'Résistance', nationality: 'Brésilienne',
+    bio: "Zumbi dos Palmares est le chef du Quilombo dos Palmares, le plus grand et le plus durable État d'esclaves libres des Amériques, fondé dans les forêts du Brésil colonial. Né libre dans le quilombo puis capturé et éduqué par des jésuites avant de s'évader, il devient le chef militaire et politique de cette communauté de 20 000 âmes qui résiste pendant 65 ans aux attaques portugaises. Il est tué en 1695 lors d'une trahison. Sa mort le 20 novembre est aujourd'hui la Journée nationale de la conscience noire au Brésil. Il est le symbole de la résistance africaine à l'esclavage.",
+    keyFacts: [
+      "Chef du Quilombo dos Palmares — communauté de 20 000 esclaves libres dans les forêts brésiliennes",
+      "Résiste 65 ans aux attaques militaires portugaises — record de résistance dans les Amériques",
+      "Tué par trahison le 20 novembre 1695 — date devenue Journée nationale de la conscience noire au Brésil",
+      "Premier à organiser une société libre multi-ethnique (Africains, Indigènes, Métis) en Amérique",
+      "Symbole de la résistance africaine — statue à Brasília, son visage proposé sur les billets brésiliens"
+    ],
+    quote: "La liberté ne s'obtient pas par grâce — elle se conquiert.",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'che-guevara',
+    name: 'Che Guevara',
+    birth: '1928', death: '1967',
+    era: 'XXe siècle', category: 'Militaire', nationality: 'Argentine',
+    bio: "Ernesto 'Che' Guevara est le révolutionnaire argentin devenu icône mondiale de la révolte et du tiers-mondisme. Médecin de formation, il est transformé par un voyage en moto à travers l'Amérique latine (1952) qui lui révèle la misère des peuples. Il rejoint Fidel Castro à Cuba et joue un rôle décisif dans la révolution cubaine (1959). Ministre de l'industrie, il théorise la guérilla (Le Manuel de guérilla) et tente d'exporter la révolution en Afrique (Congo, 1965) puis en Bolivie, où il est capturé et exécuté par la CIA et l'armée bolivienne en 1967. Sa photo par Alberto Korda est l'image la plus reproduite du XXe siècle.",
+    keyFacts: [
+      "Révolution cubaine (1959) — joue un rôle militaire décisif aux côtés de Fidel Castro",
+      "Théorise la guérilla dans 'La Guerre de guérilla' (1960) — manuel étudié dans le monde entier",
+      "Exécuté en Bolivie le 9 octobre 1967 par la CIA et l'armée bolivienne à 39 ans",
+      "Sa photo par Alberto Korda (1960) est l'image la plus reproduite et vendue du XXe siècle",
+      "Symbole mondial de la révolte anticoloniale et de l'utopie révolutionnaire"
+    ],
+    quote: "Soyons réalistes, exigeons l'impossible.",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'thomas-sankara',
+    name: 'Thomas Sankara',
+    birth: '1949', death: '1987',
+    era: 'XXe siècle', category: 'Politique', nationality: 'Burkinabè',
+    bio: "Thomas Sankara est le président révolutionnaire du Burkina Faso (1983-1987), surnommé le 'Che Guevara africain'. En quatre ans, il mène l'une des révolutions sociales les plus radicales d'Afrique : rebaptise la Haute-Volta en Burkina Faso ('pays des hommes intègres'), refuse l'aide internationale pour développer l'autonomie alimentaire, plante dix millions d'arbres contre la désertification, vaccine 2,5 millions d'enfants en deux semaines, impose la parité dans son gouvernement et interdit l'excision. Anti-impérialiste convaincu, il dénonce la dette africaine comme instrument de domination. Assassiné lors d'un coup d'État organisé par son ami Blaise Compaoré, soutenu par la France.",
+    keyFacts: [
+      "Rebaptise la Haute-Volta en Burkina Faso ('pays des hommes intègres') en 1984",
+      "Vaccine 2,5 millions d'enfants en deux semaines — sans aide internationale",
+      "Plante 10 millions d'arbres et développe l'autosuffisance alimentaire en 4 ans",
+      "Premier chef d'État africain à mettre la parité hommes-femmes au gouvernement",
+      "Assassiné le 15 octobre 1987 lors d'un coup d'État — tué à 38 ans par son ami Compaoré"
+    ],
+    quote: "Osez inventer l'avenir.",
+    level: ['3e', 'Terminale']
+  },
+
+  // FIGURES CONTEMPORAINES
+  {
+    id: 'barack-obama',
+    name: 'Barack Obama',
+    birth: '1961', death: 'présent',
+    era: 'Contemporain', category: 'Politique', nationality: 'Américaine',
+    bio: "Barack Obama est le 44e président des États-Unis (2009-2017) et le premier Afro-Américain à accéder à la Maison Blanche, 143 ans après la fin de l'esclavage. Fils d'un père kenyan et d'une mère blanche du Kansas, il grandit à Hawaï et en Indonésie avant de devenir professeur de droit constitutionnel à Chicago. Élu en 2008 sur un programme de changement ('Yes We Can'), il reçoit le prix Nobel de la Paix en 2009. Son bilan : réforme du système de santé (Obamacare), relance après la crise de 2008, retrait d'Irak, accord nucléaire avec l'Iran et accords de Paris sur le climat.",
+    keyFacts: [
+      "Premier président afro-américain des États-Unis (2009-2017)",
+      "Prix Nobel de la Paix 2009 — quelques mois après son élection",
+      "Obamacare (2010) — assurance maladie étendue à 20 millions d'Américains supplémentaires",
+      "Ordonne l'opération qui élimine Oussama Ben Laden (2 mai 2011)",
+      "Accords de Paris sur le climat (2015) — engagement international majeur sur le réchauffement"
+    ],
+    quote: "Yes We Can.",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'angela-merkel',
+    name: 'Angela Merkel',
+    birth: '1954', death: 'présent',
+    era: 'Contemporain', category: 'Politique', nationality: 'Allemande',
+    bio: "Angela Merkel est la chancelière de l'Allemagne de 2005 à 2021 — seize ans au pouvoir — et la femme politique la plus puissante du monde pendant une décennie. Physicienne de formation, née en RDA (Allemagne de l'Est communiste), elle gravit les échelons de la CDU après la réunification. Surnommée 'Mutti' (Maman) en Allemagne, elle incarne la rigueur, la discrétion et le pragmatisme. Elle gère la crise financière de 2008, la crise de la zone euro (Grèce), accueille un million de réfugiés syriens en 2015 et tient tête à Trump tout en préservant les relations transatlantiques. Personnalité internationale de référence.",
+    keyFacts: [
+      "16 ans chancelière de l'Allemagne (2005-2021) — la plus longue de l'ère démocratique",
+      "Première femme chancelière allemande — physicienne de formation, née en RDA",
+      "Gère la crise de la zone euro — impose l'austérité à la Grèce, sauve l'euro",
+      "Accueille un million de réfugiés syriens en 2015 — 'Wir schaffen das' (On peut y arriver)",
+      "Forbes la classe femme la plus puissante du monde 10 fois entre 2006 et 2021"
+    ],
+    quote: "Wir schaffen das. (On peut y arriver.)",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'malala',
+    name: 'Malala Yousafzai',
+    birth: '1997', death: 'présent',
+    era: 'Contemporain', category: 'Droits civiques', nationality: 'Pakistanaise',
+    bio: "Malala Yousafzai est la plus jeune lauréate du prix Nobel de la Paix (2014, à 17 ans), militante pakistanaise pour le droit à l'éducation des filles. Dans la vallée du Swat, sous occupation talibane, elle tient un blog anonyme pour la BBC dénonçant l'interdiction faite aux filles d'aller à l'école. Révélée au grand jour, elle est grièvement blessée par balle dans la tête par un taliban en 2012 (à 15 ans), survit miraculeusement et poursuit son combat depuis Londres. Elle fonde le Fonds Malala pour l'éducation des filles dans le monde entier et s'adresse à l'ONU à 16 ans.",
+    keyFacts: [
+      "Survit à une tentative d'assassinat par les talibans (9 octobre 2012) — balle dans la tête à 15 ans",
+      "Plus jeune lauréate du prix Nobel de la Paix (2014, à 17 ans)",
+      "Fonde le Fonds Malala — finance l'éducation de millions de filles dans 10 pays",
+      "Discours à l'ONU à 16 ans : 'Un enfant, un enseignant, un livre, un stylo peuvent changer le monde'",
+      "Symbole mondial du droit à l'éducation pour les filles"
+    ],
+    quote: "Un enfant, un enseignant, un livre et un stylo peuvent changer le monde.",
+    level: ['3e', 'Terminale']
+  },
+  {
+    id: 'steve-jobs',
+    name: 'Steve Jobs',
+    birth: '1955', death: '2011',
+    era: 'Contemporain', category: 'Contemporain', nationality: 'Américaine',
+    bio: "Steve Jobs est le co-fondateur d'Apple et l'un des entrepreneurs les plus influents de l'histoire moderne, qui a révolutionné l'informatique personnelle, la musique numérique, le téléphone et le cinéma d'animation. Adopté à la naissance, il co-fonde Apple en 1976 dans un garage avec Steve Wozniak, est renvoyé de sa propre entreprise en 1985, puis revient en 1997 pour la sauver de la faillite. L'iMac, l'iPod, l'iPhone (2007) et l'iPad transforment des industries entières. Perfectionniste obsessionnel, il impose une vision de la technologie comme outil d'art et de design, changeant à jamais notre rapport aux objets numériques.",
+    keyFacts: [
+      "Co-fonde Apple en 1976 dans un garage avec Steve Wozniak — valorisation actuelle : 3 000 milliards $",
+      "Lancé l'iPhone le 9 janvier 2007 — appareil qui transforme l'industrie du téléphone et crée l'ère smartphone",
+      "Co-fonde Pixar (1986) — premier long métrage d'animation numérique (Toy Story, 1995)",
+      "Renvoyé d'Apple en 1985, revient en 1997 et sauve l'entreprise de la faillite",
+      "Meurt d'un cancer du pancréas le 5 octobre 2011 à 56 ans"
+    ],
+    quote: "Stay hungry, stay foolish. (Restez affamés, restez fous.)",
+    level: ['3e', 'Terminale']
+  },
 ]
 
 const CAT_MAP = {
