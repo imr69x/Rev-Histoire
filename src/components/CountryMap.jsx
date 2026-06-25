@@ -50,9 +50,16 @@ const HOVER_COLORS = {
   Afrique: '#27AE60', Amériques: '#8E44AD', Océanie: '#16A085',
 }
 
+function lookupRegionData(countryId, regionName) {
+  const countryData = regionsData[countryId] || {}
+  if (countryData[regionName]) return countryData[regionName]
+  const key = Object.keys(countryData).find(k => k.startsWith(regionName + ' ('))
+  return key ? countryData[key] : null
+}
+
 // Panneau d'info region (affiché SOUS la carte)
-function RegionPanel({ countryId, regionName, onClose, onDrillDown, hasSublevel, color }) {
-  const data = (regionsData[countryId] || {})[regionName]
+function RegionPanel({ countryId, regionName, onClose, onDrillDown, hasSublevel, color, isDepartement }) {
+  const data = lookupRegionData(countryId, regionName)
 
   return (
     <div className="border-t border-[#E8E0CC] dark:border-[#30363D] bg-[#FAF7F2] dark:bg-[#0D1117] rounded-b-2xl">
@@ -172,7 +179,7 @@ function RegionPanel({ countryId, regionName, onClose, onDrillDown, hasSublevel,
             )}
           </div>
         ) : (
-          <p className="text-sm text-[#8B7355] py-2">Données à venir pour cette région.</p>
+          <p className="text-sm text-[#8B7355] py-2">Données à venir pour ce {isDepartement ? 'département' : 'région'}.</p>
         )}
       </div>
     </div>
@@ -448,6 +455,7 @@ export default function CountryMap({ countryId: cid, continent }) {
           onDrillDown={handleDrillDown}
           hasSublevel={!!config.sublevelUrl && !drilldown}
           color={hoverColor}
+          isDepartement={drilldown}
         />
       )}
     </div>
