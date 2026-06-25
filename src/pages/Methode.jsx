@@ -193,12 +193,12 @@ BONUS — Phrases à bannir :
     id: 'composition',
     icon: BookOpen,
     color: '#1B4F72',
-    title: 'Composition Bac 1ère',
-    level: 'Bac 1ère',
+    title: 'Composition 1ère',
+    level: 'Contrôle continu 1ère',
     sections: [
       {
         title: '📋 Format et spécificités de la 1ère',
-        content: `La composition en 1ère dure 2h. Elle est plus courte et plus ciblée que la dissertation de Terminale.
+        content: `En 1ère, l'histoire-géographie est évaluée en contrôle continu (épreuves communes). Il n'y a pas de Bac d'histoire en 1ère. La composition dure 2h et est plus courte et ciblée que la dissertation de Terminale.
 
 CE QUI EST IDENTIQUE à la Terminale :
 ✓ Introduction (accroche, contexte, problématique, annonce du plan)
@@ -258,8 +258,8 @@ III. La Libération et les enjeux du retour de la République (1944-1945)
    B. L'épuration et la reconstruction de la légitimité républicaine`
       },
       {
-        title: '✍️ L\'introduction en 1ère',
-        content: `En 1ère, l'introduction doit être complète mais plus concise qu'en Terminale. Visez 15 lignes.
+        title: '✍️ L\'introduction',
+        content: `L'introduction doit être complète mais plus concise qu'en Terminale. Visez 15 lignes.
 
 EXEMPLE D'INTRODUCTION pour "La France dans la Seconde Guerre mondiale" :
 
@@ -272,7 +272,7 @@ Problématique : "Comment la France a-t-elle traversé ces années de guerre, en
 Annonce : "Nous verrons d'abord comment la défaite conduit à l'établissement du régime de Vichy et de la collaboration, avant d'étudier la naissance et l'organisation de la Résistance, et enfin d'analyser les enjeux de la Libération de 1944."`
       },
       {
-        title: '💡 Exemples précis à maîtriser (programme 1ère)',
+        title: '💡 Exemples précis à maîtriser (programme)',
         content: `PREMIÈRE GUERRE MONDIALE :
 • Août 1914 : Union sacrée en France
 • 1916 : Bataille de Verdun (300 000 morts)
