@@ -2741,35 +2741,35 @@ export const personalities = [
     level: ['3e', 'Terminale']
   },
   {
-    id: 'malala',
-    name: 'Malala Yousafzai',
-    birth: '1997', death: 'présent',
-    era: 'Contemporain', category: 'Droits civiques', nationality: 'Pakistanaise',
-    bio: "Malala Yousafzai est la plus jeune lauréate du prix Nobel de la Paix (2014, à 17 ans), militante pakistanaise pour le droit à l'éducation des filles. Dans la vallée du Swat, sous occupation talibane, elle tient un blog anonyme pour la BBC dénonçant l'interdiction faite aux filles d'aller à l'école. Révélée au grand jour, elle est grièvement blessée par balle dans la tête par un taliban en 2012 (à 15 ans), survit miraculeusement et poursuit son combat depuis Londres. Elle fonde le Fonds Malala pour l'éducation des filles dans le monde entier et s'adresse à l'ONU à 16 ans.",
+    id: 'ataturk',
+    name: 'Mustafa Kemal Atatürk',
+    birth: '1881', death: '1938',
+    era: 'XXe siècle', category: 'Politique', nationality: 'Turque',
+    bio: "Mustafa Kemal Atatürk est le fondateur et premier président de la République de Turquie (1923-1938), l'un des plus grands réformateurs politiques du XXe siècle. Héros militaire à Gallipoli (1915), il mène la guerre d'indépendance turque contre les Alliés (1919-1923) et abolit le Sultanat ottoman millénaire. En quinze ans, il transforme radicalement la Turquie : séparation de l'État et de la religion, adoption de l'alphabet latin, égalité juridique hommes-femmes, port occidental obligatoire, calendrier grégorien, éducation laïque universelle. Son surnom Atatürk signifie 'Père des Turcs'. Aujourd'hui encore vénéré en Turquie, son modèle de laïcité islamique inspire de nombreux pays.",
     keyFacts: [
-      "Survit à une tentative d'assassinat par les talibans (9 octobre 2012) — balle dans la tête à 15 ans",
-      "Plus jeune lauréate du prix Nobel de la Paix (2014, à 17 ans)",
-      "Fonde le Fonds Malala — finance l'éducation de millions de filles dans 10 pays",
-      "Discours à l'ONU à 16 ans : 'Un enfant, un enseignant, un livre, un stylo peuvent changer le monde'",
-      "Symbole mondial du droit à l'éducation pour les filles"
+      "Héros de Gallipoli (1915) — seule victoire ottomane face aux Alliés",
+      "Fonde la République de Turquie le 29 octobre 1923 — met fin à l'Empire ottoman",
+      "Abolit le califat islamique (1924) — séparation État/religion sans précédent dans le monde musulman",
+      "Impose l'alphabet latin (1928), le calendrier grégorien, le code civil suisse, le droit de vote aux femmes (1934)",
+      "Surnommé Atatürk ('Père des Turcs') par le parlement en 1934 — vénéré comme père de la nation"
     ],
-    quote: "Un enfant, un enseignant, un livre et un stylo peuvent changer le monde.",
+    quote: "La paix dans le pays, la paix dans le monde.",
     level: ['3e', 'Terminale']
   },
   {
-    id: 'steve-jobs',
-    name: 'Steve Jobs',
-    birth: '1955', death: '2011',
-    era: 'Contemporain', category: 'Contemporain', nationality: 'Américaine',
-    bio: "Steve Jobs est le co-fondateur d'Apple et l'un des entrepreneurs les plus influents de l'histoire moderne, qui a révolutionné l'informatique personnelle, la musique numérique, le téléphone et le cinéma d'animation. Adopté à la naissance, il co-fonde Apple en 1976 dans un garage avec Steve Wozniak, est renvoyé de sa propre entreprise en 1985, puis revient en 1997 pour la sauver de la faillite. L'iMac, l'iPod, l'iPhone (2007) et l'iPad transforment des industries entières. Perfectionniste obsessionnel, il impose une vision de la technologie comme outil d'art et de design, changeant à jamais notre rapport aux objets numériques.",
+    id: 'ho-chi-minh',
+    name: 'Ho Chi Minh',
+    birth: '1890', death: '1969',
+    era: 'XXe siècle', category: 'Politique', nationality: 'Vietnamienne',
+    bio: "Ho Chi Minh est le père fondateur du Vietnam indépendant, révolutionnaire communiste qui mène son pays contre deux des plus grandes puissances mondiales : la France coloniale et les États-Unis. Après des années d'exil en France, en URSS et en Chine, il fonde le Viêt-Minh (1941) et proclame l'indépendance du Vietnam le 2 septembre 1945. Sa victoire à Diên Biên Phu contre la France (1954) met fin à la colonisation française en Indochine. Il inspire ensuite la résistance contre les États-Unis (guerre du Viêt Nam, 1955-1975), qui échoueront à le vaincre. Il meurt en 1969 sans voir la réunification du Vietnam (1975), qui lui dédiera Saigon renommée Hô Chi Minh-Ville.",
     keyFacts: [
-      "Co-fonde Apple en 1976 dans un garage avec Steve Wozniak — valorisation actuelle : 3 000 milliards $",
-      "Lancé l'iPhone le 9 janvier 2007 — appareil qui transforme l'industrie du téléphone et crée l'ère smartphone",
-      "Co-fonde Pixar (1986) — premier long métrage d'animation numérique (Toy Story, 1995)",
-      "Renvoyé d'Apple en 1985, revient en 1997 et sauve l'entreprise de la faillite",
-      "Meurt d'un cancer du pancréas le 5 octobre 2011 à 56 ans"
+      "Proclame l'indépendance du Vietnam le 2 septembre 1945 — en citant la Déclaration d'indépendance américaine",
+      "Victoire de Diên Biên Phu (7 mai 1954) contre la France — fin de la colonisation française en Indochine",
+      "Résiste à l'intervention américaine (1965-1969) — 500 000 soldats US ne parviennent pas à le vaincre",
+      "Saigon rebaptisée Hô Chi Minh-Ville après la réunification (1975) — hommage posthume",
+      "S'inspire explicitement d'Abd el-Krim al-Khattabi pour ses tactiques de guérilla"
     ],
-    quote: "Stay hungry, stay foolish. (Restez affamés, restez fous.)",
+    quote: "Rien n'est plus précieux que l'indépendance et la liberté.",
     level: ['3e', 'Terminale']
   },
 ]
