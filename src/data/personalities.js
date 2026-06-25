@@ -2201,13 +2201,13 @@ export const personalities = [
     name: 'Abd el-Krim al-Khattabi',
     birth: '1882', death: '1963',
     era: 'XXe siècle', category: 'Militaire', nationality: 'Marocaine',
-    bio: "Mohamed ibn Abd el-Krim al-Khattabi est un chef berbère rifain qui mène la résistance contre les colonisateurs espagnol et français dans le Rif (nord du Maroc). En 1921, il inflige à l'armée espagnole la désastreuse défaite d'Anoual (12 000 soldats tués), l'une des plus grandes humiliations de l'histoire coloniale. Sa guérilla — mobilité, embuscades, connaissance du terrain, refus du combat frontal — inspire directement Ho Chi Minh, qui l'étudie lors de ses séjours en France, Mao Zedong qui le cite comme modèle, Che Guevara qui s'en inspire dans sa théorie du foyer révolutionnaire, et Ahmed Ben Bella dont le FLN s'inspire explicitement de ses méthodes pour la guerre d'Algérie (1954-1962). Ses tactiques de guérilla sont encore aujourd'hui étudiées dans les académies militaires du monde entier.",
+    bio: "Mohamed ibn Abd el-Krim al-Khattabi est un chef berbère rifain qui mène la résistance contre les colonisateurs espagnol et français dans le Rif (nord du Maroc). En 1921, il inflige à l'armée espagnole la désastreuse défaite d'Anoual (12 000 soldats tués), l'une des plus grandes humiliations de l'histoire coloniale. Sa méthode de guérilla — mobilité, embuscades, harcèlement, refus du combat frontal — révolutionne la guerre anticoloniale et inspire des figures majeures du XXe siècle : Ho Chi Minh l'étudie lors de ses séjours en France et s'en inspire pour le Viêt-Minh, Mao Zedong le cite explicitement comme modèle dans ses écrits sur la guerre populaire, Che Guevara intègre ses principes dans sa théorie du foyer révolutionnaire, et Ahmed Ben Bella, premier président de l'Algérie, reconnaît sa dette envers Abd el-Krim. Ses tactiques sont encore aujourd'hui au programme des académies militaires, notamment à West Point (États-Unis) et Saint-Cyr (France).",
     keyFacts: [
       "Victoire d'Anoual (1921) : 12 000 soldats espagnols tués — une des plus grandes défaites coloniales de l'histoire",
-      "Résiste deux ans à la coalition de 200 000 soldats franco-espagnols avec quelques milliers de combattants",
-      "Inspire Ho Chi Minh, Mao Zedong, Che Guevara et Ben Bella — père de la guérilla anticoloniale moderne",
-      "Ses tactiques de guérilla (mobilité, terrain, embuscades) sont encore enseignées dans les académies militaires",
-      "Exilé à La Réunion puis au Caire où il préside le Comité de libération du Maghreb jusqu'à sa mort"
+      "Résiste deux ans à une coalition de 200 000 soldats franco-espagnols avec quelques milliers de combattants",
+      "Inspire directement Ho Chi Minh, Mao Zedong, Che Guevara et Ahmed Ben Bella — père de la guérilla anticoloniale",
+      "Ses tactiques étudiées à West Point (USA) et Saint-Cyr (France) encore aujourd'hui",
+      "Exilé à La Réunion puis au Caire où il préside le Comité de libération du Maghreb jusqu'à sa mort en 1963"
     ],
     quote: "Un peuple qui ne défend pas sa liberté ne mérite pas de la posséder.",
     level: ['3e', 'Terminale']
@@ -2267,13 +2267,13 @@ export const personalities = [
     name: 'Émir Abd el-Kader',
     birth: '1808', death: '1883',
     era: 'XIXe siècle', category: 'Militaire', nationality: 'Algérienne',
-    bio: "Mohamed ibn Abd el-Kader al-Hasani, dit l'Émir Abd el-Kader, est le premier résistant à la colonisation française en Algérie et l'une des figures les plus admirées du XIXe siècle. Proclamé émir par les tribus de l'ouest algérien en 1832, il opère dans le cadre de l'ancien territoire de la régence ottomane et revendique une légitimité islamique héritée de cette autorité. Il construit un véritable État (armée régulière, administration, diplomatie) et résiste quinze ans à la France. Ses tactiques de guérilla — mobilité, harcèlement, refus du combat frontal — inspirent directement Ho Chi Minh, Mao Zedong, Ahmed Ben Bella et Che Guevara. À Damas en 1860, il sauve des milliers de Chrétiens lors des massacres, lui valant l'admiration mondiale. Philosophe, poète et humaniste, il est l'un des personnages les plus complexes de l'histoire anticoloniale.",
+    bio: "Mohamed ibn Abd el-Kader al-Hasani, dit l'Émir Abd el-Kader, est le premier résistant à la colonisation française en Algérie et l'une des figures les plus admirées du XIXe siècle. Proclamé émir par les tribus de l'ouest algérien en 1832, il opère dans le cadre de l'ancien territoire de la régence ottomane et revendique une légitimité islamique héritée de cette autorité. Il construit un véritable État (armée régulière, administration, diplomatie) et résiste quinze ans à la France malgré une infériorité matérielle écrasante. À Damas en 1860, il prend personnellement la tête d'un groupe pour protéger et sauver des milliers de Chrétiens lors des massacres, lui valant l'admiration mondiale — décoration par Napoléon III et Abraham Lincoln. Philosophe, poète et humaniste soufi, il reste l'une des figures les plus complexes et respectées de l'histoire algérienne.",
     keyFacts: [
       "Proclamé émir en 1832, il bâtit un État algérien avec armée, administration et diplomatie",
       "Signe le Traité de la Tafna (1837) avec la France — reconnaissance temporaire de son autorité sur deux tiers de l'Algérie",
-      "Résiste 15 ans avec une guérilla innovante qui inspire Ho Chi Minh, Mao Zedong, Ben Bella et Che Guevara",
-      "À Damas (1860), protège des milliers de Chrétiens lors des massacres — salué par Napoléon III et Lincoln",
-      "Ses tactiques sont encore enseignées dans les académies militaires du monde entier"
+      "Résiste 15 ans à la France avec une armée régulière et une administration structurée",
+      "À Damas (1860), protège des milliers de Chrétiens lors des massacres — salué par Napoléon III et Abraham Lincoln",
+      "Figure de l'humanisme islamique : philosophe et poète soufi admiré en Orient comme en Occident"
     ],
     quote: "Je suis un homme qui aime la vérité et cherche à la faire connaître aux autres.",
     level: ['3e', 'Terminale']
