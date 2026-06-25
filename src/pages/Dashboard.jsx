@@ -32,7 +32,7 @@ const MODULES = [
     to: '/quiz', icon: HelpCircle, color: '#27AE60', bg: '#EAFAF1',
     label: 'Quiz adaptatif',
     desc: '120+ questions par niveau',
-    stat: 'Mode Brevet & Bac'
+    stat: 'Mode Brevet & Bac Term'
   },
   {
     to: '/carte', icon: Globe, color: '#D4AF37', bg: '#FEF9EC',
@@ -51,6 +51,12 @@ const MODULES = [
     label: 'Histoire des pays',
     desc: '30+ pays explorés',
     stat: 'Monde entier'
+  },
+  {
+    to: '/methode', icon: Target, color: '#C0392B', bg: '#FDEDEC',
+    label: 'Méthodologie',
+    desc: 'Composition, analyse de docs',
+    stat: 'Brevet & Bac'
   },
 ]
 

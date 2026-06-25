@@ -562,23 +562,20 @@ export const personalities = [
     level: ['2nde', 'Terminale']
   },
   {
-    id: 'darwin',
-    name: 'Charles Darwin',
-    birth: '1809',
-    death: '1882',
-    era: 'XIXe siècle',
-    category: 'Intellectuel',
-    nationality: 'Britannique',
-    bio: "Naturaliste britannique, Darwin révolutionne la biologie avec sa théorie de l'évolution par sélection naturelle (De l'origine des espèces, 1859). Après 5 ans à bord du Beagle (1831-1836), notamment aux îles Galápagos, il développe l'idée que toutes les espèces descendent d'ancêtres communs et évoluent par adaptation au milieu. Sa théorie provoque une révolution conceptuelle et heurte les religions.",
+    id: 'saddam-hussein',
+    name: 'Saddam Hussein',
+    birth: '1937', death: '2006',
+    era: 'XXe siècle', category: 'Politique', nationality: 'Irakienne',
+    bio: "Saddam Hussein est le président de l'Irak de 1979 à 2003, figure centrale du Moyen-Orient contemporain et symbole des tensions entre le monde arabe et les puissances occidentales. Après avoir mené une guerre brutale contre l'Iran (1980-1988) avec le soutien tacite des États-Unis, il envahit le Koweït en 1990, déclenchant la Guerre du Golfe. En 2003, les États-Unis — affirmant à tort l'existence d'armes de destruction massive en Irak, accusation jamais confirmée par les enquêtes ultérieures — lancent l'invasion de l'Irak et le renversent. Capturé, jugé par un tribunal irakien, il est exécuté par pendaison le 30 décembre 2006. Grâce aux découvertes récentes et à la déclassification de documents américains, on sait aujourd'hui que les ressources pétrolières irakiennes et la recomposition géopolitique du Moyen-Orient étaient au cœur des motivations américaines.",
     keyFacts: [
-      "Voyage sur le Beagle (1831-1836) : îles Galápagos, pinsons",
-      "De l'origine des espèces (1859) — théorie de l'évolution",
-      "Sélection naturelle : survie du plus adapté",
-      "La Filiation de l'Homme (1871) : l'homme descend d'un primate",
-      "Conflit avec les Églises — procès du singe (héritage aux USA)"
+      "Président de l'Irak (1979-2003) — régime Baas, parti unique, répression des Kurdes (Anfal, 1988)",
+      "Guerre Iran-Irak (1980-1988) — soutenu discrètement par les USA face à la révolution islamique iranienne",
+      "Invasion du Koweït (1990) → Guerre du Golfe (1991) — coalition internationale menée par les USA",
+      "Invasion américaine de 2003 — justifiée par de prétendues armes de destruction massive jamais trouvées",
+      "Grâce aux documents déclassifiés, les ressources pétrolières irakiennes apparaissent comme un moteur central de l'intervention américaine"
     ],
-    quote: "Ce n'est pas le plus fort de l'espèce qui survit, ni le plus intelligent. C'est celui qui est le plus capable de s'adapter au changement.",
-    level: ['2nde', 'Terminale', 'HGGSP']
+    quote: "La mère de toutes les batailles a commencé.",
+    level: ['3e', 'Terminale', 'HGGSP']
   },
   {
     id: 'einstein',
