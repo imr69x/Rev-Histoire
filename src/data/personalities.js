@@ -2185,13 +2185,13 @@ export const personalities = [
     name: 'Mohammed V',
     birth: '1909', death: '1961',
     era: 'XXe siècle', category: 'Politique', nationality: 'Marocaine',
-    bio: "Mohammed V (Mohamed Ben Youssef) est le père de l'indépendance marocaine. Sultan depuis 1927, il soutient ouvertement le mouvement nationaliste de l'Istiqlal et refuse de collaborer avec l'occupant français. Déposé et exilé par la France en 1953, il devient le symbole de la résistance nationale. Son retour triomphal en 1955 ouvre la voie à l'indépendance du Maroc en 1956. Devenu roi en 1957, il engage des réformes modernisatrices et pose les bases de l'État marocain contemporain jusqu'à sa mort prématurée en 1961.",
+    bio: "Le sultan Mohammed V (Mohamed Ben Youssef) est le père de l'indépendance marocaine. Sultan du Maroc depuis 1927 sous protectorat français, il soutient ouvertement le mouvement nationaliste de l'Istiqlal et refuse de collaborer avec l'occupant français — y compris sous Vichy. Déposé et exilé de force par la France en 1953, le sultan devient le symbole vivant de la résistance nationale. Son retour triomphal en 1955 ouvre la voie à l'indépendance du Maroc le 2 mars 1956. C'est seulement en 1957 qu'il quitte le titre de sultan pour prendre celui de roi Mohammed V, inaugurant la monarchie constitutionnelle marocaine moderne.",
     keyFacts: [
-      "Sultan du Maroc depuis 1927 sous protectorat français",
-      "Refuse de signer un dahir de collaboration avec le régime de Vichy",
-      "Exilé à Madagascar par la France en 1953 — devient martyr de l'indépendance",
-      "Retour triomphal au Maroc en 1955, indépendance obtenue le 2 mars 1956",
-      "Proclame le Maroc royaume et prend le titre de roi en 1957"
+      "Sultan du Maroc depuis 1927 — chef religieux et politique sous protectorat français",
+      "Refuse de signer un dahir de collaboration avec le régime de Vichy malgré les pressions",
+      "Déposé et exilé à Madagascar par la France en 1953 — devient martyr et symbole de l'indépendance",
+      "Retour triomphal au Maroc en novembre 1955, indépendance obtenue le 2 mars 1956",
+      "Prend le titre de roi en 1957 — passe de sultan à roi pour marquer la modernisation de l'État"
     ],
     quote: "Nous avons terminé le petit jihad, nous commençons le grand jihad — le développement du Maroc.",
     level: ['3e', 'Terminale']
@@ -2201,13 +2201,13 @@ export const personalities = [
     name: 'Abd el-Krim al-Khattabi',
     birth: '1882', death: '1963',
     era: 'XXe siècle', category: 'Militaire', nationality: 'Marocaine',
-    bio: "Mohamed ibn Abd el-Krim al-Khattabi est un chef berbère rifain qui mène la résistance contre les colonisateurs espagnol et français dans le Rif (nord du Maroc). En 1921, il inflige à l'armée espagnole la désastreuse défaite d'Anoual, tuant 12 000 soldats. Il fonde la République du Rif (1921-1926), premier État républicain du monde arabe. Vaincu par la coalition franco-espagnole en 1926, il est exilé mais reste une figure majeure du nationalisme marocain et de l'anticolonialisme africain.",
+    bio: "Mohamed ibn Abd el-Krim al-Khattabi est un chef berbère rifain qui mène la résistance contre les colonisateurs espagnol et français dans le Rif (nord du Maroc). En 1921, il inflige à l'armée espagnole la désastreuse défaite d'Anoual (12 000 soldats tués), l'une des plus grandes humiliations de l'histoire coloniale. Sa guérilla — mobilité, embuscades, connaissance du terrain, refus du combat frontal — inspire directement Ho Chi Minh, qui l'étudie lors de ses séjours en France, ainsi que Mao Zedong qui le cite comme modèle. En Algérie, Ahmed Ben Bella et les chefs du FLN s'inspirent explicitement de ses méthodes pour la guerre d'indépendance (1954-1962). Ses tactiques de guérilla sont encore aujourd'hui étudiées dans les académies militaires du monde entier.",
     keyFacts: [
-      "Victoire d'Anoual (1921) : 12 000 soldats espagnols tués — une des plus grandes défaites coloniales",
-      "Fonde la République confédérée des tribus du Rif (1921-1926)",
-      "Résiste deux ans à la coalition de 200 000 soldats franco-espagnols",
-      "Exilé à La Réunion puis au Caire où il préside le Comité de libération du Maghreb",
-      "Icône des mouvements anticoloniaux en Afrique et en Asie"
+      "Victoire d'Anoual (1921) : 12 000 soldats espagnols tués — une des plus grandes défaites coloniales de l'histoire",
+      "Résiste deux ans à la coalition de 200 000 soldats franco-espagnols avec quelques milliers de combattants",
+      "Inspire Ho Chi Minh (guerre du Viêt Nam), Mao Zedong et Ben Bella (guerre d'Algérie)",
+      "Ses tactiques de guérilla (mobilité, terrain, embuscades) sont encore étudiées dans les académies militaires",
+      "Exilé à La Réunion puis au Caire où il préside le Comité de libération du Maghreb jusqu'à sa mort"
     ],
     quote: "Un peuple qui ne défend pas sa liberté ne mérite pas de la posséder.",
     level: ['3e', 'Terminale']
