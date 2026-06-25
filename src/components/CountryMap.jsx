@@ -23,6 +23,7 @@ const COUNTRY_MAP_CONFIG = {
   royaume_uni:   { url: '/geo/royaume_uni-regions.geojson',   nameKey: 'name',    center: [54.5, -3.0],  zoom: 5 },
   pays_bas:      { url: '/geo/pays_bas-regions.geojson',      nameKey: 'NAME_1',  center: [52.3, 5.3],   zoom: 7 },
   maroc:         { url: '/geo/maroc-regions.geojson?v=3',      nameKey: 'NAME_1',  center: [27.5, -9.0],  zoom: 4 },
+  algerie:       { url: '/geo/algerie-regions.geojson',        nameKey: 'NAME_1',  center: [28.0, 2.5],   zoom: 4 },
   tunisie:       { url: '/geo/tunisie-regions.geojson',       nameKey: 'NAME_1',  center: [34.0, 9.0],   zoom: 6 },
   egypte:        { url: '/geo/egypte-regions.geojson',        nameKey: 'NAME_1',  center: [26.5, 29.5],  zoom: 5 },
   afrique_du_sud:{ url: '/geo/afrique_du_sud-regions.geojson',nameKey: 'name',    center: [-29.0, 25.0], zoom: 5 },
