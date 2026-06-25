@@ -56,24 +56,26 @@ function getCentroid(labels, label, width) {
   return n > 0 ? { x: (sx / n) | 0, y: (sy / n) | 0 } : { x: 0, y: 0 }
 }
 
-function traceContourByAngle(labels, label, width, height, step) {
-  const c = getCentroid(labels, label, width)
-  const pts = []
+// Tracé silhouette : scan ligne par ligne (gauche↓ + droite↑) + colonne (haut→ + bas←)
+// Garanti ordonné, zéro rayon, fonctionne pour formes concaves (ex: sud du Maroc)
+function traceSilhouette(labels, label, width, height, step) {
+  const left = [], right = []
   for (let y = 0; y < height; y += step) {
-    for (let x = 0; x < width; x += step) {
-      if (labels[y * width + x] !== label) continue
-      let isBorder = false
-      for (let dy = -step; dy <= step && !isBorder; dy += step)
-        for (let dx = -step; dx <= step && !isBorder; dx += step) {
-          const nx = x + dx, ny = y + dy
-          if (nx < 0 || nx >= width || ny < 0 || ny >= height || labels[ny * width + nx] !== label)
-            isBorder = true
-        }
-      if (isBorder) pts.push([x, y, Math.atan2(y - c.y, x - c.x)])
+    let l = -1, r = -1
+    for (let x = 0; x < width; x++) {
+      if (labels[y * width + x] === label) { if (l === -1) l = x; r = x }
     }
+    if (l !== -1) { left.push([l, y]); right.push([r, y]) }
   }
-  pts.sort((a, b) => a[2] - b[2])
-  return pts.map(p => [p[0], p[1]])
+  const top = [], bot = []
+  for (let x = 0; x < width; x += step) {
+    let t = -1, b = -1
+    for (let y = 0; y < height; y++) {
+      if (labels[y * width + x] === label) { if (t === -1) t = y; b = y }
+    }
+    if (t !== -1) { top.push([x, t]); bot.push([x, b]) }
+  }
+  return [...left, ...bot, ...right.slice().reverse(), ...top.slice().reverse()]
 }
 
 function douglasPeucker(pts, eps) {
@@ -164,7 +166,7 @@ function MapBuilder() {
       if (counts[r] < minPixels) continue
       if (bgSet.has(r)) continue // ← filtre le fond
       const c = getCentroid(labels, r, W)
-      const rawPts = traceContourByAngle(labels, r, W, H, step)
+      const rawPts = traceSilhouette(labels, r, W, H, step)
       const simplified = douglasPeucker(rawPts, epsilon)
       detected.push({
         id: r, path: toPath(simplified), centroid: c,
