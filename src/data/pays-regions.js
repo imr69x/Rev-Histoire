@@ -199,6 +199,130 @@ export const regionsData = {
       couleur: '#16A085',
       departements: ["Corse-du-Sud (2A)", "Haute-Corse (2B)"],
     },
+
+    // ── Départements métropolitains ──────────────────────────────────
+
+    // Île-de-France
+    'Paris (75)':            { chef_lieu: 'Paris',          villes: ['Paris'],                                    fleuves: ['Seine'],          region: 'Île-de-France',             couleur: '#E74C3C' },
+    'Seine-et-Marne (77)':   { chef_lieu: 'Melun',          villes: ['Melun', 'Meaux', 'Chelles'],                fleuves: ['Seine', 'Marne'], region: 'Île-de-France',             couleur: '#E74C3C' },
+    'Yvelines (78)':          { chef_lieu: 'Versailles',     villes: ['Versailles', 'Mantes-la-Jolie', 'Poissy'], fleuves: ['Seine', 'Oise'],  region: 'Île-de-France',             couleur: '#E74C3C' },
+    'Essonne (91)':           { chef_lieu: 'Évry-Courcouronnes', villes: ['Évry', 'Corbeil-Essonnes', 'Massy'], fleuves: ['Seine', 'Essonne'], region: 'Île-de-France',            couleur: '#E74C3C' },
+    'Hauts-de-Seine (92)':   { chef_lieu: 'Nanterre',       villes: ['Nanterre', 'Boulogne-Billancourt', 'Courbevoie'], fleuves: ['Seine'], region: 'Île-de-France',              couleur: '#E74C3C' },
+    'Seine-Saint-Denis (93)':{ chef_lieu: 'Bobigny',        villes: ['Bobigny', 'Saint-Denis', 'Montreuil'],     fleuves: ['Seine', 'Marne'], region: 'Île-de-France',             couleur: '#E74C3C' },
+    'Val-de-Marne (94)':     { chef_lieu: 'Créteil',        villes: ['Créteil', 'Vincennes', 'Vitry-sur-Seine'], fleuves: ['Marne', 'Seine'], region: 'Île-de-France',             couleur: '#E74C3C' },
+    "Val-d'Oise (95)":       { chef_lieu: 'Cergy',          villes: ['Cergy', 'Argenteuil', 'Pontoise'],         fleuves: ['Oise', 'Seine'],  region: 'Île-de-France',             couleur: '#E74C3C' },
+
+    // Auvergne-Rhône-Alpes
+    'Ain (01)':              { chef_lieu: 'Bourg-en-Bresse', villes: ['Bourg-en-Bresse', 'Oyonnax', 'Ambérieu-en-Bugey'], fleuves: ['Rhône', 'Ain'], region: 'Auvergne-Rhône-Alpes', couleur: '#E67E22' },
+    'Allier (03)':           { chef_lieu: 'Moulins',         villes: ['Moulins', 'Vichy', 'Montluçon'],           fleuves: ['Allier', 'Loire'], region: 'Auvergne-Rhône-Alpes',    couleur: '#E67E22' },
+    'Ardèche (07)':          { chef_lieu: 'Privas',          villes: ['Privas', 'Annonay', 'Aubenas'],            fleuves: ['Ardèche', 'Rhône'], region: 'Auvergne-Rhône-Alpes',   couleur: '#E67E22' },
+    'Cantal (15)':           { chef_lieu: 'Aurillac',        villes: ['Aurillac', 'Saint-Flour', 'Mauriac'],      fleuves: ['Truyère', 'Lot'],  region: 'Auvergne-Rhône-Alpes',   couleur: '#E67E22' },
+    'Drôme (26)':            { chef_lieu: 'Valence',         villes: ['Valence', 'Romans-sur-Isère', 'Montélimar'], fleuves: ['Drôme', 'Rhône'], region: 'Auvergne-Rhône-Alpes', couleur: '#E67E22' },
+    'Isère (38)':            { chef_lieu: 'Grenoble',        villes: ['Grenoble', 'Bourgoin-Jallieu', 'Vienne'], fleuves: ['Isère', 'Rhône'],  region: 'Auvergne-Rhône-Alpes',   couleur: '#E67E22' },
+    'Loire (42)':            { chef_lieu: 'Saint-Étienne',   villes: ['Saint-Étienne', 'Roanne', 'Montbrison'],  fleuves: ['Loire', 'Gier'],   region: 'Auvergne-Rhône-Alpes',   couleur: '#E67E22' },
+    'Haute-Loire (43)':      { chef_lieu: 'Le Puy-en-Velay', villes: ['Le Puy-en-Velay', 'Brioude', 'Yssingeaux'], fleuves: ['Loire', 'Allier'], region: 'Auvergne-Rhône-Alpes', couleur: '#E67E22' },
+    'Puy-de-Dôme (63)':     { chef_lieu: 'Clermont-Ferrand', villes: ['Clermont-Ferrand', 'Thiers', 'Riom'],    fleuves: ['Allier', 'Dore'],  region: 'Auvergne-Rhône-Alpes',   couleur: '#E67E22' },
+    'Rhône (69)':            { chef_lieu: 'Lyon',            villes: ['Lyon', 'Villeurbanne', 'Vénissieux'],     fleuves: ['Rhône', 'Saône'],  region: 'Auvergne-Rhône-Alpes',   couleur: '#E67E22' },
+    'Savoie (73)':           { chef_lieu: 'Chambéry',        villes: ['Chambéry', 'Albertville', 'Aix-les-Bains'], fleuves: ['Isère', 'Arc'],  region: 'Auvergne-Rhône-Alpes',   couleur: '#E67E22' },
+    'Haute-Savoie (74)':    { chef_lieu: 'Annecy',          villes: ['Annecy', 'Thonon-les-Bains', 'Cluses'],   fleuves: ['Arve', 'Fier'],    region: 'Auvergne-Rhône-Alpes',   couleur: '#E67E22' },
+
+    // Nouvelle-Aquitaine
+    'Charente (16)':         { chef_lieu: 'Angoulême',       villes: ['Angoulême', 'Cognac', 'Châteauneuf'],     fleuves: ['Charente'],        region: 'Nouvelle-Aquitaine',      couleur: '#9B59B6' },
+    'Charente-Maritime (17)':{ chef_lieu: 'La Rochelle',     villes: ['La Rochelle', 'Rochefort', 'Saintes'],    fleuves: ['Charente', 'Seugne'], region: 'Nouvelle-Aquitaine',   couleur: '#9B59B6' },
+    'Corrèze (19)':          { chef_lieu: 'Tulle',           villes: ['Tulle', 'Brive-la-Gaillarde', 'Ussel'],  fleuves: ['Corrèze', 'Vézère'], region: 'Nouvelle-Aquitaine',     couleur: '#9B59B6' },
+    'Creuse (23)':           { chef_lieu: 'Guéret',          villes: ['Guéret', 'Aubusson', 'La Souterraine'], fleuves: ['Creuse', 'Petite Creuse'], region: 'Nouvelle-Aquitaine', couleur: '#9B59B6' },
+    'Dordogne (24)':         { chef_lieu: 'Périgueux',       villes: ['Périgueux', 'Bergerac', 'Sarlat'],       fleuves: ['Dordogne', 'Vézère'], region: 'Nouvelle-Aquitaine',    couleur: '#9B59B6' },
+    'Gironde (33)':          { chef_lieu: 'Bordeaux',        villes: ['Bordeaux', 'Mérignac', 'Pessac'],        fleuves: ['Garonne', 'Dordogne', 'Gironde'], region: 'Nouvelle-Aquitaine', couleur: '#9B59B6' },
+    'Landes (40)':           { chef_lieu: 'Mont-de-Marsan',  villes: ['Mont-de-Marsan', 'Dax', 'Biscarrosse'], fleuves: ['Adour', 'Midouze'],  region: 'Nouvelle-Aquitaine',      couleur: '#9B59B6' },
+    'Lot-et-Garonne (47)':  { chef_lieu: 'Agen',            villes: ['Agen', 'Marmande', 'Villeneuve-sur-Lot'], fleuves: ['Garonne', 'Lot'],   region: 'Nouvelle-Aquitaine',      couleur: '#9B59B6' },
+    'Pyrénées-Atlantiques (64)': { chef_lieu: 'Pau',         villes: ['Pau', 'Bayonne', 'Biarritz'],            fleuves: ['Adour', 'Gave de Pau'], region: 'Nouvelle-Aquitaine',  couleur: '#9B59B6' },
+    'Deux-Sèvres (79)':     { chef_lieu: 'Niort',           villes: ['Niort', 'Bressuire', 'Parthenay'],       fleuves: ['Sèvre Niortaise', 'Thouet'], region: 'Nouvelle-Aquitaine', couleur: '#9B59B6' },
+    'Vienne (86)':           { chef_lieu: 'Poitiers',        villes: ['Poitiers', 'Châtellerault', 'Loudun'],  fleuves: ['Vienne', 'Clain'],   region: 'Nouvelle-Aquitaine',      couleur: '#9B59B6' },
+    'Haute-Vienne (87)':    { chef_lieu: 'Limoges',         villes: ['Limoges', 'Brive-la-Gaillarde', 'Saint-Junien'], fleuves: ['Vienne', 'Gartempe'], region: 'Nouvelle-Aquitaine', couleur: '#9B59B6' },
+
+    // Occitanie
+    'Ariège (09)':           { chef_lieu: 'Foix',            villes: ['Foix', 'Pamiers', 'Saint-Girons'],       fleuves: ['Ariège', 'Hers'],  region: 'Occitanie',               couleur: '#F39C12' },
+    'Aude (11)':             { chef_lieu: 'Carcassonne',     villes: ['Carcassonne', 'Narbonne', 'Castelnaudary'], fleuves: ['Aude'],           region: 'Occitanie',               couleur: '#F39C12' },
+    'Aveyron (12)':          { chef_lieu: 'Rodez',           villes: ['Rodez', 'Millau', 'Villefranche-de-Rouergue'], fleuves: ['Aveyron', 'Lot'], region: 'Occitanie',           couleur: '#F39C12' },
+    'Gard (30)':             { chef_lieu: 'Nîmes',           villes: ['Nîmes', 'Alès', 'Bagnols-sur-Cèze'],    fleuves: ['Gard', 'Cèze'],    region: 'Occitanie',               couleur: '#F39C12' },
+    'Haute-Garonne (31)':   { chef_lieu: 'Toulouse',        villes: ['Toulouse', 'Blagnac', 'Colomiers'],      fleuves: ['Garonne', 'Ariège'], region: 'Occitanie',              couleur: '#F39C12' },
+    'Gers (32)':             { chef_lieu: 'Auch',            villes: ['Auch', 'Condom', 'Nogaro'],              fleuves: ['Gers', 'Baïse'],   region: 'Occitanie',               couleur: '#F39C12' },
+    'Hérault (34)':          { chef_lieu: 'Montpellier',     villes: ['Montpellier', 'Béziers', 'Sète'],       fleuves: ['Hérault', 'Orb'],  region: 'Occitanie',               couleur: '#F39C12' },
+    'Lot (46)':              { chef_lieu: 'Cahors',          villes: ['Cahors', 'Figeac', 'Gourdon'],          fleuves: ['Lot', 'Célé'],     region: 'Occitanie',               couleur: '#F39C12' },
+    'Lozère (48)':           { chef_lieu: 'Mende',           villes: ['Mende', 'Langogne', 'Florac'],          fleuves: ['Lot', 'Tarn'],     region: 'Occitanie',               couleur: '#F39C12' },
+    'Hautes-Pyrénées (65)': { chef_lieu: 'Tarbes',          villes: ['Tarbes', 'Lourdes', 'Bagnères-de-Bigorre'], fleuves: ['Adour', 'Gave de Pau'], region: 'Occitanie',       couleur: '#F39C12' },
+    'Pyrénées-Orientales (66)': { chef_lieu: 'Perpignan',   villes: ['Perpignan', 'Canet-en-Roussillon', 'Céret'], fleuves: ['Têt', 'Tech'],  region: 'Occitanie',              couleur: '#F39C12' },
+    'Tarn (81)':             { chef_lieu: 'Albi',            villes: ['Albi', 'Castres', 'Gaillac'],           fleuves: ['Tarn', 'Agout'],   region: 'Occitanie',               couleur: '#F39C12' },
+    'Tarn-et-Garonne (82)': { chef_lieu: 'Montauban',       villes: ['Montauban', 'Castelsarrasin', 'Moissac'], fleuves: ['Garonne', 'Tarn'], region: 'Occitanie',              couleur: '#F39C12' },
+
+    // Grand Est
+    'Ardennes (08)':         { chef_lieu: 'Charleville-Mézières', villes: ['Charleville-Mézières', 'Sedan', 'Rethel'], fleuves: ['Meuse', 'Semoy'], region: 'Grand Est',        couleur: '#1ABC9C' },
+    'Aube (10)':             { chef_lieu: 'Troyes',          villes: ['Troyes', 'Bar-sur-Aube', 'Romilly-sur-Seine'], fleuves: ['Aube', 'Seine'], region: 'Grand Est',           couleur: '#1ABC9C' },
+    'Marne (51)':            { chef_lieu: 'Châlons-en-Champagne', villes: ['Châlons-en-Champagne', 'Reims', 'Épernay'], fleuves: ['Marne', 'Vesle'], region: 'Grand Est',         couleur: '#1ABC9C' },
+    'Haute-Marne (52)':     { chef_lieu: 'Chaumont',        villes: ['Chaumont', 'Saint-Dizier', 'Langres'],   fleuves: ['Marne', 'Blaise'], region: 'Grand Est',              couleur: '#1ABC9C' },
+    'Meurthe-et-Moselle (54)': { chef_lieu: 'Nancy',        villes: ['Nancy', 'Vandœuvre-lès-Nancy', 'Longwy'], fleuves: ['Moselle', 'Meurthe'], region: 'Grand Est',           couleur: '#1ABC9C' },
+    'Meuse (55)':            { chef_lieu: 'Bar-le-Duc',      villes: ['Bar-le-Duc', 'Verdun', 'Commercy'],     fleuves: ['Meuse', 'Ornain'], region: 'Grand Est',              couleur: '#1ABC9C' },
+    'Moselle (57)':          { chef_lieu: 'Metz',            villes: ['Metz', 'Thionville', 'Forbach'],        fleuves: ['Moselle', 'Sarre'], region: 'Grand Est',              couleur: '#1ABC9C' },
+    'Bas-Rhin (67)':         { chef_lieu: 'Strasbourg',      villes: ['Strasbourg', 'Haguenau', 'Schiltigheim'], fleuves: ['Rhin', 'Ill'],    region: 'Grand Est',              couleur: '#1ABC9C' },
+    'Haut-Rhin (68)':        { chef_lieu: 'Colmar',          villes: ['Colmar', 'Mulhouse', 'Saint-Louis'],    fleuves: ['Rhin', 'Ill'],     region: 'Grand Est',              couleur: '#1ABC9C' },
+    'Vosges (88)':           { chef_lieu: 'Épinal',          villes: ['Épinal', 'Saint-Dié-des-Vosges', 'Remiremont'], fleuves: ['Moselle', 'Vologne'], region: 'Grand Est',   couleur: '#1ABC9C' },
+
+    // Hauts-de-France
+    'Aisne (02)':            { chef_lieu: 'Laon',            villes: ['Laon', 'Saint-Quentin', 'Soissons'],    fleuves: ['Aisne', 'Oise'],   region: 'Hauts-de-France',         couleur: '#3498DB' },
+    'Nord (59)':             { chef_lieu: 'Lille',           villes: ['Lille', 'Roubaix', 'Tourcoing'],        fleuves: ['Lys', 'Scarpe'],   region: 'Hauts-de-France',         couleur: '#3498DB' },
+    'Oise (60)':             { chef_lieu: 'Beauvais',        villes: ['Beauvais', 'Compiègne', 'Creil'],       fleuves: ['Oise', 'Thérain'], region: 'Hauts-de-France',         couleur: '#3498DB' },
+    'Pas-de-Calais (62)':   { chef_lieu: 'Arras',           villes: ['Arras', 'Calais', 'Boulogne-sur-Mer'],  fleuves: ['Scarpe', 'Aa'],    region: 'Hauts-de-France',         couleur: '#3498DB' },
+    'Somme (80)':            { chef_lieu: 'Amiens',          villes: ['Amiens', 'Abbeville', 'Péronne'],       fleuves: ['Somme', 'Authie'], region: 'Hauts-de-France',         couleur: '#3498DB' },
+
+    // Bretagne
+    "Côtes-d'Armor (22)":   { chef_lieu: 'Saint-Brieuc',    villes: ['Saint-Brieuc', 'Lannion', 'Dinan'],     fleuves: ['Trieux', 'Jaudy'], region: 'Bretagne',                couleur: '#2ECC71' },
+    'Finistère (29)':        { chef_lieu: 'Quimper',         villes: ['Quimper', 'Brest', 'Lorient'],          fleuves: ['Odet', 'Aulne'],   region: 'Bretagne',                couleur: '#2ECC71' },
+    'Ille-et-Vilaine (35)': { chef_lieu: 'Rennes',          villes: ['Rennes', 'Saint-Malo', 'Fougères'],     fleuves: ['Vilaine', 'Ille'], region: 'Bretagne',                couleur: '#2ECC71' },
+    'Morbihan (56)':         { chef_lieu: 'Vannes',          villes: ['Vannes', 'Lorient', 'Pontivy'],         fleuves: ['Blavet', 'Scorff'], region: 'Bretagne',               couleur: '#2ECC71' },
+
+    // Normandie
+    'Calvados (14)':         { chef_lieu: 'Caen',            villes: ['Caen', 'Cherbourg', 'Bayeux'],          fleuves: ['Orne', 'Seulles'], region: 'Normandie',               couleur: '#E74C3C' },
+    'Eure (27)':             { chef_lieu: 'Évreux',          villes: ['Évreux', 'Vernon', 'Louviers'],         fleuves: ['Eure', 'Seine'],   region: 'Normandie',               couleur: '#E74C3C' },
+    'Manche (50)':           { chef_lieu: 'Saint-Lô',        villes: ['Saint-Lô', 'Cherbourg-en-Cotentin', 'Avranches'], fleuves: ['Vire', 'Sée'], region: 'Normandie',        couleur: '#E74C3C' },
+    'Orne (61)':             { chef_lieu: 'Alençon',         villes: ['Alençon', 'Flers', 'Argentan'],         fleuves: ['Orne', 'Sarthe'],  region: 'Normandie',               couleur: '#E74C3C' },
+    'Seine-Maritime (76)':  { chef_lieu: 'Rouen',           villes: ['Rouen', 'Le Havre', 'Dieppe'],          fleuves: ['Seine', 'Bresle'], region: 'Normandie',               couleur: '#E74C3C' },
+
+    // Bourgogne-Franche-Comté
+    "Côte-d'Or (21)":       { chef_lieu: 'Dijon',           villes: ['Dijon', 'Beaune', 'Chenôve'],           fleuves: ['Saône', 'Ouche'],  region: 'Bourgogne-Franche-Comté', couleur: '#8E44AD' },
+    'Doubs (25)':            { chef_lieu: 'Besançon',        villes: ['Besançon', 'Montbéliard', 'Pontarlier'], fleuves: ['Doubs', 'Loue'],  region: 'Bourgogne-Franche-Comté', couleur: '#8E44AD' },
+    'Jura (39)':             { chef_lieu: 'Lons-le-Saunier', villes: ['Lons-le-Saunier', 'Dole', 'Saint-Claude'], fleuves: ['Ain', 'Doubs'],  region: 'Bourgogne-Franche-Comté', couleur: '#8E44AD' },
+    'Nièvre (58)':           { chef_lieu: 'Nevers',          villes: ['Nevers', 'Cosne-Cours-sur-Loire', 'Clamecy'], fleuves: ['Loire', 'Nièvre'], region: 'Bourgogne-Franche-Comté', couleur: '#8E44AD' },
+    'Haute-Saône (70)':     { chef_lieu: 'Vesoul',          villes: ['Vesoul', 'Gray', 'Lure'],               fleuves: ['Saône', 'Salon'],  region: 'Bourgogne-Franche-Comté', couleur: '#8E44AD' },
+    'Saône-et-Loire (71)':  { chef_lieu: 'Mâcon',           villes: ['Mâcon', 'Chalon-sur-Saône', 'Le Creusot'], fleuves: ['Saône', 'Grosne'], region: 'Bourgogne-Franche-Comté', couleur: '#8E44AD' },
+    'Yonne (89)':            { chef_lieu: 'Auxerre',         villes: ['Auxerre', 'Sens', 'Avallon'],           fleuves: ['Yonne', 'Serein'], region: 'Bourgogne-Franche-Comté', couleur: '#8E44AD' },
+    'Territoire de Belfort (90)': { chef_lieu: 'Belfort',   villes: ['Belfort', 'Delle', 'Giromagny'],        fleuves: ['Savoureuse', 'Doubs'], region: 'Bourgogne-Franche-Comté', couleur: '#8E44AD' },
+
+    // PACA
+    'Alpes-de-Haute-Provence (04)': { chef_lieu: 'Digne-les-Bains', villes: ['Digne-les-Bains', 'Manosque', 'Sisteron'], fleuves: ['Durance', 'Verdon'], region: "Provence-Alpes-Côte d'Azur", couleur: '#E91E8C' },
+    'Hautes-Alpes (05)':    { chef_lieu: 'Gap',             villes: ['Gap', 'Briançon', 'Embrun'],             fleuves: ['Durance', 'Guil'], region: "Provence-Alpes-Côte d'Azur", couleur: '#E91E8C' },
+    'Alpes-Maritimes (06)': { chef_lieu: 'Nice',            villes: ['Nice', 'Cannes', 'Antibes'],             fleuves: ['Var', 'Roya'],     region: "Provence-Alpes-Côte d'Azur", couleur: '#E91E8C' },
+    'Bouches-du-Rhône (13)':{ chef_lieu: 'Marseille',       villes: ['Marseille', 'Aix-en-Provence', 'Arles'], fleuves: ['Rhône', 'Arc'],   region: "Provence-Alpes-Côte d'Azur", couleur: '#E91E8C' },
+    'Var (83)':              { chef_lieu: 'Toulon',          villes: ['Toulon', 'Fréjus', 'Hyères'],           fleuves: ['Var', 'Argens'],   region: "Provence-Alpes-Côte d'Azur", couleur: '#E91E8C' },
+    'Vaucluse (84)':         { chef_lieu: 'Avignon',         villes: ['Avignon', 'Carpentras', 'Apt'],          fleuves: ['Rhône', 'Durance'], region: "Provence-Alpes-Côte d'Azur", couleur: '#E91E8C' },
+
+    // Pays de la Loire
+    'Loire-Atlantique (44)':{ chef_lieu: 'Nantes',          villes: ['Nantes', 'Saint-Nazaire', 'Saint-Herblain'], fleuves: ['Loire', 'Erdre'], region: 'Pays de la Loire',    couleur: '#27AE60' },
+    'Maine-et-Loire (49)':  { chef_lieu: 'Angers',          villes: ['Angers', 'Cholet', 'Saumur'],           fleuves: ['Maine', 'Loire'],  region: 'Pays de la Loire',        couleur: '#27AE60' },
+    'Mayenne (53)':          { chef_lieu: 'Laval',           villes: ['Laval', 'Mayenne', 'Château-Gontier'],  fleuves: ['Mayenne', 'Ouette'], region: 'Pays de la Loire',      couleur: '#27AE60' },
+    'Sarthe (72)':           { chef_lieu: 'Le Mans',         villes: ['Le Mans', 'La Flèche', 'Mamers'],       fleuves: ['Sarthe', 'Loir'],  region: 'Pays de la Loire',        couleur: '#27AE60' },
+    'Vendée (85)':           { chef_lieu: 'La Roche-sur-Yon', villes: ['La Roche-sur-Yon', 'Les Sables-d\'Olonne', 'Fontenay-le-Comte'], fleuves: ['Vendée', 'Lay'], region: 'Pays de la Loire', couleur: '#27AE60' },
+
+    // Centre-Val de Loire
+    'Cher (18)':             { chef_lieu: 'Bourges',         villes: ['Bourges', 'Vierzon', 'Saint-Amand-Montrond'], fleuves: ['Cher', 'Arnon'], region: 'Centre-Val de Loire', couleur: '#F1C40F' },
+    'Eure-et-Loir (28)':    { chef_lieu: 'Chartres',        villes: ['Chartres', 'Dreux', 'Châteaudun'],      fleuves: ['Eure', 'Loir'],    region: 'Centre-Val de Loire',     couleur: '#F1C40F' },
+    'Indre (36)':            { chef_lieu: 'Châteauroux',     villes: ['Châteauroux', 'Issoudun', 'La Châtre'], fleuves: ['Indre', 'Creuse'], region: 'Centre-Val de Loire',     couleur: '#F1C40F' },
+    'Indre-et-Loire (37)':  { chef_lieu: 'Tours',           villes: ['Tours', 'Amboise', 'Chinon'],           fleuves: ['Loire', 'Indre'],  region: 'Centre-Val de Loire',     couleur: '#F1C40F' },
+    'Loir-et-Cher (41)':    { chef_lieu: 'Blois',           villes: ['Blois', 'Vendôme', 'Romorantin-Lanthenay'], fleuves: ['Loire', 'Loir'], region: 'Centre-Val de Loire',  couleur: '#F1C40F' },
+    'Loiret (45)':           { chef_lieu: 'Orléans',         villes: ['Orléans', 'Montargis', 'Pithiviers'],  fleuves: ['Loire', 'Loiret'], region: 'Centre-Val de Loire',     couleur: '#F1C40F' },
+
+    // Corse
+    'Corse-du-Sud (2A)':    { chef_lieu: 'Ajaccio',         villes: ['Ajaccio', 'Bonifacio', 'Porto-Vecchio'], fleuves: ['Taravo', 'Rizzanese'], region: 'Corse',              couleur: '#16A085' },
+    'Haute-Corse (2B)':     { chef_lieu: 'Bastia',          villes: ['Bastia', 'Corte', 'Calvi'],             fleuves: ['Golo', 'Tavignano'], region: 'Corse',                 couleur: '#16A085' },
   },
 
   // ─── Données pour les autres pays ─────────────────────────────
