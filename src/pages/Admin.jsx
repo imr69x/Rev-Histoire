@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Trash2, Plus, ChevronDown, ChevronUp, Settings, Users, CheckCircle, XCircle, RefreshCw, Shield, Crown, UserX, LayoutDashboard, SlidersHorizontal, ExternalLink } from 'lucide-react'
+import { Trash2, Plus, ChevronDown, ChevronUp, Settings, Users, CheckCircle, XCircle, RefreshCw, Shield, Crown, UserX, LayoutDashboard, SlidersHorizontal, ExternalLink, Map } from 'lucide-react'
+import AdminMapBuilder from '@/components/AdminMapBuilder'
 import { useAdminStore } from '@/stores/useAdminStore'
 import { useAuth } from '@/contexts/AuthContext'
 import { supabase } from '@/lib/supabase'
@@ -912,6 +913,7 @@ export default function Admin() {
     ...(isAdmin ? [
       { id: 'comptes', label: 'Comptes', icon: Users },
       { id: 'config', label: 'Configuration', icon: SlidersHorizontal },
+      { id: 'mapbuilder', label: 'Map Builder', icon: Map },
     ] : []),
     { id: 'contenu', label: 'Contenu', icon: Settings },
   ]
@@ -947,6 +949,7 @@ export default function Admin() {
       {/* Contenu des onglets */}
       {tab === 'comptes' && isAdmin && <ComptesPanel />}
       {tab === 'config' && isAdmin && <ConfigPanel />}
+      {tab === 'mapbuilder' && isAdmin && <AdminMapBuilder />}
 
       {tab === 'contenu' && (
         <div className="space-y-4">
