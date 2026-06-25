@@ -793,25 +793,6 @@ export const personalities = [
     quote: "Nous cherchons des chrétiens et des épices.",
     level: ['5e', '2nde']
   },
-  {
-    id: 'christophe_colomb',
-    name: 'Christophe Colomb',
-    birth: '1451',
-    death: '1506',
-    era: 'Temps Modernes',
-    category: 'Exploration',
-    nationality: 'Génoise / Espagnole',
-    bio: "Navigateur génois au service des Rois Catholiques d'Espagne, Christophe Colomb atteint les Amériques le 12 octobre 1492, pensant avoir atteint les Indes. En 4 voyages (1492, 1493, 1498, 1502), il explore les Caraïbes et l'Amérique centrale. Son voyage ouvre la colonisation des Amériques et provoque l'effondrement des civilisations amérindiennes. Il mourra sans savoir qu'il avait découvert un 'Nouveau Monde'.",
-    keyFacts: [
-      "12 octobre 1492 : aborde l'île de Guanahani (Bahamas)",
-      "Croit arriver en Asie — nomme les habitants 'Indiens'",
-      "4 voyages en Amérique (1492, 1493, 1498, 1502)",
-      "Financé par les Rois Catholiques (Isabelle de Castille, Ferdinand d'Aragon)",
-      "Meurt en 1506 sans savoir avoir découvert un nouveau continent"
-    ],
-    quote: "Par Castille et Léon, Colomb a trouvé un nouveau monde.",
-    level: ['5e', '2nde']
-  },
 
   // === PHILOSOPHES ET PENSEURS ===
   {
@@ -2741,36 +2722,36 @@ export const personalities = [
     level: ['3e', 'Terminale']
   },
   {
-    id: 'ataturk',
-    name: 'Mustafa Kemal Atatürk',
-    birth: '1881', death: '1938',
-    era: 'XXe siècle', category: 'Politique', nationality: 'Turque',
-    bio: "Mustafa Kemal Atatürk est le fondateur et premier président de la République de Turquie (1923-1938), l'un des plus grands réformateurs politiques du XXe siècle. Héros militaire à Gallipoli (1915), il mène la guerre d'indépendance turque contre les Alliés (1919-1923) et abolit le Sultanat ottoman millénaire. En quinze ans, il transforme radicalement la Turquie : séparation de l'État et de la religion, adoption de l'alphabet latin, égalité juridique hommes-femmes, port occidental obligatoire, calendrier grégorien, éducation laïque universelle. Son surnom Atatürk signifie 'Père des Turcs'. Aujourd'hui encore vénéré en Turquie, son modèle de laïcité islamique inspire de nombreux pays.",
+    id: 'macron',
+    name: 'Emmanuel Macron',
+    birth: '1977', death: 'présent',
+    era: 'Contemporain', category: 'Politique', nationality: 'Française',
+    bio: "Emmanuel Macron est le 25e président de la République française, élu en 2017 à 39 ans — le plus jeune chef d'État de l'histoire de France. Ancien haut fonctionnaire (ENA) et banquier d'affaires (Rothschild), il fonde En Marche ! en 2016, un mouvement centriste qui dynamite le bipartisme traditionnel PS/RPR. Réélu en 2022 face à Marine Le Pen, il incarne une Europe fédérale et une défense de la souveraineté stratégique du continent. Sur la scène internationale, il joue un rôle actif dans la guerre en Ukraine (soutien militaire à Kiev), les relations avec l'Afrique (fin de la présence militaire française au Sahel) et la rivalité sino-américaine.",
     keyFacts: [
-      "Héros de Gallipoli (1915) — seule victoire ottomane face aux Alliés",
-      "Fonde la République de Turquie le 29 octobre 1923 — met fin à l'Empire ottoman",
-      "Abolit le califat islamique (1924) — séparation État/religion sans précédent dans le monde musulman",
-      "Impose l'alphabet latin (1928), le calendrier grégorien, le code civil suisse, le droit de vote aux femmes (1934)",
-      "Surnommé Atatürk ('Père des Turcs') par le parlement en 1934 — vénéré comme père de la nation"
+      "Plus jeune président de la Ve République (39 ans en 2017) — outsider qui brise le bipartisme",
+      "Fondateur d'En Marche ! (2016) — nouveau mouvement centriste devenu Renaissance",
+      "Réélu en 2022 face à Marine Le Pen — seul président de la Ve République réélu hors cohabitation depuis Chirac",
+      "Partisan d'une 'autonomie stratégique' européenne — moteur de la défense européenne face à la Russie",
+      "Retrait des forces françaises du Mali, Niger, Tchad (2023-2024) — tournant de la politique africaine de la France"
     ],
-    quote: "La paix dans le pays, la paix dans le monde.",
-    level: ['3e', 'Terminale']
+    quote: "L'Europe n'est pas un marché, c'est un destin.",
+    level: ['3e', 'Terminale', 'HGGSP']
   },
   {
-    id: 'ho-chi-minh',
-    name: 'Ho Chi Minh',
-    birth: '1890', death: '1969',
-    era: 'XXe siècle', category: 'Politique', nationality: 'Vietnamienne',
-    bio: "Ho Chi Minh est le père fondateur du Vietnam indépendant, révolutionnaire communiste qui mène son pays contre deux des plus grandes puissances mondiales : la France coloniale et les États-Unis. Après des années d'exil en France, en URSS et en Chine, il fonde le Viêt-Minh (1941) et proclame l'indépendance du Vietnam le 2 septembre 1945. Sa victoire à Diên Biên Phu contre la France (1954) met fin à la colonisation française en Indochine. Il inspire ensuite la résistance contre les États-Unis (guerre du Viêt Nam, 1955-1975), qui échoueront à le vaincre. Il meurt en 1969 sans voir la réunification du Vietnam (1975), qui lui dédiera Saigon renommée Hô Chi Minh-Ville.",
+    id: 'xianfeng',
+    name: 'Xianfeng',
+    birth: '1831', death: '1861',
+    era: 'XIXe siècle', category: 'Politique', nationality: 'Chinoise',
+    bio: "Xianfeng est le neuvième empereur de la dynastie Qing (1850-1861), figure tragique d'une Chine impériale en plein effondrement face aux puissances occidentales. Son règne est marqué par deux catastrophes simultanées : la révolte des Taiping (1850-1864), guerre civile qui fait entre 20 et 30 millions de morts, et la Seconde Guerre de l'Opium (1856-1860) durant laquelle les armées franco-britanniques pillent et incendient le Palais d'Été de Pékin. Contraint de signer le traité de Pékin (1860), il cède des territoires et ouvre de nouveaux ports aux puissances étrangères. Il meurt en exil à Chengde à 30 ans, laissant un empire affaibli et humilié. Après sa mort, sa concubine Cixi prend le pouvoir comme régente.",
     keyFacts: [
-      "Proclame l'indépendance du Vietnam le 2 septembre 1945 — en citant la Déclaration d'indépendance américaine",
-      "Victoire de Diên Biên Phu (7 mai 1954) contre la France — fin de la colonisation française en Indochine",
-      "Résiste à l'intervention américaine (1965-1969) — 500 000 soldats US ne parviennent pas à le vaincre",
-      "Saigon rebaptisée Hô Chi Minh-Ville après la réunification (1975) — hommage posthume",
-      "S'inspire explicitement d'Abd el-Krim al-Khattabi pour ses tactiques de guérilla"
+      "Règne durant la révolte des Taiping (1850-1864) — l'une des guerres civiles les plus meurtrières de l'histoire (20-30 millions de morts)",
+      "Seconde Guerre de l'Opium (1856-1860) — armées franco-britanniques pillent le Palais d'Été (Yuanmingyuan) de Pékin",
+      "Traité de Pékin (1860) — cède Kowloon au Royaume-Uni, ouvre de nouveaux ports, verse des indemnités colossales",
+      "Fuit Pékin pour Chengde lors de l'entrée des troupes alliées — meurt en exil à 30 ans",
+      "Sa concubine Cixi lui succède comme régente et domine la Chine pendant 47 ans (1861-1908)"
     ],
-    quote: "Rien n'est plus précieux que l'indépendance et la liberté.",
-    level: ['3e', 'Terminale']
+    quote: "Le Fils du Ciel ne peut fuir que vers le nord.",
+    level: ['3e', 'HGGSP']
   },
 ]
 
