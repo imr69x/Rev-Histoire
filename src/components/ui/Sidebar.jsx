@@ -111,7 +111,7 @@ function MobileNav({ navItems, isAdmin, isPaid, navigate, handleSignOut, user, l
             {user?.email?.[0]?.toUpperCase() || '?'}
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-xs font-semibold text-[#D4AF37] truncate">{level.label}</p>
+            <p className="text-xs font-semibold text-[#D4AF37] truncate">{isAdmin ? '👑 Admin' : level.label}</p>
             <p className="text-[11px] text-[#8B7355] truncate">{user?.email || ''}</p>
           </div>
           <button

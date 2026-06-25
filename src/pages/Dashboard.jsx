@@ -5,6 +5,7 @@ import {
 } from 'lucide-react'
 import { useAppStore } from '@/stores/useAppStore'
 import { getLevel, getProgressToNext, XP_LEVELS } from '@/utils/xp'
+import { useAuth } from '@/contexts/AuthContext'
 import { Card, CardHeader, CardBody, CardTitle } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { Progress } from '@/components/ui/Progress'
@@ -88,6 +89,7 @@ function HeatmapCell({ count }) {
 
 export default function Dashboard() {
   const { xp, streak, quizHistory, learnedCards, learnedTerms, activity } = useAppStore()
+  const { isAdmin } = useAuth()
   const level = getLevel(xp)
   const progress = getProgressToNext(xp)
 
@@ -111,7 +113,7 @@ export default function Dashboard() {
     : 0
 
   return (
-    <div className="p-6 max-w-7xl mx-auto animate-fade-in">
+    <div className="p-6 pb-24 md:pb-6 max-w-7xl mx-auto animate-fade-in">
       {/* En-tête */}
       <div className="mb-8">
         <h1 className="text-3xl font-['Playfair_Display'] font-bold text-[#2C1810] dark:text-[#E6EDF3] mb-1">
@@ -134,8 +136,8 @@ export default function Dashboard() {
               {level.label[0]}
             </div>
             <div>
-              <p className="font-semibold text-[#D4AF37]">{level.label}</p>
-              <p className="text-sm text-white/70">{xp} XP total</p>
+              <p className="font-semibold text-[#D4AF37]">{isAdmin ? '👑 Admin' : level.label}</p>
+              <p className="text-sm text-white/70">{isAdmin ? 'Accès complet' : `${xp} XP total`}</p>
             </div>
             {streak > 0 && (
               <div className="ml-auto flex items-center gap-1.5 bg-white/10 rounded-xl px-3 py-1.5">
