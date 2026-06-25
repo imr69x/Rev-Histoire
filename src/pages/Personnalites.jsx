@@ -71,7 +71,7 @@ export default function Personnalites() {
   ], [customPersonalities])
 
   const fuse = useMemo(
-    () => new Fuse(personalitiesData, { keys: ['name', 'shortBio', 'nationality'], threshold: 0.3 }),
+    () => new Fuse(personalitiesData, { keys: ['name', 'shortBio', 'nationality'], threshold: 0.2 }),
     [personalitiesData]
   )
 
@@ -82,7 +82,7 @@ export default function Personnalites() {
     if (era !== 'Tous') data = data.filter((p) => p.era === era)
     if (category !== 'all') data = data.filter((p) => p.category === category)
     return data.sort((a, b) => a.name.localeCompare(b.name, 'fr', { sensitivity: 'base' }))
-  }, [search, era, category])
+  }, [search, era, category, fuse, personalitiesData])
 
   return (
     <div className="p-6 max-w-7xl mx-auto animate-fade-in">
