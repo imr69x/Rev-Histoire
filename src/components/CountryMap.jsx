@@ -167,6 +167,7 @@ const GEO_NAME_ALIASES = {
   arabie_saoudite: {
     'ArRiyad': 'Riyadh', 'AlMadinah': 'Madinah',
     "'Asir": 'Asir', 'Ash-Sharqīyah': 'Eastern Province',
+    'Ḥaʼil': 'Hail',
   },
   chine: {
     'Heilongjian': 'Heilongjiang',
