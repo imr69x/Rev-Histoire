@@ -1,7 +1,7 @@
 import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import {
   BookOpen, Globe, Users, BookMarked, HelpCircle,
-  Clock, BarChart3, GraduationCap, Menu, X,
+  Clock, BarChart3, Menu, X,
   Scroll, Star, MapPin, Settings, LogOut, Crown,
   MoreHorizontal, ChevronRight
 } from 'lucide-react'
@@ -20,7 +20,6 @@ const NAV_ITEMS = [
   { to: '/quiz',      icon: HelpCircle,  label: 'Quiz' },
   { to: '/carte',     icon: Globe,       label: 'Carte interactive' },
   { to: '/frise',     icon: Clock,       label: 'Frise chronologique' },
-  { to: '/methode',   icon: GraduationCap, label: 'Méthode Bac/Brevet' },
   { to: '/pays',      icon: MapPin,      label: 'Histoire des pays' },
   { to: '/favoris',   icon: Star,        label: 'Mes favoris' },
   { to: '/pricing',   icon: Crown,       label: 'Tarifs & Abonnement' },
@@ -38,7 +37,6 @@ const MORE_ITEMS = [
   { to: '/glossaire',      icon: BookMarked,    label: 'Glossaire' },
   { to: '/personnalites',  icon: Users,         label: 'Personnalités' },
   { to: '/frise',          icon: Clock,         label: 'Frise' },
-  { to: '/methode',        icon: GraduationCap, label: 'Méthode' },
   { to: '/pays',           icon: MapPin,        label: 'Pays' },
   { to: '/favoris',        icon: Star,          label: 'Favoris' },
 ]
