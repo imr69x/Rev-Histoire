@@ -1286,6 +1286,76 @@ export const paysData = [
       challenges: 'Dépendance à la Russie (énergie) et Chine (commerce), pollution d\'Oulan-Bator',
     }
   },
+
+  {
+    id: 'vietnam',
+    name: 'Viêt Nam',
+    flag: '🇻🇳',
+    surnom: 'Le Pays du Dragon d\'Eau — Rồng Tiên',
+    continent: 'Asie',
+    capital: 'Hanoï',
+    population: '98 millions (2024)',
+    area: '331 212 km²',
+    regime: 'République socialiste à parti unique (Parti communiste)',
+    langue: 'Vietnamien',
+    monnaie: 'Dong (₫)',
+    color: '#DA251D',
+    summary: "Le Viêt Nam est l'un des pays dont l'histoire est la plus marquée par la résistance : mille ans de domination chinoise (111 av. J.-C. – 938 apr. J.-C.) suivis d'une indépendance jalousement préservée contre les Mongols, les Ming et les Qing. Colonisé par la France à partir de 1858 (Cochinchine, Annam, Tonkin), il mène une guerre de libération victorieuse contre la puissance coloniale (Điện Biên Phủ, 7 mai 1954) avant d'affronter les États-Unis dans le conflit le plus médiatisé du XXe siècle. La chute de Saigon (30 avril 1975) réunifie le pays sous le régime communiste. Les réformes Đổi Mới (1986) transforment l'économie planifiée en économie de marché socialiste, faisant du Viêt Nam l'un des pays à la croissance la plus rapide d'Asie. Civilisation du riz et du fleuve, héritière du bouddhisme mahayana et du confucianisme, le Viêt Nam a développé une culture d'une grande richesse : théâtre de marionnettes sur l'eau, ao dài, cuisine classée parmi les meilleures du monde.",
+    reasons: ['1 000 ans de domination chinoise et résistance identitaire', 'Colonisation française (1858-1954) et guerre d\'Indochine', 'Bataille de Điện Biên Phủ (1954) — fin de l\'empire colonial français', 'Guerre du Viêt Nam contre les USA (1955-1975)', 'Réunification et réformes Đổi Mới (1986)'],
+    geography: {
+      montagnes: 'Fansipan (3 147 m — Toit de l\'Indochine), Chaîne Annamitique (Trường Sơn), Plateau des Bolovens',
+      fleuves: 'Fleuve Rouge (Hong Ha, 1 149 km — delta nord, Hanoï), Mékong (4 350 km total — delta sud, Cần Thơ), Rivière des Parfums (Hué)',
+      cotes: 'Mer de Chine méridionale — 3 260 km de côtes, baie d\'Ha Long (UNESCO), archipels de Phu Quoc et Con Dao',
+      sites: 'Baie d\'Ha Long (UNESCO), Phong Nha-Kẻ Bàng (grottes, UNESCO), Hội An (vieille ville, UNESCO), Mỹ Sơn (temples Cham, UNESCO), Citadelle de Hué (UNESCO)',
+      forets: 'Forêts tropicales (Cúc Phương — premier parc national 1962), mangroves du Mékong, bambouseraies des hauts plateaux',
+      climat: 'Tropical de mousson — nord (4 saisons), sud (saison sèche/humide), typhons côte centrale (sept-nov)',
+    },
+    history: [
+      { date: '2879 av. J.-C.', event: 'Fondation légendaire du royaume de Van Lang (Hùng Vương)' },
+      { date: '111 av. J.-C.', event: 'Conquête chinoise (Han) — début de mille ans de domination' },
+      { date: '40 apr. J.-C.', event: 'Révolte des sœurs Trưng contre les Han' },
+      { date: '938', event: 'Victoire de Ngô Quyền sur le Fleuve Bach Dang — indépendance' },
+      { date: '1010', event: 'Fondation de Thăng Long (Hanoï) par Lý Thái Tổ' },
+      { date: '1258-1288', event: 'Trois invasions mongoles repoussées (Trần Hưng Đạo)' },
+      { date: '1428', event: 'Expulsion des Ming par Lê Lợi — restauration de l\'indépendance' },
+      { date: '1802', event: 'Nguyễn Ánh unifie le Viêt Nam — empire des Nguyễn (Huế)' },
+      { date: '1858-1884', event: 'Conquête française — Cochinchine, Annam, Tonkin' },
+      { date: '1940-1945', event: 'Occupation japonaise — Ho Chi Minh fonde le Viêt Minh' },
+      { date: '2 sept 1945', event: 'Ho Chi Minh proclame l\'indépendance — République du Viêt Nam' },
+      { date: '7 mai 1954', event: 'Điện Biên Phủ — défaite française, accords de Genève' },
+      { date: '1955-1975', event: 'Guerre du Viêt Nam — nord communiste vs sud pro-américain' },
+      { date: '30 avr 1975', event: 'Chute de Saigon — réunification sous régime communiste' },
+      { date: '1986', event: 'Đổi Mới — réformes économiques, ouverture au marché' },
+    ],
+    dynasties: ['Hùng Vương (légendaire, ~2879-258 av. J.-C.)', 'Lý (1009-1225)', 'Trần (1225-1400)', 'Lê (1428-1788)', 'Nguyễn (1802-1945)', 'République socialiste (1975-présent)'],
+    famousBattles: [
+      { name: 'Bach Dang (938)', result: 'Victoire de Ngô Quyền — fin de la domination chinoise millénaire' },
+      { name: 'Bach Dang (1288)', result: 'Trần Hưng Đạo écrase la flotte mongole — 3e invasion repoussée' },
+      { name: 'Điện Biên Phủ (1954)', result: 'Défaite française — fin de la colonisation en Indochine' },
+      { name: 'Offensive du Tết (1968)', result: 'Tournant de la guerre du Viêt Nam — choc psychologique pour les USA' },
+    ],
+    notableFigures: ['Hùng Vương (rois fondateurs légendaires)', 'Sœurs Trưng (résistance 40 ap.)', 'Ngô Quyền (938)', 'Trần Hưng Đạo (général anti-mongol)', 'Lê Lợi (indépendance 1428)', 'Nguyễn Ánh / Gia Long (réunificateur 1802)', 'Hô Chi Minh', 'Võ Nguyên Giáp (général Điện Biên Phủ)', 'Nguyễn Văn Thiệu'],
+    economie: {
+      ressources: 'Riz (3e exportateur mondial), café (2e exportateur), crevettes, pétrole offshore (mer de Chine), bauxite',
+      industries: 'Textile et vêtements (Samsung, Nike), électronique (Samsung = 25% des exportations), tourisme, chaussures',
+      pib: '430 milliards $ (35e mondial, croissance ~6-7%/an)',
+    },
+    culture: {
+      cuisine: 'Phở (soupe de nouilles au bœuf — plat national), bánh mì (baguette vietnamienne), bún bò Huế, gỏi cuốn (rouleaux frais), cà phê trứng (café à l\'œuf — Hanoï)',
+      musique: 'Đờn ca tài tử (musique du sud, UNESCO), nhạc cụ (instruments traditionnels : đàn bầu, đàn tranh), nhạc đỏ (chants révolutionnaires)',
+      vetement: 'Áo dài (robe nationale fendue — femmes), nón lá (chapeau conique en feuilles de palmier), áo bà ba (paysans du sud)',
+      arts: 'Marionnettes sur l\'eau (múa rối nước, UNESCO), laque et marqueterie de nacre, céramique de Bát Tràng, calligraphie sino-vietnamienne',
+      fetes: 'Tết Nguyên Đán (Nouvel An lunaire — 15 jours de fêtes), Tết Trung Thu (fête de la mi-automne — lanternes), Giỗ Tổ Hùng Vương (fête des rois fondateurs)',
+    },
+    currentInfo: {
+      president: 'Tô Lâm (secrétaire général du PCV et président, 2024)',
+      pib: '430 milliards $ (35e mondial)',
+      hdm: 'IDH : 0.703 (élevé)',
+      allies: 'Russie (historique), Chine (tensions en mer de Chine), USA (normalisation 1995)',
+      challenges: 'Tensions en mer de Chine méridionale, corruption, droits de l\'homme, dépendance aux exportations électroniques',
+    }
+  },
+
   {
     id: 'coree_du_sud',
     name: 'Corée du Sud',
@@ -1422,7 +1492,6 @@ export const paysData = [
       challenges: 'Vieillissement démographique, déflation, menace nord-coréenne et chinoise, révision du pacifisme',
     }
   },
-
   // ════════════════════════════════════════════════════
   // AFRIQUE
   // ════════════════════════════════════════════════════

@@ -40,7 +40,7 @@ const FLAG_CODES = {
   france: 'fr', royaume_uni: 'gb', allemagne: 'de', espagne: 'es', portugal: 'pt',
   italie: 'it', grece: 'gr', russie: 'ru', pologne: 'pl', irak: 'iq',
   egypte: 'eg', iran: 'ir', turquie: 'tr', chine: 'cn', inde: 'in',
-  mongolie: 'mn', japon: 'jp', ethiopie: 'et', mali: 'ml', afrique_du_sud: 'za',
+  mongolie: 'mn', vietnam: 'vn', japon: 'jp', ethiopie: 'et', mali: 'ml', afrique_du_sud: 'za',
   maroc: 'ma', etats_unis: 'us', cuba: 'cu', mexique: 'mx', perou: 'pe', bresil: 'br', haiti: 'ht',
   australie: 'au', arabie_saoudite: 'sa', coree_du_sud: 'kr',
   pays_bas: 'nl', tunisie: 'tn', algerie: 'dz', emirats_arabes_unis: 'ae',
