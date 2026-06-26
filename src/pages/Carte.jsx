@@ -1,6 +1,6 @@
 ﻿import { useState, useCallback, useEffect, useRef } from 'react'
 import { ComposableMap, Geographies, Geography, ZoomableGroup } from 'react-simple-maps'
-import { Play, Pause, ChevronLeft, ChevronRight, Globe, Info, Layers, ZoomIn, ZoomOut } from 'lucide-react'
+import { Play, Pause, ChevronLeft, ChevronRight, Globe, Info, Layers, ZoomIn, ZoomOut, Menu, X } from 'lucide-react'
 
 const GEO_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'
 const DEFAULT_FILL = '#D5C9B8'
@@ -25,18 +25,18 @@ const TL = {
     { s:1944,  e:2025, n:'France (IVe puis Ve République)',             c:'#5DADE2' },
   ],
   '276': [ // Germany
-    { s:-3000, e:476,  n:'Tribus germaniques / Frontière romaine',      c:'#884EA0' },
+    { s:-3000, e:476,  n:'Tribus germaniques / Frontière romaine',      c:'#D4870B' },
     { s:476,   e:843,  n:'Royaume franc / Carolingiens',                c:'#4A7C59' },
-    { s:843,   e:962,  n:'Francie orientale',                          c:'#884EA0' },
-    { s:962,   e:1806, n:'Saint-Empire romain germanique',              c:'#884EA0' },
+    { s:843,   e:962,  n:'Francie orientale',                          c:'#D4870B' },
+    { s:962,   e:1806, n:'Saint-Empire romain germanique',              c:'#D4870B' },
     { s:1806,  e:1815, n:'Confédération du Rhin (Napoléon)',            c:'#4E1E5E' },
-    { s:1815,  e:1866, n:'Confédération germanique',                    c:'#884EA0' },
-    { s:1866,  e:1871, n:'Confédération de l\'Allemagne du Nord',      c:'#7D3C98' },
+    { s:1815,  e:1866, n:'Confédération germanique',                    c:'#D4870B' },
+    { s:1866,  e:1871, n:'Confédération de l\'Allemagne du Nord',      c:'#B7770D' },
     { s:1871,  e:1918, n:'Empire allemand (IIe Reich)',                 c:'#943126'},
-    { s:1918,  e:1933, n:'République de Weimar',                        c:'#884EA0' },
+    { s:1918,  e:1933, n:'République de Weimar',                        c:'#D4870B' },
     { s:1933,  e:1945, n:'IIIe Reich — Allemagne nazie',               c:'#1A1A1A' },
-    { s:1945,  e:1990, n:'RFA / RDA (Allemagne divisée)',               c:'#884EA0' },
-    { s:1990,  e:2025, n:'Allemagne réunifiée',                         c:'#884EA0' },
+    { s:1945,  e:1990, n:'RFA / RDA (Allemagne divisée)',               c:'#D4870B' },
+    { s:1990,  e:2025, n:'Allemagne réunifiée',                         c:'#D4870B' },
   ],
   '826': [ // UK
     { s:-3000, e:-50,  n:'Tribus celtes britaniques',                   c:'#A9CCE3' },
@@ -105,9 +105,9 @@ const TL = {
     { s:-3000, e:966,  n:'Tribus slaves (Polanes)',                     c:'#A93226' },
     { s:966,   e:1569, n:'Royaume de Pologne',                          c:'#A93226' },
     { s:1569,  e:1795, n:'République des Deux Nations (Pologne-Lituanie)',c:'#A93226' },
-    { s:1795,  e:1807, n:'Pologne partagée (Prusse / Russie / Autriche)',c:'#884EA0' },
+    { s:1795,  e:1807, n:'Pologne partagée (Prusse / Russie / Autriche)',c:'#5D6D7E' },
     { s:1807,  e:1815, n:'Duché de Varsovie (Napoléon)',                c:'#4E1E5E' },
-    { s:1815,  e:1918, n:'Pologne — domination russe/prussienne',       c:'#884EA0' },
+    { s:1815,  e:1918, n:'Pologne — domination russe/prussienne',       c:'#5D6D7E' },
     { s:1918,  e:1939, n:'République de Pologne',                       c:'#A93226' },
     { s:1939,  e:1945, n:'Pologne — occupation nazie/soviétique',       c:'#1A1A1A' },
     { s:1945,  e:1989, n:'Pologne (bloc soviétique)',                    c:'#7B241C' },
@@ -1207,14 +1207,12 @@ export default function Carte() {
           <div style={{ display: 'flex', gap: '4px', flexShrink: 0 }}>
             <button onClick={() => setZoom(z => Math.min(z + 0.5, 8))} style={btnStyle}><ZoomIn size={14}/></button>
             <button onClick={() => setZoom(z => Math.max(z - 0.5, 1))} style={btnStyle}><ZoomOut size={14}/></button>
-            {isMobile && (
-              <button
-                onClick={() => setShowPanel(p => !p)}
-                style={{ ...btnStyle, background: showPanel ? '#D4AF37' : 'rgba(255,255,255,0.1)', color: showPanel ? '#0D1117' : 'white' }}
-              >
-                <Layers size={14}/>
-              </button>
-            )}
+            <button
+              onClick={() => setShowPanel(p => !p)}
+              style={{ ...btnStyle, background: showPanel ? '#D4AF37' : 'rgba(255,255,255,0.1)', color: showPanel ? '#0D1117' : 'white' }}
+            >
+              {showPanel ? <X size={14}/> : <Menu size={14}/>}
+            </button>
           </div>
         </div>
 
@@ -1299,7 +1297,7 @@ export default function Carte() {
         </div>
 
         {/* ── Panneau droit (desktop) ── */}
-        {!isMobile && (
+        {!isMobile && showPanel && (
           <aside style={{ width: '272px', flexShrink: 0, display: 'flex', flexDirection: 'column', borderLeft: '1px solid rgba(255,255,255,0.1)', background: '#161B22', overflowY: 'auto' }}>
 
             {/* Tabs desktop */}
