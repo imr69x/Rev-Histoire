@@ -636,8 +636,8 @@ PIÈGE À ÉVITER : paraphraser le document sans l'analyser.
     id: 'oral',
     icon: PenLine,
     color: '#C0392B',
-    title: 'Grand Oral & TPE',
-    level: 'Bac Terminale / 1ère',
+    title: 'Grand Oral',
+    level: 'Bac Terminale',
     sections: [
       {
         title: '🎤 Le Grand Oral du Bac (Terminale)',
