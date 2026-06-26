@@ -43,7 +43,7 @@ const FLAG_CODES = {
   mongolie: 'mn', japon: 'jp', ethiopie: 'et', mali: 'ml', afrique_du_sud: 'za',
   maroc: 'ma', etats_unis: 'us', mexique: 'mx', bresil: 'br', haiti: 'ht',
   australie: 'au', arabie_saoudite: 'sa', coree_du_sud: 'kr',
-  pays_bas: 'nl', tunisie: 'tn', algerie: 'dz',
+  pays_bas: 'nl', tunisie: 'tn', algerie: 'dz', emirats_arabes_unis: 'ae',
 }
 
 function getFlagUrl(id, size = 80) {
