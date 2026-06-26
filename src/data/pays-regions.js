@@ -519,7 +519,7 @@ export const regionsData = {
       chef_lieu: 'Dakhla',
       population: '142 000',
       superficie: '142 865 km²',
-      description: "Région la plus méridionale du Maroc. Dakhla, capitale du kite-surf mondial. Pêche intensive, phosphates offshore.",
+      description: "Région la plus méridionale du Maroc. Dakhla, surnommée la Perle du Sahara marocain — lagune turquoise unique, capitale mondiale du kite-surf. Pêche intensive, phosphates offshore.",
       villes: ['Dakhla', 'Aousserd'],
       fleuves: ['Oued ed Dahab'],
       sites: ['Lagune de Dakhla (kite-surf mondial)', 'Réserve naturelle de la Baie de Dakhla', 'Plages sahariennes'],
