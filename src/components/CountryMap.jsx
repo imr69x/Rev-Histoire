@@ -50,9 +50,141 @@ const HOVER_COLORS = {
   Afrique: '#27AE60', Amériques: '#8E44AD', Océanie: '#16A085',
 }
 
+const GEO_NAME_ALIASES = {
+  etats_unis: {
+    'California': 'Californie', 'Florida': 'Floride', 'Georgia': 'Géorgie',
+    'North Carolina': 'Caroline du Nord', 'South Carolina': 'Caroline du Sud',
+    'North Dakota': 'Dakota du Nord', 'South Dakota': 'Dakota du Sud',
+    'Pennsylvania': 'Pennsylvanie', 'New Mexico': 'Nouveau-Mexique',
+    'West Virginia': 'Virginie-Occidentale', 'Louisiana': 'Louisiane',
+    'New Jersey': 'Nouveau-Jersey', 'Virginia': 'Virginie', 'Hawaii': 'Hawaï',
+  },
+  turquie: {
+    'İstanbul': 'Istanbul', 'İzmir': 'Izmir', 'Diyarbakır': 'Diyarbakir',
+    'K. Maraş': 'Kahramanmaraş', 'Aydın': 'Aydın (Éphèse)',
+    'Muğla': 'Muğla (Bodrum)', 'Nevşehir': 'Cappadoce',
+    'Çanakkale': 'Çanakkale (Gallipoli)', 'Afyon': 'Afyonkarahisar',
+    'Şanlıurfa': 'Şanlıurfa',
+  },
+  maroc: {
+    'Tanger-Tétouan-Al Hoceïma': 'Tanger-Tétouan-Al Hoceima',
+    'Béni Mellal-Khénifra': 'Béni Mellal-Kénifra',
+    'Drâa-Tafilalet': 'Draa-Tafilalet',
+    'Ed Dakhla-Oued ed Dahab': 'Dakhla-Oued ed Dahab',
+    'Guelmim-Oued Noun': 'Guelmin-Oued Noun',
+  },
+  egypte: {
+    'AlQahirah': 'Cairo', 'AlQalyubiyah': 'Cairo',
+    'AlIskandariyah': 'Alexandria',
+    'AlUqsur': 'Luxor',
+    'JanubSina\'': 'Sinai', 'ShamalSina\'': 'Sinai',
+    'AlBahralAhmar': 'Red Sea (Mer Rouge)',
+    'AlJizah': 'Giza',
+    'AlMinya': 'Haute-Égypte (Sohag-Asyut-Minya)',
+    'Asyut': 'Haute-Égypte (Sohag-Asyut-Minya)',
+    'Suhaj': 'Haute-Égypte (Sohag-Asyut-Minya)',
+    'Qina': 'Qena-Qus',
+    'AlIsma`iliyah': 'Canal de Suez (Port-Saïd-Ismaïlia-Suez)',
+    'AsSuways': 'Canal de Suez (Port-Saïd-Ismaïlia-Suez)',
+    'BurSa`id': 'Canal de Suez (Port-Saïd-Ismaïlia-Suez)',
+    'Dumyat': 'Canal de Suez (Port-Saïd-Ismaïlia-Suez)',
+    'AlBuhayrah': 'Delta du Nil (Dakahlia-Gharbia-Beheira)',
+    'AlGharbiyah': 'Delta du Nil (Dakahlia-Gharbia-Beheira)',
+    'AlMinufiyah': 'Delta du Nil (Dakahlia-Gharbia-Beheira)',
+    'KafrashShaykh': 'Delta du Nil (Dakahlia-Gharbia-Beheira)',
+    'AdDaqahliyah': 'Dakahlia-Sharqia (Basse Égypte orientale)',
+    'AshSharqiyah': 'Dakahlia-Sharqia (Basse Égypte orientale)',
+    'AlFayyum': 'Fayoum',
+    'BaniSuwayf': 'Beni Suef',
+    'AlWadialJadid': 'Nouvelle Vallée (Wadi el-Jadid)',
+    'Matrouh': 'Matrouh',
+  },
+  irak: {
+    'Ninawa': 'Nineveh', 'Al-Basrah': 'Basra', 'Arbil': 'Erbil',
+    'As-Sulaymaniyah': 'Sulaymaniyah', 'Al-Anbar': 'Anbar',
+    "Karbala'": 'Karbala', 'An-Najaf': 'Najaf', 'At-Ta\'mim': 'Kirkuk',
+    'Salaad-Din': 'Tikrit',
+  },
+  iran: {
+    'Esfahan': 'Isfahan', 'Fars': 'Fars (Persépolis)',
+    'Gilan': 'Gilan (Caspienne nord)', 'Hamadan': 'Hamadan (Ecbatane)',
+    'Hormozgan': 'Hormozgan (Détroit d\'Ormuz)',
+    'Khuzestan': 'Ahvaz', 'Kordestan': 'Kurdistan iranien',
+    'Mazandaran': 'Mazandaran (Caspienne sud)',
+    'RazaviKhorasan': 'Mashhad', 'SistanandBaluchestan': 'Sistan-Baloutchistan',
+    'Ardebil': 'Ardabil', 'EastAzarbaijan': 'Tabriz',
+    'WestAzarbaijan': 'Azerbaïdjan du Nord-Ouest (Urmia)',
+    'Bushehr': 'Bushehr (nucléaire)', 'Lorestan': 'Lorestan',
+  },
+  afrique_du_sud: {
+    'City of Johannesburg Metropolitan': 'Gauteng',
+    'City of Tshwane Metropolitan': 'Gauteng',
+    'Ekurhuleni Metropolitan': 'Gauteng',
+    'Sedibeng District': 'Gauteng', 'West Rand District': 'Gauteng',
+    'City of Cape Town': 'Western Cape',
+    'Cape Winelands District': 'Western Cape', 'Central Karoo District': 'Western Cape',
+    'Eden District': 'Western Cape', 'Overberg District': 'Western Cape',
+    'West Coast District': 'Western Cape',
+    'eThekwini Metropolitan': 'KwaZulu-Natal', 'Ugu District': 'KwaZulu-Natal',
+    'uMgungundlovu District': 'KwaZulu-Natal', 'Uthukela District': 'KwaZulu-Natal',
+    'Umzinyathi District': 'KwaZulu-Natal', 'Amajuba District': 'KwaZulu-Natal',
+    'Sisonke District': 'KwaZulu-Natal', 'iLembe District': 'KwaZulu-Natal',
+    'Umkhanyakude District': 'KwaZulu-Natal', 'Zululand District': 'KwaZulu-Natal',
+    'uThungulu District': 'KwaZulu-Natal',
+    'Buffalo City Metropolitan': 'Eastern Cape',
+    'Nelson Mandela Bay Metropolitan': 'Eastern Cape',
+    'Amathole District': 'Eastern Cape', 'Chris Hani District': 'Eastern Cape',
+    'Alfred Nzo District': 'Eastern Cape', 'Joe Gqabi District': 'Eastern Cape',
+    'Sarah Baartman District': 'Eastern Cape',
+    'Capricorn District': 'Limpopo', 'Mopani District': 'Limpopo',
+    'Sekhukhune District': 'Limpopo', 'Vhembe District': 'Limpopo',
+    'Waterberg District': 'Limpopo',
+    'Ehlanzeni District': 'Mpumalanga', 'Gert Sibande District': 'Mpumalanga',
+    'Nkangala District': 'Mpumalanga',
+    'Bojanala Platinum District': 'North West',
+    'Dr Kenneth Kaunda District': 'North West',
+    'Dr Ruth Segomotsi Mompati District': 'North West',
+    'Ngaka Modiri Molema District': 'North West',
+    'Fezile Dabi District': 'Free State', 'Lejweleputswa District': 'Free State',
+    'Mangaung Metropolitan': 'Free State', 'Thabo Mofutsanyana District': 'Free State',
+    'Xhariep District': 'Free State',
+    'Frances Baard District': 'Northern Cape',
+    'John Taolo Gaetsewe District': 'Northern Cape',
+    'Namakwa District': 'Northern Cape', 'Pixley ka Seme District': 'Northern Cape',
+    'ZF Mgcawu District': 'Northern Cape',
+  },
+  mongolie: {
+    'Hövsgöl': 'Khövsgöl', 'Ömnögovi': 'Gobi',
+    'Arhangay': 'Khangai', 'Övörhangay': 'Khangai',
+  },
+  mexique: {
+    'Distrito Federal': 'Ciudad de México',
+    'Veracruz de Ignacio de la Llave': 'Veracruz',
+  },
+  bresil: {
+    'Distrito Federal': 'Brasília (Distrito Federal)',
+  },
+  arabie_saoudite: {
+    'ArRiyad': 'Riyadh', 'AlMadinah': 'Madinah',
+    "'Asir": 'Asir', 'Ash-Sharqīyah': 'Eastern Province',
+  },
+  chine: {
+    'Heilongjian': 'Heilongjiang',
+  },
+  pologne: {
+    'Łódzkie': 'Łódźkie',
+  },
+  portugal: {
+    'Porto': 'Porto (district)',
+  },
+}
+
 function lookupRegionEntry(countryId, regionName) {
   const countryData = regionsData[countryId] || {}
   if (countryData[regionName]) return { data: countryData[regionName], key: regionName }
+  const aliases = GEO_NAME_ALIASES[countryId] || {}
+  const mappedName = aliases[regionName]
+  if (mappedName && countryData[mappedName]) return { data: countryData[mappedName], key: mappedName }
   const key = Object.keys(countryData).find(k => k.startsWith(regionName + ' ('))
   return key ? { data: countryData[key], key } : { data: null, key: null }
 }

@@ -1466,7 +1466,7 @@ export const paysData = [
       president: 'Roi Mohammed VI (depuis juillet 1999), Premier ministre Aziz Akhannouch (depuis 2021)',
       pib: '134 milliards $ — croissance ~3% /an',
       hdm: 'IDH : 0.683 (moyen, en progression constante)',
-      allies: 'France, Espagne, USA (allié non-OTAN majeur), EAU, Arabie Saoudite. Soutien à l\'Ukraine. Reconnaissance US du Sahara occidental (2020)',
+      allies: 'France, Espagne, USA (allié non-OTAN majeur), EAU, Arabie Saoudite. Soutien à l\'Ukraine.',
       challenges: 'Séisme de 2023 (reconstruction), eau (stress hydrique), inégalités sociales, réchauffement climatique (arganier menacé)',
     }
   },
@@ -1524,9 +1524,9 @@ export const paysData = [
       pib: '238 milliards $ (2e économie du Maghreb)',
     },
     culture: {
-      cuisine: 'Couscous (plat national — version algérienne aux sept légumes), chorba (soupe de l\'Aïd), chakhchoukha, tajine zitoune (au poulet et olives), makroud (gâteau de semoule), kalblouz, lben (lait fermenté)',
+      cuisine: 'Couscous (plat national — version algérienne aux sept légumes), chorba (soupe de l\'Aïd), chakhchoukha, tajine zitoune (aux olives), makroud (gâteau de semoule), kalblouz, lben (lait fermenté)',
       musique: 'Raï (Khaled, Cheb Mami — mondialement célèbre), chaabi algérien, kabyle (Idir, Matoub Lounès), andalou-algérien de Tlemcen',
-      vetement: 'Haïk (voile blanc traditionnel des femmes d\'Alger), burnous, karakou (robe kabyle brodée d\'or), chedda de Tlemcen (costume de mariée)',
+      vetement: 'Haïk (voile blanc traditionnel des femmes d\'Alger), karakou (robe kabyle brodée d\'or), chedda de Tlemcen (costume de mariée)',
       arts: 'Tassili n\'Ajjer (8 000 peintures rupestres néolithiques — UNESCO), art berbère amazigh (bijoux, poterie de Kabylie), cinéma algérien (Z de Costa-Gavras, La Bataille d\'Alger — Lion d\'Or Venise 1966)',
       fetes: 'Aïd el-Fitr, Aïd el-Adha, Fête de l\'Indépendance (5 juillet), Commémoration du 1er novembre 1954, Yennayer (Nouvel An berbère — fête nationale depuis 2018)',
     },
