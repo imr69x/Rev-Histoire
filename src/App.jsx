@@ -14,6 +14,7 @@ const PersonnaliteDetail  = lazy(() => import('@/pages/PersonnaliteDetail'))
 const Quiz                = lazy(() => import('@/pages/Quiz'))
 const Carte               = lazy(() => import('@/pages/Carte'))
 const Frise               = lazy(() => import('@/pages/Frise'))
+const Methode             = lazy(() => import('@/pages/Methode'))
 const Favoris             = lazy(() => import('@/pages/Favoris'))
 const Pays                = lazy(() => import('@/pages/Pays'))
 const Admin               = lazy(() => import('@/pages/Admin'))
@@ -70,6 +71,7 @@ export default function App() {
               <Route path="quiz" element={<Quiz />} />
               <Route path="carte" element={<Carte />} />
               <Route path="frise" element={<Frise />} />
+              <Route path="methode" element={<Methode />} />
               <Route path="favoris" element={<Favoris />} />
               <Route path="pays" element={<Pays />} />
               <Route path="admin" element={<Admin />} />
