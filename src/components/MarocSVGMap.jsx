@@ -46,9 +46,7 @@ export default function MarocSVGMap({ onRegionClick, selectedRegion, hoverColor 
                 <path
                   d={path}
                   fill={sel ? hoverColor + 'DD' : hov ? hoverColor + '66' : 'transparent'}
-                  stroke={sel ? hoverColor : '#7A6652'}
-                  strokeWidth={sel ? 2 : 1.2}
-                  strokeOpacity={1}
+                  stroke="none"
                 />
               </g>
             )
