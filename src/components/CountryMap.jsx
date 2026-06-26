@@ -32,6 +32,7 @@ const COUNTRY_MAP_CONFIG = {
   irak:          { url: '/geo/irak-regions.geojson',          nameKey: 'NAME_1',  center: [33.0, 43.7],  zoom: 5 },
   iran:          { url: '/geo/iran-regions.geojson',          nameKey: 'NAME_1',  center: [32.5, 53.5],  zoom: 4 },
   arabie_saoudite:{ url: '/geo/arabie_saoudite-regions.geojson',nameKey: 'NAME_1',center: [24.0, 44.0],  zoom: 4 },
+  emirats_arabes_unis: { url: '/geo/emirats_arabes_unis-regions.geojson', nameKey: 'name', center: [24.0, 54.0], zoom: 7 },
   turquie:       { url: '/geo/turquie-regions.geojson',       nameKey: 'name',    center: [39.0, 35.0],  zoom: 5 },
   chine:         { url: '/geo/chine-regions.geojson',         nameKey: 'name',    center: [37.0, 104.0], zoom: 3 },
   inde:          { url: '/geo/inde-regions.geojson',          nameKey: 'name',    center: [22.0, 80.0],  zoom: 4 },
@@ -168,6 +169,10 @@ const GEO_NAME_ALIASES = {
     'ArRiyad': 'Riyadh', 'AlMadinah': 'Madinah',
     "'Asir": 'Asir', 'Ash-Sharqīyah': 'Eastern Province',
     'Ḥaʼil': 'Hail',
+  },
+  emirats_arabes_unis: {
+    'RasAl-Khaimah': 'RasAl-Khaimah',
+    'Ummal-Qaywayn': 'Ummal-Qaywayn',
   },
   chine: {
     'Heilongjian': 'Heilongjiang',
