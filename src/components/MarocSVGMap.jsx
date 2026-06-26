@@ -17,7 +17,7 @@ const REGIONS = [
   { name: 'Rabat-Salé-Kénitra', path: 'M323,70L322,75L314,90L310,96L301,104L303,107L302,111L307,112L310,115L308,117L309,120L307,124L314,127L318,125L317,124L332,122L335,108L333,105L335,103L330,98L342,96L343,95L340,90L346,87L340,79L335,78L332,75L334,74L334,72L329,70Z', cx: 323, cy: 98, couleur: '#27AE60' },
 ]
 
-export default function MarocSVGMap({ onRegionClick, selectedRegion }) {
+export default function MarocSVGMap({ onRegionClick, selectedRegion, hoverColor = '#27AE60' }) {
   const [hovered, setHovered] = useState(null)
 
   return (
@@ -32,7 +32,7 @@ export default function MarocSVGMap({ onRegionClick, selectedRegion }) {
           viewBox={`0 0 ${W} ${H}`}
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
         >
-          {REGIONS.map(({ name, path, cx, cy, couleur }) => {
+          {REGIONS.map(({ name, path, cx, cy }) => {
             const sel = selectedRegion === name
             const hov = hovered === name
             return (
@@ -45,9 +45,9 @@ export default function MarocSVGMap({ onRegionClick, selectedRegion }) {
               >
                 <path
                   d={path}
-                  fill={sel ? couleur + 'BB' : hov ? couleur + '66' : couleur + '22'}
-                  stroke={sel ? couleur : hov ? couleur + 'CC' : couleur + '55'}
-                  strokeWidth={sel ? 2 : 1}
+                  fill={sel ? hoverColor + 'DD' : hov ? hoverColor + '66' : 'transparent'}
+                  stroke={sel || hov ? hoverColor : 'transparent'}
+                  strokeWidth={sel ? 2 : 1.5}
                 />
                 {(sel || hov) && (
                   <text

@@ -420,7 +420,7 @@ export default function CountryMap({ countryId: cid, continent }) {
         {cid === 'maroc' ? (
           <div className="flex items-center justify-center w-full h-full">
             <div style={{ width: 'min(100%, 70vh)' }}>
-              <MarocSVGMap onRegionClick={setSelectedRegion} selectedRegion={selectedRegion} />
+              <MarocSVGMap onRegionClick={setSelectedRegion} selectedRegion={selectedRegion} hoverColor={hoverColor} />
             </div>
           </div>
         ) : (
