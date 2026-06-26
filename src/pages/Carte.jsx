@@ -904,6 +904,19 @@ const TL = {
     { s:1888, e:1977, n:'Côte française des Somalis / TFAI', c:'#2980B9' },
     { s:1977, e:2025, n:'Djibouti',                         c:'#76D7C4' },
   ],
+  'Somaliland': [
+    { s:1884, e:1960, n:'Somaliland britannique', c:'#C2185B' },
+    { s:1960, e:1991, n:'Somalie',                c:'#7F8C8D' },
+    { s:1991, e:2025, n:'Somaliland (non reconnu)', c:'#F0B27A' },
+  ],
+  'Kosovo': [
+    { s:1912, e:2008, n:'Yougoslavie / Serbie', c:'#8E44AD' },
+    { s:2008, e:2025, n:'Kosovo (partiellement reconnu)', c:'#5DADE2' },
+  ],
+  'N. Cyprus': [
+    { s:1878, e:1974, n:'Chypre (Royaume-Uni / Rép.)', c:'#E74C3C' },
+    { s:1974, e:2025, n:'Chypre du Nord (non reconnue)', c:'#F39C12' },
+  ],
   '450': [ // Madagascar
     { s:1896, e:1960, n:'Madagascar (France)', c:'#2980B9' },
     { s:1960, e:2025, n:'Madagascar',         c:'#F8C471' },
@@ -1004,9 +1017,10 @@ const TL = {
   ],
 }
 
-function getTerritoryAtYear(isoCode, year) {
+function getTerritoryAtYear(isoCode, year, geoName) {
   const code = isoCode === '732' ? '504' : isoCode // Sahara occidental → Maroc
-  const timeline = TL[code]
+  const lookup = (code === 'null' || code === 'undefined') ? (geoName || '') : code
+  const timeline = TL[lookup]
   if (!timeline) return null
   for (const t of timeline) {
     if (year >= t.s && year < t.e) return { name: t.n, color: t.c }
@@ -1129,7 +1143,7 @@ export default function Carte() {
   }, [playing])
 
   const getStyle = useCallback((geo) => {
-    const t = getTerritoryAtYear(String(geo.id), year)
+    const t = getTerritoryAtYear(String(geo.id), year, geo.properties?.name)
     const fill = t ? t.color : DEFAULT_FILL
     const stroke = t ? t.color : 'rgba(255,255,255,0.15)'
     const strokeHover = t ? '#ffffff' : 'rgba(255,255,255,0.4)'
@@ -1254,12 +1268,12 @@ export default function Carte() {
                       style={getStyle(geo)}
                       onMouseEnter={() => {
                         if (isMobile) return
-                        const t = getTerritoryAtYear(String(geo.id), year)
+                        const t = getTerritoryAtYear(String(geo.id), year, geo.properties?.name)
                         setHovered({ geoName: geo.properties?.name || '', territory: t })
                       }}
                       onMouseLeave={() => setHovered(null)}
                       onClick={() => {
-                        const t = getTerritoryAtYear(String(geo.id), year)
+                        const t = getTerritoryAtYear(String(geo.id), year, geo.properties?.name)
                         setSelected({ geoName: geo.properties?.name || '', territory: t })
                         if (isMobile) { setShowPanel(true); setActiveTab('selected') }
                       }}
