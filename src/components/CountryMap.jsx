@@ -292,7 +292,7 @@ function RegionPanel({ countryId, regionName, onClose, onDrillDown, hasSublevel,
                 <div className="flex items-center gap-1 text-[10px] font-bold text-[#8B7355] uppercase tracking-wider mb-1.5">
                   <BookOpen size={10} /> Histoire
                 </div>
-                <p className="text-[11px] text-[#4A3728] dark:text-[#8B949E] leading-relaxed line-clamp-3">{data.histoire}</p>
+                <p className="text-[11px] text-[#4A3728] dark:text-[#8B949E] leading-relaxed">{data.histoire}</p>
               </div>
             )}
 
