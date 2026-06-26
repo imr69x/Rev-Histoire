@@ -776,8 +776,8 @@ export const paysData = [
     langue: 'Arabe (officielle), anglais (lingua franca)',
     monnaie: 'Dirham émirati (AED)',
     color: '#27AE60',
-    summary: "Les Émirats Arabes Unis, fondés en 1971 par l'union de 7 émirats sous l'impulsion du cheikh Zayed ben Sultan Al Nahyane (Abu Dhabi) et Rachid Al Maktoum (Dubaï), constituent le miracle économique du Golfe Persique. En 50 ans, le pays est passé d'un territoire de pêcheurs de perles et de Bédouins à l'une des économies les plus diversifiées du monde arabe. Dubaï, métropole du futur avec le Burj Khalifa (plus haute tour du monde), incarne la stratégie de diversification post-pétrolière — tourisme, finance, logistique, tech. Abu Dhabi détient 90% du pétrole et contrôle le fonds souverain ADNOC et le fonds Mubadala. Stratégiquement situés entre l'Asie, l'Afrique et l'Europe, les EAU sont devenus un hub mondial avec l'aéroport de Dubaï (1er du monde pour le trafic international) et les compagnies Emirates et Etihad. Les Accords d'Abraham (2020) normalisent les relations avec Israël, repositionnant les EAU dans la géopolitique régionale.",
-    reasons: ['Dubaï — symbole de la modernité arabe et hub mondial', 'Accords d\'Abraham (2020) — normalisation avec Israël', 'ADNOC + Mubadala — fonds souverains et pétrole d\'Abu Dhabi', 'Expatriés (89% de la population) — modèle migratoire unique', 'Hub logistique et financier entre Asie, Afrique, Europe'],
+    summary: "Les Émirats Arabes Unis, fondés en 1971 par l'union de 7 émirats sous l'impulsion du cheikh Zayed ben Sultan Al Nahyane (Abu Dhabi) et Rachid Al Maktoum (Dubaï), constituent le miracle économique du Golfe Persique. En 50 ans, le pays est passé d'un territoire de pêcheurs de perles et de Bédouins à l'une des économies les plus diversifiées du monde arabe. Dubaï, métropole du futur avec le Burj Khalifa (plus haute tour du monde), incarne la stratégie de diversification post-pétrolière — tourisme, finance, logistique, tech. Abu Dhabi détient 90% du pétrole et contrôle le fonds souverain ADNOC et le fonds Mubadala. Stratégiquement situés entre l'Asie, l'Afrique et l'Europe, les EAU sont devenus un hub mondial avec l'aéroport de Dubaï (1er du monde pour le trafic international) et les compagnies Emirates et Etihad.",
+    reasons: ['Dubaï — symbole de la modernité arabe et hub mondial', 'ADNOC + Mubadala — fonds souverains et pétrole d\'Abu Dhabi', 'Expatriés (89% de la population) — modèle migratoire unique', 'Hub logistique et financier entre Asie, Afrique, Europe', 'Vision 2071 — diversification post-pétrolière tous secteurs'],
     geography: {
       montagnes: 'Hajar (Oman/Fujairah, 1 527 m — Jebel Jais, station de ski)',
       deserts: 'Rub\' al-Khali (quart vide, au sud), désert d\'Abu Dhabi (Liwa, dunes géantes)',
@@ -794,7 +794,7 @@ export const paysData = [
       { date: '1990-1991', event: 'Guerre du Golfe — les EAU rejoignent la coalition' },
       { date: '2004', event: 'Mort de Sheikh Zayed, fondateur — son fils Khalifa lui succède' },
       { date: '2010', event: 'Inauguration du Burj Khalifa (828 m, plus haute tour du monde)' },
-      { date: '2020', event: 'Accords d\'Abraham — normalisation diplomatique avec Israël' },
+      { date: '2020', event: 'Expo 2020 Dubaï annoncée — symbole du rayonnement international des EAU' },
       { date: '2021', event: 'Expo 2020 Dubaï (reportée) — 190 pays, 24 millions de visiteurs' },
     ],
     dynasties: ['Al Nahyane (Abu Dhabi, depuis 1761)', 'Al Maktoum (Dubaï, depuis 1833)', 'Al Qasimi (Sharjah + Ras Al Khaimah)'],
@@ -820,7 +820,7 @@ export const paysData = [
       president: 'Mohamed ben Zayed Al Nahyane (MBZ, Abu Dhabi, depuis 2022)',
       pib: '509 milliards $',
       hdm: 'IDH : 0.937 (très élevé, 26e mondial)',
-      allies: 'USA (base aérienne Al Dhafra), France (base navale Abu Dhabi), Israël (Accords d\'Abraham 2020), Arabie Saoudite',
+      allies: 'USA (base aérienne Al Dhafra), France (base navale Abu Dhabi), Arabie Saoudite, Royaume-Uni',
       challenges: 'Dépendance aux expatriés, droits humains des travailleurs, tensions avec l\'Iran (îles occupées), diversification post-pétrole',
     }
   },
