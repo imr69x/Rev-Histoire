@@ -10,12 +10,17 @@ export function AuthProvider({ children }) {
 
   async function fetchProfile(userId) {
     try {
-      // Utilise l'API avec la clé service pour contourner les restrictions RLS
-      const res = await fetch(`/api/get-profile?userId=${userId}`)
-      if (res.ok) {
-        const data = await res.json()
-        setProfile(data)
-        return
+      const { data: { session } } = await supabase.auth.getSession()
+      const token = session?.access_token
+      if (token) {
+        const res = await fetch(`/api/get-profile?userId=${userId}`, {
+          headers: { 'Authorization': `Bearer ${token}` },
+        })
+        if (res.ok) {
+          const data = await res.json()
+          setProfile(data)
+          return
+        }
       }
     } catch {}
     // Fallback : lecture directe Supabase

@@ -475,7 +475,6 @@ function InvitesSection() {
   const [loading, setLoading] = useState(false)
   const [msg, setMsg] = useState(null)
   const [showPwd, setShowPwd] = useState(false)
-  const { user: me } = useAuth()
 
   async function loadInvites() {
     const { data } = await supabase.from('invites').select('*').order('created_at', { ascending: false })
@@ -490,9 +489,10 @@ function InvitesSection() {
     setLoading(true)
     setMsg(null)
 
+    const { data: { session } } = await supabase.auth.getSession()
     const res = await fetch('/api/create-invite-user', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-admin-email': me?.email || '' },
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session?.access_token || ''}` },
       body: JSON.stringify({ email: form.email.trim().toLowerCase(), password: form.password }),
     })
     const data = await res.json()
@@ -587,15 +587,15 @@ function ComptesPanel() {
   const [loading, setLoading] = useState(true)
   const { user: me } = useAuth()
 
-  const adminHeaders = {
-    'Content-Type': 'application/json',
-    'x-admin-email': me?.email || '',
+  async function getAdminHeaders() {
+    const { data: { session } } = await supabase.auth.getSession()
+    return { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session?.access_token || ''}` }
   }
 
   async function loadUsers() {
     setLoading(true)
     try {
-      const res = await fetch('/api/admin-users', { headers: adminHeaders })
+      const res = await fetch('/api/admin-users', { headers: await getAdminHeaders() })
       const data = await res.json()
       setUsers(Array.isArray(data) ? data : [])
     } catch {
@@ -613,7 +613,7 @@ function ComptesPanel() {
       : null
     await fetch('/api/admin-users', {
       method: 'PATCH',
-      headers: adminHeaders,
+      headers: await getAdminHeaders(),
       body: JSON.stringify({ id: userId, updates: { subscription_status: newStatus, subscription_end_date: endDate } }),
     })
     loadUsers()
@@ -623,7 +623,7 @@ function ComptesPanel() {
     const newRole = current === 'admin' ? 'user' : 'admin'
     await fetch('/api/admin-users', {
       method: 'PATCH',
-      headers: adminHeaders,
+      headers: await getAdminHeaders(),
       body: JSON.stringify({ id: userId, updates: { role: newRole } }),
     })
     loadUsers()
@@ -633,7 +633,7 @@ function ComptesPanel() {
     if (!window.confirm('Supprimer ce compte définitivement ?')) return
     await fetch('/api/admin-users', {
       method: 'DELETE',
-      headers: adminHeaders,
+      headers: await getAdminHeaders(),
       body: JSON.stringify({ id: userId }),
     })
     loadUsers()

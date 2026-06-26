@@ -7,11 +7,20 @@ const supabase = createClient(
 
 const ADMIN_EMAIL = 'imranbouras69@gmail.com'
 
+async function verifyAdmin(req) {
+  const auth = req.headers['authorization'] || ''
+  const token = auth.startsWith('Bearer ') ? auth.slice(7) : null
+  if (!token) return false
+  const { data, error } = await supabase.auth.getUser(token)
+  if (error || !data?.user) return false
+  return data.user.email === ADMIN_EMAIL
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
 
-  const callerEmail = req.headers['x-admin-email']
-  if (callerEmail !== ADMIN_EMAIL) return res.status(403).json({ error: 'Forbidden' })
+  const isAdmin = await verifyAdmin(req)
+  if (!isAdmin) return res.status(403).json({ error: 'Forbidden' })
 
   const { email, password } = req.body || {}
   if (!email || !password) return res.status(400).json({ error: 'Email et mot de passe requis' })

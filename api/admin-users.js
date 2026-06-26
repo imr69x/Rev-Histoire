@@ -7,12 +7,19 @@ const supabase = createClient(
 
 const ADMIN_EMAIL = 'imranbouras69@gmail.com'
 
+async function verifyAdmin(req) {
+  const auth = req.headers['authorization'] || ''
+  const token = auth.startsWith('Bearer ') ? auth.slice(7) : null
+  if (!token) return false
+
+  const { data, error } = await supabase.auth.getUser(token)
+  if (error || !data?.user) return false
+  return data.user.email === ADMIN_EMAIL
+}
+
 export default async function handler(req, res) {
-  // Vérification simple : l'email admin doit être passé en header
-  const callerEmail = req.headers['x-admin-email']
-  if (callerEmail !== ADMIN_EMAIL) {
-    return res.status(403).json({ error: 'Forbidden' })
-  }
+  const isAdmin = await verifyAdmin(req)
+  if (!isAdmin) return res.status(403).json({ error: 'Forbidden' })
 
   // GET — lister tous les profils
   if (req.method === 'GET') {
