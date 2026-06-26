@@ -24,7 +24,7 @@ export default function MarocSVGMap({ onRegionClick, selectedRegion }) {
     <div style={{ position: 'relative', width: '100%', paddingBottom: `${(H / W) * 100}%` }}>
       <div style={{ position: 'absolute', inset: 0 }}>
         <img
-          src="/geo/carte_maroc.png"
+          src="/geo/Carte_maroc_sahara-removebg-preview.png"
           alt="Carte du Maroc"
           style={{ width: '100%', height: '100%', objectFit: 'fill', display: 'block' }}
         />
