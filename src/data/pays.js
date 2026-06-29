@@ -1582,8 +1582,8 @@ export const paysData = [
     ],
     famousBattles: [
       { name: 'Zallaka (1086)', result: 'Victoire almoravide d\'Youssef ben Tachfin sur Alphonse VI de Castille — sauve Al-Andalus de la Reconquista, apogée de la puissance marocaine en Espagne' },
-      { name: 'Alarcos (1195)', result: 'Victoire almohade sur les royaumes chrétiens d\'Espagne — apogée de la puissance berbéro-marocaine en Ibérie' },
-      { name: 'Las Navas de Tolosa (1212)', result: 'Défaite almohade face à la coalition chrétienne — tournant de la Reconquista, début du recul marocain en Espagne' },
+      { name: 'Alarcos (1195)', result: 'Victoire almohade sur Alphonse VIII de Castille — démonstration de la puissance almohade en Ibérie' },
+      { name: 'Las Navas de Tolosa (1212)', result: 'Défaite almohade face à la coalition chrétienne — tournant de la Reconquista, début du recul almohade en Espagne' },
       { name: 'Oued al-Makhazin — Bataille des Trois Rois (1578)', result: 'Victoire saadienne sur le Portugal — seule bataille de l\'histoire où 3 rois meurent le même jour, fin de la menace portugaise' },
       { name: 'Conquête de Tombouctou (1591)', result: 'L\'armée saadienne bat l\'Empire Songhaï — le Maroc contrôle les routes de l\'or sahéliennes pendant 2 siècles' },
       { name: 'Isly (1844)', result: 'Défaite marocaine face à l\'armée française du maréchal Bugeaud — marque la fin de l\'aide marocaine à Abd el-Kader en Algérie' },
