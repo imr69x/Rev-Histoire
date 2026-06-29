@@ -1581,7 +1581,7 @@ export const paysData = [
       'Alaouites (1666–présent) — Mohammed V, Hassan II, Mohammed VI',
     ],
     famousBattles: [
-      { name: 'Zallaka (1086)', result: 'Victoire almoravide d\'Youssef ben Tachfin sur Alphonse VI de Castille — sauve Al-Andalus de la Reconquista, apogée de la puissance marocaine en Espagne' },
+      { name: 'Zallaka (1086)', result: 'Victoire almoravide d\'Youssef ben Tachfin sur Alphonse VI de Castille — sauve Al-Andalus de la Reconquista' },
       { name: 'Alarcos (1195)', result: 'Victoire almohade sur Alphonse VIII de Castille — démonstration de la puissance almohade en Ibérie' },
       { name: 'Las Navas de Tolosa (1212)', result: 'Défaite almohade face à la coalition chrétienne — tournant de la Reconquista, début du recul almohade en Espagne' },
       { name: 'Oued al-Makhazin — Bataille des Trois Rois (1578)', result: 'Victoire saadienne sur le Portugal — seule bataille de l\'histoire où 3 rois meurent le même jour, fin de la menace portugaise' },
