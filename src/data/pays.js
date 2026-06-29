@@ -1611,7 +1611,7 @@ export const paysData = [
       president: 'Roi Mohammed VI (depuis juillet 1999), Premier ministre Aziz Akhannouch (depuis 2021)',
       pib: '134 milliards $ — croissance ~3% /an',
       hdm: 'IDH : 0.683 (moyen, en progression constante)',
-      allies: 'France, Espagne, USA (allié non-OTAN majeur), EAU, Arabie Saoudite. Soutien à l\'Ukraine.',
+      allies: 'France, Espagne, USA (allié non-OTAN majeur), EAU, Arabie Saoudite',
       challenges: 'Séisme de 2023 (reconstruction), eau (stress hydrique), inégalités sociales, réchauffement climatique (arganier menacé)',
     }
   },
